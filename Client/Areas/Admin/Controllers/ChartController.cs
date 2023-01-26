@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Client.Controllers;
+namespace Client.Areas.Admin.Controllers;
 
-//[Area("Guest")]
+[Area("Admin")]
 public class ChartController : Controller
 {
     public IActionResult Index()
