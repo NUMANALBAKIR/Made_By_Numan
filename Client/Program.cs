@@ -22,6 +22,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Chart}/{action=Index}/{id?}");
+    pattern: "{area:Admin}/{controller=Chart}/{action=Index}/{id?}");
 
 app.Run();
