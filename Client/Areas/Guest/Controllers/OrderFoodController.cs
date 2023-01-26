@@ -3,7 +3,7 @@
 namespace Client.Areas.Guest.Controllers;
 
 [Area("Guest")]
-public class OrderPizzaController : Controller
+public class OrderFoodController : Controller
 {
     public IActionResult Index()
     {
