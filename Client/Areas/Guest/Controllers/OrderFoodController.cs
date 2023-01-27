@@ -9,4 +9,10 @@ public class OrderFoodController : Controller
     {
         return View();
     }
+
+
+    public IActionResult Cart()
+    {
+        return View();
+    }
 }
