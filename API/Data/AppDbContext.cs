@@ -1,4 +1,4 @@
-﻿using API.Models;
+﻿using API.Models.OrderFood;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
