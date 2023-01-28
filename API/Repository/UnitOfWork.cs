@@ -1,5 +1,4 @@
-﻿using API.Data;
-using API.Repository.IRepository;
+﻿using API.Repository.IRepository;
 
 namespace API.Repository;
 
