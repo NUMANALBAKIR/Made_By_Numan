@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace API.Models.DTOs.Bank;
 
-namespace Client.Models.Bank;
-
-public class BankAccount
+public class BankAccountDTO
 {
-    [Key]
     public int Id { get; set; }
     public string HolderName { get; set; }
     public double SavingsAccount { get; set; }
