@@ -1,11 +1,18 @@
-﻿using API.Repository.IRepository;
+﻿using API.Data;
+using API.Repository.IRepository;
 
 namespace API.Repository;
 
 public class UnitOfWork : IUnitOfWork
 {
-    public UnitOfWork()
-    {
+    public IFoodRepository FoodRepo { get; private set; }
+    public ICategoryRepository CategoryRepo { get; private set; }
 
+    private readonly AppDbContext _db;
+    public UnitOfWork(AppDbContext db)
+    {
+        _db = db;
+        FoodRepo = new FoodRepository(_db);
+        CategoryRepo = new CategoryRepository(_db);
     }
 }
