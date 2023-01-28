@@ -2,5 +2,5 @@
 
 public class IUnitOfWork
 {
-
+    IFoodRepository FoodRepo { get; }
 }
