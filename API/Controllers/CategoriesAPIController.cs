@@ -1,108 +1,215 @@
 ﻿using API.Data;
+using API.Models;
+using API.Models.DTOs.OrderFood;
 using API.Models.OrderFood;
+using API.Repository.IRepository;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
-namespace API.Controllers
+namespace API.Controllers;
+
+[Route("api/CategoriesAPI")]
+[ApiController]
+public class CategoriesAPIController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CategoriesAPIController : ControllerBase
+    protected APIResponse _response;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public CategoriesAPIController(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        private readonly AppDbContext _context;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+        _response = new APIResponse();
+    }
 
-        public CategoriesAPIController(AppDbContext context)
+
+    // GET: api/CategoriesAPI
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult<APIResponse>> GetCategories()
+    {
+        try
         {
-            _context = context;
+            IEnumerable<Category> categories;
+            categories = await _unitOfWork.CategoryRepo.GetAllAsync();
+            _response.Result = _mapper.Map<List<CategoryDTO>>(categories);
+            _response.StatusCode = HttpStatusCode.OK;
+            return Ok(_response);
         }
-
-        // GET: api/CategoriesAPI
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        catch (Exception ex)
         {
-            return await _context.Categories.ToListAsync();
+            _response.IsSuccess = false;
+            _response.StatusCode = HttpStatusCode.InternalServerError;
+            _response.ErrorMessages.Add(ex.ToString());
+            return _response;
         }
+    }
 
-        // GET: api/CategoriesAPI/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+
+    // GET: api/CategoriesAPI/5
+    [HttpGet("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<APIResponse>> GetCategory(int id)
+    {
+        try
         {
-            var category = await _context.Categories.FindAsync(id);
+            if (id == 0)
+            {
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                return BadRequest(_response);
+            }
+            Category category = await _unitOfWork.CategoryRepo.GetFirstOrDefaultAsync(c => c.CategoryId == id);
 
             if (category == null)
             {
-                return NotFound();
+                _response.StatusCode = HttpStatusCode.NotFound;
+                return NotFound(_response);
+            }
+            _response.Result = _mapper.Map<CategoryDTO>(category);
+            _response.StatusCode = HttpStatusCode.OK;
+            return Ok(_response);
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.StatusCode = HttpStatusCode.InternalServerError;
+            _response.ErrorMessages.Add(ex.ToString());
+            return _response;
+        }
+    }
+
+
+    // POST: api/CategoriesAPI
+    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    //[Authorize(Roles = "Admin")]
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult<APIResponse>> CreateCategory([FromBody] CategoryCreateDTO createDTO)
+    {
+        try
+        {
+            if (await CategoryExists(createDTO.Name) == true)
+            {
+                ModelState.AddModelError("ErrorMessages", "Villa already Exists!");
+                return BadRequest(ModelState);
+            }
+            if (createDTO == null)
+            {
+                return BadRequest(_response);
+            }
+            Category category = _mapper.Map<Category>(createDTO);
+            await _unitOfWork.CategoryRepo.CreateAsync(category);
+
+            // response
+            _response.Result = _mapper.Map<CategoryDTO>(category);
+            _response.StatusCode = HttpStatusCode.OK;
+            return CreatedAtAction("GetCategory", new { id = category.CategoryId }, category);
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.StatusCode = HttpStatusCode.InternalServerError;
+            _response.ErrorMessages.Add(ex.ToString());
+        }
+        return _response;
+    }
+
+
+    // PUT: api/CategoriesAPI/5
+    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    //[Authorize(Roles = "Admin")]
+    [HttpPut("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<APIResponse>> UpdateCategory(int id, [FromBody] CategoryUpdateDTO updateDTO)
+    {
+        try
+        {
+            if (updateDTO == null || id != updateDTO.CategoryId)
+            {
+                return BadRequest(_response);
             }
 
-            return category;
-        }
+            Category category = _mapper.Map<Category>(updateDTO);
+            await _unitOfWork.CategoryRepo.UpdateAsync(category);
 
-        // PUT: api/CategoriesAPI/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Category category)
+            // response
+            _response.StatusCode = HttpStatusCode.NoContent;
+            _response.IsSuccess = true;
+            return (_response);
+        }
+        catch (Exception ex)
         {
-            if (id != category.CategoryId)
+            _response.IsSuccess = false;
+            _response.StatusCode = HttpStatusCode.InternalServerError;
+            _response.ErrorMessages.Add(ex.ToString());
+        }
+        return _response;
+    }
+
+
+    // DELETE: api/CategoriesAPI/5
+    //[Authorize(Roles = "admin")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [HttpDelete("{id:int}", Name = "DeleteCategory")]
+    public async Task<ActionResult<APIResponse>> DeleteCategory(int id)
+    {
+        try
+        {
+            if (id == 0)
             {
                 return BadRequest();
             }
+            Category category = await _unitOfWork.CategoryRepo.GetFirstOrDefaultAsync(u => u.CategoryId == id);
 
-            _context.Entry(category).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/CategoriesAPI
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
-        {
-            _context.Categories.Add(category);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetCategory", new { id = category.CategoryId }, category);
-        }
-
-        // DELETE: api/CategoriesAPI/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCategory(int id)
-        {
-            var category = await _context.Categories.FindAsync(id);
             if (category == null)
             {
                 return NotFound();
             }
+            await _unitOfWork.CategoryRepo.RemoveAsync(category);
 
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            // response
+            _response.StatusCode = HttpStatusCode.NoContent;
+            _response.IsSuccess = true;
+            return Ok(_response);
         }
-
-        private bool CategoryExists(int id)
+        catch (Exception ex)
         {
-            return _context.Categories.Any(e => e.CategoryId == id);
+            _response.IsSuccess = false;
+            _response.StatusCode = HttpStatusCode.InternalServerError;
+            _response.ErrorMessages.Add(ex.ToString());
         }
+        return _response;
+    }
+
+
+    [HttpGet("{name}")]
+    public async Task<bool> CategoryExists(string name)
+    {
+        return await _unitOfWork.CategoryRepo.AnyAsync(c => c.Name.ToLower() == name.ToLower());
     }
 }

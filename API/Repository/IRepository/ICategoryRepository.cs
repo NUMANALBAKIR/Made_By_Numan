@@ -2,7 +2,7 @@
 
 namespace API.Repository.IRepository;
 
-public interface ICategoryRepository
+public interface ICategoryRepository : IRepository<Category>
 {
     Task<Category> UpdateAsync(Category entity);
 }

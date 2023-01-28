@@ -78,4 +78,10 @@ public class Repository<T> : IRepository<T> where T : class
         await _db.SaveChangesAsync();
     }
 
+    public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter = null)
+    {
+        IQueryable<T> query = dbSet;
+        return await query.AnyAsync(filter);
+    }
+
 }
