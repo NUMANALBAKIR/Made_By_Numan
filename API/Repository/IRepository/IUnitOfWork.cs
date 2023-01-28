@@ -1,6 +1,7 @@
 ﻿namespace API.Repository.IRepository;
 
-public class IUnitOfWork
+public interface IUnitOfWork
 {
     IFoodRepository FoodRepo { get; }
+    ICategoryRepository CategoryRepo { get; }
 }

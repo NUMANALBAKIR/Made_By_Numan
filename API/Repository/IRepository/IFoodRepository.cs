@@ -2,7 +2,7 @@
 
 namespace API.Repository.IRepository;
 
-public interface IFoodRepository
+public interface IFoodRepository : IRepository<Food>
 {
     Task<Food> UpdateAsync(Food entity);
 }
