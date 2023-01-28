@@ -2,7 +2,7 @@
 
 namespace API.Models.DTOs.OrderFood;
 
-public class CategoryDTO
+public class CategoryUpdateDTO
 {
     [Key]
     public int CategoryId { get; set; }

@@ -2,8 +2,10 @@
 
 namespace API.Models.DTOs.OrderFood;
 
-public class FoodCreateDTO
+public class FoodUpdateDTO
 {
+    [Key]
+    public int FoodId { get; set; }
     [Required]
     public string Name { get; set; }
     [Required]
