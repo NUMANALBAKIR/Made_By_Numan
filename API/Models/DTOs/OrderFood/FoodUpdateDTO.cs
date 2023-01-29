@@ -12,6 +12,7 @@ public class FoodUpdateDTO
     public int Description { get; set; }
     [Required]
     public double Price { get; set; }
+    public string? ImageURL { get; set; }
 
     [Required]
     public int CategoryId { get; set; }
