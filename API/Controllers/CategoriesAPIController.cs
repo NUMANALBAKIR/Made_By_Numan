@@ -141,7 +141,7 @@ public class CategoriesAPIController : ControllerBase
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<APIResponse>> UpdateCategory(int id, [FromBody] CategoryUpdateDTO updateDTO)
+    public async Task<ActionResult<APIResponse>> UpdateCategory(int id, [FromBody] FoodUpdateDTO updateDTO)
     {
         try
         {

@@ -4,7 +4,7 @@ namespace API.Models.DTOs.OrderFood;
 
 public class FoodUpdateDTO
 {
-    [Key]
+    [Required]
     public int FoodId { get; set; }
     [Required]
     public string Name { get; set; }
