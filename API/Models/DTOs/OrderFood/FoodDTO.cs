@@ -6,18 +6,12 @@ namespace API.Models.DTOs.OrderFood;
 
 public class FoodDTO
 {
-    [Key]
     public int FoodId { get; set; }
-    [Required]
     public string Name { get; set; }
-    [Required]
     public int Description { get; set; }
-    [Required]
     public double Price { get; set; }
     public string? ImageURL { get; set; }
 
-    [Required]
     public int CategoryId { get; set; }
-    [ValidateNever, ForeignKey(nameof(CategoryId))]
     public CategoryCreateDTO Category { get; set; }
 }
