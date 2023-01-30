@@ -36,7 +36,7 @@ public class Repository<T> : IRepository<T> where T : class
             var propertyArr = includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var property in propertyArr)
             {
-                query.Include(property);
+                query = query.Include(property);
             }
         }
         return await query.ToListAsync();
@@ -76,12 +76,6 @@ public class Repository<T> : IRepository<T> where T : class
     public async Task SaveAsync()
     {
         await _db.SaveChangesAsync();
-    }
-
-    public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter = null)
-    {
-        IQueryable<T> query = dbSet;
-        return await query.AnyAsync(filter);
     }
 
 }
