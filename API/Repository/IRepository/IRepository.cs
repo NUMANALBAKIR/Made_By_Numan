@@ -9,5 +9,5 @@ public interface IRepository<T> where T : class
     Task CreateAsync(T entity);
     Task RemoveAsync(T entity);
     Task SaveAsync();
-    Task<bool> AnyAsync(Expression<Func<T, bool>>? filter = null);
+
 }

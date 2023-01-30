@@ -12,7 +12,6 @@ public class Food
     public double Price { get; set; }
     public string? ImageURL { get; set; }
 
-
     public int CategoryId { get; set; }
     [ForeignKey(nameof(CategoryId))]
     public Category Category { get; set; }
