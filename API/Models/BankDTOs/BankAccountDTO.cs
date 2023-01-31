@@ -1,4 +1,4 @@
-﻿namespace API.Models.DTOs.Bank;
+﻿namespace API.Models.BankDTOs;
 
 public class BankAccountDTO
 {

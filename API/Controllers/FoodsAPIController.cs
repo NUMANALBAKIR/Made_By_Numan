@@ -1,6 +1,6 @@
 ﻿using API.Models;
-using API.Models.DTOs.OrderFood;
 using API.Models.OrderFood;
+using API.Models.OrderFoodDTOs;
 using API.Repository.IRepository;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;

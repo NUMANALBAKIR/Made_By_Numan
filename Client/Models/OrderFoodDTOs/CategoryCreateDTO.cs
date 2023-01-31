@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace API.Models.DTOs.OrderFood;
+namespace Client.Models.OrderFoodDTOs;
 
 public class CategoryCreateDTO
 {
