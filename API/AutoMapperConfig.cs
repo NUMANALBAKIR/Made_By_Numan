@@ -1,5 +1,5 @@
-﻿using API.Models.DTOs.OrderFood;
-using API.Models.OrderFood;
+﻿using API.Models.OrderFood;
+using API.Models.OrderFoodDTOs;
 using AutoMapper;
 
 namespace API;
