@@ -9,5 +9,4 @@ public interface ICategoryService
     Task<T> CreateAsync<T>(CategoryCreateDTO dto, string token);
     Task<T> UpdateAsync<T>(CategoryUpdateDTO dto, string token);
     Task<T> DeleteAsync<T>(int id, string token);
-
 }

@@ -4,6 +4,6 @@ namespace Client.Services;
 
 public interface IBaseService
 {
-    APIResponse responseModel { get; set; }
+    APIResponse apiResponse { get; set; }
     Task<T> SendAsync<T>(APIRequest apiRequest);
 }
