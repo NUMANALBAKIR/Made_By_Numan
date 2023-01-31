@@ -1,18 +1,10 @@
-﻿using API.Data;
-using API.Models;
+﻿using API.Models;
 using API.Models.DTOs.OrderFood;
 using API.Models.OrderFood;
 using API.Repository.IRepository;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace API.Controllers;
 
@@ -105,7 +97,7 @@ public class FoodsAPIController : ControllerBase
     {
         try
         {
-            if (await _unitOfWork.FoodRepo.GetFirstOrDefaultAsync(f => f.Name == createDTO.Name) != null)
+            if (await _unitOfWork.FoodRepo.GetFirstOrDefaultAsync(f => f.Name.ToLower() == createDTO.Name.ToLower()) != null)
             {
                 ModelState.AddModelError("ErrorMessages", "Food already Exists!");
                 return BadRequest(ModelState);

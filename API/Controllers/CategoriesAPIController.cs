@@ -1,18 +1,10 @@
-﻿using API.Data;
-using API.Models;
+﻿using API.Models;
 using API.Models.DTOs.OrderFood;
 using API.Models.OrderFood;
 using API.Repository.IRepository;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace API.Controllers;
 
@@ -105,14 +97,14 @@ public class CategoriesAPIController : ControllerBase
     {
         try
         {
-            if (await _unitOfWork.CategoryRepo.GetFirstOrDefaultAsync(c => c.Name == createDTO.Name) != null)
+            if (await _unitOfWork.CategoryRepo.GetFirstOrDefaultAsync(c => c.Name.ToLower() == createDTO.Name.ToLower()) != null)
             {
                 ModelState.AddModelError("ErrorMessages", "Category already Exists!");
                 return BadRequest(ModelState);
             }
             if (createDTO == null)
             {
-                return BadRequest(_response);
+                return BadRequest(createDTO);
             }
             Category category = _mapper.Map<Category>(createDTO);
             await _unitOfWork.CategoryRepo.CreateAsync(category);
@@ -147,7 +139,9 @@ public class CategoriesAPIController : ControllerBase
         {
             if (updateDTO == null || id != updateDTO.CategoryId)
             {
-                return BadRequest(_response);
+                _response.IsSuccess = false;
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                return BadRequest(updateDTO);
             }
 
             Category category = _mapper.Map<Category>(updateDTO);
@@ -156,7 +150,7 @@ public class CategoriesAPIController : ControllerBase
             // response
             _response.StatusCode = HttpStatusCode.NoContent;
             _response.IsSuccess = true;
-            return (_response);
+            return Ok(_response);
         }
         catch (Exception ex)
         {

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace API.Models.DTOs.OrderFood;
+﻿namespace API.Models.DTOs.OrderFood;
 
 public class CategoryDTO
 {

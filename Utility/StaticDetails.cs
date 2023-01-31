@@ -2,11 +2,12 @@
 
 public static class StaticDetails
 {
-    public enum FoodType
+    public enum APIType
     {
-        PIZZA,
-        SALADS,
-        STARTER
+        GET,
+        POST,
+        PUT,
+        DELETE
     }
 
     public const string Role_User_Admin = "Admin";
