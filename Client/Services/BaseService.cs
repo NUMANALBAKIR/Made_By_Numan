@@ -59,18 +59,18 @@ public class BaseService : IBaseService
             try
             {
                 // responseString => Deserialize to APIResponse
-                APIResponse APIResponse = JsonConvert.DeserializeObject<APIResponse>(responseString);
+                APIResponse apiResponse = JsonConvert.DeserializeObject<APIResponse>(responseString);
 
                 // there's a response, but it's not what we want.
-                if (APIResponse != null &&
+                if (apiResponse != null &&
                     (responseMessage.StatusCode == HttpStatusCode.BadRequest || responseMessage.StatusCode == HttpStatusCode.NotFound))
                 {
-                    APIResponse.StatusCode = HttpStatusCode.BadRequest;
-                    APIResponse.IsSuccess = false;
+                    apiResponse.StatusCode = HttpStatusCode.BadRequest;
+                    apiResponse.IsSuccess = false;
                     // APIResponse => Serialize to json => Deserialize to T
-                    var res = JsonConvert.SerializeObject(APIResponse); //??
-                    var returnObj = JsonConvert.DeserializeObject<T>(res);
-                    return returnObj;
+                    var jsonApiResponse = JsonConvert.SerializeObject(apiResponse); //??
+                    var tApiResponse = JsonConvert.DeserializeObject<T>(jsonApiResponse);
+                    return tApiResponse;
                 }
             }
             catch (Exception ex)
@@ -81,20 +81,20 @@ public class BaseService : IBaseService
             }
 
             // responseString => Deserialize to T
-            var apiResponse = JsonConvert.DeserializeObject<T>(responseString);
-            return apiResponse;
+            var tApiResponse1 = JsonConvert.DeserializeObject<T>(responseString);
+            return tApiResponse1;
         }
         catch (Exception ex)
         {
-            APIResponse dto = new()
+            APIResponse apiResponse = new()
             {
                 ErrorMessages = new List<string>() { Convert.ToString(ex.Message) },
                 IsSuccess = false
             };
             // APIResponse => Serialize to json => Deserialize to T
-            var res = JsonConvert.SerializeObject(dto);
-            var APIResponse = JsonConvert.DeserializeObject<T>(res);
-            return APIResponse;
+            var jsonApiResponse = JsonConvert.SerializeObject(apiResponse);
+            var tApiResponse2 = JsonConvert.DeserializeObject<T>(jsonApiResponse);
+            return tApiResponse2;
         }
     }
 }
