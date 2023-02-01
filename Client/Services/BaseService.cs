@@ -10,17 +10,18 @@ namespace Client.Services;
 
 public class BaseService : IBaseService
 {
-    private readonly IHttpClientFactory httpClient;
+    private readonly IHttpClientFactory _httpClient;
     public BaseService(IHttpClientFactory httpClientFactory)
     {
-        httpClient = httpClientFactory;
+        _httpClient = httpClientFactory;
     }
 
+    // benefit of return-type T is, it can return ApiResponse or ExceptionResponse.
     public async Task<T> SendAsync<T>(APIRequest apiRequest)
     {
         try
         {
-            // Request processing.
+            // Request processing =>
             HttpRequestMessage requestMessage = new();
             requestMessage.Headers.Add("Accept", "application/json");
             requestMessage.RequestUri = new Uri(apiRequest.Url);
@@ -45,14 +46,14 @@ public class BaseService : IBaseService
                     break;
             }
 
-            var client = httpClient.CreateClient("clientAPI");
+            var client = _httpClient.CreateClient("clientAPI");
             if (string.IsNullOrEmpty(apiRequest.Token) == false)
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.Token);
             }
 
 
-            // Response processing.
+            // Response processing =>
             HttpResponseMessage responseMessage = await client.SendAsync(requestMessage);
             var responseString = await responseMessage.Content.ReadAsStringAsync();
 

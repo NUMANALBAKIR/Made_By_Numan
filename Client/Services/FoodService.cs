@@ -6,12 +6,10 @@ namespace Client.Services;
 
 public class FoodService : BaseService, IFoodService
 {
-
     private string _APIUrl;
-    private readonly IHttpClientFactory _httpClient; //???
+
     public FoodService(IConfiguration configuration, IHttpClientFactory httpClientFactory) : base(httpClientFactory)
     {
-        _httpClient = httpClientFactory;
         _APIUrl = configuration.GetValue<string>("ServiceUrls:APIUrl");
     }
 
