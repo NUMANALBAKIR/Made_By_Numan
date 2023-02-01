@@ -13,11 +13,9 @@ public class BaseService : IBaseService
     private readonly IHttpClientFactory httpClient;
     public BaseService(IHttpClientFactory httpClientFactory)
     {
-        apiResponse = new(); // ???
         httpClient = httpClientFactory;
     }
 
-    public APIResponse apiResponse { get; set; } // ??
     public async Task<T> SendAsync<T>(APIRequest apiRequest)
     {
         try
@@ -53,6 +51,7 @@ public class BaseService : IBaseService
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.Token);
             }
 
+
             // Response processing.
             HttpResponseMessage responseMessage = await client.SendAsync(requestMessage);
             var responseString = await responseMessage.Content.ReadAsStringAsync();
@@ -87,7 +86,7 @@ public class BaseService : IBaseService
         }
         catch (Exception ex)
         {
-            var dto = new APIResponse
+            APIResponse dto = new()
             {
                 ErrorMessages = new List<string>() { Convert.ToString(ex.Message) },
                 IsSuccess = false

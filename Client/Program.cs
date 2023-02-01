@@ -1,7 +1,16 @@
+using Client;
+using Client.Services;
+using Client.Services.IServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
+
+// necessary
+builder.Services.AddScoped<IFoodService, FoodService>();
+builder.Services.AddHttpClient<IFoodService, FoodService>();
 
 var app = builder.Build();
 
