@@ -4,13 +4,15 @@ using Client.Services.IServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 // Add services to container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
-// necessary
-builder.Services.AddScoped<IFoodService, FoodService>();
+// sequence is important !
 builder.Services.AddHttpClient<IFoodService, FoodService>();
+builder.Services.AddScoped<IFoodService, FoodService>();
 
 var app = builder.Build();
 
@@ -25,7 +27,6 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 
 app.UseAuthorization();
