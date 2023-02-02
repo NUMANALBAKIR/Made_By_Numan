@@ -34,15 +34,15 @@ public class CategoriesAPIController : ControllerBase
         {
             IEnumerable<Category> categories;
             categories = await _unitOfWork.CategoryRepo.GetAllAsync();
-            _response.Result = _mapper.Map<List<CategoryDTO>>(categories);
-            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = _mapper.Map<List<CategoryDTO>>(categories);
             return Ok(_response);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.StatusCode = HttpStatusCode.InternalServerError;
-            _response.ErrorMessages.Add(ex.ToString());
+
+            //InternalServerError;
+            _response.Messages.Add(ex.ToString());
             return _response;
         }
     }
@@ -60,25 +60,24 @@ public class CategoriesAPIController : ControllerBase
         {
             if (id == 0)
             {
-                _response.StatusCode = HttpStatusCode.BadRequest;
+
                 return BadRequest(_response);
             }
             Category category = await _unitOfWork.CategoryRepo.GetFirstOrDefaultAsync(c => c.CategoryId == id);
 
             if (category == null)
             {
-                _response.StatusCode = HttpStatusCode.NotFound;
+
                 return NotFound(_response);
             }
-            _response.Result = _mapper.Map<CategoryDTO>(category);
-            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = _mapper.Map<CategoryDTO>(category);
             return Ok(_response);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.StatusCode = HttpStatusCode.InternalServerError;
-            _response.ErrorMessages.Add(ex.ToString());
+            //InternalServerError;
+            _response.Messages.Add(ex.ToString());
             return _response;
         }
     }
@@ -110,15 +109,14 @@ public class CategoriesAPIController : ControllerBase
             await _unitOfWork.CategoryRepo.CreateAsync(category);
 
             // response
-            _response.Result = _mapper.Map<CategoryDTO>(category);
-            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = _mapper.Map<CategoryDTO>(category);
             return CreatedAtAction("GetCategory", new { id = category.CategoryId }, category);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.StatusCode = HttpStatusCode.InternalServerError;
-            _response.ErrorMessages.Add(ex.ToString());
+            //InternalServerError;
+            _response.Messages.Add(ex.ToString());
         }
         return _response;
     }
@@ -140,7 +138,6 @@ public class CategoriesAPIController : ControllerBase
             if (updateDTO == null || id != updateDTO.CategoryId)
             {
                 _response.IsSuccess = false;
-                _response.StatusCode = HttpStatusCode.BadRequest;
                 return BadRequest(updateDTO);
             }
 
@@ -148,15 +145,15 @@ public class CategoriesAPIController : ControllerBase
             await _unitOfWork.CategoryRepo.UpdateAsync(category);
 
             // response
-            _response.StatusCode = HttpStatusCode.NoContent;
+            //NoContent;
             _response.IsSuccess = true;
             return Ok(_response);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.StatusCode = HttpStatusCode.InternalServerError;
-            _response.ErrorMessages.Add(ex.ToString());
+            //InternalServerError;
+            _response.Messages.Add(ex.ToString());
         }
         return _response;
     }
@@ -187,15 +184,15 @@ public class CategoriesAPIController : ControllerBase
             await _unitOfWork.CategoryRepo.RemoveAsync(category);
 
             // response
-            _response.StatusCode = HttpStatusCode.NoContent;
+            // NoContent;
             _response.IsSuccess = true;
             return Ok(_response);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.StatusCode = HttpStatusCode.InternalServerError;
-            _response.ErrorMessages.Add(ex.ToString());
+            // InternalServerError
+            _response.Messages.Add(ex.ToString());
         }
         return _response;
     }

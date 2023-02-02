@@ -66,10 +66,10 @@ public class BaseService : IBaseService
                 if (apiResponse != null &&
                     (responseMessage.StatusCode == HttpStatusCode.BadRequest || responseMessage.StatusCode == HttpStatusCode.NotFound))
                 {
-                    apiResponse.StatusCode = HttpStatusCode.BadRequest;
+                    //BadRequest;
                     apiResponse.IsSuccess = false;
                     // APIResponse => Serialize to json => Deserialize to T
-                    var jsonApiResponse = JsonConvert.SerializeObject(apiResponse); //??
+                    var jsonApiResponse = JsonConvert.SerializeObject(apiResponse);
                     var tApiResponse = JsonConvert.DeserializeObject<T>(jsonApiResponse);
                     return tApiResponse;
                 }
@@ -89,7 +89,7 @@ public class BaseService : IBaseService
         {
             APIResponse apiResponse = new()
             {
-                ErrorMessages = new List<string>() { Convert.ToString(ex.Message) },
+                Messages = new List<string>() { Convert.ToString(ex.Message) },
                 IsSuccess = false
             };
             // APIResponse => Serialize to json => Deserialize to T

@@ -27,7 +27,7 @@ public class OrderFoodController : Controller
         if (response != null && response.IsSuccess == true)
         {
             // baseservice
-            var stringList = Convert.ToString(response.Result);
+            var stringList = Convert.ToString(response.Data);
             foodList = JsonConvert.DeserializeObject<List<FoodDTO>>(stringList);
         }
         return View(foodList);
