@@ -42,7 +42,7 @@ public class CategoriesAPIController : ControllerBase
             _response.IsSuccess = false;
 
             //InternalServerError;
-            _response.Messages.Add(ex.ToString());
+            _response.Message = ex.ToString();
             return _response;
         }
     }
@@ -77,7 +77,7 @@ public class CategoriesAPIController : ControllerBase
         {
             _response.IsSuccess = false;
             //InternalServerError;
-            _response.Messages.Add(ex.ToString());
+            _response.Message = ex.ToString();
             return _response;
         }
     }
@@ -116,7 +116,7 @@ public class CategoriesAPIController : ControllerBase
         {
             _response.IsSuccess = false;
             //InternalServerError;
-            _response.Messages.Add(ex.ToString());
+            _response.Message = ex.ToString();
         }
         return _response;
     }
@@ -153,7 +153,7 @@ public class CategoriesAPIController : ControllerBase
         {
             _response.IsSuccess = false;
             //InternalServerError;
-            _response.Messages.Add(ex.ToString());
+            _response.Message = ex.ToString();
         }
         return _response;
     }
@@ -192,7 +192,7 @@ public class CategoriesAPIController : ControllerBase
         {
             _response.IsSuccess = false;
             // InternalServerError
-            _response.Messages.Add(ex.ToString());
+            _response.Message = ex.ToString();
         }
         return _response;
     }

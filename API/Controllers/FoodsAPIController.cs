@@ -40,7 +40,7 @@ public class FoodsAPIController : ControllerBase
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.Messages.Add(ex.ToString());
+            _response.Message = ex.ToString();
             return _response; // InternalServerError
         }
     }
@@ -72,7 +72,7 @@ public class FoodsAPIController : ControllerBase
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.Messages.Add(ex.ToString());
+            _response.Message = ex.ToString();
             return _response;
         }
     }
@@ -115,7 +115,7 @@ public class FoodsAPIController : ControllerBase
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.Messages.Add(ex.ToString());
+            _response.Message = ex.ToString();
         }
         return _response;
     }
@@ -154,7 +154,7 @@ public class FoodsAPIController : ControllerBase
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.Messages.Add(ex.ToString());
+            _response.Message = ex.ToString();
         }
         return _response;
     }
@@ -191,7 +191,7 @@ public class FoodsAPIController : ControllerBase
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.Messages.Add(ex.ToString());
+            _response.Message = ex.ToString();
         }
         return _response;
     }

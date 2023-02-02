@@ -89,7 +89,7 @@ public class BaseService : IBaseService
         {
             APIResponse apiResponse = new()
             {
-                Messages = new List<string>() { Convert.ToString(ex.Message) },
+                Message = Convert.ToString(ex),
                 IsSuccess = false
             };
             // APIResponse => Serialize to json => Deserialize to T
