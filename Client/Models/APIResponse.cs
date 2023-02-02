@@ -4,14 +4,8 @@ namespace Client.Models;
 
 public class APIResponse
 {
-    public HttpStatusCode StatusCode { get; set; }
     public bool IsSuccess { get; set; } = true;
-    public object? Result { get; set; }
-    public List<string>? ErrorMessages { get; set; }
-
-    public APIResponse()
-    {
-        ErrorMessages = new List<string>();
-    }
+    public object? Data { get; set; }
+    public List<string>? Messages { get; set; } = new List<string>();
 
 }

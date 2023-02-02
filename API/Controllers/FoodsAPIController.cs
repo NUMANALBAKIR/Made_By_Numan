@@ -34,16 +34,14 @@ public class FoodsAPIController : ControllerBase
         {
             IEnumerable<Food> foods;
             foods = await _unitOfWork.FoodRepo.GetAllAsync(includeProperties: "Category");
-            _response.Result = _mapper.Map<List<FoodDTO>>(foods);
-            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = _mapper.Map<List<FoodDTO>>(foods);
             return Ok(_response);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.StatusCode = HttpStatusCode.InternalServerError;
-            _response.ErrorMessages.Add(ex.ToString());
-            return _response;
+            _response.Messages.Add(ex.ToString());
+            return _response; // InternalServerError
         }
     }
 
@@ -60,25 +58,21 @@ public class FoodsAPIController : ControllerBase
         {
             if (id == 0)
             {
-                _response.StatusCode = HttpStatusCode.BadRequest;
                 return BadRequest(_response);
             }
             Food food = await _unitOfWork.FoodRepo.GetFirstOrDefaultAsync(filter: f => f.FoodId == id, includeProperties: "Category");
 
             if (food == null)
             {
-                _response.StatusCode = HttpStatusCode.NotFound;
                 return NotFound(_response);
             }
-            _response.Result = _mapper.Map<FoodDTO>(food);
-            _response.StatusCode = HttpStatusCode.OK;
+            _response.Data = _mapper.Map<FoodDTO>(food);
             return Ok(_response);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.StatusCode = HttpStatusCode.InternalServerError;
-            _response.ErrorMessages.Add(ex.ToString());
+            _response.Messages.Add(ex.ToString());
             return _response;
         }
     }
@@ -115,15 +109,13 @@ public class FoodsAPIController : ControllerBase
             await _unitOfWork.FoodRepo.CreateAsync(food);
 
             // response
-            _response.Result = _mapper.Map<FoodDTO>(food);
-            _response.StatusCode = HttpStatusCode.Created;
+            _response.Data = _mapper.Map<FoodDTO>(food);
             return CreatedAtAction("GetFood", new { id = food.FoodId }, food);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.StatusCode = HttpStatusCode.InternalServerError;
-            _response.ErrorMessages.Add(ex.ToString());
+            _response.Messages.Add(ex.ToString());
         }
         return _response;
     }
@@ -156,15 +148,13 @@ public class FoodsAPIController : ControllerBase
             await _unitOfWork.FoodRepo.UpdateAsync(food);
 
             // response
-            _response.StatusCode = HttpStatusCode.NoContent;
             _response.IsSuccess = true;
             return Ok(_response);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.StatusCode = HttpStatusCode.InternalServerError;
-            _response.ErrorMessages.Add(ex.ToString());
+            _response.Messages.Add(ex.ToString());
         }
         return _response;
     }
@@ -195,15 +185,13 @@ public class FoodsAPIController : ControllerBase
             await _unitOfWork.FoodRepo.RemoveAsync(food);
 
             // response
-            _response.StatusCode = HttpStatusCode.NoContent;
             _response.IsSuccess = true;
             return Ok(_response);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.StatusCode = HttpStatusCode.InternalServerError;
-            _response.ErrorMessages.Add(ex.ToString());
+            _response.Messages.Add(ex.ToString());
         }
         return _response;
     }
