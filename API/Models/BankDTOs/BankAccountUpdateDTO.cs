@@ -1,6 +1,6 @@
 ﻿namespace API.Models.BankDTOs;
 
-public class BankAccountDTO
+public class BankAccountUpdateDTO
 {
     public int AccountId { get; set; }
     public string HolderName { get; set; }
@@ -8,3 +8,4 @@ public class BankAccountDTO
     public double CheckingsBalance { get; set; }
     public double TransactionAmount { get; set; }
 }
+

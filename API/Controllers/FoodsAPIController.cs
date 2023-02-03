@@ -4,7 +4,6 @@ using API.Models.OrderFoodDTOs;
 using API.Repository.IRepository;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace API.Controllers;
 
@@ -35,14 +34,13 @@ public class FoodsAPIController : ControllerBase
             IEnumerable<Food> foods;
             foods = await _unitOfWork.FoodRepo.GetAllAsync(includeProperties: "Category");
             _response.Data = _mapper.Map<List<FoodDTO>>(foods);
-            _response.Message = "Foods List.";
             return Ok(_response);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.Message = ex.ToString();
-            return _response; // InternalServerError
+            _response.ErrorMessage = ex.ToString();
+            return StatusCode(500, _response);
         }
     }
 
@@ -59,12 +57,16 @@ public class FoodsAPIController : ControllerBase
         {
             if (id == 0)
             {
+                _response.IsSuccess = false;
+                _response.ErrorMessage = "id can't be 0.";
                 return BadRequest(_response);
             }
             Food food = await _unitOfWork.FoodRepo.GetFirstOrDefaultAsync(filter: f => f.FoodId == id, includeProperties: "Category");
 
             if (food == null)
             {
+                _response.IsSuccess = false;
+                _response.ErrorMessage = $"No Food with id= {id} exists.";
                 return NotFound(_response);
             }
             _response.Data = _mapper.Map<FoodDTO>(food);
@@ -73,8 +75,8 @@ public class FoodsAPIController : ControllerBase
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.Message = ex.ToString();
-            return _response;
+            _response.ErrorMessage = ex.ToString();
+            return StatusCode(500, _response);
         }
     }
 
@@ -83,11 +85,11 @@ public class FoodsAPIController : ControllerBase
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     //[Authorize(Roles = "Admin")]
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<ActionResult<APIResponse>> CreateFood([FromBody] FoodCreateDTO createDTO)
     {
         try
@@ -104,6 +106,8 @@ public class FoodsAPIController : ControllerBase
             }
             if (createDTO == null)
             {
+                _response.IsSuccess = false;
+                _response.ErrorMessage = "createDTO is null";
                 return BadRequest(_response);
             }
             Food food = _mapper.Map<Food>(createDTO);
@@ -116,9 +120,9 @@ public class FoodsAPIController : ControllerBase
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.Message = ex.ToString();
+            _response.ErrorMessage = ex.ToString();
+            return StatusCode(500, _response);
         }
-        return _response;
     }
 
 
@@ -131,17 +135,20 @@ public class FoodsAPIController : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<APIResponse>> UpdateFood(int id, [FromBody] FoodUpdateDTO updateDTO)
     {
         try
         {
             if (updateDTO == null || id != updateDTO.FoodId)
             {
-                return BadRequest(); // don't enclose _reponse.
+                _response.IsSuccess = false;
+                _response.ErrorMessage = "id or updateDTO has issue(s).";
+                return BadRequest(_response);
             }
             if (await _unitOfWork.CategoryRepo.GetFirstOrDefaultAsync(c => c.CategoryId == updateDTO.CategoryId) == null)
             {
-                ModelState.AddModelError("ErrorMessages", "CategoryID is Invalid!");
+                ModelState.AddModelError("ErrorMessages", "Category ID is Invalid!");
                 return BadRequest(ModelState);
             }
 
@@ -149,15 +156,15 @@ public class FoodsAPIController : ControllerBase
             await _unitOfWork.FoodRepo.UpdateAsync(food);
 
             // response
-            _response.IsSuccess = true;
+            _response.Data = _mapper.Map<FoodDTO>(food);
             return Ok(_response);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.Message = ex.ToString();
+            _response.ErrorMessage = ex.ToString();
+            return StatusCode(500, _response);
         }
-        return _response;
     }
 
 
@@ -168,6 +175,7 @@ public class FoodsAPIController : ControllerBase
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     [HttpDelete("{id:int}", Name = "DeleteFood")]
     public async Task<ActionResult<APIResponse>> DeleteFood(int id)
     {
@@ -175,25 +183,27 @@ public class FoodsAPIController : ControllerBase
         {
             if (id == 0)
             {
-                return BadRequest();
+                _response.IsSuccess = false;
+                _response.ErrorMessage = "id can't be 0";
+                return BadRequest(_response);
             }
             Food food = await _unitOfWork.FoodRepo.GetFirstOrDefaultAsync(f => f.FoodId == id);
 
             if (food == null)
             {
-                return NotFound();
+                _response.IsSuccess = false;
+                _response.ErrorMessage = $"No food with id= {id} exists.";
+                return NotFound(_response);
             }
             await _unitOfWork.FoodRepo.RemoveAsync(food);
 
-            // response
-            _response.IsSuccess = true;
             return Ok(_response);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.Message = ex.ToString();
+            _response.ErrorMessage = ex.ToString();
+            return StatusCode(500, _response);
         }
-        return _response;
     }
 }

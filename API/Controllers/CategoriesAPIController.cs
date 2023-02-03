@@ -4,10 +4,10 @@ using API.Models.OrderFoodDTOs;
 using API.Repository.IRepository;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace API.Controllers;
 
+// Food Categories
 [Route("api/CategoriesAPI")]
 [ApiController]
 public class CategoriesAPIController : ControllerBase
@@ -35,24 +35,22 @@ public class CategoriesAPIController : ControllerBase
             IEnumerable<Category> categories;
             categories = await _unitOfWork.CategoryRepo.GetAllAsync();
             _response.Data = _mapper.Map<List<CategoryDTO>>(categories);
-            _response.Message = "Food Categories List.";
             return Ok(_response);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            _response.Message = ex.ToString();
-            //InternalServerError;
-            return (_response);
+            _response.ErrorMessage = ex.ToString();
+            return StatusCode(500, _response);
         }
     }
 
 
     // GET: api/CategoriesAPI/5
     [HttpGet("{id:int}")]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<APIResponse>> GetCategory(int id)
     {
@@ -60,14 +58,16 @@ public class CategoriesAPIController : ControllerBase
         {
             if (id == 0)
             {
-
+                _response.IsSuccess = false;
+                _response.ErrorMessage = "id can't be 0.";
                 return BadRequest(_response);
             }
             Category category = await _unitOfWork.CategoryRepo.GetFirstOrDefaultAsync(c => c.CategoryId == id);
 
             if (category == null)
             {
-
+                _response.IsSuccess = false;
+                _response.ErrorMessage = $"No Category with id= {id} exists.";
                 return NotFound(_response);
             }
             _response.Data = _mapper.Map<CategoryDTO>(category);
@@ -76,9 +76,8 @@ public class CategoriesAPIController : ControllerBase
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            //InternalServerError;
-            _response.Message = ex.ToString();
-            return _response;
+            _response.ErrorMessage = ex.ToString();
+            return StatusCode(500, _response);
         }
     }
 
@@ -87,11 +86,11 @@ public class CategoriesAPIController : ControllerBase
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     //[Authorize(Roles = "Admin")]
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<ActionResult<APIResponse>> CreateCategory([FromBody] CategoryCreateDTO createDTO)
     {
         try
@@ -103,7 +102,9 @@ public class CategoriesAPIController : ControllerBase
             }
             if (createDTO == null)
             {
-                return BadRequest(createDTO);
+                _response.IsSuccess = false;
+                _response.ErrorMessage = "createDTO is null";
+                return BadRequest(_response);
             }
             Category category = _mapper.Map<Category>(createDTO);
             await _unitOfWork.CategoryRepo.CreateAsync(category);
@@ -115,10 +116,9 @@ public class CategoriesAPIController : ControllerBase
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            //InternalServerError;
-            _response.Message = ex.ToString();
+            _response.ErrorMessage = ex.ToString();
+            return StatusCode(500, _response);
         }
-        return _response;
     }
 
 
@@ -126,11 +126,11 @@ public class CategoriesAPIController : ControllerBase
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     //[Authorize(Roles = "Admin")]
     [HttpPut("{id:int}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<APIResponse>> UpdateCategory(int id, [FromBody] CategoryUpdateDTO updateDTO)
     {
         try
@@ -138,34 +138,34 @@ public class CategoriesAPIController : ControllerBase
             if (updateDTO == null || id != updateDTO.CategoryId)
             {
                 _response.IsSuccess = false;
-                return BadRequest(updateDTO);
+                _response.ErrorMessage = "id or updateDTO has issue(s).";
+                return BadRequest(_response);
             }
 
             Category category = _mapper.Map<Category>(updateDTO);
             await _unitOfWork.CategoryRepo.UpdateAsync(category);
 
             // response
-            //NoContent;
-            _response.IsSuccess = true;
+            _response.Data = _mapper.Map<CategoryDTO>(category);
             return Ok(_response);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            //InternalServerError;
-            _response.Message = ex.ToString();
+            _response.ErrorMessage = ex.ToString();
+            return StatusCode(500, _response);
         }
-        return _response;
     }
 
 
     // DELETE: api/CategoriesAPI/5
     //[Authorize(Roles = "admin")]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     [HttpDelete("{id:int}", Name = "DeleteCategory")]
     public async Task<ActionResult<APIResponse>> DeleteCategory(int id)
     {
@@ -173,28 +173,28 @@ public class CategoriesAPIController : ControllerBase
         {
             if (id == 0)
             {
-                return BadRequest();
+                _response.IsSuccess = false;
+                _response.ErrorMessage = "id can't be 0";
+                return BadRequest(_response);
             }
             Category category = await _unitOfWork.CategoryRepo.GetFirstOrDefaultAsync(u => u.CategoryId == id);
 
             if (category == null)
             {
-                return NotFound();
+                _response.IsSuccess = false;
+                _response.ErrorMessage = $"No category with id= {id} exists.";
+                return NotFound(_response);
             }
             await _unitOfWork.CategoryRepo.RemoveAsync(category);
 
-            // response
-            // NoContent;
-            _response.IsSuccess = true;
             return Ok(_response);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-            // InternalServerError
-            _response.Message = ex.ToString();
+            _response.ErrorMessage = ex.ToString();
+            return StatusCode(500, _response);
         }
-        return _response;
     }
 
 }
