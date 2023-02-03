@@ -35,6 +35,7 @@ public class FoodsAPIController : ControllerBase
             IEnumerable<Food> foods;
             foods = await _unitOfWork.FoodRepo.GetAllAsync(includeProperties: "Category");
             _response.Data = _mapper.Map<List<FoodDTO>>(foods);
+            _response.Message = "Foods List.";
             return Ok(_response);
         }
         catch (Exception ex)

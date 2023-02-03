@@ -9,5 +9,5 @@ public class FoodDTO
     public string? ImageURL { get; set; }
 
     public int CategoryId { get; set; }
-    public CategoryCreateDTO Category { get; set; }
+    public CategoryDTO Category { get; set; }
 }
