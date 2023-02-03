@@ -35,15 +35,15 @@ public class CategoriesAPIController : ControllerBase
             IEnumerable<Category> categories;
             categories = await _unitOfWork.CategoryRepo.GetAllAsync();
             _response.Data = _mapper.Map<List<CategoryDTO>>(categories);
+            _response.Message = "Food Categories List.";
             return Ok(_response);
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
-
-            //InternalServerError;
             _response.Message = ex.ToString();
-            return _response;
+            //InternalServerError;
+            return (_response);
         }
     }
 
