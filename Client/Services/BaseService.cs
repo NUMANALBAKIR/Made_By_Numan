@@ -1,5 +1,4 @@
 ﻿using Client.Models;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http.Headers;
@@ -89,7 +88,7 @@ public class BaseService : IBaseService
         {
             APIResponse apiResponse = new()
             {
-                Message = Convert.ToString(ex),
+                ErrorMessage = Convert.ToString(ex),
                 IsSuccess = false
             };
             // APIResponse => Serialize to json => Deserialize to T

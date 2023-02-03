@@ -4,4 +4,5 @@ public interface IUnitOfWork
 {
     IFoodRepository FoodRepo { get; }
     ICategoryRepository CategoryRepo { get; }
+    IBankAccountRepository BankAccountRepo { get; }
 }
