@@ -1,4 +1,4 @@
-﻿@model Client.Models.OrderFoodDTOs.CartItemDTO
+﻿@model Client.Models.OrderFoodDTOs.CartItemCreateDTO
 
 @{
     ViewData["Title"] = "CartItemDetails";
@@ -13,37 +13,64 @@
     </style>
 }
 <h1>Cart-Item Details</h1>
+<hr />
 
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CartItemId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CartItemId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FoodId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FoodId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CurrentPrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CurrentPrice)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Count)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Count)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-area="Guest" asp-controller="orderFood" asp-action="Index" asp-fragment="menu">Back to menu</a>
-</div>
+
+<form method="post">
+
+    <div class="row">
+
+        <div class="col-4">
+            <img src="~/@Model.Food.ImageURL" style="height:200px;" />
+        </div>
+
+        <div class="col-8">
+            <dl class="row">
+                <input asp-for="FoodId" hidden />
+
+                <dt class="col-sm-2">
+                    Name :
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.Food.Name
+                </dd>
+
+                <dt class="col-sm-2">
+                    Price :
+                </dt>
+                <dd class="col-sm-10 text-danger">
+                    @Model.Food.Price.ToString("c")
+                </dd>
+
+                <dt class="col-sm-2">
+                    Description :
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.Food.Description
+                </dd>
+
+                <dt class="col-sm-2">
+                    Category :
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.Food.Category.Name
+                </dd>
+
+                <dt class="col-sm-2">
+                    Number of this item :
+                </dt>
+                <dd class="col-sm-10">
+                    <input asp-for="@Model.Count" />
+                </dd>
+
+            </dl>
+
+            <div>
+                <a class="btn btn-outline-success" asp-area="Guest" asp-controller="orderFood" asp-action="Index" asp-fragment="menu">Back to menu</a>                
+                <button type="submit" class="btn btn-outline-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+</form>
+
