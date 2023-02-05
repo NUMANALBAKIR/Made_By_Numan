@@ -14,6 +14,9 @@ builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 builder.Services.AddHttpClient<IFoodService, FoodService>();
 builder.Services.AddScoped<IFoodService, FoodService>();
 
+builder.Services.AddHttpClient<ICartItemService, CartItemService>();
+builder.Services.AddScoped<ICartItemService, CartItemService>();
+
 var app = builder.Build();
 
 

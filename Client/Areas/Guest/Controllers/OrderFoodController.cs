@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Client.Models;
+﻿using Client.Models;
 using Client.Models.OrderFoodDTOs;
 using Client.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +10,12 @@ namespace Client.Areas.Guest.Controllers;
 public class OrderFoodController : Controller
 {
     private readonly IFoodService _foodService;
-    private readonly IMapper _mapper;
+    private readonly ICartItemService _cartItemService;
 
-    public OrderFoodController(IFoodService foodService, IMapper mapper)
+    public OrderFoodController(IFoodService foodService, ICartItemService cartItemService)
     {
         _foodService = foodService;
-        _mapper = mapper;
+        _cartItemService = cartItemService;
     }
 
     public async Task<IActionResult> Index()
@@ -26,25 +25,27 @@ public class OrderFoodController : Controller
         APIResponse response = await _foodService.GetAllAsync<APIResponse>("");
         if (response != null && response.IsSuccess == true)
         {
-            // baseservice
+            // baseService
             var stringList = Convert.ToString(response.Data);
             foodList = JsonConvert.DeserializeObject<List<FoodDTO>>(stringList);
         }
         return View(foodList);
     }
 
+
     // Get
-    public IActionResult CartItemDetails()
+    public async Task<IActionResult> CartItemDetails(int foodId)
     {
-        //CartItem cartItem = new()
-        //{
-        //    Food = _foodService.GetAsync(foodId, ""),
+        CartItemDTO cartItem = new();
 
-
-        //};
-
-        //return View(cartItem);
-        return View();
+        APIResponse response = await _cartItemService.GetAsync<APIResponse>(foodId, "");
+        if (response != null && response.IsSuccess == true)
+        {
+            // baseService???
+            var stringCartItem = Convert.ToString(response.Data);
+            cartItem = JsonConvert.DeserializeObject<CartItemDTO>(stringCartItem);
+        }
+        return View(cartItem);
     }
 
 
@@ -55,17 +56,3 @@ public class OrderFoodController : Controller
         return View();
     }
 }
-
-//@model Client.Models.OrderFood.Food
-
-//@{
-//    Layout = "~/Views/Shared/_Layout_OrderFood.cshtml";
-//    < style >
-//        .footer {
-//    position: absolute;
-//    bottom: 0;
-//    width: 100 %;
-//        white - space: nowrap;
-//    }
-//    </ style >
-//}
