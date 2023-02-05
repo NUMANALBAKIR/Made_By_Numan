@@ -1,8 +1,9 @@
-﻿@{
+﻿@model IEnumerable<Client.Models.OrderFoodDTOs.FoodDTO>
+
+@{
     Layout = "~/Views/Shared/_Layout_OrderFood.cshtml";
 }
 
-@model IEnumerable<Client.Models.OrderFoodDTOs.FoodDTO>
 
 <!-- ======= Hero Section ======= -->
 <section id="hero2" class="hero d-flex align-items-center section-bg">
@@ -220,7 +221,9 @@
                                 <p class="price">
                                     @food.Price.ToString("c")
                                 </p>
-                                <a class="btn btn-warning" asp-action="">Select Item</a>
+
+                                <!-- test -->
+                                <a class="btn btn-warning" asp-area="Guest" asp-controller="OrderFood" asp-action="CartItemDetails">Select Food</a>
                             </div>
                         }
                     }
@@ -248,7 +251,7 @@
                                 <p class="price">
                                     @food.Price.ToString("c")
                                 </p>
-                                <a class="btn btn-warning" asp-action="">Select Item</a>
+                                <a class="btn btn-warning" asp-area="Guest" asp-controller="OrderFood" asp-action="CartItemDetails" asp-route-foodId="@food.FoodId">Select Food</a>
                             </div>
                         }
                     }
@@ -276,7 +279,7 @@
                                 <p class="price">
                                     @food.Price.ToString("c")
                                 </p>
-                                <a class="btn btn-warning" asp-action="">Select Item</a>
+                                <a class="btn btn-warning" asp-area="Guest" asp-controller="OrderFood" asp-action="CartItemDetails" asp-route-foodId="@food.FoodId">Select Food</a>
                             </div>
                         }
                     }
@@ -304,7 +307,7 @@
                                 <p class="price">
                                     @food.Price.ToString("c")
                                 </p>
-                                <a class="btn btn-warning" asp-action="">Select Item</a>
+                                <a class="btn btn-warning" asp-area="Guest" asp-controller="OrderFood" asp-action="CartItemDetails" asp-route-foodId="@food.FoodId">Select Food</a>
                             </div>
                         }
                     }
