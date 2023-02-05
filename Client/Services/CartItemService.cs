@@ -4,21 +4,21 @@ using Client.Services.IServices;
 
 namespace Client.Services;
 
-public class FoodService : BaseService, IFoodService
+public class CartItemService : BaseService, ICartItemService
 {
     private string _APIUrl;
 
-    public FoodService(IConfiguration configuration, IHttpClientFactory httpClientFactory) : base(httpClientFactory)
+    public CartItemService(IConfiguration configuration, IHttpClientFactory httpClientFactory) : base(httpClientFactory)
     {
         _APIUrl = configuration.GetValue<string>("ServiceUrls:APIUrl");
     }
 
-    public Task<T> CreateAsync<T>(FoodCreateDTO dto, string token)
+    public Task<T> CreateAsync<T>(CartItemCreateDTO dto, string token)
     {
         return SendAsync<T>(new APIRequest()
         {
             ApiType = Utility.StaticDetails.APIType.POST,
-            Url = _APIUrl + "/api/FoodsAPI",
+            Url = _APIUrl + "/api/CartItemsAPI",
             Token = token,
             Data = dto
         });
@@ -29,7 +29,7 @@ public class FoodService : BaseService, IFoodService
         return SendAsync<T>(new APIRequest()
         {
             ApiType = Utility.StaticDetails.APIType.DELETE,
-            Url = _APIUrl + "/api/FoodsAPI/" + id,
+            Url = _APIUrl + "/api/CartItemsAPI/" + id,
             Token = token,
         });
     }
@@ -39,7 +39,7 @@ public class FoodService : BaseService, IFoodService
         return SendAsync<T>(new APIRequest()
         {
             ApiType = Utility.StaticDetails.APIType.GET,
-            Url = _APIUrl + "/api/FoodsAPI",
+            Url = _APIUrl + "/api/CartItemsAPI",
             Token = token
         });
     }
@@ -49,17 +49,17 @@ public class FoodService : BaseService, IFoodService
         return SendAsync<T>(new APIRequest()
         {
             ApiType = Utility.StaticDetails.APIType.GET,
-            Url = _APIUrl + "/api/FoodsAPI/" + id,
+            Url = _APIUrl + "/api/CartItemsAPI/" + id,
             Token = token
         });
     }
 
-    public Task<T> UpdateAsync<T>(FoodUpdateDTO dto, string token)
+    public Task<T> UpdateAsync<T>(CartItemUpdateDTO dto, string token)
     {
         return SendAsync<T>(new APIRequest()
         {
             ApiType = Utility.StaticDetails.APIType.PUT,
-            Url = _APIUrl + "/api/FoodsAPI/" + dto.FoodId,
+            Url = _APIUrl + "/api/CartItemsAPI/" + dto.CartItemId,
             Token = token,
             Data = dto
         });
