@@ -22,5 +22,9 @@ public class AutoMapperConfig : Profile
         CreateMap<BankAccount, BankAccountCreateDTO>().ReverseMap();
         CreateMap<BankAccount, BankAccountUpdateDTO>().ReverseMap();
 
+        CreateMap<CartItem, CartItemDTO>().ReverseMap();
+        CreateMap<CartItem, CartItemCreateDTO>().ReverseMap();
+        CreateMap<CartItem, CartItemUpdateDTO>().ReverseMap();
+
     }
 }
