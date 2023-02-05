@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using Client.Models;
+using Client.Models.OrderFood;
 using Client.Models.OrderFoodDTOs;
 using Client.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Reflection;
 
 namespace Client.Areas.Guest.Controllers;
 
@@ -33,9 +36,39 @@ public class OrderFoodController : Controller
         return View(foodList);
     }
 
+    // Get
+    public IActionResult CartItemDetails()
+    {
+        //CartItem cartItem = new()
+        //{
+        //    Food = _foodService.GetAsync(foodId, ""),
+
+
+        //};
+
+        //return View(cartItem);
+        return View();
+    }
+
+
+
 
     public IActionResult Cart()
     {
         return View();
     }
 }
+
+//@model Client.Models.OrderFood.Food
+
+//@{
+//    Layout = "~/Views/Shared/_Layout_OrderFood.cshtml";
+//    < style >
+//        .footer {
+//    position: absolute;
+//    bottom: 0;
+//    width: 100 %;
+//        white - space: nowrap;
+//    }
+//    </ style >
+//}
