@@ -8,6 +8,8 @@ public class UnitOfWork : IUnitOfWork
     public IFoodRepository FoodRepo { get; private set; }
     public ICategoryRepository CategoryRepo { get; private set; }
     public IBankAccountRepository BankAccountRepo { get; private set; }
+    public ICartItemRepository CartItemRepo { get; private set; }
+
 
 
 
@@ -18,5 +20,7 @@ public class UnitOfWork : IUnitOfWork
         FoodRepo = new FoodRepository(_db);
         CategoryRepo = new CategoryRepository(_db);
         BankAccountRepo = new BankAccountRepository(_db);
+        CartItemRepo = new CartItemRepository(_db);
+
     }
 }
