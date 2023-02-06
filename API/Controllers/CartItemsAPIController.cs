@@ -24,9 +24,10 @@ public class CartItemsAPIController : ControllerBase
 
 
     // GET: api/CartItemsAPI
+    //[ResponseCache(CacheProfileName = "Default30s")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpGet, ResponseCache(CacheProfileName = "Default10mins")]
+    [HttpGet]
     public async Task<ActionResult<APIResponse>> GetCartItems()
     {
         try
@@ -90,7 +91,7 @@ public class CartItemsAPIController : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<ActionResult<APIResponse>> CreateCartItem([FromForm] CartItemCreateDTO createDTO)
+    public async Task<ActionResult<APIResponse>> CreateCartItem([FromBody] CartItemCreateDTO createDTO)
     {
         try
         {
