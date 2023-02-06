@@ -9,8 +9,6 @@ public class CartItemCreateDTO
     // add AppUser
 
     public int FoodId { get; set; }
-    [ValidateNever]
-    public FoodDTO Food { get; set; }
 
     public double CurrentPrice { get; set; }
     [Required]
