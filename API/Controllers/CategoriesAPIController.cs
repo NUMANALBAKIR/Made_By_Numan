@@ -25,9 +25,9 @@ public class CategoriesAPIController : ControllerBase
 
 
     // GET: api/CategoriesAPI
-    [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [HttpGet, ResponseCache(CacheProfileName = "Default10mins")]
     public async Task<ActionResult<APIResponse>> GetCategories()
     {
         try

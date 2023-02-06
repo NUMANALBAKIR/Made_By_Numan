@@ -56,7 +56,6 @@ public class BaseService : IBaseService
             // Response processing =>
             HttpResponseMessage responseMessage = await client.SendAsync(requestMessage);
             var responseString = await responseMessage.Content.ReadAsStringAsync();
-
             try
             {
                 // responseString => Deserialize to APIResponse

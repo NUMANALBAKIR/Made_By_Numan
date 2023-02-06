@@ -21,6 +21,7 @@ public class OrderFoodController : Controller
         _cartItemService = cartItemService;
     }
 
+
     public async Task<IActionResult> Index()
     {
         List<FoodDTO> foodList = new();
@@ -62,10 +63,11 @@ public class OrderFoodController : Controller
     [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> CartItemDetails(CartItemDTO cartItemDTO)
     {
+        FoodDTO foodDto = new();
+
         if (ModelState.IsValid)
         {
-            // Get that FoodDTO from Db using FoodID
-            FoodDTO foodDto = new();
+            // Get FoodDTO from Db using FoodID
             APIResponse foodResponse = await _foodService.GetAsync<APIResponse>(cartItemDTO.FoodId, "");
             if (foodResponse != null && foodResponse.IsSuccess == true)
             {
@@ -80,7 +82,6 @@ public class OrderFoodController : Controller
                 CurrentPrice = foodDto.Price,
                 Count = cartItemDTO.Count
             };
-
             APIResponse createResponse = await _cartItemService.CreateAsync<APIResponse>(cartItemCreateDTO, "");
             if (createResponse != null && createResponse.IsSuccess == true)
             {
@@ -88,6 +89,12 @@ public class OrderFoodController : Controller
                 return RedirectToAction(nameof(Index));
             }
         }
+
+        // if modelstate not valid, populate cartItemDTO
+        cartItemDTO.Food = foodDto;
+        cartItemDTO.CurrentPrice = foodDto.Price;
+        cartItemDTO.Count = cartItemDTO.Count;
+
         TempData["error"] = "Error encountered.";
         return View(cartItemDTO);
     }
