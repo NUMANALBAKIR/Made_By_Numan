@@ -35,7 +35,7 @@ public class OrderFoodController : Controller
     }
 
 
-    // GET
+    [HttpGet]
     public async Task<IActionResult> CartItemDetails(int foodId)
     {
 
@@ -43,44 +43,53 @@ public class OrderFoodController : Controller
         APIResponse response = await _foodService.GetAsync<APIResponse>(foodId, "");
         if (response != null && response.IsSuccess == true)
         {
-            var stingFood = Convert.ToString(response.Data);
-            foodDTO = JsonConvert.DeserializeObject<FoodDTO>(stingFood);
+            var stringFood = Convert.ToString(response.Data);
+            foodDTO = JsonConvert.DeserializeObject<FoodDTO>(stringFood);
         }
-        CartItemCreateDTO cartItem = new()
+
+        CartItemDTO cartItemDTO = new()
         {
             FoodId = foodId,
+            Food = foodDTO,
             CurrentPrice = foodDTO.Price,
             Count = 1,
-            Food = foodDTO
         };
-        return View(cartItem);
+        return View(cartItemDTO);
     }
 
 
     //[Authorize]
     [HttpPost, ValidateAntiForgeryToken]
-    public async Task<IActionResult> CartItemDetails(CartItemCreateDTO CreateDto)
+    public async Task<IActionResult> CartItemDetails(CartItemDTO cartItemDTO)
     {
         if (ModelState.IsValid)
         {
-            Food food = new();
-            APIResponse response = await _foodService.GetAsync<APIResponse>(CreateDto.FoodId, "");
-            if (response != null && response.IsSuccess == true)
+            // Get that FoodDTO from Db using FoodID
+            FoodDTO foodDto = new();
+            APIResponse foodResponse = await _foodService.GetAsync<APIResponse>(cartItemDTO.FoodId, "");
+            if (foodResponse != null && foodResponse.IsSuccess == true)
             {
-                var stringFood = Convert.ToString(response.Data);
-                food = JsonConvert.DeserializeObject<FoodDTO>(stringFood);
+                var stringFood = Convert.ToString(foodResponse.Data);
+                foodDto = JsonConvert.DeserializeObject<FoodDTO>(stringFood);
             }
 
-            CreateDto.Food = food;
-            response = await _cartItemService.CreateAsync<APIResponse>(CreateDto, "");
-            if (response != null && response.IsSuccess == true)
+            // Add cart-item to Db
+            CartItemCreateDTO cartItemCreateDTO = new()
+            {
+                FoodId = cartItemDTO.FoodId,
+                CurrentPrice = foodDto.Price,
+                Count = cartItemDTO.Count
+            };
+
+            APIResponse createResponse = await _cartItemService.CreateAsync<APIResponse>(cartItemCreateDTO, "");
+            if (createResponse != null && createResponse.IsSuccess == true)
             {
                 TempData["success"] = "Item added to Cart.";
                 return RedirectToAction(nameof(Index));
             }
         }
         TempData["error"] = "Error encountered.";
-        return View(CreateDto);
+        return View(cartItemDTO);
     }
 
 
