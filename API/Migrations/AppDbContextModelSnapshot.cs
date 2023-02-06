@@ -44,7 +44,7 @@ namespace API.Migrations
 
                     b.HasKey("AccountId");
 
-                    b.ToTable("BankAccounts");
+                    b.ToTable("BankAccounts", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.OrderFood.CartItem", b =>
@@ -68,7 +68,7 @@ namespace API.Migrations
 
                     b.HasIndex("FoodId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItems", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.OrderFood.Category", b =>
@@ -85,7 +85,7 @@ namespace API.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.OrderFood.Food", b =>
@@ -117,7 +117,7 @@ namespace API.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Foods");
+                    b.ToTable("Foods", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.OrderFood.CartItem", b =>
