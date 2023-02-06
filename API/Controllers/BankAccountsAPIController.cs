@@ -23,9 +23,10 @@ public class BankAccountsAPIController : ControllerBase
     }
 
     // GET: api/BankAccountsAPI
+    //[ResponseCache(CacheProfileName = "Default30s")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpGet, ResponseCache(CacheProfileName = "Default10mins")]
+    [HttpGet]
     public async Task<ActionResult<APIResponse>> GetBankAccounts()
     {
         try

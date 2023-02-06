@@ -13,17 +13,17 @@ builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddResponseCaching();
+//builder.Services.AddResponseCaching();
 
-builder.Services.AddControllers(option =>
-{
-    option.CacheProfiles.Add("Default10mins", new CacheProfile()
-    {
-        Duration = 300
-    });
-});
+//builder.Services.AddControllers(option =>
+//{
+//    option.CacheProfiles.Add("Default30s", new CacheProfile()
+//    {
+//        Duration = 30
+//    });
+//});
 
-//builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen();
 

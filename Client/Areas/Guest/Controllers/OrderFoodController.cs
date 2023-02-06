@@ -39,7 +39,7 @@ public class OrderFoodController : Controller
     [HttpGet]
     public async Task<IActionResult> CartItemDetails(int foodId)
     {
-
+        // Get FoodDTO from Db using FoodID
         FoodDTO foodDTO = new();
         APIResponse response = await _foodService.GetAsync<APIResponse>(foodId, "");
         if (response != null && response.IsSuccess == true)
@@ -48,6 +48,7 @@ public class OrderFoodController : Controller
             foodDTO = JsonConvert.DeserializeObject<FoodDTO>(stringFood);
         }
 
+        // populate cartItemDTO
         CartItemDTO cartItemDTO = new()
         {
             FoodId = foodId,
@@ -63,18 +64,17 @@ public class OrderFoodController : Controller
     [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> CartItemDetails(CartItemDTO cartItemDTO)
     {
+        // Get FoodDTO from Db using FoodID
         FoodDTO foodDto = new();
+        APIResponse foodResponse = await _foodService.GetAsync<APIResponse>(cartItemDTO.FoodId, "");
+        if (foodResponse != null && foodResponse.IsSuccess == true)
+        {
+            var stringFood = Convert.ToString(foodResponse.Data);
+            foodDto = JsonConvert.DeserializeObject<FoodDTO>(stringFood);
+        }
 
         if (ModelState.IsValid)
         {
-            // Get FoodDTO from Db using FoodID
-            APIResponse foodResponse = await _foodService.GetAsync<APIResponse>(cartItemDTO.FoodId, "");
-            if (foodResponse != null && foodResponse.IsSuccess == true)
-            {
-                var stringFood = Convert.ToString(foodResponse.Data);
-                foodDto = JsonConvert.DeserializeObject<FoodDTO>(stringFood);
-            }
-
             // Add cart-item to Db
             CartItemCreateDTO cartItemCreateDTO = new()
             {
@@ -90,7 +90,7 @@ public class OrderFoodController : Controller
             }
         }
 
-        // if modelstate not valid, populate cartItemDTO
+        // if modelstate valid false, populate cartItemDTO
         cartItemDTO.Food = foodDto;
         cartItemDTO.CurrentPrice = foodDto.Price;
         cartItemDTO.Count = cartItemDTO.Count;
