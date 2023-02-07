@@ -99,12 +99,6 @@ public class OrderFoodController : Controller
         return View(cartItemDTO);
     }
 
-
-
-
-
-
-
     public IActionResult Cart()
     {
         return View();
