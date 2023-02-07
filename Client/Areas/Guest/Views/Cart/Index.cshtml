@@ -10,7 +10,6 @@
         white-space: nowrap;
         }
     </style>
-
     double total = 0;
 }
 
@@ -44,7 +43,7 @@
                         </div>
                         <div class="col-12  col-lg-5 text-center row">
                             <div class="col-4 text-md-right pt-4">
-                                <h6><strong>@item.CurrentPrice.ToString("c")<span class="text-muted">x </span>@item.Count plate(s)</strong></h6>
+                                <h6>@item.CurrentPrice.ToString("c")<span class="text-muted">x </span>@item.Count plate(s)</h6>
 
                                 <!-- total -->
                                 @{
@@ -53,6 +52,10 @@
                             </div>
                             <div class="col-6 col-sm-4 col-lg-6 pt-2">
                                 <div class="w-75 btn-group" role="group">
+                                    <i class="bi bi-plus-square px-2"></i>
+
+                                    <i class="bi bi-dash-square"></i>
+
 @*                                    <a asp-action="plus" asp-route-cartId="@item.id" class="btn btn-primary">
                                         <i class="bi bi-plus-square"></i>
                                     </a> &nbsp;
@@ -89,7 +92,7 @@
             <div class="card-footer">
                 <div class="card-footer row">
                     <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
-                        <a asp-action="Summary" class="btn btn-outline-success">GO to Summary Page</a>
+                        <a asp-action="Summary" class="btn btn-outline-success">Go to Summary Page</a>
                     </div>
                 </div>
             </div>

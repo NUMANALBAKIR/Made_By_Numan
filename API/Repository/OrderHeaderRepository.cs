@@ -1,5 +1,22 @@
-﻿namespace API.Repository;
+﻿using API.Data;
+using API.Models.OrderFood;
+using API.Models.OrderFoodDTOs;
+using API.Repository.IRepository;
 
-public class OrderHeaderRepository
+namespace API.Repository;
+
+public class OrderHeaderRepository : Repository<OrderHeader>, IOrderHeaderRepository
 {
+    private readonly AppDbContext _db;
+    public OrderHeaderRepository(AppDbContext db) : base(db)
+    {
+        _db = db;
+    }
+
+    public async Task<OrderHeader> UpdateAsync(OrderHeader entity)
+    {
+        _db.OrderHeaders.Update(entity);
+        await _db.SaveChangesAsync();
+        return entity;
+    }
 }
