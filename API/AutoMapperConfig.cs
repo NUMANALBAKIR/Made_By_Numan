@@ -26,5 +26,15 @@ public class AutoMapperConfig : Profile
         CreateMap<CartItem, CartItemCreateDTO>().ReverseMap();
         CreateMap<CartItem, CartItemUpdateDTO>().ReverseMap();
 
+        CreateMap<OrderHeader, OrderHeaderDTO>().ReverseMap();
+        CreateMap<OrderHeader, OrderHeaderCreateDTO>().ReverseMap();
+        CreateMap<OrderHeader, OrderHeaderUpdateDTO>().ReverseMap();
+
+        CreateMap<OrderDetail, OrderDetailDTO>().ReverseMap();
+        CreateMap<OrderDetail, OrderDetailCreateDTO>().ReverseMap();
+        CreateMap<OrderDetail, OrderDetailUpdateDTO>().ReverseMap();
+
+
+
     }
 }

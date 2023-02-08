@@ -33,7 +33,7 @@ public class OrderHeadersAPIController : ControllerBase
         try
         {
             IEnumerable<OrderHeader> orderHeaders;
-            orderHeaders = await _unitOfWork.OrderHeaderRepo.GetAllAsync(includeProperties: "Food");
+            orderHeaders = await _unitOfWork.OrderHeaderRepo.GetAllAsync();
             _response.Data = _mapper.Map<List<OrderHeaderDTO>>(orderHeaders);
             return Ok(_response);
         }
@@ -190,12 +190,12 @@ public class OrderHeadersAPIController : ControllerBase
                 _response.ErrorMessage = "id can't be 0";
                 return BadRequest(_response);
             }
-            OrderHeader OrderHeader = await _unitOfWork.OrderHeaderRepo.GetFirstOrDefaultAsync(f => f.OrderHeaderId == id);
+            OrderHeader OrderHeader = await _unitOfWork.OrderHeaderRepo.GetFirstOrDefaultAsync(x => x.OrderHeaderId == id);
 
             if (OrderHeader == null)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessage = $"No Cart Item with id= {id} exists.";
+                _response.ErrorMessage = $"No OrderHeader with id= {id} exists.";
                 return NotFound(_response);
             }
             await _unitOfWork.OrderHeaderRepo.RemoveAsync(OrderHeader);
