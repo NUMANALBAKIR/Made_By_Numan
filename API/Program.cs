@@ -2,7 +2,6 @@ using API;
 using API.Data;
 using API.Repository;
 using API.Repository.IRepository;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

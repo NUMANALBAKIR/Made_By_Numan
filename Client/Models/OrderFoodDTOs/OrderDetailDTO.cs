@@ -1,6 +1,6 @@
-﻿using API.Models.OrderFood;
+﻿using Client.Models.OrderFood;
 
-namespace API.Models.OrderFoodDTOs;
+namespace Client.Models.OrderFoodDTOs;
 
 public class OrderDetailDTO
 {
