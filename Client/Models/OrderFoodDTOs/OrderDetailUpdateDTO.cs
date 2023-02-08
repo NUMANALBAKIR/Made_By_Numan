@@ -1,7 +1,9 @@
-﻿namespace API.Models.OrderFoodDTOs;
+﻿namespace Client.Models.OrderFoodDTOs;
 
-public class OrderDetailCreateDTO
+public class OrderDetailUpdateDTO
 {
+    public int OrderDetailId { get; set; }
+
     public int OrderHeaderId { get; set; }
 
     public int FoodId { get; set; }

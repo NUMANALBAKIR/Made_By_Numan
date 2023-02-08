@@ -1,4 +1,4 @@
-﻿namespace API.Models.OrderFoodDTOs;
+﻿namespace Client.Models.OrderFoodDTOs;
 
 public class OrderHeaderCreateDTO
 {

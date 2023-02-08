@@ -1,11 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace Client.Models.OrderFoodDTOs;
 
-namespace Client.Models.OrderFood;
-
-public class OrderHeader
+public class OrderHeaderUpdateDTO
 {
-    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int OrderHeaderId { get; set; }
 
     public double OrderTotal { get; set; }
