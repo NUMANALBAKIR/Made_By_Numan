@@ -62,7 +62,7 @@ public class OrderHeadersAPIController : ControllerBase
                 _response.ErrorMessage = "id can't be 0.";
                 return BadRequest(_response);
             }
-            OrderHeader orderHeader = await _unitOfWork.OrderHeaderRepo.GetFirstOrDefaultAsync(filter: x => x.OrderHeaderId == id, includeProperties: "Food");
+            OrderHeader orderHeader = await _unitOfWork.OrderHeaderRepo.GetFirstOrDefaultAsync(filter: x => x.OrderHeaderId == id);
 
             if (orderHeader == null)
             {
@@ -83,7 +83,6 @@ public class OrderHeadersAPIController : ControllerBase
 
 
     // POST: api/OrderHeadersAPI
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     //[Authorize(Roles = "Admin")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -101,11 +100,12 @@ public class OrderHeadersAPIController : ControllerBase
             //    return BadRequest(ModelState);
             //}
 
-            if (await _unitOfWork.FoodRepo.GetFirstOrDefaultAsync(c => c.FoodId == createDTO.FoodId) == null)
-            {
-                ModelState.AddModelError("ErrorMessages", "FoodID is Invalid!");
-                return BadRequest(ModelState);
-            }
+            //if (await _unitOfWork.FoodRepo.GetFirstOrDefaultAsync(c => c.FoodId == createDTO.FoodId) == null)
+            //{
+            //    ModelState.AddModelError("ErrorMessages", "FoodID is Invalid!");
+            //    return BadRequest(ModelState);
+            //}
+
             if (createDTO == null)
             {
                 _response.IsSuccess = false;
@@ -130,7 +130,6 @@ public class OrderHeadersAPIController : ControllerBase
 
 
     // PUT: api/OrderHeadersAPI/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     //[Authorize(Roles = "Admin")]
     [HttpPut("{id:int}")]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -149,17 +148,17 @@ public class OrderHeadersAPIController : ControllerBase
                 _response.ErrorMessage = "id or updateDTO has issue(s).";
                 return BadRequest(_response);
             }
-            if (await _unitOfWork.FoodRepo.GetFirstOrDefaultAsync(c => c.FoodId == updateDTO.FoodId) == null)
+            if (await _unitOfWork.OrderHeaderRepo.GetFirstOrDefaultAsync(x => x.OrderHeaderId == updateDTO.OrderHeaderId) == null)
             {
-                ModelState.AddModelError("ErrorMessages", "Food ID is Invalid!");
+                ModelState.AddModelError("ErrorMessages", "OrderHeader ID is Invalid!");
                 return BadRequest(ModelState);
             }
 
-            OrderHeader OrderHeader = _mapper.Map<OrderHeader>(updateDTO);
-            await _unitOfWork.OrderHeaderRepo.UpdateAsync(OrderHeader);
+            OrderHeader orderHeader = _mapper.Map<OrderHeader>(updateDTO);
+            await _unitOfWork.OrderHeaderRepo.UpdateAsync(orderHeader);
 
             // response
-            _response.Data = _mapper.Map<OrderHeaderDTO>(OrderHeader);
+            _response.Data = _mapper.Map<OrderHeaderDTO>(orderHeader);
             return Ok(_response);
         }
         catch (Exception ex)
