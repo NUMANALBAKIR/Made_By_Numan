@@ -5,7 +5,7 @@ using API.Repository.IRepository;
 
 namespace API.Repository;
 
-public class OrderDetailRepository : Repository<OrderDetailCreateDTO>, IOrderDetailRepository
+public class OrderDetailRepository : Repository<OrderDetail>, IOrderDetailRepository
 {
     private readonly AppDbContext _db;
     public OrderDetailRepository(AppDbContext db) : base(db)
@@ -13,7 +13,7 @@ public class OrderDetailRepository : Repository<OrderDetailCreateDTO>, IOrderDet
         _db = db;
     }
 
-    public async Task<OrderDetailCreateDTO> UpdateAsync(OrderDetailCreateDTO entity)
+    public async Task<OrderDetail> UpdateAsync(OrderDetail entity)
     {
         _db.OrderDetails.Update(entity);
         await _db.SaveChangesAsync();

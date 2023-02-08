@@ -2,7 +2,7 @@
 
 namespace API.Repository.IRepository;
 
-public interface IOrderDetailRepository : IRepository<OrderDetailCreateDTO>
+public interface IOrderDetailRepository : IRepository<OrderDetail>
 {
-    Task<OrderDetailCreateDTO> UpdateAsync(OrderDetailCreateDTO entity);
+    Task<OrderDetail> UpdateAsync(OrderDetail entity);
 }

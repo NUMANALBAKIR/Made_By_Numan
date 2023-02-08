@@ -190,15 +190,15 @@ public class OrderDetailsAPIController : ControllerBase
                 _response.ErrorMessage = "id can't be 0";
                 return BadRequest(_response);
             }
-            OrderDetailCreateDTO OrderDetail = await _unitOfWork.OrderDetailRepo.GetFirstOrDefaultAsync(f => f.OrderDetailId == id);
+            OrderDetail orderDetail = await _unitOfWork.OrderDetailRepo.GetFirstOrDefaultAsync(x => x.OrderDetailId == id);
 
-            if (OrderDetail == null)
+            if (orderDetail == null)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessage = $"No Cart Item with id= {id} exists.";
+                _response.ErrorMessage = $"No OrderDetail with id= {id} exists.";
                 return NotFound(_response);
             }
-            await _unitOfWork.OrderDetailRepo.RemoveAsync(OrderDetail);
+            await _unitOfWork.OrderDetailRepo.RemoveAsync(orderDetail);
 
             return Ok(_response);
         }

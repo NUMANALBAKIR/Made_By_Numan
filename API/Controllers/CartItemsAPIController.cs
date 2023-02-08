@@ -190,15 +190,15 @@ public class CartItemsAPIController : ControllerBase
                 _response.ErrorMessage = "id can't be 0";
                 return BadRequest(_response);
             }
-            CartItem CartItem = await _unitOfWork.CartItemRepo.GetFirstOrDefaultAsync(f => f.CartItemId == id);
+            CartItem cartItem = await _unitOfWork.CartItemRepo.GetFirstOrDefaultAsync(x => x.CartItemId == id);
 
-            if (CartItem == null)
+            if (cartItem == null)
             {
                 _response.IsSuccess = false;
                 _response.ErrorMessage = $"No Cart Item with id= {id} exists.";
                 return NotFound(_response);
             }
-            await _unitOfWork.CartItemRepo.RemoveAsync(CartItem);
+            await _unitOfWork.CartItemRepo.RemoveAsync(cartItem);
 
             return Ok(_response);
         }
