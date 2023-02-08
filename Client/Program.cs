@@ -17,6 +17,12 @@ builder.Services.AddScoped<IFoodService, FoodService>();
 builder.Services.AddHttpClient<ICartItemService, CartItemService>();
 builder.Services.AddScoped<ICartItemService, CartItemService>();
 
+builder.Services.AddHttpClient<IOrderHeaderService, OrderHeaderService>();
+builder.Services.AddScoped<IOrderHeaderService, OrderHeaderService>();
+
+builder.Services.AddHttpClient<IOrderDetailService, OrderDetailService>();
+builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
+
 var app = builder.Build();
 
 
