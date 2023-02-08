@@ -32,9 +32,9 @@ public class OrderDetailsAPIController : ControllerBase
     {
         try
         {
-            IEnumerable<OrderDetailCreateDTO> orderDetails;
-            orderDetails = await _unitOfWork.OrderDetailRepo.GetAllAsync(includeProperties: "Food");
-            _response.Data = _mapper.Map<List<OrderDetailUpdateDTO>>(orderDetails);
+            IEnumerable<OrderDetail> orderDetails;
+            orderDetails = await _unitOfWork.OrderDetailRepo.GetAllAsync(includeProperties: "Food,OrderHeader");
+            _response.Data = _mapper.Map<List<OrderDetailDTO>>(orderDetails);
             return Ok(_response);
         }
         catch (Exception ex)
@@ -62,7 +62,7 @@ public class OrderDetailsAPIController : ControllerBase
                 _response.ErrorMessage = "id can't be 0.";
                 return BadRequest(_response);
             }
-            OrderDetailCreateDTO orderDetail = await _unitOfWork.OrderDetailRepo.GetFirstOrDefaultAsync(filter: x => x.OrderDetailId == id, includeProperties: "Food");
+            OrderDetail orderDetail = await _unitOfWork.OrderDetailRepo.GetFirstOrDefaultAsync(filter: x => x.OrderDetailId == id, includeProperties: "Food,OrderHeader");
 
             if (orderDetail == null)
             {
@@ -70,7 +70,7 @@ public class OrderDetailsAPIController : ControllerBase
                 _response.ErrorMessage = $"No OrderDetail with id= {id} exists.";
                 return NotFound(_response);
             }
-            _response.Data = _mapper.Map<OrderDetailUpdateDTO>(orderDetail);
+            _response.Data = _mapper.Map<OrderDetailDTO>(orderDetail);
             return Ok(_response);
         }
         catch (Exception ex)
@@ -83,7 +83,6 @@ public class OrderDetailsAPIController : ControllerBase
 
 
     // POST: api/OrderDetailsAPI
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     //[Authorize(Roles = "Admin")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -95,15 +94,14 @@ public class OrderDetailsAPIController : ControllerBase
     {
         try
         {
-            //if (await _unitOfWork.OrderDetailRepo.GetFirstOrDefaultAsync(x => x.FoodId == createDTO.FoodId) != null)
-            //{
-            //    ModelState.AddModelError("ErrorMessages", "OrderDetail already Exists!");
-            //    return BadRequest(ModelState);
-            //}
-
-            if (await _unitOfWork.FoodRepo.GetFirstOrDefaultAsync(c => c.FoodId == createDTO.FoodId) == null)
+            if (await _unitOfWork.OrderDetailRepo.GetFirstOrDefaultAsync(x => x.OrderHeaderId == createDTO.OrderHeaderId) == null)
             {
-                ModelState.AddModelError("ErrorMessages", "FoodID is Invalid!");
+                ModelState.AddModelError("ErrorMessages", "OrderHeaderId is Invalid!");
+                return BadRequest(ModelState);
+            }
+            if (await _unitOfWork.OrderDetailRepo.GetFirstOrDefaultAsync(x => x.FoodId == createDTO.FoodId) == null)
+            {
+                ModelState.AddModelError("ErrorMessages", "FoodId is Invalid!");
                 return BadRequest(ModelState);
             }
             if (createDTO == null)
@@ -112,11 +110,11 @@ public class OrderDetailsAPIController : ControllerBase
                 _response.ErrorMessage = "createDTO is null";
                 return BadRequest(_response);
             }
-            OrderDetailCreateDTO OrderDetail = _mapper.Map<OrderDetailCreateDTO>(createDTO);
+            OrderDetail OrderDetail = _mapper.Map<OrderDetail>(createDTO);
             await _unitOfWork.OrderDetailRepo.CreateAsync(OrderDetail);
 
             // response
-            _response.Data = _mapper.Map<OrderDetailUpdateDTO>(OrderDetail);
+            _response.Data = _mapper.Map<OrderDetailDTO>(OrderDetail);
             return Ok(_response);
             //return CreatedAtAction("GetOrderDetail", new { id = OrderDetail.OrderDetailId }, OrderDetail);
         }
@@ -130,7 +128,6 @@ public class OrderDetailsAPIController : ControllerBase
 
 
     // PUT: api/OrderDetailsAPI/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     //[Authorize(Roles = "Admin")]
     [HttpPut("{id:int}")]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -149,9 +146,14 @@ public class OrderDetailsAPIController : ControllerBase
                 _response.ErrorMessage = "id or updateDTO has issue(s).";
                 return BadRequest(_response);
             }
-            if (await _unitOfWork.OrderDetailRepo.GetFirstOrDefaultAsync(x => x.OrderDetailId == updateDTO.OrderDetailId) == null)
+            if (await _unitOfWork.OrderDetailRepo.GetFirstOrDefaultAsync(x => x.OrderHeaderId == updateDTO.OrderHeaderId) == null)
             {
-                ModelState.AddModelError("ErrorMessages", "OrderDetail ID is Invalid!");
+                ModelState.AddModelError("ErrorMessages", "OrderHeaderId is Invalid!");
+                return BadRequest(ModelState);
+            }
+            if (await _unitOfWork.OrderDetailRepo.GetFirstOrDefaultAsync(x => x.FoodId == updateDTO.FoodId) == null)
+            {
+                ModelState.AddModelError("ErrorMessages", "FoodId is Invalid!");
                 return BadRequest(ModelState);
             }
 
@@ -159,7 +161,7 @@ public class OrderDetailsAPIController : ControllerBase
             await _unitOfWork.OrderDetailRepo.UpdateAsync(orderDetail);
 
             // response
-            _response.Data = _mapper.Map<OrderDetailUpdateDTO>(orderDetail);
+            _response.Data = _mapper.Map<OrderDetailDTO>(orderDetail);
             return Ok(_response);
         }
         catch (Exception ex)

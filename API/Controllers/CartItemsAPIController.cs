@@ -95,12 +95,6 @@ public class CartItemsAPIController : ControllerBase
     {
         try
         {
-            //if (await _unitOfWork.CartItemRepo.GetFirstOrDefaultAsync(x => x.FoodId == createDTO.FoodId) != null)
-            //{
-            //    ModelState.AddModelError("ErrorMessages", "CartItem already Exists!");
-            //    return BadRequest(ModelState);
-            //}
-
             if (await _unitOfWork.FoodRepo.GetFirstOrDefaultAsync(c => c.FoodId == createDTO.FoodId) == null)
             {
                 ModelState.AddModelError("ErrorMessages", "FoodID is Invalid!");

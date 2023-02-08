@@ -94,18 +94,6 @@ public class OrderHeadersAPIController : ControllerBase
     {
         try
         {
-            //if (await _unitOfWork.OrderHeaderRepo.GetFirstOrDefaultAsync(x => x.FoodId == createDTO.FoodId) != null)
-            //{
-            //    ModelState.AddModelError("ErrorMessages", "OrderHeader already Exists!");
-            //    return BadRequest(ModelState);
-            //}
-
-            //if (await _unitOfWork.FoodRepo.GetFirstOrDefaultAsync(c => c.FoodId == createDTO.FoodId) == null)
-            //{
-            //    ModelState.AddModelError("ErrorMessages", "FoodID is Invalid!");
-            //    return BadRequest(ModelState);
-            //}
-
             if (createDTO == null)
             {
                 _response.IsSuccess = false;
