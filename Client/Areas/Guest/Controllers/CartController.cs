@@ -11,41 +11,68 @@ namespace Client.Areas.Guest.Controllers;
 [Area("Guest")]
 public class CartController : Controller
 {
-	private readonly ICartItemService _cartItemService;
+    private readonly ICartItemService _cartItemService;
 
-	public CartController(ICartItemService cartItemService)
-	{
-		_cartItemService = cartItemService;
-	}
-
-
-	// Display list of selected items in cart.
-	[HttpGet]
-	public async Task<IActionResult> Index()
-	{
-		List<CartItemDTO> cartItems = new();
-
-		APIResponse response = await _cartItemService.GetAllAsync<APIResponse>("");
-		if (response != null && response.IsSuccess == true)
-		{
-			var stringList = Convert.ToString(response.Data);
-			cartItems = JsonConvert.DeserializeObject<List<CartItemDTO>>(stringList);
-		}
-
-		CartVM cartVM = new()
-		{
-			CartItems = cartItems,
-			OrderHeader = new()
-		};
-
-		return View(cartVM);
-	}
+    public CartController(ICartItemService cartItemService)
+    {
+        _cartItemService = cartItemService;
+    }
 
 
-	//[HttpGet]
-	//public async Task<IActionResult> Summary()
-	//{
-	//	return Task.CompletedTask;
-	//}
+    // Display list of selected items in cart.
+    [HttpGet]
+    public async Task<IActionResult> Index()
+    {
+        // populate cart items
+        List<CartItemDTO> cartItems = new();
+
+        APIResponse response = await _cartItemService.GetAllAsync<APIResponse>("");
+        if (response != null && response.IsSuccess == true)
+        {
+            var stringList = Convert.ToString(response.Data);
+            cartItems = JsonConvert.DeserializeObject<List<CartItemDTO>>(stringList);
+        }
+
+        CartVM cartVM = new()
+        {
+            CartItems = cartItems,
+            OrderHeader = new()
+        };
+
+        return View(cartVM);
+    }
+
+
+    [HttpGet]
+    public async Task<IActionResult> Summary()
+    {
+
+        // populate cart items
+        List<CartItemDTO> cartItems = new();
+
+        APIResponse response = await _cartItemService.GetAllAsync<APIResponse>("");
+        if (response != null && response.IsSuccess == true)
+        {
+            var stringList = Convert.ToString(response.Data);
+            cartItems = JsonConvert.DeserializeObject<List<CartItemDTO>>(stringList);
+        }
+
+        CartVM cartVM = new()
+        {
+            CartItems = cartItems,
+            OrderHeader = new()
+        };
+
+        // populate orderer's (header) information
+        cartVM.OrderHeader.OrdererName = "numan";
+        cartVM.OrderHeader.DeliveryAddress = "215sher";
+
+        foreach (var item in cartVM.CartItems)
+        {
+            cartVM.OrderHeader.OrderTotal += (item.CurrentPrice * item.Count);
+        }
+
+        return View(cartVM);
+    }
 
 }
