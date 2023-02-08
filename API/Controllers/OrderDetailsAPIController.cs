@@ -94,12 +94,12 @@ public class OrderDetailsAPIController : ControllerBase
     {
         try
         {
-            if (await _unitOfWork.OrderDetailRepo.GetFirstOrDefaultAsync(x => x.OrderHeaderId == createDTO.OrderHeaderId) == null)
+            if (await _unitOfWork.OrderHeaderRepo.GetFirstOrDefaultAsync(x => x.OrderHeaderId == createDTO.OrderHeaderId) == null)
             {
                 ModelState.AddModelError("ErrorMessages", "OrderHeaderId is Invalid!");
                 return BadRequest(ModelState);
             }
-            if (await _unitOfWork.OrderDetailRepo.GetFirstOrDefaultAsync(x => x.FoodId == createDTO.FoodId) == null)
+            if (await _unitOfWork.FoodRepo.GetFirstOrDefaultAsync(x => x.FoodId == createDTO.FoodId) == null)
             {
                 ModelState.AddModelError("ErrorMessages", "FoodId is Invalid!");
                 return BadRequest(ModelState);
@@ -146,12 +146,12 @@ public class OrderDetailsAPIController : ControllerBase
                 _response.ErrorMessage = "id or updateDTO has issue(s).";
                 return BadRequest(_response);
             }
-            if (await _unitOfWork.OrderDetailRepo.GetFirstOrDefaultAsync(x => x.OrderHeaderId == updateDTO.OrderHeaderId) == null)
+            if (await _unitOfWork.OrderHeaderRepo.GetFirstOrDefaultAsync(x => x.OrderHeaderId == updateDTO.OrderHeaderId) == null)
             {
                 ModelState.AddModelError("ErrorMessages", "OrderHeaderId is Invalid!");
                 return BadRequest(ModelState);
             }
-            if (await _unitOfWork.OrderDetailRepo.GetFirstOrDefaultAsync(x => x.FoodId == updateDTO.FoodId) == null)
+            if (await _unitOfWork.FoodRepo.GetFirstOrDefaultAsync(x => x.FoodId == updateDTO.FoodId) == null)
             {
                 ModelState.AddModelError("ErrorMessages", "FoodId is Invalid!");
                 return BadRequest(ModelState);
