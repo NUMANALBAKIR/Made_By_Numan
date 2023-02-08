@@ -16,5 +16,5 @@ public class OrderDetailDTO
     public Food Food { get; set; }
 
     public int Count { get; set; }
-    public double Price { get; set; }
+    public double PurchasePrice { get; set; }
 }

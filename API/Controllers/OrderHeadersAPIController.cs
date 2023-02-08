@@ -136,11 +136,6 @@ public class OrderHeadersAPIController : ControllerBase
                 _response.ErrorMessage = "id or updateDTO has issue(s).";
                 return BadRequest(_response);
             }
-            if (await _unitOfWork.OrderHeaderRepo.GetFirstOrDefaultAsync(x => x.OrderHeaderId == updateDTO.OrderHeaderId) == null)
-            {
-                ModelState.AddModelError("ErrorMessages", "OrderHeader ID is Invalid!");
-                return BadRequest(ModelState);
-            }
 
             OrderHeader orderHeader = _mapper.Map<OrderHeader>(updateDTO);
             await _unitOfWork.OrderHeaderRepo.UpdateAsync(orderHeader);
