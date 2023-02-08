@@ -149,17 +149,17 @@ public class OrderDetailsAPIController : ControllerBase
                 _response.ErrorMessage = "id or updateDTO has issue(s).";
                 return BadRequest(_response);
             }
-            if (await _unitOfWork.FoodRepo.GetFirstOrDefaultAsync(c => c.FoodId == updateDTO.FoodId) == null)
+            if (await _unitOfWork.OrderDetailRepo.GetFirstOrDefaultAsync(x => x.OrderDetailId == updateDTO.OrderDetailId) == null)
             {
-                ModelState.AddModelError("ErrorMessages", "Food ID is Invalid!");
+                ModelState.AddModelError("ErrorMessages", "OrderDetail ID is Invalid!");
                 return BadRequest(ModelState);
             }
 
-            OrderDetailCreateDTO OrderDetail = _mapper.Map<OrderDetailCreateDTO>(updateDTO);
-            await _unitOfWork.OrderDetailRepo.UpdateAsync(OrderDetail);
+            OrderDetail orderDetail = _mapper.Map<OrderDetail>(updateDTO);
+            await _unitOfWork.OrderDetailRepo.UpdateAsync(orderDetail);
 
             // response
-            _response.Data = _mapper.Map<OrderDetailUpdateDTO>(OrderDetail);
+            _response.Data = _mapper.Map<OrderDetailUpdateDTO>(orderDetail);
             return Ok(_response);
         }
         catch (Exception ex)
