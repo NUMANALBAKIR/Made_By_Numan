@@ -2,8 +2,12 @@
 
 public interface IUnitOfWork
 {
+    IBankAccountRepository BankAccountRepo { get; }
+
     IFoodRepository FoodRepo { get; }
     ICategoryRepository CategoryRepo { get; }
-    IBankAccountRepository BankAccountRepo { get; }
     ICartItemRepository CartItemRepo { get; }
+    IOrderHeaderRepository OrderHeaderRepo { get; }
+    IOrderDetailRepository OrderDetailRepo { get; }
+
 }
