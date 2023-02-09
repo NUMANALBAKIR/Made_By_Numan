@@ -2,14 +2,6 @@
 
 @{
     Layout = "~/Views/Shared/_Layout_OrderFood.cshtml";
-    <style>
-        .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        white-space: nowrap;
-        }
-    </style>
     double total = 0;
 }
 
@@ -21,7 +13,7 @@
                 <div class="row">
                     <div class="col-6  pt-2">
                         <i class="fa fa-shopping-cart"></i> &nbsp;
-                        Shopping Cart
+                        <b>Cart</b>
                     </div>
                     <div class="col-6 text-end">
                         <a asp-area="Guest" asp-controller="OrderFood" asp-action="Index" asp-fragment="menu" class="btn btn-outline-info btn-sm">Back to Menu</a>

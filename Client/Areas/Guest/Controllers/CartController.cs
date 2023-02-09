@@ -46,7 +46,6 @@ public class CartController : Controller
     [HttpGet]
     public async Task<IActionResult> Summary()
     {
-
         // populate cart items
         List<CartItemDTO> cartItems = new();
 
@@ -75,4 +74,10 @@ public class CartController : Controller
         return View(cartVM);
     }
 
+
+    //[HttpPost, ActionName("Summary"), ValidateAntiForgeryToken]
+    //public async Task<IActionResult> SummaryPOST()
+    //{
+
+    //}
 }
