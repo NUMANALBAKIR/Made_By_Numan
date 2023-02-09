@@ -1,0 +1,30 @@
+﻿@model Client.Models.ViewModels.CartVM
+
+@{
+    Layout = "~/Views/Shared/_Layout_OrderFood.cshtml"; 
+    <style>
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            white-space: nowrap;
+        }
+    </style>
+}
+ 
+<div class="container row">
+    <div class="col-12 text-center">
+        <h1 class="text-primary text-center">Order Placed Successfully!</h1>
+    </div>
+    <div class="col-12 text-center">
+        <br />
+        Your Tracking Number is: <span style ="color:maroon">
+            @Model.OrderHeader.TrackingNumber</span>
+        <br />
+    </div>
+
+    <div class="col-12 text-center">
+        <p class="pt-4">Email sent to <strong>@Model.OrderHeader.EmailAddress</strong></p>
+    </div>
+
+</div> 
