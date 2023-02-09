@@ -127,7 +127,6 @@ public class CartController : Controller
             };
             await _orderDetailService.CreateAsync<APIResponse>(detailCreateDTO, "");
         }
-        //return RedirectToAction(nameof(OrderConfirmation), cartVM);
         return View(nameof(OrderConfirmation), cartVM);
     }
 
