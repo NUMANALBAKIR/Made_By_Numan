@@ -1,4 +1,5 @@
-﻿using Client.Models;
+﻿using AutoMapper;
+using Client.Models;
 using Client.Models.OrderFoodDTOs;
 using Client.Models.ViewModels;
 using Client.Services.IServices;
@@ -11,11 +12,20 @@ namespace Client.Areas.Guest.Controllers;
 [Area("Guest")]
 public class CartController : Controller
 {
+    [BindProperty]
+    public CartVM cartVM { get; set; }
+    private readonly IMapper _mapper;
     private readonly ICartItemService _cartItemService;
+    private readonly IOrderHeaderService _orderHeaderService;
+    private readonly IOrderDetailService _orderDetailService;
 
-    public CartController(ICartItemService cartItemService)
+
+    public CartController(IMapper mapper, ICartItemService cartItemService, IOrderHeaderService orderHeaderService, IOrderDetailService orderDetailService)
     {
+        _mapper = mapper;
         _cartItemService = cartItemService;
+        _orderHeaderService = orderHeaderService;
+        _orderDetailService = orderDetailService;
     }
 
 
@@ -55,8 +65,7 @@ public class CartController : Controller
             var stringList = Convert.ToString(response.Data);
             cartItems = JsonConvert.DeserializeObject<List<CartItemDTO>>(stringList);
         }
-
-        CartVM cartVM = new()
+        cartVM = new()
         {
             CartItems = cartItems,
             OrderHeader = new()
@@ -76,9 +85,59 @@ public class CartController : Controller
     }
 
 
-    //[HttpPost, ActionName("Summary"), ValidateAntiForgeryToken]
-    //public async Task<IActionResult> SummaryPOST()
-    //{
+    [HttpPost, ActionName("Summary"), ValidateAntiForgeryToken]
+    public async Task<IActionResult> SummaryPOST()
+    {
+        // get cartitems list
+        APIResponse response = await _cartItemService.GetAllAsync<APIResponse>("");
+        if (response != null && response.IsSuccess == true)
+        {
+            var stringList = Convert.ToString(response.Data);
+            cartVM.CartItems = JsonConvert.DeserializeObject<List<CartItemDTO>>(stringList);
+        }
 
-    //}
+        // populate OrderHeaderCreateDTO to create it.
+        foreach (var item in cartVM.CartItems)
+        {
+            cartVM.OrderHeader.OrderTotal += (item.CurrentPrice * item.Count);
+        }
+        cartVM.OrderHeader.TrackingNumber = Guid.NewGuid().ToString();
+        cartVM.OrderHeader.OrderDate = DateTime.Now;
+        OrderHeaderCreateDTO headerCreateDto = _mapper.Map<OrderHeaderCreateDTO>(cartVM.OrderHeader);
+
+        // get OrderHeaderDTO to get its id
+        OrderHeaderDTO headerDto = new();
+        APIResponse createResponse = await _orderHeaderService.CreateAsync<APIResponse>(headerCreateDto, "");
+        if (createResponse != null && createResponse.IsSuccess == true)
+        {
+            var stringHeader = Convert.ToString(createResponse.Data);
+            headerDto = JsonConvert.DeserializeObject<OrderHeaderDTO>(stringHeader);
+        }
+
+        // populate each OrderDetailCreateDTO and send it.
+        OrderDetailCreateDTO detailCreateDTO;
+        foreach (var cartItem in cartVM.CartItems)
+        {
+            detailCreateDTO = new()
+            {
+                OrderHeaderId = headerDto.OrderHeaderId,
+                FoodId = cartItem.FoodId,
+                PurchasePrice = cartItem.CurrentPrice,
+                Count = cartItem.Count
+            };
+            await _orderDetailService.CreateAsync<APIResponse>(detailCreateDTO, "");
+        }
+        //return RedirectToAction(nameof(OrderConfirmation), cartVM);
+        return View(nameof(OrderConfirmation), cartVM);
+    }
+
+
+    [HttpGet]
+    public async Task<IActionResult> OrderConfirmation()
+    {
+        return View();
+    }
+
+
+
 }

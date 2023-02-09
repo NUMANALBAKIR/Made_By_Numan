@@ -15,5 +15,11 @@ public class AutoMapperConfig : Profile
         CreateMap<Food, FoodDTO>().ReverseMap();
         CreateMap<Food, FoodCreateDTO>().ReverseMap();
         CreateMap<Food, FoodUpdateDTO>().ReverseMap();
+
+        CreateMap<OrderHeader, OrderHeaderDTO>().ReverseMap();
+        CreateMap<OrderHeader, OrderHeaderCreateDTO>().ReverseMap();
+        CreateMap<OrderHeader, OrderHeaderUpdateDTO>().ReverseMap();
+
+
     }
 }
