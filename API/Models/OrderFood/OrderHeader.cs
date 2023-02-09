@@ -14,4 +14,6 @@ public class OrderHeader
 
     public string OrdererName { get; set; }
     public string DeliveryAddress { get; set; }
+    public string EmailAddress { get; set; }
+
 }

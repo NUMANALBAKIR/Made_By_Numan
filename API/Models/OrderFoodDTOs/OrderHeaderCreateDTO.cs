@@ -8,4 +8,6 @@ public class OrderHeaderCreateDTO
 
     public string OrdererName { get; set; }
     public string DeliveryAddress { get; set; }
+    public string EmailAddress { get; set; }
+
 }

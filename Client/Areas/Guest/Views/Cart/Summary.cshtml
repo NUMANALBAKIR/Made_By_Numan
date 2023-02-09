@@ -10,8 +10,7 @@
 		<div class="card">
 			<div class="card-header bg-dark text-light ml-0">
 				<div class=" row container">
-					<div class="col-6">
-						<i class="fa fa-shopping-cart"></i> &nbsp;
+					<div class="col-6">						
 						Order Summary
 					</div>
 					<div class="col-6 text-end">
@@ -42,7 +41,17 @@
 
 							<div class="row my-1">
 								<div class="col-3">
-									<label>Street Address</label>
+									<label>Email</label>
+								</div>
+								<div class="col-9">
+									<input asp-for="OrderHeader.EmailAddress" class="form-control" />
+									<span asp-validation-for="OrderHeader.EmailAddress" class="text-danger"></span>
+								</div>
+							</div>
+
+							<div class="row my-1">
+								<div class="col-3">
+									<label>Delivery Address</label>
 								</div>
 								<div class="col-9">
 									<input asp-for="OrderHeader.DeliveryAddress" class="form-control" />

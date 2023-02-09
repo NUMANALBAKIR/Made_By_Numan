@@ -65,6 +65,7 @@ public class CartController : Controller
         // populate orderer's (header) information
         cartVM.OrderHeader.OrdererName = "numan";
         cartVM.OrderHeader.DeliveryAddress = "215sher";
+        cartVM.OrderHeader.EmailAddress = "n@gmail.com";
 
         foreach (var item in cartVM.CartItems)
         {
