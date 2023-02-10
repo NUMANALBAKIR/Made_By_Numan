@@ -5,6 +5,6 @@ namespace Client.Models.ViewModels;
 
 public class CartVM
 {
-    public IEnumerable<CartItemDTO> CartItems { get; set; }
+    public List<CartItemDTO> CartItems { get; set; }
     public OrderHeader OrderHeader { get; set; }
 }

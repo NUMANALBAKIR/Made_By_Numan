@@ -83,7 +83,7 @@ public class OrderFoodController : Controller
             if (createResponse != null && createResponse.IsSuccess == true)
             {
                 TempData["success"] = "Item added to Cart.";
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), "OrderFood", "menu");
             }
         }
 
@@ -97,8 +97,4 @@ public class OrderFoodController : Controller
     }
 
 
-    public IActionResult Cart()
-    {
-        return View();
-    }
 }

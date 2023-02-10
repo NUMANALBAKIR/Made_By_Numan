@@ -42,7 +42,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Guest}/{controller=Cart}/{action=Summary}/{id?}"
+    pattern: "{area=Guest}/{controller=OrderFood}/{action=Index}/{id?}"
 );
 
 app.Run();
