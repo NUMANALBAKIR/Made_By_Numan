@@ -30,7 +30,6 @@ public class CartController : Controller
     }
 
 
-    // Display list of selected items in cart.
     [HttpGet]
     public async Task<IActionResult> Index()
     {
@@ -103,8 +102,8 @@ public class CartController : Controller
         // clear cart
         await ClearCart(cartVM.CartItems);
 
-        return RedirectToAction(nameof(OrderConfirmation));
-        //return View(nameof(OrderConfirmation), cartVM);
+        //return RedirectToAction(nameof(OrderConfirmation));
+        return View(nameof(OrderConfirmation), cartVM);
     }
 
 
