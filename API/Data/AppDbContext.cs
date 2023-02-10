@@ -1,6 +1,5 @@
 ﻿using API.Models.Bank;
 using API.Models.OrderFood;
-using API.Models.User;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,8 +17,6 @@ public class AppDbContext : IdentityDbContext
     public DbSet<OrderDetail> OrderDetails { get; set; }
 
     public DbSet<BankAccount> BankAccounts { get; set; }
-
-    public DbSet<AppUser> AppUsers { get; set; }
 
 
 }
