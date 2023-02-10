@@ -192,8 +192,8 @@ public class CartItemsAPIController : ControllerBase
                 _response.ErrorMessage = $"No Cart Item with id= {id} exists.";
                 return NotFound(_response);
             }
-            await _unitOfWork.CartItemRepo.RemoveAsync(cartItem);
 
+            await _unitOfWork.CartItemRepo.RemoveAsync(cartItem);
             return Ok(_response);
         }
         catch (Exception ex)

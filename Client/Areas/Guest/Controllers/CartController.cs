@@ -4,6 +4,7 @@ using Client.Models.OrderFoodDTOs;
 using Client.Models.ViewModels;
 using Client.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Newtonsoft.Json;
 
 namespace Client.Areas.Guest.Controllers;
@@ -33,22 +34,11 @@ public class CartController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        // populate cart items
-        List<CartItemDTO> cartItems = new();
-
-        APIResponse response = await _cartItemService.GetAllAsync<APIResponse>("");
-        if (response != null && response.IsSuccess == true)
-        {
-            var stringList = Convert.ToString(response.Data);
-            cartItems = JsonConvert.DeserializeObject<List<CartItemDTO>>(stringList);
-        }
-
         CartVM cartVM = new()
         {
-            CartItems = cartItems,
+            CartItems = await CartItemsByService(),
             OrderHeader = new()
         };
-
         return View(cartVM);
     }
 
@@ -56,21 +46,11 @@ public class CartController : Controller
     [HttpGet]
     public async Task<IActionResult> Summary()
     {
-        // populate cart items
-        List<CartItemDTO> cartItems = new();
-
-        APIResponse response = await _cartItemService.GetAllAsync<APIResponse>("");
-        if (response != null && response.IsSuccess == true)
-        {
-            var stringList = Convert.ToString(response.Data);
-            cartItems = JsonConvert.DeserializeObject<List<CartItemDTO>>(stringList);
-        }
         cartVM = new()
         {
-            CartItems = cartItems,
+            CartItems = await CartItemsByService(),
             OrderHeader = new()
         };
-
         // populate orderer's (header) information
         cartVM.OrderHeader.OrdererName = "numan";
         cartVM.OrderHeader.DeliveryAddress = "215sher";
@@ -80,7 +60,6 @@ public class CartController : Controller
         {
             cartVM.OrderHeader.OrderTotal += (item.CurrentPrice * item.Count);
         }
-
         return View(cartVM);
     }
 
@@ -88,15 +67,8 @@ public class CartController : Controller
     [HttpPost, ActionName("Summary"), ValidateAntiForgeryToken]
     public async Task<IActionResult> SummaryPOST()
     {
-        // get cartitems list
-        APIResponse response = await _cartItemService.GetAllAsync<APIResponse>("");
-        if (response != null && response.IsSuccess == true)
-        {
-            var stringList = Convert.ToString(response.Data);
-            cartVM.CartItems = JsonConvert.DeserializeObject<List<CartItemDTO>>(stringList);
-        }
-
-        // populate OrderHeaderCreateDTO to create it.
+        cartVM.CartItems = await CartItemsByService();
+        // populate OrderHeaderCreateDTO and send it.
         foreach (var item in cartVM.CartItems)
         {
             cartVM.OrderHeader.OrderTotal += (item.CurrentPrice * item.Count);
@@ -127,7 +99,12 @@ public class CartController : Controller
             };
             await _orderDetailService.CreateAsync<APIResponse>(detailCreateDTO, "");
         }
-        return View(nameof(OrderConfirmation), cartVM);
+
+        // clear cart
+        await ClearCart(cartVM.CartItems);
+
+        return RedirectToAction(nameof(OrderConfirmation));
+        //return View(nameof(OrderConfirmation), cartVM);
     }
 
 
@@ -137,6 +114,28 @@ public class CartController : Controller
         return View();
     }
 
+
+    // get cartitems list
+    private async Task<List<CartItemDTO>> CartItemsByService()
+    {
+        List<CartItemDTO> cartItems = new();
+        APIResponse response = await _cartItemService.GetAllAsync<APIResponse>("");
+        if (response != null && response.IsSuccess == true)
+        {
+            var stringList = Convert.ToString(response.Data);
+            cartItems = JsonConvert.DeserializeObject<List<CartItemDTO>>(stringList);
+        }
+        return cartItems;
+    }
+
+
+    private async Task ClearCart(List<CartItemDTO> cartItems)
+    {
+        foreach (var item in cartItems)
+        {
+            await _cartItemService.DeleteAsync<APIResponse>(item.CartItemId, "");
+        }
+    }
 
 
 }
