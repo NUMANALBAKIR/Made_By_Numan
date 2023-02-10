@@ -24,7 +24,6 @@ public class CartItemsAPIController : ControllerBase
 
 
     // GET: api/CartItemsAPI
-    //[ResponseCache(CacheProfileName = "Default30s")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [HttpGet]

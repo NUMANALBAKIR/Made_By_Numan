@@ -24,7 +24,6 @@ public class OrderDetailsAPIController : ControllerBase
 
 
     // GET: api/OrderDetailsAPI
-    //[ResponseCache(CacheProfileName = "Default30s")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [HttpGet]
