@@ -25,7 +25,6 @@ public class CategoriesAPIController : ControllerBase
 
 
     // GET: api/CategoriesAPI
-    //[ResponseCache(CacheProfileName = "Default30s")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [HttpGet]

@@ -7,12 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Identity\Data\**" />
     <Compile Remove="Models\DTOs\**" />
     <Compile Remove="wwwroot\images\OrderPizza\**" />
+    <Content Remove="Areas\Identity\Data\**" />
     <Content Remove="Models\DTOs\**" />
     <Content Remove="wwwroot\images\OrderPizza\**" />
+    <EmbeddedResource Remove="Areas\Identity\Data\**" />
     <EmbeddedResource Remove="Models\DTOs\**" />
     <EmbeddedResource Remove="wwwroot\images\OrderPizza\**" />
+    <None Remove="Areas\Identity\Data\**" />
     <None Remove="Models\DTOs\**" />
     <None Remove="wwwroot\images\OrderPizza\**" />
   </ItemGroup>
