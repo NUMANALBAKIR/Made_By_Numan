@@ -42,6 +42,7 @@ public class Repository<T> : IRepository<T> where T : class
         return await query.ToListAsync();
     }
 
+
     public async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter = null, bool tracked = true, string? includeProperties = null)
     {
         IQueryable<T> query = dbSet;
@@ -66,6 +67,7 @@ public class Repository<T> : IRepository<T> where T : class
         }
         return await query.FirstOrDefaultAsync();
     }
+
 
     public async Task RemoveAsync(T entity)
     {

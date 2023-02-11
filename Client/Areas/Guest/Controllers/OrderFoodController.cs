@@ -84,20 +84,40 @@ public class OrderFoodController : Controller
 
         if (ModelState.IsValid)
         {
-            // Add cart-item to Db
-            CartItemCreateDTO cartItemCreateDTO = new()
+            // fetch this user's this item.
+            CartItemDTO cartItemFromDb = new();
+            APIResponse cartItemResponse = await _cartItemService.GetAsync<APIResponse>(cartItemDTO.FoodId, cartItemDTO.AppUserId, "");
+            if (cartItemResponse != null && cartItemResponse.IsSuccess == true)
             {
-                AppUserId = cartItemDTO.AppUserId,
-                FoodId = cartItemDTO.FoodId,
-                CurrentPrice = foodDto.Price,
-                Count = cartItemDTO.Count
-            };
-            APIResponse createResponse = await _cartItemService.CreateAsync<APIResponse>(cartItemCreateDTO, "");
-            if (createResponse != null && createResponse.IsSuccess == true)
-            {
-                TempData["success"] = "Item added to Cart.";
-                return RedirectToAction(nameof(Index), "OrderFood", "menu");
+                var stringCartItemFromDb = Convert.ToString(cartItemResponse.Data);
+                cartItemFromDb = JsonConvert.DeserializeObject<CartItemDTO>(stringCartItemFromDb);
             }
+
+            // if "this user's this item" NOT found, add to db.
+            if (cartItemFromDb == null)
+            {
+                CartItemCreateDTO cartItemCreateDTO = new()
+                {
+                    AppUserId = cartItemDTO.AppUserId,
+                    FoodId = cartItemDTO.FoodId,
+                    CurrentPrice = foodDto.Price,
+                    Count = cartItemDTO.Count
+                };
+                // add to db and redirect
+                APIResponse createResponse = await _cartItemService.CreateAsync<APIResponse>(cartItemCreateDTO, "");
+                if (createResponse != null && createResponse.IsSuccess == true)
+                {
+                    TempData["success"] = "Item added to Cart.";
+                    return RedirectToAction(nameof(Index), "OrderFood", "menu");
+                }
+            }
+            // if found, update by adding count.
+            else
+            {
+
+            }
+
+
         }
 
         // if modelstate valid false, populate cartItemDTO

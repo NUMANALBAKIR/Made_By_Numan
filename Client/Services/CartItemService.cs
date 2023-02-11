@@ -44,12 +44,12 @@ public class CartItemService : BaseService, ICartItemService
         });
     }
 
-    public Task<T> GetAsync<T>(int id, string token)
+    public Task<T> GetAsync<T>(int foodId, string appUserId, string token)
     {
         return SendAsync<T>(new APIRequest()
         {
             ApiType = Utility.StaticDetails.APIType.GET,
-            Url = _APIUrl + "/api/CartItemsAPI/" + id,
+            Url = _APIUrl + "/api/CartItemsAPI/" + foodId + "?appUserId=" + appUserId,
             Token = token
         });
     }
