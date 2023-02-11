@@ -1,8 +1,10 @@
 ﻿using Client.Models;
 using Client.Models.OrderFoodDTOs;
 using Client.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace Client.Areas.Guest.Controllers;
 
@@ -57,10 +59,14 @@ public class OrderFoodController : Controller
     }
 
 
-    //[Authorize]
-    [HttpPost, ValidateAntiForgeryToken]
+    [HttpPost, Authorize, ValidateAntiForgeryToken]
     public async Task<IActionResult> CartItemDetails(CartItemDTO cartItemDTO)
     {
+        // Get user-identity
+        //var claimsIdentity = (ClaimsIdentity)User.Identity;
+        //var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+        //shoppingCart.AppUserId = claim.Value;
+
         // Get FoodDTO from Db using FoodID
         FoodDTO foodDto = new();
         APIResponse foodResponse = await _foodService.GetAsync<APIResponse>(cartItemDTO.FoodId, "");
