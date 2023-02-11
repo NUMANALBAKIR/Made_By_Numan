@@ -3,14 +3,14 @@ using Client.Models;
 using Client.Models.OrderFoodDTOs;
 using Client.Models.ViewModels;
 using Client.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Newtonsoft.Json;
 
 namespace Client.Areas.Guest.Controllers;
 
-//[Authorize]
-[Area("Guest")]
+[Area("Guest"), Authorize]
 public class CartController : Controller
 {
     [BindProperty]
