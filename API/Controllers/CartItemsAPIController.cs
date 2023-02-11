@@ -45,28 +45,28 @@ public class CartItemsAPIController : ControllerBase
     }
 
 
-    // GET: api/CartItemsAPI/5
-    [HttpGet("{id:int}")]
+    // Get cart item having this user's this food.
+    [HttpGet("{foodId:int}")]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<APIResponse>> GetCartItem(int id)
+    public async Task<ActionResult<APIResponse>> GetCartItem(int foodId, string appUserId)
     {
         try
         {
-            if (id == 0)
+            if (foodId == 0)
             {
                 _response.IsSuccess = false;
                 _response.ErrorMessage = "id can't be 0.";
                 return BadRequest(_response);
             }
-            CartItem cartItem = await _unitOfWork.CartItemRepo.GetFirstOrDefaultAsync(filter: x => x.CartItemId == id, includeProperties: "Food");
+            CartItem cartItem = await _unitOfWork.CartItemRepo.GetFirstOrDefaultAsync(filter: x => (x.FoodId == foodId) && (x.AppUserId == appUserId), includeProperties: "Food");
 
             if (cartItem == null)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessage = $"No CartItem with id= {id} exists.";
+                _response.ErrorMessage = $"No CartItem with id= {foodId} exists.";
                 return NotFound(_response);
             }
             _response.Data = _mapper.Map<CartItemDTO>(cartItem);
