@@ -10,4 +10,6 @@ public interface IUnitOfWork
     IOrderHeaderRepository OrderHeaderRepo { get; }
     IOrderDetailRepository OrderDetailRepo { get; }
 
+    IAppUserRepository AppUserRepo { get; }
+
 }
