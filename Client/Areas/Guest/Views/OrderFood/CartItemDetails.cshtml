@@ -26,8 +26,7 @@
         <div class="col-8">
             <dl class="row">
 
-                <input asp-for="FoodId" hidden />
-                <input asp-for="Food" hidden />
+                <input asp-for="@Model.FoodId" hidden />
 
                 <dt class="col-sm-2">
                     Name :
@@ -49,19 +48,20 @@
                 <dd class="col-sm-10">
                     @Model.Food.Description
                 </dd>
-@*
+
                 <dt class="col-sm-2">
                     Category :
                 </dt>
                 <dd class="col-sm-10">
                     @Model.Food.Category.Name
                 </dd>
-*@
+
                 <dt class="col-sm-2">
                     Number of this item :
                 </dt>
                 <dd class="col-sm-10">
                     <input asp-for="@Model.Count" />
+			        <span asp-validation-for="@Model.Count" class="text-danger"></span>
                 </dd>
 
             </dl>

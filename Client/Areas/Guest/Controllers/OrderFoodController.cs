@@ -76,6 +76,12 @@ public class OrderFoodController : Controller
             foodDto = JsonConvert.DeserializeObject<FoodDTO>(stringFood);
         }
 
+        // count can't be less than 1
+        if (cartItemDTO.Count <= 0)
+        {
+            ModelState.AddModelError("Count", "Must be at least 1 item.");
+        }
+
         if (ModelState.IsValid)
         {
             // Add cart-item to Db
@@ -95,12 +101,9 @@ public class OrderFoodController : Controller
         }
 
         // if modelstate valid false, populate cartItemDTO
-        //cartItemDTO.AppUser = 
-        cartItemDTO.Food = foodDto;
-        cartItemDTO.CurrentPrice = foodDto.Price;
-        cartItemDTO.Count = cartItemDTO.Count;
-
         TempData["error"] = "Error encountered.";
+        cartItemDTO.Count = 1;
+        cartItemDTO.Food = foodDto;
         return View(cartItemDTO);
     }
 
