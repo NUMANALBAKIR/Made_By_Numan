@@ -30,6 +30,30 @@ public class CartController : Controller
     }
 
 
+    // get cartitems list
+    private async Task<List<CartItemDTO>> CartItemsByService()
+    {
+        List<CartItemDTO> cartItems = new();
+        APIResponse response = await _cartItemService.GetAllAsync<APIResponse>("");
+        if (response != null && response.IsSuccess == true)
+        {
+            var stringList = Convert.ToString(response.Data);
+            cartItems = JsonConvert.DeserializeObject<List<CartItemDTO>>(stringList);
+        }
+        return cartItems;
+    }
+
+
+    // clear cart 
+    private async Task ClearCart(List<CartItemDTO> cartItems)
+    {
+        foreach (var item in cartItems)
+        {
+            await _cartItemService.DeleteAsync<APIResponse>(item.CartItemId, "");
+        }
+    }
+
+
     [HttpGet]
     public async Task<IActionResult> Index()
     {
@@ -111,29 +135,6 @@ public class CartController : Controller
     public async Task<IActionResult> OrderConfirmation()
     {
         return View();
-    }
-
-
-    // get cartitems list
-    private async Task<List<CartItemDTO>> CartItemsByService()
-    {
-        List<CartItemDTO> cartItems = new();
-        APIResponse response = await _cartItemService.GetAllAsync<APIResponse>("");
-        if (response != null && response.IsSuccess == true)
-        {
-            var stringList = Convert.ToString(response.Data);
-            cartItems = JsonConvert.DeserializeObject<List<CartItemDTO>>(stringList);
-        }
-        return cartItems;
-    }
-
-
-    private async Task ClearCart(List<CartItemDTO> cartItems)
-    {
-        foreach (var item in cartItems)
-        {
-            await _cartItemService.DeleteAsync<APIResponse>(item.CartItemId, "");
-        }
     }
 
 
