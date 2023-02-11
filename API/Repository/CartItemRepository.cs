@@ -19,16 +19,5 @@ public class CartItemRepository : Repository<CartItem>, ICartItemRepository
         return entity;
     }
 
-    public int DecrementCount(CartItem cartItem, int count)
-    {
-        cartItem.Count -= count;
-        return cartItem.Count;
-    }
-
-    public int IncrementCount(CartItem cartItem, int count)
-    {
-        cartItem.Count += count;
-        return cartItem.Count;
-    }
 
 }
