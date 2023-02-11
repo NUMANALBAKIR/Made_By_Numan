@@ -10,7 +10,7 @@ public class CartItem
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int CartItemId { get; set; }
 
-    public int AppUserId { get; set; }
+    public string AppUserId { get; set; }
     [ValidateNever, ForeignKey(nameof(AppUserId))]
     public AppUser AppUser { get; set; }
 
