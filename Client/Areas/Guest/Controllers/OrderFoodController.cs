@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace Client.Areas.Guest.Controllers;
 
-[Area("Guest")]
+[Area("Guest"), Authorize]
 public class OrderFoodController : Controller
 {
     private readonly IFoodService _foodService;
@@ -63,9 +63,9 @@ public class OrderFoodController : Controller
     public async Task<IActionResult> CartItemDetails(CartItemDTO cartItemDTO)
     {
         // Get user-identity
-        //var claimsIdentity = (ClaimsIdentity)User.Identity;
-        //var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-        //shoppingCart.AppUserId = claim.Value;
+        var claimsIdentity = (ClaimsIdentity)User.Identity;
+        var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+        cartItemDTO.AppUserId = claim.Value;
 
         // Get FoodDTO from Db using FoodID
         FoodDTO foodDto = new();
@@ -81,6 +81,7 @@ public class OrderFoodController : Controller
             // Add cart-item to Db
             CartItemCreateDTO cartItemCreateDTO = new()
             {
+                AppUserId = cartItemDTO.AppUserId,
                 FoodId = cartItemDTO.FoodId,
                 CurrentPrice = foodDto.Price,
                 Count = cartItemDTO.Count
@@ -94,6 +95,7 @@ public class OrderFoodController : Controller
         }
 
         // if modelstate valid false, populate cartItemDTO
+        //cartItemDTO.AppUser = 
         cartItemDTO.Food = foodDto;
         cartItemDTO.CurrentPrice = foodDto.Price;
         cartItemDTO.Count = cartItemDTO.Count;

@@ -37,5 +37,9 @@
     <ProjectReference Include="..\API\API.csproj" />
     <ProjectReference Include="..\Utility\Utility.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Controllers\" />
+  </ItemGroup>
 	
 </Project>
