@@ -1,8 +1,10 @@
 using API.Data;
 using Client;
+using Client.Areas.Identity.EmailSender;
 using Client.Services;
 using Client.Services.IServices;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +39,10 @@ builder.Services.AddScoped<IOrderHeaderService, OrderHeaderService>();
 
 builder.Services.AddHttpClient<IOrderDetailService, OrderDetailService>();
 builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
+
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
+
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
