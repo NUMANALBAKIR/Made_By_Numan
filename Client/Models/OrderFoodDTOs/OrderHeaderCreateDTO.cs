@@ -2,6 +2,8 @@
 
 public class OrderHeaderCreateDTO
 {
+    public string AppUserId { get; set; }
+
     public double OrderTotal { get; set; }
     public string TrackingNumber { get; set; }
     public DateTime OrderDate { get; set; }

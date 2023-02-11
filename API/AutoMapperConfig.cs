@@ -2,6 +2,7 @@
 using API.Models.BankDTOs;
 using API.Models.OrderFood;
 using API.Models.OrderFoodDTOs;
+using API.Models.User;
 using AutoMapper;
 
 namespace API;
@@ -34,6 +35,9 @@ public class AutoMapperConfig : Profile
         CreateMap<OrderDetail, OrderDetailCreateDTO>().ReverseMap();
         CreateMap<OrderDetail, OrderDetailUpdateDTO>().ReverseMap();
 
+        CreateMap<AppUser, AppUserDTO>().ReverseMap();
+        CreateMap<AppUser, AppUserCreateDTO>().ReverseMap();
+        CreateMap<AppUser, AppUserUpdateDTO>().ReverseMap();
 
 
     }
