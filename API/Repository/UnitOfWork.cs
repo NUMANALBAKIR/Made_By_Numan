@@ -12,6 +12,8 @@ public class UnitOfWork : IUnitOfWork
     public IOrderHeaderRepository OrderHeaderRepo { get; private set; }
     public IOrderDetailRepository OrderDetailRepo { get; private set; }
 
+    public IAppUserRepository AppUserRepo { get; private set; }
+
 
 
 
@@ -25,6 +27,7 @@ public class UnitOfWork : IUnitOfWork
         CartItemRepo = new CartItemRepository(_db);
         OrderHeaderRepo = new OrderHeaderRepository(_db);
         OrderDetailRepo = new OrderDetailRepository(_db);
+        AppUserRepo = new AppUserRepository(_db);
 
     }
 }
