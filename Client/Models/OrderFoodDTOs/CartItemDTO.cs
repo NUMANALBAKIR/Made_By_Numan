@@ -1,5 +1,6 @@
 ﻿using Client.Models.User;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Client.Models.OrderFoodDTOs;
@@ -17,5 +18,6 @@ public class CartItemDTO
     public FoodDTO Food { get; set; }
 
     public double CurrentPrice { get; set; }
+    [Range(1, 20)]
     public int Count { get; set; }
 }
