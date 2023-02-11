@@ -20,9 +20,9 @@ public class AutoMapperConfig : Profile
         CreateMap<OrderHeader, OrderHeaderCreateDTO>().ReverseMap();
         CreateMap<OrderHeader, OrderHeaderUpdateDTO>().ReverseMap();
 
-        //CreateMap<AppUser, AppUserDTO>().ReverseMap();
-        //CreateMap<AppUser, AppUserCreateDTO>().ReverseMap();
-        //CreateMap<AppUser, AppUserUpdateDTO>().ReverseMap();
+        CreateMap<AppUser, AppUserDTO>().ReverseMap();
+        CreateMap<AppUser, AppUserCreateDTO>().ReverseMap();
+        CreateMap<AppUser, AppUserUpdateDTO>().ReverseMap();
 
     }
 }
