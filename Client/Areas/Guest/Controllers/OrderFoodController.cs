@@ -63,9 +63,9 @@ public class OrderFoodController : Controller
     public async Task<IActionResult> CartItemDetails(CartItemDTO cartItemDTO)
     {
         // Get user-identity
-        var claimsIdentity = (ClaimsIdentity)User.Identity;
-        var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-        cartItemDTO.AppUserId = claim.Value;
+        //var claimsIdentity = (ClaimsIdentity)User.Identity;
+        //var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+        //shoppingCart.AppUserId = claim.Value;
 
         if (ModelState.IsValid)
         {
