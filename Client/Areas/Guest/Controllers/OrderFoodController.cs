@@ -67,21 +67,6 @@ public class OrderFoodController : Controller
         var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
         cartItemDTO.AppUserId = claim.Value;
 
-        // Get FoodDTO from Db using FoodID
-        FoodDTO foodDto = new();
-        APIResponse foodResponse = await _foodService.GetAsync<APIResponse>(cartItemDTO.FoodId, "");
-        if (foodResponse != null && foodResponse.IsSuccess == true)
-        {
-            var stringFood = Convert.ToString(foodResponse.Data);
-            foodDto = JsonConvert.DeserializeObject<FoodDTO>(stringFood);
-        }
-
-        // count can't be less than 1
-        if (cartItemDTO.Count <= 0)
-        {
-            ModelState.AddModelError("Count", "Must be at least 1 item.");
-        }
-
         if (ModelState.IsValid)
         {
             // fetch this user's this item.
@@ -93,17 +78,17 @@ public class OrderFoodController : Controller
                 cartItemFromDb = JsonConvert.DeserializeObject<CartItemDTO>(stringCartItemFromDb);
             }
 
-            // if "this user's this item" NOT found, add to db.
-            if (cartItemFromDb == null)
+            // if NOT found "this user's this item", add to db.
+            if (cartItemFromDb.FoodId == 0)
             {
                 CartItemCreateDTO cartItemCreateDTO = new()
                 {
                     AppUserId = cartItemDTO.AppUserId,
                     FoodId = cartItemDTO.FoodId,
-                    CurrentPrice = foodDto.Price,
+                    CurrentPrice = cartItemDTO.CurrentPrice,
                     Count = cartItemDTO.Count
                 };
-                // add to db and redirect
+                // add to db and redirect.
                 APIResponse createResponse = await _cartItemService.CreateAsync<APIResponse>(cartItemCreateDTO, "");
                 if (createResponse != null && createResponse.IsSuccess == true)
                 {
@@ -114,13 +99,33 @@ public class OrderFoodController : Controller
             // if found, update by adding count.
             else
             {
-
+                CartItemUpdateDTO cartItemUpdateDTO = new()
+                {
+                    CartItemId = cartItemFromDb.CartItemId,
+                    AppUserId = cartItemDTO.AppUserId,
+                    FoodId = cartItemDTO.FoodId,
+                    CurrentPrice = cartItemDTO.CurrentPrice,
+                    Count = cartItemFromDb.Count + cartItemDTO.Count
+                };
+                // update to db and redirect
+                APIResponse updateResponse = await _cartItemService.UpdateAsync<APIResponse>(cartItemUpdateDTO, "");
+                if (updateResponse != null && updateResponse.IsSuccess == true)
+                {
+                    TempData["success"] = "Updated item-count in cart.";
+                    return RedirectToAction(nameof(Index), "OrderFood", "menu");
+                }
             }
-
-
         }
 
-        // if modelstate valid false, populate cartItemDTO
+        // if modelstate not valid, populate cartItemDTO for view
+        // Get FoodDTO from Db using FoodID.
+        FoodDTO foodDto = new();
+        APIResponse foodResponse = await _foodService.GetAsync<APIResponse>(cartItemDTO.FoodId, "");
+        if (foodResponse != null && foodResponse.IsSuccess == true)
+        {
+            var stringFood = Convert.ToString(foodResponse.Data);
+            foodDto = JsonConvert.DeserializeObject<FoodDTO>(stringFood);
+        }
         TempData["error"] = "Error encountered.";
         cartItemDTO.Count = 1;
         cartItemDTO.Food = foodDto;
