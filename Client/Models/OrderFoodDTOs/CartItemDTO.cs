@@ -18,6 +18,6 @@ public class CartItemDTO
     public FoodDTO Food { get; set; }
 
     public double CurrentPrice { get; set; }
-    [Range(1, 20)]
+    [Range(1, 20, ErrorMessage = "Items must be between 1 and 20")]
     public int Count { get; set; }
 }
