@@ -1,6 +1,6 @@
-﻿using API.Models.AppUser;
-using API.Models.Bank;
+﻿using API.Models.Bank;
 using API.Models.OrderFood;
+using API.Models.User;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
