@@ -26,6 +26,7 @@ public class AppUsersAPIController : ControllerBase
 
 
     // Get appUser having this appUserId.
+    // api/AppUsersAPI?appUserId=abc
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -64,7 +65,7 @@ public class AppUsersAPIController : ControllerBase
     // GET: api/AppUsersAPI
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpGet("GetAppUsers")]
+    [HttpGet("GetAll")]
     public async Task<ActionResult<APIResponse>> GetAppUsers()
     {
         try

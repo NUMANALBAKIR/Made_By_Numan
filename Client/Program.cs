@@ -44,6 +44,9 @@ builder.Services.AddScoped<IOrderHeaderService, OrderHeaderService>();
 builder.Services.AddHttpClient<IOrderDetailService, OrderDetailService>();
 builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
 
+builder.Services.AddHttpClient<IAppUserService, AppUserService>();
+builder.Services.AddScoped<IAppUserService, AppUserService>();
+
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
 builder.Services.AddRazorPages();
@@ -77,7 +80,7 @@ app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Guest}/{controller=Chart}/{action=Index}/{id?}"
+    pattern: "{area=Guest}/{controller=OrderFood}/{action=Index}/{id?}"
 );
 
 app.Run();

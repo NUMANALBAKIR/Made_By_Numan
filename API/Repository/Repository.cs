@@ -14,7 +14,7 @@ public class Repository<T> : IRepository<T> where T : class
     {
         _db = db;
         dbSet = _db.Set<T>();
-        //_db.OrderDetails.Include(u => u.OrderHeader).ToList();
+        //_db.CartItems.Include(u => u.AppUser).ToList();
     }
 
     public async Task CreateAsync(T entity)

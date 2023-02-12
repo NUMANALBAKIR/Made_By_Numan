@@ -43,8 +43,8 @@
                                     <label>Name</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="OrderHeader.OrdererName" class="form-control" />
-                                    <span asp-validation-for="OrderHeader.OrdererName" class="text-danger"></span>
+                                    <input asp-for="OrderHeaderDTO.OrdererName" class="form-control" />
+                                    <span asp-validation-for="OrderHeaderDTO.OrdererName" class="text-danger"></span>
                                 </div>
                             </div>
 
@@ -53,8 +53,8 @@
                                     <label>Email</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="OrderHeader.EmailAddress" class="form-control" />
-                                    <span asp-validation-for="OrderHeader.EmailAddress" class="text-danger"></span>
+                                    <input asp-for="OrderHeaderDTO.EmailAddress" class="form-control" />
+                                    <span asp-validation-for="OrderHeaderDTO.EmailAddress" class="text-danger"></span>
                                 </div>
                             </div>
 
@@ -63,8 +63,8 @@
                                     <label>Delivery Address</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="OrderHeader.DeliveryAddress" class="form-control" />
-                                    <span asp-validation-for="OrderHeader.DeliveryAddress" class="text-danger"></span>
+                                    <input asp-for="OrderHeaderDTO.DeliveryAddress" class="form-control" />
+                                    <span asp-validation-for="OrderHeaderDTO.DeliveryAddress" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
 
                                 <li class="list-group-item d-flex justify-content-between bg-light">
                                     <small class="text-info">Total (USD)</small>
-                                    <strong class="text-info">@Model.OrderHeader.OrderTotal.ToString("c")</strong>
+                                    <strong class="text-info">@Model.OrderHeaderDTO.OrderTotal.ToString("c")</strong>
                                 </li>
                             </ul>
                         </div>

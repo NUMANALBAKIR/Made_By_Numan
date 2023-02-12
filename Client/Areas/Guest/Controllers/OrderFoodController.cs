@@ -21,6 +21,16 @@ public class OrderFoodController : Controller
     }
 
 
+    // Get user-identity
+    private string GetNameIdentifier()
+    {
+        var claimsIdentity = (ClaimsIdentity)User.Identity;
+        var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+        return claim.Value;
+    }
+
+
+    // fetch and display all foods
     public async Task<IActionResult> Index()
     {
         List<FoodDTO> foodList = new();
@@ -35,6 +45,7 @@ public class OrderFoodController : Controller
     }
 
 
+    // Display selected food's details
     [HttpGet]
     public async Task<IActionResult> CartItemDetails(int foodId)
     {
@@ -59,17 +70,15 @@ public class OrderFoodController : Controller
     }
 
 
+    // add selected food to cart
     [HttpPost, Authorize, ValidateAntiForgeryToken]
     public async Task<IActionResult> CartItemDetails(CartItemDTO cartItemDTO)
     {
-        // Get user-identity
-        //var claimsIdentity = (ClaimsIdentity)User.Identity;
-        //var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-        //shoppingCart.AppUserId = claim.Value;
+        cartItemDTO.AppUserId = GetNameIdentifier();
 
         if (ModelState.IsValid)
         {
-            // fetch this user's this item.
+            // look for this user's this item.
             CartItemDTO cartItemFromDb = new();
             APIResponse cartItemResponse = await _cartItemService.GetAsync<APIResponse>(cartItemDTO.FoodId, cartItemDTO.AppUserId, "");
             if (cartItemResponse != null && cartItemResponse.IsSuccess == true)
@@ -96,7 +105,7 @@ public class OrderFoodController : Controller
                     return RedirectToAction(nameof(Index), "OrderFood", "menu");
                 }
             }
-            // if found, update by adding count.
+            // if found, update count by adding.
             else
             {
                 CartItemUpdateDTO cartItemUpdateDTO = new()
@@ -129,9 +138,9 @@ public class OrderFoodController : Controller
         TempData["error"] = "Error encountered.";
         cartItemDTO.Count = 1;
         cartItemDTO.Food = foodDto;
+        cartItemDTO.FoodId = foodDto.FoodId;
         return View(cartItemDTO);
     }
-
 
 
     public async Task<IActionResult> EmailUs()
