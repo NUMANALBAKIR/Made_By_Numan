@@ -10,12 +10,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
-
-//builder.Services.AddDbContext<AppDbContext>(option =>
-//{
-//    option.UseSqlServer(connectionString);
-//});
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
+builder.Services.AddDbContext<AppDbContext>(option =>
+{
+    option.UseSqlServer(connectionString);
+});
 
 //builder.Services.AddIdentity<AppUser, IdentityRole>()
 //    .AddDefaultTokenProviders()
