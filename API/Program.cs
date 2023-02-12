@@ -16,13 +16,6 @@ builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseSqlServer(connectionString);
 });
 
-//builder.Services.AddDefaultIdentity<IdentityUser>()
-//    .AddEntityFrameworkStores<ApplicationDbContext>();
-
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddDefaultTokenProviders()
-    .AddEntityFrameworkStores<AppDbContext>();
-
 builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen();
