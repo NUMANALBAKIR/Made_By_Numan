@@ -133,4 +133,10 @@ public class OrderFoodController : Controller
     }
 
 
+
+    public async Task<IActionResult> EmailUs()
+    {
+        return View();
+    }
+
 }
