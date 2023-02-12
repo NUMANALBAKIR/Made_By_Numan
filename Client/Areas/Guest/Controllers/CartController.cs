@@ -3,6 +3,7 @@ using Client.Models;
 using Client.Models.OrderFoodDTOs;
 using Client.Models.User;
 using Client.Models.ViewModels;
+using Client.Services;
 using Client.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,28 +18,40 @@ public class CartController : Controller
 {
     [BindProperty]
     public CartVM cartVM { get; set; }
-    private readonly IMapper _mapper;
+    //private readonly IMapper _mapper;
     private readonly ICartItemService _cartItemService;
     private readonly IOrderHeaderService _orderHeaderService;
     private readonly IOrderDetailService _orderDetailService;
+    private readonly IAppUserService _appUserService;
 
-
-    public CartController(IMapper mapper, ICartItemService cartItemService, IOrderHeaderService orderHeaderService, IOrderDetailService orderDetailService)
+    public CartController(
+        //IMapper mapper,
+        ICartItemService cartItemService,
+        IOrderHeaderService orderHeaderService,
+        IOrderDetailService orderDetailService,
+        IAppUserService appUserService)
     {
-        _mapper = mapper;
+        //_mapper = mapper;
         _cartItemService = cartItemService;
         _orderHeaderService = orderHeaderService;
         _orderDetailService = orderDetailService;
+        _appUserService = appUserService;
     }
 
 
-    // get cart-items list
-    private async Task<List<CartItemDTO>> CartItemsByService()
+    // Get user-identity
+    private string GetNameIdentifier()
     {
-        // Get user-identity
         var claimsIdentity = (ClaimsIdentity)User.Identity;
         var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-        string appUserId = claim.Value;
+        return claim.Value;
+    }
+
+
+    // get this user's cart-items list
+    private async Task<List<CartItemDTO>> CartItemsByServiceAsync()
+    {
+        string appUserId = GetNameIdentifier();
 
         List<CartItemDTO> cartItems = new();
         APIResponse response = await _cartItemService.GetAllAsync<APIResponse>(appUserId, "");
@@ -51,6 +64,20 @@ public class CartController : Controller
     }
 
 
+    // Get AppUser from Db using NameIdentifier
+    private async Task<AppUserDTO> AppUserByServiceAsync()
+    {
+        AppUserDTO appUser = new();
+        APIResponse response = await _appUserService.GetAsync<APIResponse>(GetNameIdentifier(), "");
+        if (response != null && response.IsSuccess == true)
+        {
+            var stringAppUser = Convert.ToString(response.Data);
+            appUser = JsonConvert.DeserializeObject<AppUserDTO>(stringAppUser);
+        }
+        return appUser;
+    }
+
+
     // clear cart 
     private async Task ClearCart(List<CartItemDTO> cartItems)
     {
@@ -60,62 +87,61 @@ public class CartController : Controller
         }
     }
 
-    // Get user-identity
-    private string GetClaimValue()
-    {
-        var claimsIdentity = (ClaimsIdentity)User.Identity;
-        var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-        return claim.Value;
-    }
 
-    [HttpGet]
     public async Task<IActionResult> Index()
     {
         CartVM cartVM = new()
         {
-            CartItems = await CartItemsByService(),
-            OrderHeader = new()
+            CartItems = await CartItemsByServiceAsync(),
+            OrderHeaderDTO = new()
         };
         return View(cartVM);
     }
 
 
-    [HttpGet]
+    // Order Summary with items of this user.
     public async Task<IActionResult> Summary()
     {
         cartVM = new()
         {
-            CartItems = await CartItemsByService(),
-            OrderHeader = new()
+            CartItems = await CartItemsByServiceAsync(),
+            OrderHeaderDTO = new()
         };
         // populate orderer's (header) information
-        //AppUser appUser = _appUserService.GetUserAsync<APIResponse>(GetClaimValue(), "");
-        cartVM.OrderHeader.OrdererName = cartVM.OrderHeader.AppUser.Name;
-        cartVM.OrderHeader.DeliveryAddress = cartVM.OrderHeader.AppUser.Address;
-        cartVM.OrderHeader.EmailAddress = cartVM.OrderHeader.AppUser.Email;
+        cartVM.OrderHeaderDTO.AppUser = await AppUserByServiceAsync();
+        cartVM.OrderHeaderDTO.AppUserId = GetNameIdentifier();
+        cartVM.OrderHeaderDTO.OrdererName = cartVM.OrderHeaderDTO.AppUser.Name;
+        cartVM.OrderHeaderDTO.DeliveryAddress = cartVM.OrderHeaderDTO.AppUser.Address;
+        cartVM.OrderHeaderDTO.EmailAddress = cartVM.OrderHeaderDTO.AppUser.Email;
 
         foreach (var item in cartVM.CartItems)
         {
-            cartVM.OrderHeader.OrderTotal += (item.CurrentPrice * item.Count);
+            cartVM.OrderHeaderDTO.OrderTotal += (item.CurrentPrice * item.Count);
         }
         return View(cartVM);
     }
 
 
+    // Order placed in summary page.
     [HttpPost, ActionName("Summary"), ValidateAntiForgeryToken]
     public async Task<IActionResult> SummaryPOST()
     {
-        cartVM.CartItems = await CartItemsByService();
-        // populate OrderHeaderCreateDTO and send it.
-        foreach (var item in cartVM.CartItems)
+        // populate OrderHeaderCreateDTO to create it.
+        OrderHeaderCreateDTO headerCreateDto = new();
+        // get order total
+        var cartItems = await CartItemsByServiceAsync();
+        foreach (var item in cartItems)
         {
-            cartVM.OrderHeader.OrderTotal += (item.CurrentPrice * item.Count);
+            headerCreateDto.OrderTotal += (item.CurrentPrice * item.Count);
         }
-        cartVM.OrderHeader.TrackingNumber = Guid.NewGuid().ToString();
-        cartVM.OrderHeader.OrderDate = DateTime.Now;
-        OrderHeaderCreateDTO headerCreateDto = _mapper.Map<OrderHeaderCreateDTO>(cartVM.OrderHeader);
+        headerCreateDto.AppUserId = GetNameIdentifier();
+        headerCreateDto.TrackingNumber = Guid.NewGuid().ToString();
+        headerCreateDto.OrderDate = DateTime.Now;
+        headerCreateDto.OrdererName = cartVM.OrderHeaderDTO.OrdererName;
+        headerCreateDto.DeliveryAddress = cartVM.OrderHeaderDTO.DeliveryAddress;
+        headerCreateDto.EmailAddress = cartVM.OrderHeaderDTO.EmailAddress;
 
-        // get OrderHeaderDTO to get its id
+        // send OrderHeaderCreateDTO and get id of the created, to add to orderdetail.
         OrderHeaderDTO headerDto = new();
         APIResponse createResponse = await _orderHeaderService.CreateAsync<APIResponse>(headerCreateDto, "");
         if (createResponse != null && createResponse.IsSuccess == true)
@@ -124,29 +150,27 @@ public class CartController : Controller
             headerDto = JsonConvert.DeserializeObject<OrderHeaderDTO>(stringHeader);
         }
 
-        // populate each OrderDetailCreateDTO and send it.
-        OrderDetailCreateDTO detailCreateDTO;
-        foreach (var cartItem in cartVM.CartItems)
+        // populate each OrderDetailCreateDTO and send it. 
+        foreach (var item in cartItems)
         {
-            detailCreateDTO = new()
+            OrderDetailCreateDTO detailCreateDTO = new()
             {
                 OrderHeaderId = headerDto.OrderHeaderId,
-                FoodId = cartItem.FoodId,
-                PurchasePrice = cartItem.CurrentPrice,
-                Count = cartItem.Count
+                FoodId = item.FoodId,
+                PurchasePrice = item.CurrentPrice,
+                Count = item.Count
             };
             await _orderDetailService.CreateAsync<APIResponse>(detailCreateDTO, "");
         }
 
         // clear cart
-        await ClearCart(cartVM.CartItems);
+        await ClearCart(cartItems);
 
         //return RedirectToAction(nameof(OrderConfirmation));
         return View(nameof(OrderConfirmation), cartVM);
     }
 
 
-    [HttpGet]
     public async Task<IActionResult> OrderConfirmation()
     {
         //CartVM cartVM = new()

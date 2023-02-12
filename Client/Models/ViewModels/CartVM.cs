@@ -6,5 +6,5 @@ namespace Client.Models.ViewModels;
 public class CartVM
 {
     public List<CartItemDTO> CartItems { get; set; }
-    public OrderHeader OrderHeader { get; set; }
+    public OrderHeaderDTO OrderHeaderDTO { get; set; }
 }

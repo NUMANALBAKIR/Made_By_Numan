@@ -33,7 +33,7 @@ public class CartItemsAPIController : ControllerBase
         try
         {
             IEnumerable<CartItem> cartItems;
-            cartItems = await _unitOfWork.CartItemRepo.GetAllAsync(filter: x => x.AppUserId == appUserId, includeProperties: "Food");
+            cartItems = await _unitOfWork.CartItemRepo.GetAllAsync(filter: x => x.AppUserId.Equals(appUserId), includeProperties: "Food,AppUser");
             _response.Data = _mapper.Map<List<CartItemDTO>>(cartItems);
             return Ok(_response);
         }
@@ -62,7 +62,7 @@ public class CartItemsAPIController : ControllerBase
                 _response.ErrorMessage = "id can't be 0.";
                 return BadRequest(_response);
             }
-            CartItem cartItem = await _unitOfWork.CartItemRepo.GetFirstOrDefaultAsync(filter: x => (x.FoodId == foodId) && (x.AppUserId == appUserId), includeProperties: "Food");
+            CartItem cartItem = await _unitOfWork.CartItemRepo.GetFirstOrDefaultAsync(filter: x => (x.FoodId == foodId) && (x.AppUserId == appUserId), includeProperties: "Food,AppUser");
 
             if (cartItem == null)
             {

@@ -8,12 +8,20 @@ namespace Client.Areas.Guest.Controllers;
 [Area("Guest"), Authorize]
 public class BankController : Controller
 {
-
-
     //public BankController(IBankAccountService)
     //{
 
     //}
+
+
+    // Get user-identity
+    private string GetNameIdentifier()
+    {
+        var claimsIdentity = (ClaimsIdentity)User.Identity;
+        var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+        return claim.Value;
+    }
+
 
     [HttpGet]
     public IActionResult Index()
@@ -75,5 +83,7 @@ public class BankController : Controller
 
         return View(); //del when uncomment above
     }
+
+
 
 }

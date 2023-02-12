@@ -10,7 +10,7 @@ public class OrderHeaderDTO
 
     public string AppUserId { get; set; }
     [ValidateNever, ForeignKey(nameof(AppUserId))]
-    public AppUser AppUser { get; set; }
+    public AppUserDTO AppUser { get; set; }
 
     public double OrderTotal { get; set; }
     public string TrackingNumber { get; set; }
