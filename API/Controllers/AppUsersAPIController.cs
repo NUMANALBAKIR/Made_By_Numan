@@ -61,4 +61,25 @@ public class AppUsersAPIController : ControllerBase
     }
 
 
+    // GET: api/AppUsersAPI
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [HttpGet("GetAppUsers")]
+    public async Task<ActionResult<APIResponse>> GetAppUsers()
+    {
+        try
+        {
+            List<AppUser> appUsers;
+            appUsers = await _unitOfWork.AppUserRepo.GetAllAsync();
+            _response.Data = _mapper.Map<List<AppUserDTO>>(appUsers);
+            return Ok(_response);
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessage = ex.ToString();
+            return StatusCode(500, _response);
+        }
+    }
+
 }
