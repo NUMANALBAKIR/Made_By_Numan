@@ -134,6 +134,15 @@ public class CartController : Controller
     [HttpGet]
     public async Task<IActionResult> OrderConfirmation()
     {
+        //CartVM cartVM = new()
+        //{
+        //    OrderHeader orderHeader = new()
+        //    {
+
+        //    }
+        //};
+
+
         return View();
     }
 
