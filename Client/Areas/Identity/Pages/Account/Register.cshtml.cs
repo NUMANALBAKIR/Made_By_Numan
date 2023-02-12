@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using API.Models.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -119,6 +120,7 @@ namespace Client.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            // create roles
             if (_roleManager.RoleExistsAsync(Utility.StaticDetails.Role_Admin).GetAwaiter().GetResult() == false)
             {
                 _roleManager.CreateAsync(new IdentityRole(Utility.StaticDetails.Role_Admin)).GetAwaiter().GetResult();
@@ -128,6 +130,7 @@ namespace Client.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
+
 
         public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
         {
@@ -177,11 +180,11 @@ namespace Client.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private IdentityUser CreateUser()
+        private AppUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<AppUser>();
             }
             catch
             {
