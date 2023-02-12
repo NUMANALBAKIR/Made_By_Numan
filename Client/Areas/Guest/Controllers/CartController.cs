@@ -60,6 +60,13 @@ public class CartController : Controller
         }
     }
 
+    // Get user-identity
+    private string GetClaimValue()
+    {
+        var claimsIdentity = (ClaimsIdentity)User.Identity;
+        var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+        return claim.Value;
+    }
 
     [HttpGet]
     public async Task<IActionResult> Index()
@@ -72,13 +79,6 @@ public class CartController : Controller
         return View(cartVM);
     }
 
-    // Get user-identity
-    private string GetClaimValue()
-    {
-        var claimsIdentity = (ClaimsIdentity)User.Identity;
-        var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-        return claim.Value;
-    }
 
     [HttpGet]
     public async Task<IActionResult> Summary()
@@ -89,7 +89,7 @@ public class CartController : Controller
             OrderHeader = new()
         };
         // populate orderer's (header) information
-        //AppUser appUser = get using service
+        //AppUser appUser = _appUserService.GetUserAsync<APIResponse>(GetClaimValue(), "");
         cartVM.OrderHeader.OrdererName = cartVM.OrderHeader.AppUser.Name;
         cartVM.OrderHeader.DeliveryAddress = cartVM.OrderHeader.AppUser.Address;
         cartVM.OrderHeader.EmailAddress = cartVM.OrderHeader.AppUser.Email;
