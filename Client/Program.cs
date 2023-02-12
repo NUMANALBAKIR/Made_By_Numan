@@ -1,6 +1,7 @@
 using API.Data;
 using Client;
 using Client.Areas.Identity.EmailSender;
+using Client.Models.User;
 using Client.Services;
 using Client.Services.IServices;
 using Microsoft.AspNetCore.Identity;
@@ -9,18 +10,18 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
+//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
 
-builder.Services.AddDbContext<AppDbContext>(option =>
-{
-    option.UseSqlServer(connectionString);
-});
+//builder.Services.AddDbContext<AppDbContext>(option =>
+//{
+//    option.UseSqlServer(connectionString);
+//});
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddDefaultTokenProviders()
-    .AddEntityFrameworkStores<AppDbContext>();
+//builder.Services.AddIdentity<AppUser, IdentityRole>()
+//    .AddDefaultTokenProviders()
+//    .AddEntityFrameworkStores<AppDbContext>();
 
-// -
+// - above are identity stuff
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 // Add services to container.

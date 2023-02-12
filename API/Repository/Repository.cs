@@ -47,10 +47,7 @@ public class Repository<T> : IRepository<T> where T : class
     {
         IQueryable<T> query = dbSet;
 
-        if (filter != null)
-        {
-            query = query.Where(filter);
-        }
+        query = query.Where(filter);
 
         if (tracked == false)
         {
