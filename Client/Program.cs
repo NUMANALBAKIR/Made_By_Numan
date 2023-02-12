@@ -10,11 +10,15 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
+// Add services to container.
+builder.Services.AddControllersWithViews();
+
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(connectionString);
 });
+
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddDefaultTokenProviders()
@@ -73,7 +77,7 @@ app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Guest}/{controller=OrderFood}/{action=Index}/{id?}"
+    pattern: "{area=Guest}/{controller=Chart}/{action=Index}/{id?}"
 );
 
 app.Run();
