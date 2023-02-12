@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using Client.Models;
 using Client.Models.OrderFoodDTOs;
+using Client.Models.User;
 using Client.Models.ViewModels;
 using Client.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace Client.Areas.Guest.Controllers;
 
@@ -30,11 +32,16 @@ public class CartController : Controller
     }
 
 
-    // get cartitems list
+    // get cart-items list
     private async Task<List<CartItemDTO>> CartItemsByService()
     {
+        // Get user-identity
+        var claimsIdentity = (ClaimsIdentity)User.Identity;
+        var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+        string appUserId = claim.Value;
+
         List<CartItemDTO> cartItems = new();
-        APIResponse response = await _cartItemService.GetAllAsync<APIResponse>("");
+        APIResponse response = await _cartItemService.GetAllAsync<APIResponse>(appUserId, "");
         if (response != null && response.IsSuccess == true)
         {
             var stringList = Convert.ToString(response.Data);
@@ -65,6 +72,13 @@ public class CartController : Controller
         return View(cartVM);
     }
 
+    // Get user-identity
+    private string GetClaimValue()
+    {
+        var claimsIdentity = (ClaimsIdentity)User.Identity;
+        var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+        return claim.Value;
+    }
 
     [HttpGet]
     public async Task<IActionResult> Summary()
@@ -75,9 +89,10 @@ public class CartController : Controller
             OrderHeader = new()
         };
         // populate orderer's (header) information
-        cartVM.OrderHeader.OrdererName = "numan";
-        cartVM.OrderHeader.DeliveryAddress = "215sher";
-        cartVM.OrderHeader.EmailAddress = "n@gmail.com";
+        //AppUser appUser = get using service
+        cartVM.OrderHeader.OrdererName = cartVM.OrderHeader.AppUser.Name;
+        cartVM.OrderHeader.DeliveryAddress = cartVM.OrderHeader.AppUser.Address;
+        cartVM.OrderHeader.EmailAddress = cartVM.OrderHeader.AppUser.Email;
 
         foreach (var item in cartVM.CartItems)
         {
@@ -141,8 +156,6 @@ public class CartController : Controller
 
         //    }
         //};
-
-
         return View();
     }
 

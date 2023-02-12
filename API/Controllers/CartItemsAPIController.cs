@@ -1,6 +1,7 @@
 ﻿using API.Models;
 using API.Models.OrderFood;
 using API.Models.OrderFoodDTOs;
+using API.Models.User;
 using API.Repository.IRepository;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -27,12 +28,12 @@ public class CartItemsAPIController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [HttpGet]
-    public async Task<ActionResult<APIResponse>> GetCartItems()
+    public async Task<ActionResult<APIResponse>> GetCartItems(string appUserId)
     {
         try
         {
             IEnumerable<CartItem> cartItems;
-            cartItems = await _unitOfWork.CartItemRepo.GetAllAsync(includeProperties: "Food");
+            cartItems = await _unitOfWork.CartItemRepo.GetAllAsync(filter: x => x.AppUserId == appUserId, includeProperties: "Food");
             _response.Data = _mapper.Map<List<CartItemDTO>>(cartItems);
             return Ok(_response);
         }
