@@ -46,7 +46,7 @@ public class BankAccountsAPIController : ControllerBase
 
 
     // GET: api/BankAccountsAPI?appUserId=abc
-    [HttpGet("{appUserId:int}")]
+    [HttpGet("{appUserId}")]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -103,7 +103,7 @@ public class BankAccountsAPIController : ControllerBase
             await _unitOfWork.BankAccountRepo.CreateAsync(bankAccount);
 
             // response
-            _response.Data = _mapper.Map<BankAccountDTO>(bankAccount);
+            //_response.Data = _mapper.Map<BankAccountDTO>(bankAccount);
             return CreatedAtAction(nameof(GetBankAccount), new { appUserId = bankAccount.AppUserId }, bankAccount);
         }
         catch (Exception ex)

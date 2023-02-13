@@ -48,6 +48,7 @@ public class CartItemsAPIController : ControllerBase
 
 
     // Get cart item having this user's this food.
+    // api/CartItemsAPI/2/abc
     [HttpGet("{foodId}/{appUserId}")]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
