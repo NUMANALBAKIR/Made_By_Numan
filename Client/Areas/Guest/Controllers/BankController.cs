@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Client.Models;
+using Client.Models.User;
+using Client.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Elfie.Extensions;
@@ -10,15 +13,14 @@ namespace Client.Areas.Guest.Controllers;
 [Area("Guest"), Authorize]
 public class BankController : Controller
 {
-    //public BankController(IBankAccountService)
-    //{
 
-    //}
     private readonly IEmailSender _emailSender;
+    private readonly IAppUserService _appUserService;
 
-    public BankController(IEmailSender emailSender)
+    public BankController(IEmailSender emailSender, IAppUserService appUserService)
     {
         _emailSender = emailSender;
+        _appUserService = appUserService;
     }
 
 
@@ -31,13 +33,23 @@ public class BankController : Controller
     }
 
 
+    // Get AppUser from Db using NameIdentifier
+    private async Task<AppUserDTO> AppUserByServiceAsync()
+    {
+        AppUserDTO appUser = new();
+        APIResponse response = await _appUserService.GetAsync<APIResponse>(GetNameIdentifier(), "");
+        if (response != null && response.IsSuccess == true)
+        {
+            var stringAppUser = Convert.ToString(response.Data);
+            appUser = JsonConvert.DeserializeObject<AppUserDTO>(stringAppUser);
+        }
+        return appUser;
+    }
+
+
     [HttpGet]
     public IActionResult Index()
     {
-        //    // Get user-identity
-        //    var claimsIdentity = (ClaimsIdentity)User.Identity;
-        //    var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-        //    var appUserId = claim.Value;
 
         //    if (ModelState.IsValid)
         //    {

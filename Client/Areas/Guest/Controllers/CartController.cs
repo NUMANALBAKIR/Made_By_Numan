@@ -30,14 +30,12 @@ public class CartController : Controller
     private readonly IEmailSender _emailSender;
 
     public CartController(
-        //IMapper mapper,
         ICartItemService cartItemService,
         IOrderHeaderService orderHeaderService,
         IOrderDetailService orderDetailService,
         IAppUserService appUserService,
         IEmailSender emailSender)
     {
-        //_mapper = mapper;
         _cartItemService = cartItemService;
         _orderHeaderService = orderHeaderService;
         _orderDetailService = orderDetailService;
