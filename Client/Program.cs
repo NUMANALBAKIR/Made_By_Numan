@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to container.
 builder.Services.AddControllersWithViews();
 
+// needed for identity
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(option =>
 {

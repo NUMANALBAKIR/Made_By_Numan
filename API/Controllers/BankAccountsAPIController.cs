@@ -60,7 +60,7 @@ public class BankAccountsAPIController : ControllerBase
                 _response.ErrorMessage = "id can't be 0.";
                 return BadRequest(_response);
             }
-            BankAccount bankAccount = await _unitOfWork.BankAccountRepo.GetFirstOrDefaultAsync(ba => ba.AccountId == id);
+            BankAccount bankAccount = await _unitOfWork.BankAccountRepo.GetFirstOrDefaultAsync(ba => ba.BankAccountId == id);
 
             if (bankAccount == null)
             {
@@ -109,7 +109,7 @@ public class BankAccountsAPIController : ControllerBase
 
             // response
             _response.Data = _mapper.Map<BankAccountDTO>(bankAccount);
-            return CreatedAtAction("GetBankAccount", new { id = bankAccount.AccountId }, bankAccount);
+            return CreatedAtAction("GetBankAccount", new { id = bankAccount.BankAccountId }, bankAccount);
         }
         catch (Exception ex)
         {
@@ -133,7 +133,7 @@ public class BankAccountsAPIController : ControllerBase
     {
         try
         {
-            if (updateDTO == null || id != updateDTO.AccountId)
+            if (updateDTO == null || id != updateDTO.BankAccountId)
             {
                 _response.IsSuccess = false;
                 _response.ErrorMessage = "id or updateDTO has issue(s).";
@@ -175,7 +175,7 @@ public class BankAccountsAPIController : ControllerBase
                 _response.ErrorMessage = "id can't be 0";
                 return BadRequest(_response);
             }
-            BankAccount bankAccount = await _unitOfWork.BankAccountRepo.GetFirstOrDefaultAsync(ba => ba.AccountId == id);
+            BankAccount bankAccount = await _unitOfWork.BankAccountRepo.GetFirstOrDefaultAsync(ba => ba.BankAccountId == id);
 
             if (bankAccount == null)
             {
