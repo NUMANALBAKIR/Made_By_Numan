@@ -45,7 +45,7 @@ public class BankAccountsAPIController : ControllerBase
     }
 
 
-    // GET: api/BankAccountsAPI?appUserId=abc
+    // GET: api/BankAccountsAPI/abc
     [HttpGet("{appUserId}")]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

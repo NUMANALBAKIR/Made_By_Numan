@@ -39,7 +39,7 @@ public class CartItemService : BaseService, ICartItemService
         return SendAsync<T>(new APIRequest()
         {
             ApiType = Utility.StaticDetails.APIType.GET,
-            Url = _APIUrl + "/api/CartItemsAPI" + "?appUserId=" + appUserId,
+            Url = _APIUrl + "/api/CartItemsAPI?appUserId=" + appUserId,
             Token = token
         });
     }
