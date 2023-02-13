@@ -34,12 +34,13 @@ public class OrderHeaderService : BaseService, IOrderHeaderService
         });
     }
 
-    public Task<T> GetAllAsync<T>(string token)
+    //get allorderheaders of this appuser
+    public Task<T> GetAllAsync<T>(string appUserId, string token)
     {
         return SendAsync<T>(new APIRequest()
         {
             ApiType = Utility.StaticDetails.APIType.GET,
-            Url = _APIUrl + "/api/OrderHeadersAPI",
+            Url = _APIUrl + "/api/OrderHeadersAPI?appUserId=" + appUserId,
             Token = token
         });
     }
