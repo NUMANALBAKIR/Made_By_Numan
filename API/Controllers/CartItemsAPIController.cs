@@ -24,7 +24,8 @@ public class CartItemsAPIController : ControllerBase
     }
 
 
-    // GET: api/CartItemsAPI
+    // get all cartitems of this user
+    // GET: api/CartItemsAPI?appUserId=abc
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [HttpGet]
@@ -33,7 +34,7 @@ public class CartItemsAPIController : ControllerBase
         try
         {
             IEnumerable<CartItem> cartItems;
-            cartItems = await _unitOfWork.CartItemRepo.GetAllAsync(filter: x => x.AppUserId.Equals(appUserId), includeProperties: "Food,AppUser");
+            cartItems = await _unitOfWork.CartItemRepo.GetAllAsync(filter: x => x.AppUserId == appUserId, includeProperties: "Food,AppUser");
             _response.Data = _mapper.Map<List<CartItemDTO>>(cartItems);
             return Ok(_response);
         }
@@ -47,7 +48,7 @@ public class CartItemsAPIController : ControllerBase
 
 
     // Get cart item having this user's this food.
-    [HttpGet("{foodId:int}")]
+    [HttpGet("{foodId}/{appUserId}")]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -83,7 +84,6 @@ public class CartItemsAPIController : ControllerBase
 
 
     // POST: api/CartItemsAPI
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     //[Authorize(Roles = "Admin")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -106,13 +106,12 @@ public class CartItemsAPIController : ControllerBase
                 _response.ErrorMessage = "createDTO is null";
                 return BadRequest(_response);
             }
-            CartItem CartItem = _mapper.Map<CartItem>(createDTO);
-            await _unitOfWork.CartItemRepo.CreateAsync(CartItem);
+            CartItem cartItem = _mapper.Map<CartItem>(createDTO);
+            await _unitOfWork.CartItemRepo.CreateAsync(cartItem);
 
             // response
-            _response.Data = _mapper.Map<CartItemDTO>(CartItem);
-            return Ok(_response);
-            //return CreatedAtAction("GetCartItem", new { id = CartItem.CartItemId }, CartItem);
+            _response.Data = _mapper.Map<CartItemDTO>(cartItem);
+            return CreatedAtAction(nameof(GetCartItem), new { foodId = cartItem.FoodId, appUserId = cartItem.AppUserId }, cartItem);
         }
         catch (Exception ex)
         {

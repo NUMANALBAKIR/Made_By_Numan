@@ -115,7 +115,7 @@ public class FoodsAPIController : ControllerBase
 
             // response
             _response.Data = _mapper.Map<FoodDTO>(food);
-            return CreatedAtAction("GetFood", new { id = food.FoodId }, food);
+            return CreatedAtAction(nameof(GetFood), new { id = food.FoodId }, food);
         }
         catch (Exception ex)
         {
