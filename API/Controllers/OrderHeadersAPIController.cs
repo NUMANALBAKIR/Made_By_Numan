@@ -23,16 +23,17 @@ public class OrderHeadersAPIController : ControllerBase
     }
 
 
-    // GET: api/OrderHeadersAPI
+    // get all orderheaders of this appUser
+    // GET: api/OrderHeadersAPI?appUserId=abc
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpGet]
-    public async Task<ActionResult<APIResponse>> GetOrderHeaders()
+    [HttpGet()]
+    public async Task<ActionResult<APIResponse>> GetOrderHeaders(string appUserId)
     {
         try
         {
             IEnumerable<OrderHeader> orderHeaders;
-            orderHeaders = await _unitOfWork.OrderHeaderRepo.GetAllAsync();
+            orderHeaders = await _unitOfWork.OrderHeaderRepo.GetAllAsync(filter: x => x.AppUserId == appUserId, includeProperties: "AppUser");
             _response.Data = _mapper.Map<List<OrderHeaderDTO>>(orderHeaders);
             return Ok(_response);
         }
