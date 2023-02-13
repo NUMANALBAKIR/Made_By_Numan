@@ -1,6 +1,7 @@
 ﻿using API.Models;
 using API.Models.Bank;
 using API.Models.BankDTOs;
+using API.Models.User;
 using API.Repository.IRepository;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,7 @@ public class BankAccountsAPIController : ControllerBase
         try
         {
             IEnumerable<BankAccount> bankAccounts;
-            bankAccounts = await _unitOfWork.BankAccountRepo.GetAllAsync();
+            bankAccounts = await _unitOfWork.BankAccountRepo.GetAllAsync(includeProperties: "AppUser");
             _response.Data = _mapper.Map<List<BankAccountDTO>>(bankAccounts);
             return Ok(_response);
         }
@@ -44,28 +45,28 @@ public class BankAccountsAPIController : ControllerBase
     }
 
 
-    // GET: api/BankAccountsAPI/5
-    [HttpGet("{id:int}")]
+    // GET: api/BankAccountsAPI?appUserId=abc
+    [HttpGet("{appUserId:int}")]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<APIResponse>> GetBankAccount(int id)
+    public async Task<ActionResult<APIResponse>> GetBankAccount(string appUserId)
     {
         try
         {
-            if (id == 0)
+            if (appUserId == "" || appUserId == null)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessage = "id can't be 0.";
+                _response.ErrorMessage = "id can't be empty.";
                 return BadRequest(_response);
             }
-            BankAccount bankAccount = await _unitOfWork.BankAccountRepo.GetFirstOrDefaultAsync(ba => ba.BankAccountId == id);
+            BankAccount bankAccount = await _unitOfWork.BankAccountRepo.GetFirstOrDefaultAsync(filter: x => x.AppUserId == appUserId, includeProperties: "AppUser");
 
             if (bankAccount == null)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessage = $"No BankAccount with id= {id} exists.";
+                _response.ErrorMessage = $"No BankAccount with AppUser id= {appUserId} exists.";
                 return NotFound(_response);
             }
             _response.Data = _mapper.Map<BankAccountDTO>(bankAccount);
@@ -81,7 +82,6 @@ public class BankAccountsAPIController : ControllerBase
 
 
     // POST: api/BankAccountsAPI
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     //[Authorize(Roles = "Admin")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -93,11 +93,6 @@ public class BankAccountsAPIController : ControllerBase
     {
         try
         {
-            if (await _unitOfWork.BankAccountRepo.GetFirstOrDefaultAsync(ba => ba.HolderName.ToLower() == createDTO.HolderName.ToLower()) != null)
-            {
-                ModelState.AddModelError("ErrorMessages", "BankAccount already Exists!");
-                return BadRequest(ModelState);
-            }
             if (createDTO == null)
             {
                 _response.IsSuccess = false;
@@ -109,7 +104,7 @@ public class BankAccountsAPIController : ControllerBase
 
             // response
             _response.Data = _mapper.Map<BankAccountDTO>(bankAccount);
-            return CreatedAtAction("GetBankAccount", new { id = bankAccount.BankAccountId }, bankAccount);
+            return CreatedAtAction(nameof(GetBankAccount), new { appUserId = bankAccount.AppUserId }, bankAccount);
         }
         catch (Exception ex)
         {
@@ -121,19 +116,18 @@ public class BankAccountsAPIController : ControllerBase
 
 
     // PUT: api/BankAccountsAPI/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     //[Authorize(Roles = "Admin")]
-    [HttpPut("{id:int}")]
+    [HttpPut("{bankAccountId:int}")]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<APIResponse>> UpdateBankAccount(int id, [FromBody] BankAccountUpdateDTO updateDTO)
+    public async Task<ActionResult<APIResponse>> UpdateBankAccount(int bankAccountId, [FromBody] BankAccountUpdateDTO updateDTO)
     {
         try
         {
-            if (updateDTO == null || id != updateDTO.BankAccountId)
+            if (updateDTO == null || bankAccountId != updateDTO.BankAccountId)
             {
                 _response.IsSuccess = false;
                 _response.ErrorMessage = "id or updateDTO has issue(s).";
@@ -164,23 +158,23 @@ public class BankAccountsAPIController : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [HttpDelete("{id:int}", Name = "DeleteBankAccount")]
-    public async Task<ActionResult<APIResponse>> DeleteBankAccount(int id)
+    [HttpDelete("{bankAccountId:int}", Name = "DeleteBankAccount")]
+    public async Task<ActionResult<APIResponse>> DeleteBankAccount(int bankAccountId)
     {
         try
         {
-            if (id == 0)
+            if (bankAccountId == 0)
             {
                 _response.IsSuccess = false;
                 _response.ErrorMessage = "id can't be 0";
                 return BadRequest(_response);
             }
-            BankAccount bankAccount = await _unitOfWork.BankAccountRepo.GetFirstOrDefaultAsync(ba => ba.BankAccountId == id);
+            BankAccount bankAccount = await _unitOfWork.BankAccountRepo.GetFirstOrDefaultAsync(x => x.BankAccountId == bankAccountId);
 
             if (bankAccount == null)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessage = $"No bankAccount with id= {id} exists.";
+                _response.ErrorMessage = $"No bankAccount with id= {bankAccountId} exists.";
                 return NotFound(_response);
             }
             await _unitOfWork.BankAccountRepo.RemoveAsync(bankAccount);
