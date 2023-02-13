@@ -1,0 +1,40 @@
+﻿@model Client.Models.OrderFoodDTOs.EmailUsDTO
+
+@{
+    Layout = "~/Views/Shared/_Layout_OrderFood.cshtml";
+    <style>
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            white-space: nowrap;
+        }
+    </style>
+}
+
+<br />
+
+<h4>Email Sent. Thank you for contacting us.</h4>
+
+<h4 class="text-danger">A copy of the email has been sent to your address: <span style="color:black;">@Model.Email</span></h4>
+
+<br />
+
+<h4>
+    Message Details:
+</h4> 
+
+<p>
+    Name:    @Model.Name
+</p>
+<p>
+    Email:   @Model.Email
+</p>
+<p>
+    Subject: @Model.Subject
+</p>
+<p>
+    Message: @Model.Message
+</p>
+
+
