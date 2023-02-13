@@ -1616,7 +1616,7 @@ section {
         padding: 10px 12px;
     }
 
-    .contact .php-email-form button[type=submit] {
+/*    .contact .php-email-form button[type=submit] {
         background: var(--color-primary);
         border: 0;
         padding: 12px 40px;
@@ -1628,7 +1628,7 @@ section {
         .contact .php-email-form button[type=submit]:hover {
             background: #ec2727;
         }
-
+*/
 @keyframes animate-loading {
     0% {
         transform: rotate(0deg);
