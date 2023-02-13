@@ -6,8 +6,10 @@ using Client.Models.ViewModels;
 using Client.Services;
 using Client.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.CodeAnalysis.Elfie.Extensions;
 using Newtonsoft.Json;
 using System.Security.Claims;
 
@@ -18,24 +20,29 @@ public class CartController : Controller
 {
     [BindProperty]
     public CartVM cartVM { get; set; }
-    //private readonly IMapper _mapper;
+    [BindProperty]
+    public OrderHeaderDTO OrderHeaderDTO { get; set; }
+
     private readonly ICartItemService _cartItemService;
     private readonly IOrderHeaderService _orderHeaderService;
     private readonly IOrderDetailService _orderDetailService;
     private readonly IAppUserService _appUserService;
+    private readonly IEmailSender _emailSender;
 
     public CartController(
         //IMapper mapper,
         ICartItemService cartItemService,
         IOrderHeaderService orderHeaderService,
         IOrderDetailService orderDetailService,
-        IAppUserService appUserService)
+        IAppUserService appUserService,
+        IEmailSender emailSender)
     {
         //_mapper = mapper;
         _cartItemService = cartItemService;
         _orderHeaderService = orderHeaderService;
         _orderDetailService = orderDetailService;
         _appUserService = appUserService;
+        _emailSender = emailSender;
     }
 
 
@@ -166,21 +173,39 @@ public class CartController : Controller
         // clear cart
         await ClearCart(cartItems);
 
+        sendEmailMessage(headerDto);
+
         //return RedirectToAction(nameof(OrderConfirmation));
-        return View(nameof(OrderConfirmation), cartVM);
+        return View(nameof(OrderConfirmation), headerDto);
     }
 
 
-    public async Task<IActionResult> OrderConfirmation()
+    // OrderConfirmation page
+    public IActionResult OrderConfirmation()
     {
-        //CartVM cartVM = new()
-        //{
-        //    OrderHeader orderHeader = new()
-        //    {
+        //var appUser = AppUserByServiceAsync();
 
-        //    }
-        //};
-        return View();
+        //var orderHeaderDTO = _orderHeaderService. 
+
+        // for bank
+        OrderHeaderDTO confirmationHeader = new()
+        {
+            AppUserId = OrderHeaderDTO.AppUserId,
+            OrderTotal = OrderHeaderDTO.OrderTotal,
+            TrackingNumber = OrderHeaderDTO.TrackingNumber,
+            OrderDate = OrderHeaderDTO.OrderDate,
+            OrdererName = OrderHeaderDTO.OrdererName,
+            DeliveryAddress = OrderHeaderDTO.DeliveryAddress,
+            EmailAddress = OrderHeaderDTO.EmailAddress
+        };
+        return View(confirmationHeader);
+    }
+
+
+    private void sendEmailMessage(OrderHeaderDTO confirmationHeader)
+    {
+        string emailBody = $"<h2>An Order of total <u>{confirmationHeader.OrderTotal.ToString("c")}</u> placed for your address <u>{confirmationHeader.DeliveryAddress}</u> at <u>{DateTime.Now.ToShortTimeString()}</u>.</h2>";
+        _emailSender.SendEmailAsync(confirmationHeader.EmailAddress, "Food Order placed.", emailBody);
     }
 
 

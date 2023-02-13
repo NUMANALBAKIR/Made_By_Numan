@@ -1,4 +1,4 @@
-﻿@model Client.Models.ViewModels.CartVM
+﻿@model Client.Models.OrderFoodDTOs.OrderHeaderDTO
 
 @{
     Layout = "~/Views/Shared/_Layout_OrderFood.cshtml";
@@ -19,13 +19,13 @@
     <div class="col-12 text-center">
         <br />
         Your Tracking Number is: <span style="color:maroon">
-            a-b-cd
-            @*@Model.OrderHeader.TrackingNumber</span>*@
+            @Model.TrackingNumber</span>
             <br />
     </div>
 
     <div class="col-12 text-center">
-        <p class="pt-4">Confirmation email sent to @*<strong>@Model.OrderHeader.EmailAddress</strong>*@ </p>
+        <p class="pt-4">Confirmation email sent to <strong>@Model.EmailAddress</strong> </p>
+        <p class="pt-2"><u>Please check email.</u></p>
     </div>
 
 

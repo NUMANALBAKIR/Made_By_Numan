@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Elfie.Extensions;
 using Newtonsoft.Json;
 using System.Security.Claims;
 
@@ -12,6 +14,12 @@ public class BankController : Controller
     //{
 
     //}
+    private readonly IEmailSender _emailSender;
+
+    public BankController(IEmailSender emailSender)
+    {
+        _emailSender = emailSender;
+    }
 
 
     // Get user-identity

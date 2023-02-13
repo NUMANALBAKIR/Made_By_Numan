@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Client.Models.OrderFoodDTOs.FoodDTO>
+﻿@model Client.Models.ViewModels.YummyVM
 
 @{
     Layout = "~/Views/Shared/_Layout_OrderFood.cshtml";
@@ -208,7 +208,7 @@
                     <h3>Starters</h3>
                 </div>
                 <div class="row gy-5">
-                    @foreach (var food in Model)
+                    @foreach (var food in Model.FoodList)
                     {
                         if (food.Category.Name.ToLower().Equals("starters".ToLower()))
                         {
@@ -237,7 +237,7 @@
                     <h3>Breakfast</h3>
                 </div>
                 <div class="row gy-5">
-                    @foreach (var food in Model)
+                    @foreach (var food in Model.FoodList)
                     {
                         if (food.Category.Name.ToLower().Equals("breakfast".ToLower()))
                         {
@@ -265,7 +265,7 @@
                     <h3>Lunch</h3>
                 </div>
                 <div class="row gy-5">
-                    @foreach (var food in Model)
+                    @foreach (var food in Model.FoodList)
                     {
                         if (food.Category.Name.ToLower().Equals("lunch".ToLower()))
                         {
@@ -293,7 +293,7 @@
                     <h3>Dinner</h3>
                 </div>
                 <div class="row gy-5">
-                    @foreach (var food in Model)
+                    @foreach (var food in Model.FoodList)
                     {
                         if (food.Category.Name.ToLower().Equals("dinner".ToLower()))
                         {
@@ -473,31 +473,34 @@
 
  
         <!-- Email section -->
-        <form action="forms/contact.php" method="post" role="form" class="php-email-form p-3 p-md-4">
+        <form asp-controller="OrderFood" asp-action="EmailUs" method="post" role="form" class=" p-3 p-md-4">
             
-            <h4 id="emailus">EMAIL US:</h4>
+            <h4 class="pt-3" id="emailus">EMAIL US:</h4>
             
             <div class="row" >
                 <div class="col-xl-6 form-group">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                    <input asp-for="EmailUsDTO.Name"class="form-control" id="name" placeholder="Your Name" required>
                 </div>
                 <div class="col-xl-6 form-group">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" required>
+                    <input asp-for="EmailUsDTO.Email" class="form-control" id="email" placeholder="Email Address" required>
                 </div>
             </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+            <div class="form-group pt-2">
+                <input asp-for="EmailUsDTO.Subject" class="form-control" id="subject" placeholder="Subject" required>
             </div>
-            <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+            <div class="form-group pt-2">
+                <textarea asp-for="EmailUsDTO.Message" class="form-control" rows="5" placeholder="Message" required></textarea>
             </div>
-            <div class="my-3">
+
+@*            <div class="my-3">
                 <div class="loading">Loading</div>
                 <div class="error-message"></div>
                 <div class="sent-message">Your email has been sent. Thank you!</div>
             </div>
-
-            <div class="text-center"><button type="submit">Send Email</button></div>
+*@
+            <div class="text-center pt-3">
+                <button type="submit">Send Email</button>
+            </div>
         </form> 
     <!--End Email Form -->
     </div>

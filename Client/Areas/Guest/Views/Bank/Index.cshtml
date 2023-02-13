@@ -1,17 +1,20 @@
 ﻿@model Client.Models.Bank.BankAccount
+@inject IHttpContextAccessor httpContext
 
 <div class="container-fluid p-2 text-black mt-2 mx-1 d-flex" style="border: solid 1px;">
 
     <div class="col-4">
         <h3>
-            <u>Account User</u><br />
-            Numan
+            <u>Account User:</u><br />
+            <b>
+                @httpContext.HttpContext.User.Identity.Name
+            </b>
         </h3>
     </div>
 
     <div class="col-8">
         <h3><i class="bi bi-bank2 text-secondary"></i>&nbsp;&nbsp;Bank-of-Numan</h3>
-        <h5>( <b>Balances saved in Persistence </b>)</h5>
+        <h5>[ <b>Balances saved in Persistence </b>]</h5>
     </div>
 </div>
 

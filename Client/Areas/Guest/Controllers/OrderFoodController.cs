@@ -1,7 +1,9 @@
 ﻿using Client.Models;
 using Client.Models.OrderFoodDTOs;
+using Client.Models.ViewModels;
 using Client.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Security.Claims;
@@ -13,11 +15,13 @@ public class OrderFoodController : Controller
 {
     private readonly IFoodService _foodService;
     private readonly ICartItemService _cartItemService;
+    private readonly IEmailSender _emailSender;
 
-    public OrderFoodController(IFoodService foodService, ICartItemService cartItemService)
+    public OrderFoodController(IFoodService foodService, ICartItemService cartItemService, IEmailSender emailSender)
     {
         _foodService = foodService;
         _cartItemService = cartItemService;
+        _emailSender = emailSender;
     }
 
 
@@ -41,7 +45,13 @@ public class OrderFoodController : Controller
             var stringList = Convert.ToString(response.Data);
             foodList = JsonConvert.DeserializeObject<List<FoodDTO>>(stringList);
         }
-        return View(foodList);
+
+        YummyVM yummyVM = new()
+        {
+            FoodList = foodList,
+            EmailUsDTO = new()
+        };
+        return View(yummyVM);
     }
 
 
@@ -143,9 +153,14 @@ public class OrderFoodController : Controller
     }
 
 
-    public async Task<IActionResult> EmailUs()
+    public IActionResult EmailUs(EmailUsDTO emailUsDTO)
     {
-        return View();
+        string emailBody = $"<h4>\r\n    Email Message Details:\r\n</h4> \r\n\r\n<p>\r\n    Name:    {emailUsDTO.Name}\r\n</p>\r\n<p>\r\n    Email:   {emailUsDTO.Email}\r\n</p>\r\n<p>\r\n    Subject: {emailUsDTO.Subject}\r\n</p>\r\n<p>\r\n    Message: {emailUsDTO.Message}\r\n</p>";
+
+        _emailSender.SendEmailAsync(emailUsDTO.Email, "Copy of the email you sent.", emailBody);
+        //_emailSender.SendEmailAsync("numan.al.developer@gmail.com", "Copy of the email you sent.", emailBody);
+
+        return View(emailUsDTO);
     }
 
 }
