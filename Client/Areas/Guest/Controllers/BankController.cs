@@ -50,6 +50,10 @@ public class BankController : Controller
     [HttpGet]
     public IActionResult Index()
     {
+        // use nameidentifer to fetch bankaccount
+        // populate model using bankaccount info
+        // return to view
+
 
         //    if (ModelState.IsValid)
         //    {

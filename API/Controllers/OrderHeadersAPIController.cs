@@ -27,7 +27,7 @@ public class OrderHeadersAPIController : ControllerBase
     // GET: api/OrderHeadersAPI?appUserId=abc
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpGet()]
+    [HttpGet]
     public async Task<ActionResult<APIResponse>> GetOrderHeaders(string appUserId)
     {
         try
