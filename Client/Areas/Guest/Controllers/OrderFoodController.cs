@@ -16,17 +16,22 @@ public class OrderFoodController : Controller
     private readonly IFoodService _foodService;
     private readonly ICartItemService _cartItemService;
     private readonly IEmailSender _emailSender;
+    private readonly IOrderHeaderService _orderHeaderService;
 
-    public OrderFoodController(IFoodService foodService, ICartItemService cartItemService, IEmailSender emailSender)
+    public OrderFoodController(IFoodService foodService,
+        ICartItemService cartItemService,
+        IEmailSender emailSender,
+        IOrderHeaderService orderHeaderService)
     {
         _foodService = foodService;
         _cartItemService = cartItemService;
         _emailSender = emailSender;
+        _orderHeaderService = orderHeaderService;
     }
 
 
     // Get user-identity
-    private string GetNameIdentifier()
+    private string GetNameIdentifierClaim()
     {
         var claimsIdentity = (ClaimsIdentity)User.Identity;
         var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
@@ -84,7 +89,7 @@ public class OrderFoodController : Controller
     [HttpPost, Authorize, ValidateAntiForgeryToken]
     public async Task<IActionResult> CartItemDetails(CartItemDTO cartItemDTO)
     {
-        cartItemDTO.AppUserId = GetNameIdentifier();
+        cartItemDTO.AppUserId = GetNameIdentifierClaim();
 
         if (ModelState.IsValid)
         {
@@ -161,6 +166,20 @@ public class OrderFoodController : Controller
         //_emailSender.SendEmailAsync("numan.al.developer@gmail.com", "Copy of the email you sent.", emailBody);
 
         return View(emailUsDTO);
+    }
+
+
+    public async Task<IActionResult> OrderHistory()
+    {
+        // get all orderheaders of this user using appUserId.
+        List<OrderHeaderDTO> orderHeaders = new();
+        APIResponse response = await _orderHeaderService.GetAllAsync<APIResponse>(GetNameIdentifierClaim(), "");
+        if (response != null && response.IsSuccess == true)
+        {
+            var stringList = Convert.ToString(response.Data);
+            orderHeaders = JsonConvert.DeserializeObject<List<OrderHeaderDTO>>(stringList);
+        }
+        return View(orderHeaders);
     }
 
 }
