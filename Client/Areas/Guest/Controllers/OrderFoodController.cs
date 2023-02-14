@@ -160,7 +160,7 @@ public class OrderFoodController : Controller
 
     public IActionResult EmailUs(EmailUsDTO emailUsDTO)
     {
-        string emailBody = $"<h4>\r\n    Email Message Details:\r\n</h4> \r\n\r\n<p>\r\n    Name:    {emailUsDTO.Name}\r\n</p>\r\n<p>\r\n    Email:   {emailUsDTO.Email}\r\n</p>\r\n<p>\r\n    Subject: {emailUsDTO.Subject}\r\n</p>\r\n<p>\r\n    Message: {emailUsDTO.Message}\r\n</p>";
+        string emailBody = $"<h4>\r\n    Copy of the Email you sent:\r\n</h4> \r\n\r\n<p>\r\n    Name:    {emailUsDTO.Name}\r\n</p>\r\n<p>\r\n    Email:   {emailUsDTO.Email}\r\n</p>\r\n<p>\r\n    Subject: {emailUsDTO.Subject}\r\n</p>\r\n<p>\r\n    Message: {emailUsDTO.Message}\r\n</p>";
 
         _emailSender.SendEmailAsync(emailUsDTO.Email, "Copy of the email you sent.", emailBody);
         //_emailSender.SendEmailAsync("numan.al.developer@gmail.com", "Copy of the email you sent.", emailBody);
