@@ -139,7 +139,7 @@
                                 <input hidden asp-for="HolderName" />
 
                                 <label asp-for="TransactionAmount" class="form-label">Amount:</label>
-                                $<input asp-for="TransactionAmount" class="form-control" id="amount">
+                                $<input asp-for="TransactionAmount" class="form-control" style="width:15%;" id="amount">
 
                                 <button type="submit" asp-action="WithDrawFromCheckings" class="btn btn-primary">Withdraw</button>
                                 <span asp-validation-for="TransactionAmount" class="text-danger"></span>
