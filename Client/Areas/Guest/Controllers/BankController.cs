@@ -45,15 +45,21 @@ private string GetNameIdentifierClaim()
 
 
 // Get AppUser info using NameIdentifier claim
-var stringAppUserFromDb = Convert.ToString(appUserResponse.Data);
-appUserFromDb = JsonConvert.DeserializeObject<AppUserDTO>(stringAppUserFromDb);
-        }
-        return appUserFromDb;
+private async Task<AppUserDTO> AppUserByService()
+{
+    AppUserDTO appUserFromDb = new();
+    APIResponse appUserResponse = await _appUserService.GetAsync<APIResponse>(GetNameIdentifierClaim(), "");
+    if (appUserResponse != null && appUserResponse.IsSuccess == true)
+    {
+        var stringAppUserFromDb = Convert.ToString(appUserResponse.Data);
+        appUserFromDb = JsonConvert.DeserializeObject<AppUserDTO>(stringAppUserFromDb);
     }
+    return appUserFromDb;
+}
 
 
-    // fetch this appUser's bankaccount
-    private async Task<BankAccountDTO> BankAccountByService()
+// fetch this appUser's bankaccount
+private async Task<BankAccountDTO> BankAccountByService()
 {
     BankAccountDTO bankAccountFromDb = new();
     APIResponse bankAccountResponse = await _bankAccountService.GetAsync<APIResponse>(GetNameIdentifierClaim(), "");
