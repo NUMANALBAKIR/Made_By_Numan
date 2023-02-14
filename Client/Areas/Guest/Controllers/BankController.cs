@@ -76,8 +76,8 @@ public class BankController : Controller
             {
                 HolderName = AppUserByService().Result.Name,
                 AppUserId = GetNameIdentifierClaim(),
-                CheckingsBalance = 12,
-                SavingsBalance = 14,
+                CheckingsBalance = 0,
+                SavingsBalance = 0,
                 TransactionAmount = 0
             };
             // add to db and redirect.

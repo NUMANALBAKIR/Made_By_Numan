@@ -1,13 +1,12 @@
 ﻿@model Client.Models.BankDTOs.BankAccountDTO
-@inject IHttpContextAccessor httpContext
 
 <div class="container-fluid p-2 text-black mt-2 mx-1 d-flex" style="border: solid 1px;">
 
     <div class="col-4">
         <h3>
-            <u>Account User:</u><br />
-            <b>
-                @httpContext.HttpContext.User.Identity.Name
+            <u>Account Holder:</u><br />
+            <b style="color:maroon;">
+                @Model.HolderName
             </b>
         </h3>
     </div>
