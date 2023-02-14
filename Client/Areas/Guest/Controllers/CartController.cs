@@ -111,9 +111,16 @@ public class CartController : Controller
     }
 
 
-    // Order Summary with items of this user.
+    // get bank account using service.
+    // check if balance available-- do in summary post
+    // deduct from bank
+    // update bank account
+    // set tempdata
+
+    // Order Summary with items of this user. ready to press place order button.
     public async Task<IActionResult> Summary()
     {
+        // populate cart items list
         cartVM = new()
         {
             CartItems = await CartItemsByServiceAsync(),
@@ -137,11 +144,26 @@ public class CartController : Controller
         {
             cartVM.OrderHeaderDTO.OrderTotal += (item.CurrentPrice * item.Count);
         }
+
+        // Balance calculations begin.
+        BankAccountDTO bankAccountDTO = await BankAccountDTOByService();
+
+        // if insufficient balance
+        if (bankAccountDTO.CheckingsBalance >= cartVM.OrderHeaderDTO.OrderTotal)
+        {
+            TempData["successBalance"] = bankAccountDTO.CheckingsBalance;
+        }
+        // if sufficient balance
+        else
+        {
+            TempData["errorBalance"] = bankAccountDTO.CheckingsBalance;
+        }
+
         return View(cartVM);
     }
 
 
-    // Order placed in summary page.
+    // Order place button pressed in summary page.
     [HttpPost, ActionName("Summary"), ValidateAntiForgeryToken]
     public async Task<IActionResult> SummaryPOST()
     {
@@ -182,57 +204,49 @@ public class CartController : Controller
             await _orderDetailService.CreateAsync<APIResponse>(detailCreateDTO, "");
         }
 
-        // clear cart
         await ClearCart(cartItems);
 
-        sendEmailMessage(headerDto);
+        SendEmailMessage(headerDto);
 
         //return View(nameof(OrderConfirmation), headerDto);
         return RedirectToAction(nameof(OrderConfirmation), new { orderHeaderid = headerDto.OrderHeaderId });
     }
 
 
+
+
     // Order Confirmation page
     public async Task<IActionResult> OrderConfirmation(int orderHeaderid)
     {
-        //// get order information
-        //OrderHeaderDTO headerDto = new();
-        //APIResponse response = await _orderHeaderService.GetAsync<APIResponse>(orderHeaderid, "");
-        //if (response != null && response.IsSuccess == true)
-        //{
-        //    var stringHeader = Convert.ToString(response.Data);
-        //    headerDto = JsonConvert.DeserializeObject<OrderHeaderDTO>(stringHeader);
-        //}
-        //// deduct from bank
-        //// get bank account using service.
-        //BankAccountDTO bankAccountFromDb = new();
-        //APIResponse bankAccountResponse = await _bankAccountService.GetAsync<APIResponse>(GetNameIdentifierClaim(), "");
-        //if (bankAccountResponse != null && bankAccountResponse.IsSuccess == true)
-        //{
-        //    var stringBankAccountFromDb = Convert.ToString(bankAccountResponse.Data);
-        //    bankAccountFromDb = JsonConvert.DeserializeObject<BankAccountDTO>(stringBankAccountFromDb);
-        //}
-
-        ////-----// check if balance available-- do in summary post
-
-        //// update bank account
-        //bankAccountFromDb.CheckingsBalance -= bankAccountFromDb.TransactionAmount;
-        //bankAccountFromDb.SavingsBalance += bankAccountFromDb.TransactionAmount;
-        //BankAccountUpdateDTO bankAccountUpdateDTO = _mapper.Map<BankAccountUpdateDTO>(bankAccount);
-        //APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
-
-
-        //// add tempdata for bank
-        //TempData["success"] = $"Your order of ${headerDto.OrderTotal} has been placed.";
-
-
-        return View();
-
-        //return View(headerDto);
+        // get order info 
+        OrderHeaderDTO headerDto = new();
+        APIResponse response = await _orderHeaderService.GetAsync<APIResponse>(orderHeaderid, "");
+        if (response != null && response.IsSuccess == true)
+        {
+            var stringHeader = Convert.ToString(response.Data);
+            headerDto = JsonConvert.DeserializeObject<OrderHeaderDTO>(stringHeader);
+        }
+        // add tempdata for bank
+        TempData["success"] = $"Your order of ${headerDto.OrderTotal} has been placed.";
+        return View(headerDto);
     }
 
 
-    private void sendEmailMessage(OrderHeaderDTO confirmationHeader)
+    // get this user's bank account details
+    public async Task<BankAccountDTO> BankAccountDTOByService()
+    {
+        BankAccountDTO bankAccountFromDb = new();
+        APIResponse bankAccountResponse = await _bankAccountService.GetAsync<APIResponse>(GetNameIdentifierClaim(), "");
+        if (bankAccountResponse != null && bankAccountResponse.IsSuccess == true)
+        {
+            var stringBankAccountFromDb = Convert.ToString(bankAccountResponse.Data);
+            bankAccountFromDb = JsonConvert.DeserializeObject<BankAccountDTO>(stringBankAccountFromDb);
+        }
+        return bankAccountFromDb;
+    }
+
+
+    private void SendEmailMessage(OrderHeaderDTO confirmationHeader)
     {
         string emailBody = $"<h2>A Food Order of total <u>{confirmationHeader.OrderTotal.ToString("c")}</u> has been placed for your address <u>{confirmationHeader.DeliveryAddress}</u> at <u>{DateTime.Now.ToShortTimeString()}</u>.</h2>";
         _emailSender.SendEmailAsync(confirmationHeader.EmailAddress, "Food Order placed.", emailBody);
