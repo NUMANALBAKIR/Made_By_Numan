@@ -5,7 +5,7 @@
 
     <style>
         .footer {
-            position: absolute;
+            position: page;
             bottom: 0;
             width: 100%;
             white-space: nowrap;
@@ -133,6 +133,12 @@
 @section Scripts{
     <script>
         let btn = document.getElementById('orderButton');
+        let checkingsBalance = @TempData["errorBalance"]; 
+        let orderTotal = @Model.OrderHeaderDTO.OrderTotal;
+
+        if (checkingsBalance < orderTotal){
+            btn.style.visibility = 'hidden';
+        }
 
         btn.addEventListener('click', () => {
             btn.style.display = 'none';
