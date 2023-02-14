@@ -20,13 +20,13 @@
         @if (TempData["successBalance"] != null)
         {
         <div style="font-size:18px;" class="alert alert-primary" role="alert">
-                Your Bank-of-Numan <b>Checkings balance: @TempData["successBalance"]</b>. You <b>can</b> place order.
+                Your Bank-of-Numan <b>Checkings balance: $@TempData["successBalance"]</b>. You <b>can</b> place order.
         </div>
         }
         else if (TempData["errorBalance"] != null)
         {
         <div style="font-size:18px;" class="alert alert-warning" role="alert">
-                Your Bank-of-Numan <b>Checkings balance: @TempData["errorBalance"]</b>. You <b>can not</b> place order.
+                Your Bank-of-Numan <b>Checkings balance: $@TempData["errorBalance"]</b>. You <b>can not</b> place order.
         </div>
         }
 
@@ -133,15 +133,16 @@
 @section Scripts{
     <script>
         let btn = document.getElementById('orderButton');
-        let checkingsBalance = @TempData["errorBalance"]; 
+        let checkingsBalance =  @TempData["errorBalance"];
         let orderTotal = @Model.OrderHeaderDTO.OrderTotal;
 
         if (checkingsBalance < orderTotal){
             btn.style.visibility = 'hidden';
         }
 
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', () => 
+        {
             btn.style.display = 'none';
-        });
+        } );
     </script>
 }
