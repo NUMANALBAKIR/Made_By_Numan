@@ -104,7 +104,7 @@ public class BankAccountsAPIController : ControllerBase
 
             // response
             //_response.Data = _mapper.Map<BankAccountDTO>(bankAccount);
-            return CreatedAtAction(nameof(GetBankAccount), new { appUserId = bankAccount.AppUserId }, bankAccount);
+            return CreatedAtAction(nameof(GetBankAccount), new { appUserId = bankAccount.AppUserId }, new APIResponse { Data = bankAccount });
         }
         catch (Exception ex)
         {
