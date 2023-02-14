@@ -22,6 +22,9 @@ public class BankController : Controller
     [BindProperty]
     public BankAccountDTO bankAccount { get; set; }
 
+    [BindProperty]
+    public BankAccountDTO bankAccount { get; set; }
+
     public BankController(IMapper mapper, IAppUserService appUserService, IBankAccountService bankAccountService)
     public BankController(IEmailSender emailSender, IAppUserService appUserService)
         _mapper = mapper;
