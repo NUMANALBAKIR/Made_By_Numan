@@ -111,12 +111,6 @@ public class CartController : Controller
     }
 
 
-    // get bank account using service.
-    // check if balance available-- do in summary post
-    // deduct from bank
-    // update bank account
-    // set tempdata
-
     // Order Summary with items of this user. ready to press place order button.
     public async Task<IActionResult> Summary()
     {
@@ -146,7 +140,7 @@ public class CartController : Controller
         }
 
         // Balance calculations begin.
-        BankAccountDTO bankAccountDTO = await BankAccountDTOByService();
+        BankAccountDTO bankAccountDTO = await BankAccountByService();
 
         // if insufficient balance
         if (bankAccountDTO.CheckingsBalance >= cartVM.OrderHeaderDTO.OrderTotal)
@@ -204,6 +198,13 @@ public class CartController : Controller
             await _orderDetailService.CreateAsync<APIResponse>(detailCreateDTO, "");
         }
 
+        // get bank account info, deduct amount, update account.
+        BankAccountDTO bankAccount = await BankAccountByService();
+        bankAccount.CheckingsBalance -= headerDto.OrderTotal;
+        BankAccountUpdateDTO bankAccountUpdateDTO = _mapper.Map<BankAccountUpdateDTO>(bankAccount);
+        // update to db
+        await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
+
         await ClearCart(cartItems);
 
         SendEmailMessage(headerDto);
@@ -211,8 +212,6 @@ public class CartController : Controller
         //return View(nameof(OrderConfirmation), headerDto);
         return RedirectToAction(nameof(OrderConfirmation), new { orderHeaderid = headerDto.OrderHeaderId });
     }
-
-
 
 
     // Order Confirmation page
@@ -227,13 +226,13 @@ public class CartController : Controller
             headerDto = JsonConvert.DeserializeObject<OrderHeaderDTO>(stringHeader);
         }
         // add tempdata for bank
-        TempData["success"] = $"Your order of ${headerDto.OrderTotal} has been placed.";
+        TempData["success"] = $"Food purchase of {headerDto.OrderTotal} done.";
         return View(headerDto);
     }
 
 
     // get this user's bank account details
-    public async Task<BankAccountDTO> BankAccountDTOByService()
+    public async Task<BankAccountDTO> BankAccountByService()
     {
         BankAccountDTO bankAccountFromDb = new();
         APIResponse bankAccountResponse = await _bankAccountService.GetAsync<APIResponse>(GetNameIdentifierClaim(), "");

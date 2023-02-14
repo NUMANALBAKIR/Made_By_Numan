@@ -30,9 +30,6 @@
 
 
     <div class="col-12 text-center">
-        <p class="pt-4">
-            Cart has been cleared. But you can check order-details in Order History.
-        </p>
         <p class="pt-2">
             This transaction will be reflected in you Bank-Of-Numan account.
         </p>
@@ -40,9 +37,14 @@
 
 
     <div class="d-flex justify-content-center">
-        <a class="btn btn-secondary mx-2" asp-controller="OrderFood" asp-action="OrderHistory">Order History</a>
-
+@*        <a class="btn btn-secondary mx-2" asp-controller="OrderFood" asp-action="OrderHistory">Order History</a>
+*@
         <a class="btn btn-info mx-2" asp-controller="Bank" asp-action="Index">Bank Balance</a>
+
+        <p class="pt-4">
+            Cart has been cleared. But you can check order-details in Order History.
+        </p>
+
     </div>
 
 
