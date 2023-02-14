@@ -54,7 +54,7 @@
                         <div class="accordion-body">
                             <form method="post">
                                 <label asp-for="TransactionAmount" class="form-label">Amount:</label>
-                                $<input asp-for="TransactionAmount" class="form-control" style="width:15%;" id="amount">
+                                $<input asp-for="TransactionAmount" class="form-control"  id="amount">
                                 
                                 <button type="submit" asp-action="AddToSavings" class="btn btn-primary">Add</button>
                                 <span asp-validation-for="TransactionAmount" class="text-danger"></span>
@@ -73,7 +73,7 @@
                         <div class="accordion-body">
                             <form method="post">
                                 <label asp-for="TransactionAmount" class="form-label">Amount:</label>
-                                $<input asp-for="TransactionAmount" class="form-control" style="width:15%;" id="amount">
+                                $<input asp-for="TransactionAmount" class="form-control"  id="amount">
 
                                 <button type="submit" asp-action="SavingsToCheckings" class="btn btn-primary">Send</button>
                                 <span asp-validation-for="TransactionAmount" class="text-danger"></span>
@@ -92,7 +92,7 @@
                         <div class="accordion-body">
                             <form method="post">
                                 <label asp-for="TransactionAmount" class="form-label">Amount:</label>
-                                $<input asp-for="TransactionAmount" style="width:15%;" class="form-control" id="amount">
+                                $<input asp-for="TransactionAmount"  class="form-control" id="amount">
 
                                 <button type="submit" asp-action="CheckingsToSavings" class="btn btn-primary">Send</button>
                                 <span asp-validation-for="TransactionAmount" class="text-danger"></span>
@@ -111,7 +111,7 @@
                         <div class="accordion-body">
                             <form method="post">
                                 <label asp-for="TransactionAmount" class="form-label">Amount:</label>
-                                $<input asp-for="TransactionAmount" class="form-control" style="width:15%;" id="amount">
+                                $<input asp-for="TransactionAmount" class="form-control" id="amount">
 
                                 <button type="submit" asp-action="WithDrawFromCheckings" class="btn btn-primary">Withdraw</button>
                                 <span asp-validation-for="TransactionAmount" class="text-danger"></span>
