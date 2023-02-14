@@ -112,6 +112,13 @@ public class CartController : Controller
             CartItems = await CartItemsByServiceAsync(),
             OrderHeaderDTO = new()
         };
+
+        // prevent browser's back-button after placing order.
+        if (cartVM.CartItems.Count == 0)
+        {
+            return RedirectToAction("Index", "OrderFood");
+        }
+
         // populate orderer's (header) information
         cartVM.OrderHeaderDTO.AppUser = await AppUserByServiceAsync();
         cartVM.OrderHeaderDTO.AppUserId = GetNameIdentifier();
@@ -202,7 +209,7 @@ public class CartController : Controller
 
     private void sendEmailMessage(OrderHeaderDTO confirmationHeader)
     {
-        string emailBody = $"<h2>An Order of total <u>{confirmationHeader.OrderTotal.ToString("c")}</u> placed for your address <u>{confirmationHeader.DeliveryAddress}</u> at <u>{DateTime.Now.ToShortTimeString()}</u>.</h2>";
+        string emailBody = $"<h2>A Food Order of total <u>{confirmationHeader.OrderTotal.ToString("c")}</u> has been placed for your address <u>{confirmationHeader.DeliveryAddress}</u> at <u>{DateTime.Now.ToShortTimeString()}</u>.</h2>";
         _emailSender.SendEmailAsync(confirmationHeader.EmailAddress, "Food Order placed.", emailBody);
     }
 

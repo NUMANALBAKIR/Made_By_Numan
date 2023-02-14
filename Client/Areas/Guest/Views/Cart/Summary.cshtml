@@ -5,7 +5,7 @@
 
     <style>
         .footer {
-            position: fixed;
+            position: page;
             bottom: 0;
             width: 100%;
             white-space: nowrap;
@@ -105,10 +105,21 @@
                         </h4>
                     </div>
                     <div class="col-12 col-md-4">
-                        <button type="submit" id="myBtn" onclick="Order()" value="Place Order" class="btn btn-primary form-control">Place Order</button>
+                        <button type="submit" id="orderButton" value="Place Order" class="btn btn-primary form-control">Place Order</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
+
+
+@section Scripts{
+    <script>
+        let btn = document.getElementById('orderButton');
+
+        btn.addEventListener('click', () => {
+            btn.style.display = 'none';
+        });
+    </script>
+}
