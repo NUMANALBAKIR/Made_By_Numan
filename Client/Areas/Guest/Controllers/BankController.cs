@@ -19,6 +19,9 @@ public class BankController : Controller
     private readonly IAppUserService _appUserService;
     private readonly IBankAccountService _bankAccountService;
 
+    [BindProperty]
+    public BankAccountDTO bankAccount { get; set; }
+
     public BankController(IMapper mapper, IAppUserService appUserService, IBankAccountService bankAccountService)
     {
         _mapper = mapper;
@@ -67,10 +70,10 @@ public class BankController : Controller
     public async Task<IActionResult> Index()
     {
         // fetch this appUser's bankaccount
-        BankAccountDTO bankAccountFromDb = await BankAccountByService();
+        bankAccount = await BankAccountByService();
 
         // if NOT found "this user's bankaccount", create to db.
-        if (bankAccountFromDb.BankAccountId == 0)
+        if (bankAccount.BankAccountId == 0)
         {
             BankAccountCreateDTO bankAccountCreateDTO = new()
             {
@@ -85,78 +88,95 @@ public class BankController : Controller
             if (createResponse != null && createResponse.IsSuccess == true)
             {
                 var stringBankAccountFromDb = Convert.ToString(createResponse.Data);
-                bankAccountFromDb = JsonConvert.DeserializeObject<BankAccountDTO>(stringBankAccountFromDb);
-                return View(bankAccountFromDb);
+                bankAccount = JsonConvert.DeserializeObject<BankAccountDTO>(stringBankAccountFromDb);
+                return View(bankAccount);
             }
         }
         // if found, display info.
-        return View(bankAccountFromDb);
+        return View(bankAccount);
     }
 
 
     [HttpPost]
-    public async Task<IActionResult> AddToSavings(BankAccountDTO dto)
+    public async Task<IActionResult> AddToSavings()
     {
-        // fetch this appUser's bankaccount
-        BankAccountDTO bankAccountFromDb = await BankAccountByService();
-        bankAccountFromDb.SavingsBalance += dto.TransactionAmount;
-        BankAccountUpdateDTO bankAccountUpdateDTO = _mapper.Map<BankAccountUpdateDTO>(bankAccountFromDb);
+        bankAccount.SavingsBalance += bankAccount.TransactionAmount;
+        BankAccountUpdateDTO bankAccountUpdateDTO = _mapper.Map<BankAccountUpdateDTO>(bankAccount);
 
         // update to db and redirect
         APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
 
-        TempData["success"] = $"${dto.TransactionAmount} added to Savings.";
+        TempData["success"] = $"${bankAccount.TransactionAmount} added to Savings.";
         return RedirectToAction(nameof(Index));
     }
 
 
     [HttpPost]
-    public async Task<IActionResult> WithDrawFromCheckings(BankAccountDTO dto)
+    public async Task<IActionResult> WithDrawFromCheckings()
     {
-        // fetch this appUser's bankaccount
-        BankAccountDTO bankAccountFromDb = await BankAccountByService();
-        bankAccountFromDb.CheckingsBalance -= dto.TransactionAmount;
-        BankAccountUpdateDTO bankAccountUpdateDTO = _mapper.Map<BankAccountUpdateDTO>(bankAccountFromDb);
+        if (bankAccount.CheckingsBalance < bankAccount.TransactionAmount)
+        {
+            TempData["error"] = $"Can't withdraw ${bankAccount.TransactionAmount} from Checkings, because Checkings balance is ${bankAccount.CheckingsBalance}.";
+            return RedirectToAction(nameof(Index));
+        }
+        else
+        {
+            bankAccount.CheckingsBalance -= bankAccount.TransactionAmount;
+            BankAccountUpdateDTO bankAccountUpdateDTO = _mapper.Map<BankAccountUpdateDTO>(bankAccount);
 
-        // update to db and redirect
-        APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
+            // update to db and redirect
+            APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
 
-        TempData["success"] = $"${dto.TransactionAmount} withdrawn from Checkings.";
-        return RedirectToAction(nameof(Index));
+            TempData["success"] = $"${bankAccount.TransactionAmount} withdrawn from Checkings.";
+            return RedirectToAction(nameof(Index));
+        }
     }
 
 
     [HttpPost]
-    public async Task<IActionResult> SavingsToCheckings(BankAccountDTO dto)
+    public async Task<IActionResult> SavingsToCheckings()
     {
-        // fetch this appUser's bankaccount
-        BankAccountDTO bankAccountFromDb = await BankAccountByService();
-        bankAccountFromDb.SavingsBalance -= dto.TransactionAmount;
-        bankAccountFromDb.CheckingsBalance += dto.TransactionAmount;
-        BankAccountUpdateDTO bankAccountUpdateDTO = _mapper.Map<BankAccountUpdateDTO>(bankAccountFromDb);
+        if (bankAccount.SavingsBalance < bankAccount.TransactionAmount)
+        {
+            TempData["error"] = $"Can't transfer ${bankAccount.TransactionAmount} from Savings, because Savings balance is ${bankAccount.SavingsBalance}.";
+            return RedirectToAction(nameof(Index));
+        }
+        else
+        {
+            bankAccount.SavingsBalance -= bankAccount.TransactionAmount;
+            bankAccount.CheckingsBalance += bankAccount.TransactionAmount;
+            BankAccountUpdateDTO bankAccountUpdateDTO = _mapper.Map<BankAccountUpdateDTO>(bankAccount);
 
-        // update to db and redirect
-        APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
+            // update to db and redirect
+            APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
 
-        TempData["success"] = $"${dto.TransactionAmount} transferred from Savings to Checkings.";
-        return RedirectToAction(nameof(Index));
+            TempData["success"] = $"${bankAccount.TransactionAmount} transferred from Savings to Checkings.";
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 
 
     [HttpPost]
-    public async Task<IActionResult> CheckingsToSavings(BankAccountDTO dto)
+    public async Task<IActionResult> CheckingsToSavings()
     {
-        // fetch this appUser's bankaccount
-        BankAccountDTO bankAccountFromDb = await BankAccountByService();
-        bankAccountFromDb.CheckingsBalance -= dto.TransactionAmount;
-        bankAccountFromDb.SavingsBalance += dto.TransactionAmount;
-        BankAccountUpdateDTO bankAccountUpdateDTO = _mapper.Map<BankAccountUpdateDTO>(bankAccountFromDb);
+        if (bankAccount.CheckingsBalance < bankAccount.TransactionAmount)
+        {
+            TempData["error"] = $"Can't transfer ${bankAccount.TransactionAmount} from Checkings, because Checkings balance is ${bankAccount.CheckingsBalance}.";
+            return RedirectToAction(nameof(Index));
+        }
+        else
+        {
+            bankAccount.CheckingsBalance -= bankAccount.TransactionAmount;
+            bankAccount.SavingsBalance += bankAccount.TransactionAmount;
+            BankAccountUpdateDTO bankAccountUpdateDTO = _mapper.Map<BankAccountUpdateDTO>(bankAccount);
 
-        // update to db and redirect
-        APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
+            // update to db and redirect
+            APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
 
-        TempData["success"] = $"${dto.TransactionAmount} transferred from Checkings to Savings.";
-        return RedirectToAction(nameof(Index));
+            TempData["success"] = $"${bankAccount.TransactionAmount} transferred from Checkings to Savings.";
+            return RedirectToAction(nameof(Index));
+        }
     }
 
 }

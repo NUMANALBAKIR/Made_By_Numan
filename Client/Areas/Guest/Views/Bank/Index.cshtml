@@ -1,5 +1,11 @@
 ﻿@model Client.Models.BankDTOs.BankAccountDTO
 
+<input hidden asp-for="BankAccountId" />
+<input hidden asp-for="AppUserId" />
+<input hidden asp-for="SavingsBalance" />
+<input hidden asp-for="CheckingsBalance" />
+<input hidden asp-for="HolderName" />
+
 <div class="container-fluid p-2 text-black mt-2 mx-1 d-flex" style="border: solid 1px;">
 
     <div class="col-4">
@@ -53,6 +59,13 @@
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
                         <div class="accordion-body">
                             <form method="post">
+
+                                <input hidden asp-for="BankAccountId" />
+                                <input hidden asp-for="AppUserId" />
+                                <input hidden asp-for="SavingsBalance" />
+                                <input hidden asp-for="CheckingsBalance" />
+                                <input hidden asp-for="HolderName" />
+
                                 <label asp-for="TransactionAmount" class="form-label">Amount:</label>
                                 $<input asp-for="TransactionAmount" class="form-control"  id="amount">
                                 
@@ -72,6 +85,13 @@
                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <form method="post">
+
+                                <input hidden asp-for="BankAccountId" />
+                                <input hidden asp-for="AppUserId" />
+                                <input hidden asp-for="SavingsBalance" />
+                                <input hidden asp-for="CheckingsBalance" />
+                                <input hidden asp-for="HolderName" />
+
                                 <label asp-for="TransactionAmount" class="form-label">Amount:</label>
                                 $<input asp-for="TransactionAmount" class="form-control"  id="amount">
 
@@ -91,6 +111,13 @@
                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <form method="post">
+
+                                <input hidden asp-for="BankAccountId" />
+                                <input hidden asp-for="AppUserId" />
+                                <input hidden asp-for="SavingsBalance" />
+                                <input hidden asp-for="CheckingsBalance" />
+                                <input hidden asp-for="HolderName" />
+
                                 <label asp-for="TransactionAmount" class="form-label">Amount:</label>
                                 $<input asp-for="TransactionAmount"  class="form-control" id="amount">
 
@@ -110,6 +137,13 @@
                     <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <form method="post">
+
+                                <input hidden asp-for="BankAccountId" />
+                                <input hidden asp-for="AppUserId" />
+                                <input hidden asp-for="SavingsBalance" />
+                                <input hidden asp-for="CheckingsBalance" />
+                                <input hidden asp-for="HolderName" />
+
                                 <label asp-for="TransactionAmount" class="form-label">Amount:</label>
                                 $<input asp-for="TransactionAmount" class="form-control" id="amount">
 
