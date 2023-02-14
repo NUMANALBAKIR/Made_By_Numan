@@ -19,9 +19,6 @@ public class AutoMapperConfig : Profile
         CreateMap<Food, FoodCreateDTO>().ReverseMap();
         CreateMap<Food, FoodUpdateDTO>().ReverseMap();
 
-        CreateMap<BankAccount, BankAccountDTO>().ReverseMap();
-        CreateMap<BankAccount, BankAccountCreateDTO>().ReverseMap();
-        CreateMap<BankAccount, BankAccountUpdateDTO>().ReverseMap();
 
         CreateMap<CartItem, CartItemDTO>().ReverseMap();
         CreateMap<CartItem, CartItemCreateDTO>().ReverseMap();
@@ -39,6 +36,12 @@ public class AutoMapperConfig : Profile
         CreateMap<AppUser, AppUserCreateDTO>().ReverseMap();
         CreateMap<AppUser, AppUserUpdateDTO>().ReverseMap();
 
+        CreateMap<BankAccount, BankAccountDTO>().ReverseMap();
+        CreateMap<BankAccount, BankAccountCreateDTO>().ReverseMap();
+        CreateMap<BankAccount, BankAccountUpdateDTO>().ReverseMap();
+
+        CreateMap<BankAccountDTO, BankAccountCreateDTO>().ReverseMap();
+        CreateMap<BankAccountDTO, BankAccountUpdateDTO>().ReverseMap();
 
     }
 }
