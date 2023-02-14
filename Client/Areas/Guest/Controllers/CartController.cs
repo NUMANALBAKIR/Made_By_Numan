@@ -163,7 +163,7 @@ public class CartController : Controller
     }
 
 
-    // Order place button pressed in summary page.
+    // Place Order button pressed in summary page.
     [HttpPost, ActionName("Summary"), ValidateAntiForgeryToken]
     public async Task<IActionResult> SummaryPOST()
     {
