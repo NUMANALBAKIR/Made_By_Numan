@@ -104,6 +104,8 @@ public class BankController : Controller
 
         // update to db and redirect
         APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
+
+        TempData["success"] = $"${dto.TransactionAmount} added to Savings.";
         return RedirectToAction(nameof(Index));
     }
 
@@ -118,6 +120,8 @@ public class BankController : Controller
 
         // update to db and redirect
         APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
+
+        TempData["success"] = $"${dto.TransactionAmount} withdrawn from Checkings.";
         return RedirectToAction(nameof(Index));
     }
 
@@ -133,6 +137,8 @@ public class BankController : Controller
 
         // update to db and redirect
         APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
+
+        TempData["success"] = $"${dto.TransactionAmount} transferred from Savings to Checkings.";
         return RedirectToAction(nameof(Index));
     }
 
@@ -148,6 +154,8 @@ public class BankController : Controller
 
         // update to db and redirect
         APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
+
+        TempData["success"] = $"${dto.TransactionAmount} transferred from Checkings to Savings.";
         return RedirectToAction(nameof(Index));
     }
 
