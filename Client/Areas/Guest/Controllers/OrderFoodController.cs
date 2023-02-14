@@ -116,7 +116,7 @@ public class OrderFoodController : Controller
                 APIResponse createResponse = await _cartItemService.CreateAsync<APIResponse>(cartItemCreateDTO, "");
                 if (createResponse != null && createResponse.IsSuccess == true)
                 {
-                    TempData["success"] = "Item added to Cart.";
+                    TempData["success"] = $"Item added to Cart.";
                     return RedirectToAction(nameof(Index), "OrderFood", "menu");
                 }
             }
@@ -135,7 +135,7 @@ public class OrderFoodController : Controller
                 APIResponse updateResponse = await _cartItemService.UpdateAsync<APIResponse>(cartItemUpdateDTO, "");
                 if (updateResponse != null && updateResponse.IsSuccess == true)
                 {
-                    TempData["success"] = "Updated item-count in cart.";
+                    TempData["success"] = $"Updated count of item in cart.";
                     return RedirectToAction(nameof(Index), "OrderFood", "menu");
                 }
             }
@@ -150,7 +150,6 @@ public class OrderFoodController : Controller
             var stringFood = Convert.ToString(foodResponse.Data);
             foodDto = JsonConvert.DeserializeObject<FoodDTO>(stringFood);
         }
-        TempData["error"] = "Error encountered.";
         cartItemDTO.Count = 1;
         cartItemDTO.Food = foodDto;
         cartItemDTO.FoodId = foodDto.FoodId;

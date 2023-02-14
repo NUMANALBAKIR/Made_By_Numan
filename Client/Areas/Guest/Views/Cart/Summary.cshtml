@@ -5,7 +5,7 @@
 
     <style>
         .footer {
-            position: page;
+            position: absolute;
             bottom: 0;
             width: 100%;
             white-space: nowrap;
@@ -16,7 +16,22 @@
 <form method="post">
     <br />
     <div class="container">
+
+        @if (TempData["successBalance"] != null)
+        {
+        <div style="font-size:18px;" class="alert alert-primary" role="alert">
+            Your Bank-of-Numan <b>Checkings balance: $@TempData["successBalance"]</b>. You <b>can</b> place order.
+        </div>
+        }
+        else if (TempData["errorBalance"] != null)
+        {
+        <div style="font-size:18px;" class="alert alert-warning" role="alert">
+            Your Bank-of-Numan <b>Checkings balance: $@TempData["errorBalance"]</b>. You <b>can not</b> place order.
+        </div>
+        }
+
         <div class="card">
+
             <div class="card-header bg-dark text-light ml-0">
                 <div class=" row container">
                     <div class="col-6 pt-1">
@@ -27,6 +42,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="card-body">
                 <div class="container rounded p-2">
                     <div class="row">

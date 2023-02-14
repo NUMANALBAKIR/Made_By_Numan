@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Client.Models;
+using Client.Models.BankDTOs;
 using Client.Models.OrderFoodDTOs;
 using Client.Models.User;
 using Client.Models.ViewModels;
@@ -28,24 +29,30 @@ public class CartController : Controller
     private readonly IOrderDetailService _orderDetailService;
     private readonly IAppUserService _appUserService;
     private readonly IEmailSender _emailSender;
+    private readonly IBankAccountService _bankAccountService;
+    private readonly IMapper _mapper;
 
     public CartController(
         ICartItemService cartItemService,
         IOrderHeaderService orderHeaderService,
         IOrderDetailService orderDetailService,
         IAppUserService appUserService,
-        IEmailSender emailSender)
+        IEmailSender emailSender,
+        IBankAccountService bankAccountService,
+        IMapper mapper)
     {
         _cartItemService = cartItemService;
         _orderHeaderService = orderHeaderService;
         _orderDetailService = orderDetailService;
         _appUserService = appUserService;
         _emailSender = emailSender;
+        _bankAccountService = bankAccountService;
+        _mapper = mapper;
     }
 
 
     // Get user-identity
-    private string GetNameIdentifier()
+    private string GetNameIdentifierClaim()
     {
         var claimsIdentity = (ClaimsIdentity)User.Identity;
         var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
@@ -56,7 +63,7 @@ public class CartController : Controller
     // get this user's cart-items list
     private async Task<List<CartItemDTO>> CartItemsByServiceAsync()
     {
-        string appUserId = GetNameIdentifier();
+        string appUserId = GetNameIdentifierClaim();
 
         List<CartItemDTO> cartItems = new();
         APIResponse response = await _cartItemService.GetAllAsync<APIResponse>(appUserId, "");
@@ -73,7 +80,7 @@ public class CartController : Controller
     private async Task<AppUserDTO> AppUserByServiceAsync()
     {
         AppUserDTO appUser = new();
-        APIResponse response = await _appUserService.GetAsync<APIResponse>(GetNameIdentifier(), "");
+        APIResponse response = await _appUserService.GetAsync<APIResponse>(GetNameIdentifierClaim(), "");
         if (response != null && response.IsSuccess == true)
         {
             var stringAppUser = Convert.ToString(response.Data);
@@ -121,7 +128,7 @@ public class CartController : Controller
 
         // populate orderer's (header) information
         cartVM.OrderHeaderDTO.AppUser = await AppUserByServiceAsync();
-        cartVM.OrderHeaderDTO.AppUserId = GetNameIdentifier();
+        cartVM.OrderHeaderDTO.AppUserId = GetNameIdentifierClaim();
         cartVM.OrderHeaderDTO.OrdererName = cartVM.OrderHeaderDTO.AppUser.Name;
         cartVM.OrderHeaderDTO.DeliveryAddress = cartVM.OrderHeaderDTO.AppUser.Address;
         cartVM.OrderHeaderDTO.EmailAddress = cartVM.OrderHeaderDTO.AppUser.Email;
@@ -146,14 +153,14 @@ public class CartController : Controller
         {
             headerCreateDto.OrderTotal += (item.CurrentPrice * item.Count);
         }
-        headerCreateDto.AppUserId = GetNameIdentifier();
+        headerCreateDto.AppUserId = GetNameIdentifierClaim();
         headerCreateDto.TrackingNumber = Guid.NewGuid().ToString();
         headerCreateDto.OrderDate = DateTime.Now;
         headerCreateDto.OrdererName = cartVM.OrderHeaderDTO.OrdererName;
         headerCreateDto.DeliveryAddress = cartVM.OrderHeaderDTO.DeliveryAddress;
         headerCreateDto.EmailAddress = cartVM.OrderHeaderDTO.EmailAddress;
 
-        // send OrderHeaderCreateDTO and get id of the created, to add to orderdetail.
+        // send OrderHeaderCreateDTO and get response orderHeader. need its id.
         OrderHeaderDTO headerDto = new();
         APIResponse createResponse = await _orderHeaderService.CreateAsync<APIResponse>(headerCreateDto, "");
         if (createResponse != null && createResponse.IsSuccess == true)
@@ -180,30 +187,48 @@ public class CartController : Controller
 
         sendEmailMessage(headerDto);
 
-        //return RedirectToAction(nameof(OrderConfirmation));
-        return View(nameof(OrderConfirmation), headerDto);
+        //return View(nameof(OrderConfirmation), headerDto);
+        return RedirectToAction(nameof(OrderConfirmation), new { orderHeaderid = headerDto.OrderHeaderId });
     }
 
 
-    // OrderConfirmation page
-    public IActionResult OrderConfirmation()
+    // Order Confirmation page
+    public async Task<IActionResult> OrderConfirmation(int orderHeaderid)
     {
-        //var appUser = AppUserByServiceAsync();
+        //// get order information
+        //OrderHeaderDTO headerDto = new();
+        //APIResponse response = await _orderHeaderService.GetAsync<APIResponse>(orderHeaderid, "");
+        //if (response != null && response.IsSuccess == true)
+        //{
+        //    var stringHeader = Convert.ToString(response.Data);
+        //    headerDto = JsonConvert.DeserializeObject<OrderHeaderDTO>(stringHeader);
+        //}
+        //// deduct from bank
+        //// get bank account using service.
+        //BankAccountDTO bankAccountFromDb = new();
+        //APIResponse bankAccountResponse = await _bankAccountService.GetAsync<APIResponse>(GetNameIdentifierClaim(), "");
+        //if (bankAccountResponse != null && bankAccountResponse.IsSuccess == true)
+        //{
+        //    var stringBankAccountFromDb = Convert.ToString(bankAccountResponse.Data);
+        //    bankAccountFromDb = JsonConvert.DeserializeObject<BankAccountDTO>(stringBankAccountFromDb);
+        //}
 
-        //var orderHeaderDTO = _orderHeaderService. 
+        ////-----// check if balance available-- do in summary post
 
-        // for bank
-        OrderHeaderDTO confirmationHeader = new()
-        {
-            AppUserId = OrderHeaderDTO.AppUserId,
-            OrderTotal = OrderHeaderDTO.OrderTotal,
-            TrackingNumber = OrderHeaderDTO.TrackingNumber,
-            OrderDate = OrderHeaderDTO.OrderDate,
-            OrdererName = OrderHeaderDTO.OrdererName,
-            DeliveryAddress = OrderHeaderDTO.DeliveryAddress,
-            EmailAddress = OrderHeaderDTO.EmailAddress
-        };
-        return View(confirmationHeader);
+        //// update bank account
+        //bankAccountFromDb.CheckingsBalance -= bankAccountFromDb.TransactionAmount;
+        //bankAccountFromDb.SavingsBalance += bankAccountFromDb.TransactionAmount;
+        //BankAccountUpdateDTO bankAccountUpdateDTO = _mapper.Map<BankAccountUpdateDTO>(bankAccount);
+        //APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
+
+
+        //// add tempdata for bank
+        //TempData["success"] = $"Your order of ${headerDto.OrderTotal} has been placed.";
+
+
+        return View();
+
+        //return View(headerDto);
     }
 
 
@@ -212,6 +237,5 @@ public class CartController : Controller
         string emailBody = $"<h2>A Food Order of total <u>{confirmationHeader.OrderTotal.ToString("c")}</u> has been placed for your address <u>{confirmationHeader.DeliveryAddress}</u> at <u>{DateTime.Now.ToShortTimeString()}</u>.</h2>";
         _emailSender.SendEmailAsync(confirmationHeader.EmailAddress, "Food Order placed.", emailBody);
     }
-
 
 }

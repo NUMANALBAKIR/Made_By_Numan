@@ -167,6 +167,13 @@
             <p>Check Our <span>Yummy Menu</span></p>
         </div>
 
+        @if (TempData["success"] != null)
+        {
+            <div style="font-size:18px;" class="alert alert-success" role="alert">
+                <strong>Success!</strong> @TempData["success"]
+            </div>
+        }
+
         <!-- menu tabs -->
         <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <!-- Begin Starters (tab nav item) -->
