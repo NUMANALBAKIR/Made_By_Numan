@@ -24,7 +24,7 @@
                         <b>Cart</b>
                     </div>
                     <div class="col-6 text-end">
-                        <a asp-area="Guest" asp-controller="OrderFood" asp-action="Index" asp-fragment="menu" class="btn btn-outline-info btn-sm">Back to Menu</a>
+                        <a asp-area="Guest" asp-controller="OrderFood" asp-action="Index" asp-fragment="menu" class="btn btn-outline-info btn-sm">Add more items from Menu</a>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                             <p><small>@item.Food.Description</small></p>
                         </div>
                         <div class="col-12  col-lg-5 text-center row">
-                            <div class="col-4 text-md-right pt-4">
+                            <div class="text-md-right pt-4">
                                 <h6>@item.CurrentPrice.ToString("c")<span class="text-muted">x </span>@item.Count plate(s)</h6>
 
                                 <!-- total -->
@@ -50,27 +50,28 @@
                                     total = total + (item.CurrentPrice * item.Count);
                                 }
                             </div>
-                            <div class="col-6 col-sm-4 col-lg-6 pt-2">
+
+                            @*<div class="col-6 col-sm-4 col-lg-6 pt-2">
                                 <div class="w-75 btn-group" role="group">
 
-                                    @*<i class="bi bi-plus-square px-2"></i>
+                                    <i class="bi bi-plus-square px-2"></i>
 
-                                    <i class="bi bi-dash-square"></i>*@
+                                    <i class="bi bi-dash-square"></i>
 
-@*                                    <a asp-action="plus" asp-route-cartId="@item.id" class="btn btn-primary">
+                                    <a asp-action="plus" asp-route-cartId="@item.id" class="btn btn-primary">
                                         <i class="bi bi-plus-square"></i>
                                     </a> &nbsp;
                                     <a asp-action="minus" asp-route-cartId="@item.Id" class="btn btn-warning">
                                         <i class="bi bi-dash-square"></i>
                                     </a>
-*@                                </div>
+                                 </div>
 
                             </div>
                             <div class="col-2 col-sm-4 col-lg-2 text-right pt-2">
-                                @* <a asp-action="remove" class="btn btn-danger">
+                                 <a asp-action="remove" class="btn btn-danger">
                                   <i class="bi bi-trash-fill"></i>
-                                </a>*@
-                            </div>
+                                </a>
+                            </div>*@
                         </div>
                     </div>
                     <hr />
