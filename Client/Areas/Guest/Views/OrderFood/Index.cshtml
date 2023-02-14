@@ -475,7 +475,7 @@
         <!-- Email section -->
         <form asp-controller="OrderFood" asp-action="EmailUs" method="post" role="form" class="p-3 p-md-4">
             
-            <h4 class="pt-3" id="emailus">EMAIL US:</h4>
+            <h4 style="text-align: center;" class="py-3" id="emailus">EMAIL US:</h4>
             
             <div class="row" >
                 <div class="col-xl-6 form-group">
@@ -485,10 +485,10 @@
                     <input asp-for="EmailUsDTO.Email" class="form-control" id="email" placeholder="Email Address" required>
                 </div>
             </div>
-            <div class="form-group pt-2">
+            <div class="form-group pt-3">
                 <input asp-for="EmailUsDTO.Subject" class="form-control" id="subject" placeholder="Subject" required>
             </div>
-            <div class="form-group pt-2">
+            <div class="form-group pt-3">
                 <textarea asp-for="EmailUsDTO.Message" class="form-control" rows="5" placeholder="Message" required></textarea>
             </div>
 
