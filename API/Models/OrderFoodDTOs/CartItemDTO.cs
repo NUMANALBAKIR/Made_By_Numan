@@ -16,6 +16,6 @@ public class CartItemDTO
     [ValidateNever, ForeignKey(nameof(FoodId))]
     public FoodDTO Food { get; set; }
 
-    public double CurrentPrice { get; set; }
+    public decimal CurrentPrice { get; set; }
     public int Count { get; set; }
 }

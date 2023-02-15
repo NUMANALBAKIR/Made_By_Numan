@@ -4,6 +4,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230215064625_removePrecision")]
+    partial class removePrecision
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,17 +36,17 @@ namespace API.Migrations
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<decimal>("CheckingsBalance")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("CheckingsBalance")
+                        .HasColumnType("float");
 
                     b.Property<string>("HolderName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("SavingsBalance")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("SavingsBalance")
+                        .HasColumnType("float");
 
-                    b.Property<decimal>("TransactionAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("TransactionAmount")
+                        .HasColumnType("float");
 
                     b.HasKey("BankAccountId");
 
@@ -66,8 +69,8 @@ namespace API.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("CurrentPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("CurrentPrice")
+                        .HasColumnType("float");
 
                     b.Property<int>("FoodId")
                         .HasColumnType("int");
@@ -117,8 +120,8 @@ namespace API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.HasKey("FoodId");
 
@@ -144,8 +147,8 @@ namespace API.Migrations
                     b.Property<int>("OrderHeaderId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("PurchasePrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("PurchasePrice")
+                        .HasColumnType("float");
 
                     b.HasKey("OrderDetailId");
 
@@ -176,8 +179,8 @@ namespace API.Migrations
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("OrderTotal")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("OrderTotal")
+                        .HasColumnType("float");
 
                     b.Property<string>("OrdererName")
                         .HasColumnType("nvarchar(max)");

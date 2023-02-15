@@ -11,8 +11,8 @@ public class BankAccountUpdateDTO
     public string AppUserId { get; set; }
 
     public string HolderName { get; set; }
-    public double SavingsBalance { get; set; }
-    public double CheckingsBalance { get; set; }
-    public double TransactionAmount { get; set; }
+    public decimal SavingsBalance { get; set; }
+    public decimal CheckingsBalance { get; set; }
+    public decimal TransactionAmount { get; set; }
 }
 
