@@ -1,9 +1,8 @@
 using API;
 using API.Data;
-using API.Models.User;
+using API.DatabaseInitializer;
 using API.Repository;
 using API.Repository.IRepository;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +22,8 @@ builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+builder.Services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
+
 var app = builder.Build();
 
 
@@ -36,8 +37,19 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+SeedDatabase();
+
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+
+void SeedDatabase()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var databaseInitializer = scope.ServiceProvider.GetRequiredService<IDatabaseInitializer>();
+        databaseInitializer.Initialize();
+    }
+}

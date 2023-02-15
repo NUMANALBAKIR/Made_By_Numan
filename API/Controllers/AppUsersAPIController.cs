@@ -1,10 +1,7 @@
 ﻿using API.Models;
-using API.Models.OrderFood;
-using API.Models.OrderFoodDTOs;
 using API.Models.User;
 using API.Repository.IRepository;
 using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;

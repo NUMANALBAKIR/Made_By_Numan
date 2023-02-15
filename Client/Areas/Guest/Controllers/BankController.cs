@@ -4,9 +4,7 @@ using Client.Models.BankDTOs;
 using Client.Models.User;
 using Client.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Elfie.Extensions;
 using Newtonsoft.Json;
 using System.Security.Claims;
 

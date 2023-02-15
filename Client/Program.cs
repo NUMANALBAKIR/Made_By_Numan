@@ -1,7 +1,6 @@
 using API.Data;
 using Client;
 using Client.Areas.Identity.EmailSender;
-using Client.Models.User;
 using Client.Services;
 using Client.Services.IServices;
 using Microsoft.AspNetCore.Identity;
