@@ -1,8 +1,4 @@
-﻿using API.Models.User;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace API.Models.BankDTOs;
+﻿namespace API.Models.BankDTOs;
 
 public class BankAccountUpdateDTO
 {

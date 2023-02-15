@@ -1,5 +1,4 @@
-﻿using Client.Models.OrderFood;
-using Client.Models.OrderFoodDTOs;
+﻿using Client.Models.OrderFoodDTOs;
 
 namespace Client.Models.ViewModels;
 

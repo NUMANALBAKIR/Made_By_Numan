@@ -4,13 +4,10 @@ using Client.Models.BankDTOs;
 using Client.Models.OrderFoodDTOs;
 using Client.Models.User;
 using Client.Models.ViewModels;
-using Client.Services;
 using Client.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.CodeAnalysis.Elfie.Extensions;
 using Newtonsoft.Json;
 using System.Security.Claims;
 

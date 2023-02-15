@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Client.Models.Bank;
 using Client.Models.BankDTOs;
 using Client.Models.OrderFood;
 using Client.Models.OrderFoodDTOs;
