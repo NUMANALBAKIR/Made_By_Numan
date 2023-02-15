@@ -18,5 +18,5 @@ public class OrderDetail
     public Food Food { get; set; }
 
     public int Count { get; set; }
-    public double PurchasePrice { get; set; }
+    public decimal PurchasePrice { get; set; }
 }

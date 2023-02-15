@@ -9,5 +9,5 @@ public class OrderDetailUpdateDTO
     public int FoodId { get; set; }
 
     public int Count { get; set; }
-    public double PurchasePrice { get; set; }
+    public decimal PurchasePrice { get; set; }
 }

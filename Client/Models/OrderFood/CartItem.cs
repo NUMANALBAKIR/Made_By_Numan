@@ -18,6 +18,6 @@ public class CartItem
     [ValidateNever, ForeignKey(nameof(FoodId))]
     public Food Food { get; set; }
 
-    public double CurrentPrice { get; set; }
+    public decimal CurrentPrice { get; set; }
     public int Count { get; set; }
 }

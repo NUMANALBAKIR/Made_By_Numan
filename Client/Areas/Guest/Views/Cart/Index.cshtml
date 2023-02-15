@@ -10,7 +10,7 @@
             white-space: nowrap;
         }
     </style>
-    double total = 0;
+    decimal total = 0;
 }
 
 <form method="post">
@@ -18,13 +18,11 @@
     <div class="container">
         <div class="card">
             <div class="card-header ml-0">
-                <div class="row">
-                    <div class="col-6  pt-2">
-                        <i class="fa fa-shopping-cart"></i> &nbsp;
+                <div class="row d-flex justify-content-between">
+                    <div class ="d-flex justify-content-between">
                         <b>Cart</b>
-                    </div>
-                    <div class="col-6 text-end">
-                        <a asp-area="Guest" asp-controller="OrderFood" asp-action="Index" asp-fragment="menu" class="btn btn-outline-info btn-sm">Add more items from Menu</a>
+                        <a asp-controller="OrderFood" asp-action="Index" asp-fragment="menu" class="btn btn-small btn-outline-info">Add more items from Menu</a>
+                        <a asp-controller="Cart" asp-action="Summary" class="btn btn-small btn-success">Proceed to Order</a>
                     </div>
                 </div>
             </div>
@@ -88,15 +86,6 @@
                     </div>
                 </div>
 
-            </div>
-
-
-            <div class="card-footer">
-                <div class="card-footer row">
-                    <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
-                        <a asp-action="Summary" class="btn btn-outline-success">Go to Order Summary</a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
