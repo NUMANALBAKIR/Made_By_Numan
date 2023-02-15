@@ -2,5 +2,5 @@
 
 public interface IDatabaseInitializer
 {
-    Task Initialize();
+    void Initialize();
 }
