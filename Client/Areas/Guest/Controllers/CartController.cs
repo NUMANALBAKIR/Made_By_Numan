@@ -124,7 +124,7 @@ public class CartController : Controller
         // prevent browser's back-button after placing order.
         if (cartVM.CartItems.Count == 0)
         {
-            return RedirectToAction("Index", "OrderFood");
+            return RedirectToAction("Index", "OrderFood", "menu");
         }
 
         // populate orderer's (header) information
