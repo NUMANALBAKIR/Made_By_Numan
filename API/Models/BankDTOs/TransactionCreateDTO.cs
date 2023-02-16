@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace API.Models.BankDTOs;
+namespace API.Models.Bank;
 
-public class TransactionDTO
+public class TransactionCreateDTO
 {
-    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int TransactionId { get; set; }
     public string AppUserId { get; set; }
     public string Message { get; set; }
     public DateTime Date { get; set; }
+
 }
