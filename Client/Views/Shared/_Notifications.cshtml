@@ -11,3 +11,17 @@
         <strong>Error!</strong> @TempData["error"]
     </div>
 }
+
+@if (TempData["warning"] != null)
+{
+    <div style="font-size:18px;" class="alert alert-warning" role="alert">
+        <strong>Warning!</strong> @TempData["warning"]
+        </div>
+}
+
+@if (TempData["info"] != null)
+{
+    <div style="font-size:18px;" class="alert alert-info" role="alert">
+        <strong>Info!</strong> @TempData["info"]
+    </div>
+}
