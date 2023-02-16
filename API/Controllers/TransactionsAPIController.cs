@@ -35,7 +35,7 @@ public class TransactionsAPIController : ControllerBase
         try
         {
             IEnumerable<Transaction> transactions;
-            transactions = await _unitOfWork.TransactionRepo.GetAllAsync(filter: x => x.AppUserId == appUserId, includeProperties: "AppUser");
+            transactions = await _unitOfWork.TransactionRepo.GetAllAsync(filter: x => x.AppUserId == appUserId);
             _response.Data = _mapper.Map<List<TransactionDTO>>(transactions);
             return Ok(_response);
         }
