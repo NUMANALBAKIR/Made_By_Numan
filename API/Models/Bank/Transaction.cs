@@ -9,8 +9,8 @@ public class Transaction
     public int TransactionId { get; set; }
     public string AppUserId { get; set; }
     public string Message { get; set; }
-    public DateTime Date { get; set; }
+    public DateTime TransactionDate { get; set; }
     public decimal PreviousCheckingsBalance { get; set; }
-    public decimal PreviousTransactionAmount { get; set; }
+    public decimal PreviousSavingsBalance { get; set; }
 
 }
