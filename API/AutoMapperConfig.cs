@@ -43,5 +43,10 @@ public class AutoMapperConfig : Profile
         CreateMap<BankAccountDTO, BankAccountCreateDTO>().ReverseMap();
         CreateMap<BankAccountDTO, BankAccountUpdateDTO>().ReverseMap();
 
+        CreateMap<TransactionCreateDTO, Transaction>().ReverseMap();
+        CreateMap<TransactionUpdateDTO, Transaction>().ReverseMap();
+        CreateMap<Transaction, TransactionDTO>().ReverseMap();
+
+
     }
 }
