@@ -1,8 +1,6 @@
 ﻿using API.Models;
 using API.Models.Bank;
 using API.Models.BankDTOs;
-using API.Models.OrderFood;
-using API.Models.OrderFoodDTOs;
 using API.Repository.IRepository;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;

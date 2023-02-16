@@ -1,4 +1,4 @@
-﻿namespace API.Models.Bank;
+﻿namespace Client.Models.Bank;
 
 public class TransactionCreateDTO
 {

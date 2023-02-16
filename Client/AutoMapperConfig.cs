@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Client.Models.Bank;
 using Client.Models.BankDTOs;
 using Client.Models.OrderFood;
 using Client.Models.OrderFoodDTOs;
@@ -27,6 +28,11 @@ public class AutoMapperConfig : Profile
 
         CreateMap<BankAccountDTO, BankAccountCreateDTO>().ReverseMap();
         CreateMap<BankAccountDTO, BankAccountUpdateDTO>().ReverseMap();
+
+        CreateMap<TransactionCreateDTO, Transaction>().ReverseMap();
+        CreateMap<TransactionUpdateDTO, Transaction>().ReverseMap();
+        CreateMap<Transaction, TransactionDTO>().ReverseMap();
+
 
     }
 }
