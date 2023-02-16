@@ -25,7 +25,7 @@ public class TransactionsAPIController : ControllerBase
     }
 
 
-    // get all orderheaders of this appUser
+    // get all transactions of this appUser
     // GET: api/TransactionsAPI?appUserId=abc
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]

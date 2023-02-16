@@ -14,26 +14,14 @@
                     <p class="card-text">Aspiring Full Stack .Net Developer.</p>
                     <p class="card-text">This website portrays my work.</p>
 
-                    <div class="d-flex justify-content-between mb-2">
-
-                        <div id="sIcon">
-                            <i class="fa fa-twitter fa-lg"></i>
-                        </div>
-
-                        <div id="wIcon">
-                            <i class="fa fa-linkedin fa-lg text-warning"></i>
-                        </div>
-
-                        <div id="eIcon">
-                            <i class="fa fa-facebook fa-lg text-info"></i>
-                        </div>
-
-                        <div id="iIcon">
-                            <i class="fa fa-github fa-lg"></i>
-                        </div>
+                    <div id="sIcons" class="d-flex justify-content-between mb-2">
+                        <i class="fa fa-twitter fa-lg"></i>
+                        <i class="fa fa-linkedin fa-lg text-warning"></i>
+                        <i class="fa fa-facebook fa-lg text-info"></i>
+                        <i class="fa fa-github fa-lg"></i>
                     </div>
 
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center pt-3">
                         <a asp-area="Guest" asp-controller="Chart" asp-action="Index" class="btn btn-outline-primary">Next Page</a>
                     </div>
                 </div>
@@ -81,19 +69,7 @@
 </div>
 
 
-<div id="sDiv" style="font-size:18px;display: none;" class="alert alert-success" role="alert">
-    <strong>Hello!</strong> I added those icons just for prettifying!
-</div>
-
-<div id="eDiv" style="font-size:18px; display: none;" class="alert alert-danger" role="alert">
-    <strong>Hello!</strong> I added those icons just for prettifying!
-</div>
-
-<div id="wDiv" style="font-size:18px; display: none;" class="alert alert-warning" role="alert">
-    <strong>Hello!</strong> I added those icons just for prettifying!
-</div>
-
-<div id="iDiv" style="font-size:18px; display: none;" class="alert alert-info" role="alert">
+<div id="div" style="font-size:18px; display: none;" class="alert alert-warning" role="alert">
     <strong>Hello!</strong> I added those icons just for prettifying!
 </div>
 
@@ -102,19 +78,12 @@
     <script>
         $(document).ready(function () {
 
-            $('#sIcon').click(function () {
-                $("#sDiv").show("fast").delay(2500).hide("fast");
+            $('#sIcons').click(function () {
+                $("#div").show("fast").delay(2500).hide("fast");
             });
-            $('#wIcon').click(function () {
-                $("#wDiv").show("fast").delay(2500).hide("fast");
-            }); 
-            $('#eIcon').click(function () {
-                $("#eDiv").show("fast").delay(2500).hide("fast");
-            }); 
-            $('#iIcon').click(function () {
-                $("#iDiv").show("fast").delay(2500).hide("fast");
-            });
+
         });
+
 
     </script>
 }
