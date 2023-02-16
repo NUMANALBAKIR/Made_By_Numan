@@ -53,9 +53,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="Guest" asp-controller="OrderFood" asp-action="Index">- Order Food -</a>
                         </li>
-@*                        <li class="nav-item">
-                            <a href="https://localhost:5001/swagger/index.html" class="nav-link text-light">Swagger API</a>
-                        </li>*@
+                        <li class="nav-item">
+                            <a target="_blank" href="https://madebynumanapi.azurewebsites.net/" class="nav-link text-light">Swagger-API</a>
+                        </li>
 
                     </ul>
                 
@@ -83,6 +83,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
