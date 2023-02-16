@@ -1,6 +1,5 @@
 ﻿using API.Data;
 using API.Models.OrderFood;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.DatabaseInitializer;
 

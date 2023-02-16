@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Client.Models.Bank;
 
-public class Transaction
+public class TransactionUpdateDTO
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int TransactionId { get; set; }

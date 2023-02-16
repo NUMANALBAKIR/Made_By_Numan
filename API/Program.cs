@@ -4,7 +4,6 @@ using API.DatabaseInitializer;
 using API.Repository;
 using API.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
