@@ -21,7 +21,8 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "Swagger-API I used to develop the site.",
+        Title = "Numan's Swagger-API",
+        Description = "API I used to develop the site.",
         Contact = new OpenApiContact
         {
             Url = new Uri("https://madebynumanclient.azurewebsites.net/")
