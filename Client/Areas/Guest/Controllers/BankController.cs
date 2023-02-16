@@ -22,8 +22,6 @@ public class BankController : Controller
 
     [BindProperty]
     public BankDashboardVM dashboard { get; set; }
-    [BindProperty]
-    public BankAccountDTO bankAccount { get; set; }
 
     public BankController(IMapper mapper,
         IAppUserService appUserService,
@@ -96,13 +94,17 @@ public class BankController : Controller
     // home page of Bank
     public async Task<IActionResult> Index()
     {
-        dashboard = new();
+        dashboard = new()
+        {
+            BankAccount = new(),
+            Transactions = new()
+        };
 
         // fetch this appUser's bankaccount
-        bankAccount = await BankAccountByService();
+        dashboard.BankAccount = await BankAccountByService();
 
-        // if NOT found "this user's bankaccount", create to db.
-        if (bankAccount.BankAccountId == 0)
+        // if NOT found "this user's bank account", create to db.
+        if (dashboard.BankAccount.BankAccountId == 0)
         {
             BankAccountCreateDTO bankAccountCreateDTO = new()
             {
@@ -112,19 +114,17 @@ public class BankController : Controller
                 SavingsBalance = 0,
                 TransactionAmount = 0
             };
-            // add to db and redirect.
+            // create to db and redirect.
             APIResponse createResponse = await _bankAccountService.CreateAsync<APIResponse>(bankAccountCreateDTO, "");
             if (createResponse != null && createResponse.IsSuccess == true)
             {
                 var stringBankAccountFromDb = Convert.ToString(createResponse.Data);
-                bankAccount = JsonConvert.DeserializeObject<BankAccountDTO>(stringBankAccountFromDb);
+                dashboard.BankAccount = JsonConvert.DeserializeObject<BankAccountDTO>(stringBankAccountFromDb);
                 return View(dashboard);
             }
         }
-        // if found, add to dashboard.
-        dashboard.BankAccount = bankAccount;
 
-        // add this accounts transactions to dashboard.
+        // else bankAccount found. add this accounts transactions to dashboard.
         dashboard.Transactions = await TransactionsByService();
 
         return View(dashboard);
@@ -156,7 +156,7 @@ public class BankController : Controller
     {
         if (dashboard.BankAccount.CheckingsBalance < dashboard.BankAccount.TransactionAmount)
         {
-            TempData["error"] = $"Can't withdraw ${dashboard.BankAccount.TransactionAmount} from Checkings, because Checkings balance is ${bankAccount.CheckingsBalance}.";
+            TempData["error"] = $"Can't withdraw ${dashboard.BankAccount.TransactionAmount} from Checkings, because Checkings balance is ${dashboard.BankAccount.CheckingsBalance}.";
             return RedirectToAction(nameof(Index));
         }
         else
@@ -190,7 +190,7 @@ public class BankController : Controller
             // update balances to db and redirect
             APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
 
-            TempData["success"] = $"${bankAccount.TransactionAmount} transferred from Savings to Checkings.";
+            TempData["success"] = $"${dashboard.BankAccount.TransactionAmount} transferred from Savings to Checkings.";
             return RedirectToAction(nameof(Index));
         }
 

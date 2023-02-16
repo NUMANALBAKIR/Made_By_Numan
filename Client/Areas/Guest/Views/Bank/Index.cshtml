@@ -19,6 +19,7 @@
 </div>
 
 <div class="container mt-2 p-5 mx-1 bg-primary">
+
     <!-- row 1 -->
     <div class="row">
         <div class="col-6">
@@ -64,7 +65,7 @@
                                 <input hidden asp-for="BankAccount.HolderName" />
 
                                 <label asp-for="BankAccount.TransactionAmount" class="form-label">Amount:</label>
-                                $<input asp-for="BankAccount.@Model.BankAccount.TransactionAmount" class="form-control" id="amount">
+                                $<input asp-for="BankAccount.TransactionAmount" class="form-control" id="amount">
                                 
                                 <button type="submit" asp-action="AddToSavings" class="btn btn-primary">Add</button>
                                 <span asp-validation-for="BankAccount.TransactionAmount" class="text-danger"></span>
@@ -174,7 +175,6 @@
                     </tr>
                 </thead>
                 <tbody>
-
                     @for (int i = 0; i < Model.Transactions.Count; i++)
                     {
                         TransactionDTO item = Model.Transactions[i];
@@ -182,7 +182,7 @@
 
                         if (i == 0)
                         {
-                            lastTransactionClass = "text-bg-info";
+                            lastTransactionClass = "text-bg-secondary";
                         }
 
                         <tr class="@lastTransactionClass">
@@ -202,7 +202,8 @@
                     }
                 </tbody>
             </table>
-        </div>
+        </div> <!-- transactions div ends -->
+
     </div>
 
 </div>
