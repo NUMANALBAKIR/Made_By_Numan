@@ -49,6 +49,10 @@ builder.Services.AddScoped<IAppUserService, AppUserService>();
 builder.Services.AddHttpClient<IBankAccountService, BankAccountService>();
 builder.Services.AddScoped<IBankAccountService, BankAccountService>();
 
+builder.Services.AddHttpClient<ITransactionService, TransactionService>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+
+
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
 builder.Services.AddRazorPages();
