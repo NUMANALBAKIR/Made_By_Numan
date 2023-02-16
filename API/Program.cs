@@ -4,6 +4,8 @@ using API.DatabaseInitializer;
 using API.Repository;
 using API.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,18 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 
 builder.Services.AddControllers();
 
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Numan's Swagger-API",
+        Description = "API I used to develop the site.",
+        Contact = new OpenApiContact
+        {
+            Url = new Uri("https://madebynumanclient.azurewebsites.net/")
+        }
+    })
+);
 
 builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
@@ -29,18 +42,19 @@ var app = builder.Build();
 
 
 // Configure HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
-//app.UseSwagger();
-//app.UseSwaggerUI(options =>
+//if (app.Environment.IsDevelopment())
 //{
-//    options.RoutePrefix = string.Empty;
-//    options.SwaggerEndpoint("/swagger/swagger.json", "API");
-//});
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.RoutePrefix = string.Empty;
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+});
 
 app.UseHttpsRedirection();
 
