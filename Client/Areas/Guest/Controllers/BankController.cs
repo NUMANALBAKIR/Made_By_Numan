@@ -96,8 +96,6 @@ public class BankController : Controller
     public async Task AddTransactionByService(TransactionCreateDTO createDto)
     {
         await _transactionService.CreateAsync<APIResponse>(createDto, "");
-
-        // ? what does CreateAsync return?
     }
 
 
@@ -165,42 +163,6 @@ public class BankController : Controller
         await AddTransactionByService(createDto);
 
         return RedirectToAction(nameof(Index));
-    }
-
-
-    [HttpPost]
-    public async Task<IActionResult> WithDrawFromCheckings()
-    {
-        // in-sufficient blance
-        if (dashboard.BankAccount.CheckingsBalance < dashboard.BankAccount.TransactionAmount)
-        {
-            TempData["error"] = $"Can't withdraw ${dashboard.BankAccount.TransactionAmount} from Checkings, because Checkings balance is ${dashboard.BankAccount.CheckingsBalance}.";
-            return RedirectToAction(nameof(Index));
-        }
-        else
-        // sufficient balance
-        {
-            dashboard.BankAccount.CheckingsBalance -= dashboard.BankAccount.TransactionAmount;
-            BankAccountUpdateDTO bankAccountUpdateDTO = _mapper.Map<BankAccountUpdateDTO>(dashboard.BankAccount);
-
-            // update balances to db and redirect
-            APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
-
-            TempData["success"] = $"${dashboard.BankAccount.TransactionAmount} withdrawn from Checkings.";
-
-            // add this transaction to db
-            TransactionCreateDTO createDto = new()
-            {
-                AppUserId = GetNameIdentifierClaim(),
-                PreviousCheckingsBalance = dashboard.BankAccount.CheckingsBalance + dashboard.BankAccount.TransactionAmount,
-                PreviousSavingsBalance = dashboard.BankAccount.SavingsBalance,
-                TransactionDate = DateTime.Now,
-                Message = $"${dashboard.BankAccount.TransactionAmount} withdrawn from Checkings."
-            };
-            await AddTransactionByService(createDto);
-
-            return RedirectToAction(nameof(Index));
-        }
     }
 
 
@@ -277,6 +239,42 @@ public class BankController : Controller
             return RedirectToAction(nameof(Index));
         }
     }
+
+
+    [HttpPost]
+    public async Task<IActionResult> WithDrawFromCheckings()
+    {
+        // in-sufficient blance
+        if (dashboard.BankAccount.CheckingsBalance < dashboard.BankAccount.TransactionAmount)
+        {
+            TempData["error"] = $"Can't withdraw ${dashboard.BankAccount.TransactionAmount} from Checkings, because Checkings balance is ${dashboard.BankAccount.CheckingsBalance}.";
+            return RedirectToAction(nameof(Index));
+        }
+        else
+        // sufficient balance
+        {
+            dashboard.BankAccount.CheckingsBalance -= dashboard.BankAccount.TransactionAmount;
+            BankAccountUpdateDTO bankAccountUpdateDTO = _mapper.Map<BankAccountUpdateDTO>(dashboard.BankAccount);
+
+            // update balances to db and redirect
+            APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
+
+            TempData["success"] = $"${dashboard.BankAccount.TransactionAmount} withdrawn from Checkings.";
+
+            // add this transaction to db
+            TransactionCreateDTO createDto = new()
+            {
+                AppUserId = GetNameIdentifierClaim(),
+                PreviousCheckingsBalance = dashboard.BankAccount.CheckingsBalance + dashboard.BankAccount.TransactionAmount,
+                PreviousSavingsBalance = dashboard.BankAccount.SavingsBalance,
+                TransactionDate = DateTime.Now,
+                Message = $"${dashboard.BankAccount.TransactionAmount} cash withdrawn from Checkings."
+            };
+            await AddTransactionByService(createDto);
+
+            return RedirectToAction(nameof(Index));
+        }
+    }
         //        {
         //            var stringBankAccountFromDb = Convert.ToString(bankAccountResponse.Data);
         //            bankAccountFromDb = JsonConvert.DeserializeObject<BankAccountDTO>(stringBankAccountFromDb);
@@ -297,6 +295,7 @@ if (updateResponse != null && updateResponse.IsSuccess == true)
 }
     }
     */
+
 
 
 }
