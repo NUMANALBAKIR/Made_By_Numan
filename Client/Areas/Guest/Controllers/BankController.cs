@@ -30,11 +30,6 @@ public class BankController : Controller
         ITransactionService transactionService)
     {
         _mapper = mapper;
-        _emailSender = emailSender;
-        _emailSender = emailSender;
-        _emailSender = emailSender;
-        _emailSender = emailSender;
-        _emailSender = emailSender;
         _appUserService = appUserService;
         _bankAccountService = bankAccountService;
         _transactionService = transactionService;
@@ -275,27 +270,6 @@ public class BankController : Controller
             return RedirectToAction(nameof(Index));
         }
     }
-        //        {
-        //            var stringBankAccountFromDb = Convert.ToString(bankAccountResponse.Data);
-        //            bankAccountFromDb = JsonConvert.DeserializeObject<BankAccountDTO>(stringBankAccountFromDb);
-        //        }
-        //    if (ModelState.IsValid)
-        //    {
-        return View(); //del when uncomment above
-}
-CurrentPrice = bankAccountDTO.CurrentPrice,
-
-            };
-// update to db and redirect
-APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
-if (updateResponse != null && updateResponse.IsSuccess == true)
-{
-    TempData["success"] = "Updated item-count in cart.";
-    return RedirectToAction(nameof(Index), "OrderFood", "menu");
-}
-    }
-    */
-
 
 
 }
