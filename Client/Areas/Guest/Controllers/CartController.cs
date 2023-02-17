@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Client.Models;
+using Client.Models.Bank;
 using Client.Models.BankDTOs;
 using Client.Models.OrderFoodDTOs;
 using Client.Models.User;
 using Client.Models.ViewModels;
+using Client.Services;
 using Client.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -27,6 +29,7 @@ public class CartController : Controller
     private readonly IAppUserService _appUserService;
     private readonly IEmailSender _emailSender;
     private readonly IBankAccountService _bankAccountService;
+    private readonly ITransactionService _transactionService;
     private readonly IMapper _mapper;
 
     public CartController(
@@ -36,6 +39,7 @@ public class CartController : Controller
         IAppUserService appUserService,
         IEmailSender emailSender,
         IBankAccountService bankAccountService,
+        ITransactionService transactionService,
         IMapper mapper)
     {
         _cartItemService = cartItemService;
@@ -44,6 +48,7 @@ public class CartController : Controller
         _appUserService = appUserService;
         _emailSender = emailSender;
         _bankAccountService = bankAccountService;
+        _transactionService = transactionService;
         _mapper = mapper;
     }
 
@@ -199,8 +204,19 @@ public class CartController : Controller
         BankAccountDTO bankAccount = await BankAccountByService();
         bankAccount.CheckingsBalance -= headerDto.OrderTotal;
         BankAccountUpdateDTO bankAccountUpdateDTO = _mapper.Map<BankAccountUpdateDTO>(bankAccount);
-        // update to db
         await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
+
+        // add this transaction to db
+        bankAccount.TransactionAmount = headerDto.OrderTotal;
+        TransactionCreateDTO createDto = new()
+        {
+            AppUserId = GetNameIdentifierClaim(),
+            PreviousCheckingsBalance = bankAccount.CheckingsBalance + bankAccount.TransactionAmount,
+            PreviousSavingsBalance = bankAccount.SavingsBalance,
+            TransactionDate = DateTime.Now,
+            Message = $"Food Order of ${bankAccount.TransactionAmount} placed using Checkings Balance."
+        };
+        await AddTransactionByService(createDto);
 
         await ClearCart(cartItems);
 
@@ -224,6 +240,7 @@ public class CartController : Controller
         }
         // add tempdata for bank
         TempData["success"] = $"Food purchase of {headerDto.OrderTotal} done.";
+
         return View(headerDto);
     }
 
@@ -247,5 +264,13 @@ public class CartController : Controller
         string emailBody = $"<h2>A Food Order of total <u>{confirmationHeader.OrderTotal.ToString("c")}</u> has been placed for your address <u>{confirmationHeader.DeliveryAddress}</u> at <u>{DateTime.Now.ToShortTimeString()}</u>.</h2>";
         _emailSender.SendEmailAsync(confirmationHeader.EmailAddress, "Food Order placed.", emailBody);
     }
+
+
+    // add this transaction to db.
+    public async Task AddTransactionByService(TransactionCreateDTO createDto)
+    {
+        await _transactionService.CreateAsync<APIResponse>(createDto, "");
+    }
+
 
 }
