@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Client.Models;
+using Client.Models.Bank;
 using Client.Models.BankDTOs;
 using Client.Models.User;
 using Client.Models.ViewModels;
@@ -86,6 +87,15 @@ public class BankController : Controller
     }
 
 
+    // add this transaction to db.
+    public async Task AddTransactionByService(TransactionCreateDTO createDto)
+    {
+        await _transactionService.CreateAsync<APIResponse>(createDto, "");
+
+        // ? what does CreateAsync return?
+    }
+
+
     // home page of Bank
     public async Task<IActionResult> Index()
     {
@@ -121,12 +131,10 @@ public class BankController : Controller
 
         // else bankAccount found. add this accounts transactions to dashboard.
         dashboard.Transactions = await TransactionsByService();
+        dashboard.Transactions.Reverse(); // to show last one on top.
 
         return View(dashboard);
     }
-
-
-
 
 
     [HttpPost]
@@ -139,8 +147,17 @@ public class BankController : Controller
         APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
 
         TempData["success"] = $"${dashboard.BankAccount.TransactionAmount} added to Savings.";
-        // add to transaction
 
+        // add this transaction to db
+        TransactionCreateDTO createDto = new()
+        {
+            AppUserId = GetNameIdentifierClaim(),
+            PreviousCheckingsBalance = dashboard.BankAccount.CheckingsBalance,
+            PreviousSavingsBalance = dashboard.BankAccount.SavingsBalance - dashboard.BankAccount.TransactionAmount,
+            TransactionDate = DateTime.Now,
+            Message = $"${dashboard.BankAccount.TransactionAmount} added to Savings."
+        };
+        await AddTransactionByService(createDto);
 
         return RedirectToAction(nameof(Index));
     }
@@ -149,12 +166,14 @@ public class BankController : Controller
     [HttpPost]
     public async Task<IActionResult> WithDrawFromCheckings()
     {
+        // in-sufficient blance
         if (dashboard.BankAccount.CheckingsBalance < dashboard.BankAccount.TransactionAmount)
         {
             TempData["error"] = $"Can't withdraw ${dashboard.BankAccount.TransactionAmount} from Checkings, because Checkings balance is ${dashboard.BankAccount.CheckingsBalance}.";
             return RedirectToAction(nameof(Index));
         }
         else
+        // sufficient balance
         {
             dashboard.BankAccount.CheckingsBalance -= dashboard.BankAccount.TransactionAmount;
             BankAccountUpdateDTO bankAccountUpdateDTO = _mapper.Map<BankAccountUpdateDTO>(dashboard.BankAccount);
@@ -163,6 +182,18 @@ public class BankController : Controller
             APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
 
             TempData["success"] = $"${dashboard.BankAccount.TransactionAmount} withdrawn from Checkings.";
+
+            // add this transaction to db
+            TransactionCreateDTO createDto = new()
+            {
+                AppUserId = GetNameIdentifierClaim(),
+                PreviousCheckingsBalance = dashboard.BankAccount.CheckingsBalance + dashboard.BankAccount.TransactionAmount,
+                PreviousSavingsBalance = dashboard.BankAccount.SavingsBalance,
+                TransactionDate = DateTime.Now,
+                Message = $"${dashboard.BankAccount.TransactionAmount} withdrawn from Checkings."
+            };
+            await AddTransactionByService(createDto);
+
             return RedirectToAction(nameof(Index));
         }
     }
@@ -171,12 +202,14 @@ public class BankController : Controller
     [HttpPost]
     public async Task<IActionResult> SavingsToCheckings()
     {
+        // in-sufficient balance
         if (dashboard.BankAccount.SavingsBalance < dashboard.BankAccount.TransactionAmount)
         {
             TempData["error"] = $"Can't transfer ${dashboard.BankAccount.TransactionAmount} from Savings, because Savings balance is ${dashboard.BankAccount.SavingsBalance}.";
             return RedirectToAction(nameof(Index));
         }
         else
+        // sufficient balance
         {
             dashboard.BankAccount.SavingsBalance -= dashboard.BankAccount.TransactionAmount;
             dashboard.BankAccount.CheckingsBalance += dashboard.BankAccount.TransactionAmount;
@@ -186,6 +219,18 @@ public class BankController : Controller
             APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
 
             TempData["success"] = $"${dashboard.BankAccount.TransactionAmount} transferred from Savings to Checkings.";
+
+            // add this transaction to db
+            TransactionCreateDTO createDto = new()
+            {
+                AppUserId = GetNameIdentifierClaim(),
+                PreviousSavingsBalance = dashboard.BankAccount.SavingsBalance + dashboard.BankAccount.TransactionAmount,
+                PreviousCheckingsBalance = dashboard.BankAccount.CheckingsBalance - dashboard.BankAccount.TransactionAmount,
+                TransactionDate = DateTime.Now,
+                Message = $"${dashboard.BankAccount.TransactionAmount} transferred from Savings to Checkings."
+            };
+            await AddTransactionByService(createDto);
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -195,12 +240,14 @@ public class BankController : Controller
     [HttpPost]
     public async Task<IActionResult> CheckingsToSavings()
     {
+        // in-sufficient balance
         if (dashboard.BankAccount.CheckingsBalance < dashboard.BankAccount.TransactionAmount)
         {
             TempData["error"] = $"Can't transfer ${dashboard.BankAccount.TransactionAmount} from Checkings, because Checkings balance is ${dashboard.BankAccount.CheckingsBalance}.";
             return RedirectToAction(nameof(Index));
         }
         else
+        // sufficient balance
         {
             dashboard.BankAccount.CheckingsBalance -= dashboard.BankAccount.TransactionAmount;
             dashboard.BankAccount.SavingsBalance += dashboard.BankAccount.TransactionAmount;
@@ -210,6 +257,18 @@ public class BankController : Controller
             APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
 
             TempData["success"] = $"${dashboard.BankAccount.TransactionAmount} transferred from Checkings to Savings.";
+
+            // add this transaction to db
+            TransactionCreateDTO createDto = new()
+            {
+                AppUserId = GetNameIdentifierClaim(),
+                PreviousCheckingsBalance = dashboard.BankAccount.CheckingsBalance + dashboard.BankAccount.TransactionAmount,
+                PreviousSavingsBalance = dashboard.BankAccount.SavingsBalance - dashboard.BankAccount.TransactionAmount,
+                TransactionDate = DateTime.Now,
+                Message = $"${dashboard.BankAccount.TransactionAmount} transferred from Checkings to Savings."
+            };
+            await AddTransactionByService(createDto);
+
             return RedirectToAction(nameof(Index));
         }
     }
