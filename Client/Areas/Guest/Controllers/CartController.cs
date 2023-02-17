@@ -239,7 +239,7 @@ public class CartController : Controller
             headerDto = JsonConvert.DeserializeObject<OrderHeaderDTO>(stringHeader);
         }
         // add tempdata for bank
-        TempData["success"] = $"Food purchase of {headerDto.OrderTotal} done.";
+        TempData["success"] = $"Food purchase of ${headerDto.OrderTotal} done.";
 
         return View(headerDto);
     }
