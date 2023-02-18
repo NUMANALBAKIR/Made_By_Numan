@@ -9,28 +9,21 @@
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
-/*.footer {
-    font-size: 14px;
-    background-color: #1f1f24;
-    padding: 50px 0;
-    color: rgba(255, 255, 255, 0.7);
-    position: fixed;
-    bottom: 0;
-}*/
 
-.footer {
-    position: page;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    background-color:black;
-    color: white;
-    padding: 30px;
-/*    line-height: 60px;*/
+
+
+/* EXTERNAL CODE ABOVE */
+
+body {
+    font-family: var(--font-default);
+    color: var(--color-default);
 }
 
-
-
+.footer {
+    padding: 30px;
+    background-color: black;
+    color: white;
+}
 
     .footer .icon {
         margin-right: 15px;
@@ -139,10 +132,7 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
-body {
-    font-family: var(--font-default);
-    color: var(--color-default);
-}
+
 
 a {
     color: var(--color-primary);
@@ -1720,4 +1710,3 @@ section {
         font-size: 14px;
     }
 }
-
