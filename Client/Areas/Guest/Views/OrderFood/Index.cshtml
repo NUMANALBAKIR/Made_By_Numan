@@ -173,6 +173,12 @@
                 <strong>Success!</strong> @TempData["success"]
             </div>
         }
+        @if (TempData["info"] != null)
+        {
+            <div style="font-size:18px;" class="alert alert-info" role="alert">
+                <strong>Info!</strong> @TempData["info"]
+            </div>
+        }
 
         <!-- menu tabs -->
         <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">

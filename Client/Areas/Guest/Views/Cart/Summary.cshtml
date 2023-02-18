@@ -69,7 +69,7 @@
                                     <label>Email</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="OrderHeaderDTO.EmailAddress" class="form-control" />
+                                    <input type="email" asp-for="OrderHeaderDTO.EmailAddress" class="form-control" />
                                     <p class="text-danger">A real email will be sent to this address.</p>
                                     <span asp-validation-for="OrderHeaderDTO.EmailAddress" class="text-danger"></span>
                                 </div>

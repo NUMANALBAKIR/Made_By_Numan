@@ -109,6 +109,14 @@ public class CartController : Controller
             CartItems = await CartItemsByServiceAsync(),
             OrderHeaderDTO = new()
         };
+
+        // if empty cart 
+        if (cartVM.CartItems.Count == 0)
+        {
+            TempData["info"] = "Cart is empty. Please add foods.";
+            return RedirectToAction("Index", "OrderFood", "menu");
+        }
+
         return View(cartVM);
     }
 
@@ -230,7 +238,13 @@ public class CartController : Controller
     // Order Confirmation page
     public async Task<IActionResult> OrderConfirmation(int orderHeaderid)
     {
-        // get order info 
+        // prevent page refresh.
+        if (TempData["success"] != null)
+        {
+            return RedirectToAction("Index", "OrderFood");
+        }
+
+        // get order info
         OrderHeaderDTO headerDto = new();
         APIResponse response = await _orderHeaderService.GetAsync<APIResponse>(orderHeaderid, "");
         if (response != null && response.IsSuccess == true)
