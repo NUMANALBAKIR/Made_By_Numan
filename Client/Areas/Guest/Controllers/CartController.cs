@@ -102,6 +102,8 @@ public class CartController : Controller
     }
 
 
+    // Cart tab contents.
+    // if empty cart, redirect. else display cart.
     public async Task<IActionResult> Index()
     {
         CartVM cartVM = new()

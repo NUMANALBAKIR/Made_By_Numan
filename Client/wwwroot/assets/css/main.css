@@ -10,20 +10,24 @@
 # Footer
 --------------------------------------------------------------*/
 
-
-
-/* EXTERNAL CODE ABOVE */
-
 body {
     font-family: var(--font-default);
     color: var(--color-default);
 }
 
 .footer {
-    padding: 30px;
-    background-color: black;
-    color: white;
+/*    position: absolute;*/
+/*    line-height: 60px;*/
+    bottom: 0;
+    white-space: nowrap;
+    width: 100%;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    background-color: #1f1f24;
+    padding: 50px 0;
 }
+
+
 
     .footer .icon {
         margin-right: 15px;
@@ -40,7 +44,7 @@ body {
     }
 
     .footer .footer-links {
-        margin-bottom: 30px;
+        margin-bottom: 0px;
     }
 
         .footer .footer-links ul {
@@ -132,7 +136,6 @@ body {
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
-
 
 a {
     color: var(--color-primary);
@@ -1710,3 +1713,4 @@ section {
         font-size: 14px;
     }
 }
+

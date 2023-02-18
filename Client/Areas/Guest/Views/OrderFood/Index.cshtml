@@ -2,12 +2,6 @@
 
 @{
     Layout = "~/Views/Shared/_Layout_OrderFood.cshtml";
-
-    <style>
-    footer{
-        position: page;
-    }
-    </style>
 }
 
 
@@ -497,10 +491,10 @@
             <h4 style="text-align: center;" class="py-3" id="emailus">EMAIL US:</h4>
             
             <div class="row" >
-                <div class="col-xl-6 form-group">
+                <div class="col-xl-6 pt-3 form-group">
                     <input asp-for="EmailUsDTO.Name"class="form-control" id="name" placeholder="Your Name" required>
                 </div>
-                <div class="col-xl-6 form-group">
+                <div class="col-xl-6 pt-3 form-group">
                     <input asp-for="EmailUsDTO.Email" class="form-control" id="email" placeholder="Email Address" required>
                 </div>
             </div>
