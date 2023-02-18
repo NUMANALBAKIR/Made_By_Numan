@@ -112,10 +112,7 @@ public class BankController : Controller
             BankAccountCreateDTO bankAccountCreateDTO = new()
             {
                 HolderName = AppUserByService().Result.Name,
-                AppUserId = GetNameIdentifierClaim(),
-                CheckingsBalance = 0,
-                SavingsBalance = 0,
-                TransactionAmount = 0
+                AppUserId = GetNameIdentifierClaim()
             };
             // create to db and redirect.
             APIResponse createResponse = await _bankAccountService.CreateAsync<APIResponse>(bankAccountCreateDTO, "");

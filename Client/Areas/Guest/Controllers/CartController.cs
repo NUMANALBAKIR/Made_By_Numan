@@ -92,7 +92,7 @@ public class CartController : Controller
     }
 
 
-    // clear cart 
+    // clear cart
     private async Task ClearCart(List<CartItemDTO> cartItems)
     {
         foreach (var item in cartItems)
