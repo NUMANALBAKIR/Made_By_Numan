@@ -15,9 +15,9 @@ public class BankAccount
     public AppUser AppUser { get; set; }
 
     public string HolderName { get; set; }
-    public decimal SavingsBalance { get; set; }
-    public decimal CheckingsBalance { get; set; }
-    public decimal TransactionAmount { get; set; }
+    [Precision(18, 2)] public decimal SavingsBalance { get; set; }
+    [Precision(18, 2)] public decimal CheckingsBalance { get; set; }
+    [Precision(18, 2)] public decimal TransactionAmount { get; set; }
 
 
 }

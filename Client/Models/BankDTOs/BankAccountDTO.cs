@@ -14,9 +14,9 @@ public class BankAccountDTO
     public AppUser AppUser { get; set; }
 
     public string HolderName { get; set; }
-    public decimal SavingsBalance { get; set; }
-    public decimal CheckingsBalance { get; set; }
+    [Precision(18, 2)] public decimal SavingsBalance { get; set; }
+    [Precision(18, 2)] public decimal CheckingsBalance { get; set; }
 
     [Range(1, 500, ErrorMessage = "Amount must be between 1 and 500.")]
-    public decimal TransactionAmount { get; set; }
+    [Precision(18, 2)] public decimal TransactionAmount { get; set; }
 }

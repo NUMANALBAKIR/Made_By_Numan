@@ -13,5 +13,5 @@ public class OrderDetailDTO
     public Food Food { get; set; }
 
     public int Count { get; set; }
-    public decimal PurchasePrice { get; set; }
+    [Precision(18, 2)] public decimal PurchasePrice { get; set; }
 }

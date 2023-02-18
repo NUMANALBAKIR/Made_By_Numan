@@ -17,7 +17,7 @@ public class CartItemDTO
     [ValidateNever, ForeignKey(nameof(FoodId))]
     public FoodDTO Food { get; set; }
 
-    public decimal CurrentPrice { get; set; }
+    [Precision(18, 2)] public decimal CurrentPrice { get; set; }
     [Range(1, 20, ErrorMessage = "Items must be between 1 and 20")]
     public int Count { get; set; }
 }

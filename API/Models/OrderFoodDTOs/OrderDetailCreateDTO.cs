@@ -7,5 +7,5 @@ public class OrderDetailCreateDTO
     public int FoodId { get; set; }
 
     public int Count { get; set; }
-    public decimal PurchasePrice { get; set; }
+    [Precision(18, 2)] public decimal PurchasePrice { get; set; }
 }

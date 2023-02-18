@@ -9,7 +9,7 @@ public class FoodCreateDTO
     [Required]
     public string Description { get; set; }
     [Required]
-    public decimal Price { get; set; }
+    [Precision(18, 2)] public decimal Price { get; set; }
     public string? ImageURL { get; set; }
 
 

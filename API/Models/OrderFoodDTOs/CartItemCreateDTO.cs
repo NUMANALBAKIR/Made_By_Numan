@@ -6,7 +6,7 @@ public class CartItemCreateDTO
 {
     public string AppUserId { get; set; }
     public int FoodId { get; set; }
-    public decimal CurrentPrice { get; set; }
+    [Precision(18, 2)] public decimal CurrentPrice { get; set; }
     [Required]
     public int Count { get; set; }
 }

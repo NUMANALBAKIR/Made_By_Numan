@@ -12,7 +12,7 @@ public class OrderHeaderDTO
     [ValidateNever, ForeignKey(nameof(AppUserId))]
     public AppUserDTO AppUser { get; set; }
 
-    public decimal OrderTotal { get; set; }
+    [Precision(18, 2)] public decimal OrderTotal { get; set; }
     public string TrackingNumber { get; set; }
     public DateTime OrderDate { get; set; }
 
