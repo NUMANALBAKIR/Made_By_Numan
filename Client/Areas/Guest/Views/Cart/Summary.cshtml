@@ -133,8 +133,8 @@
 
     <script>
         let btn = document.getElementById('orderButton');
-        let checkingsBalance =  @TempData["errorBalance"];
-        let orderTotal = @Model.OrderHeaderDTO.OrderTotal;
+        let checkingsBalance = parseFloat(@TempData["errorBalance"]);
+        let orderTotal = parseFloat(@Model.OrderHeaderDTO.OrderTotal);
 
         if (checkingsBalance < orderTotal){
             btn.style.visibility = 'hidden';
