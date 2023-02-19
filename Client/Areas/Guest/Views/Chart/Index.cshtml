@@ -1,41 +1,49 @@
 ﻿
-<div class="container-fluid p-2 text-black text-center mt-2" style="border: solid 1px;">
-    <h4>[ Using Javascript, Google-charts. ]</h4>
+
+
+
+<div class="container text-black text-center mt-2" style="border: solid 1px;">
+    <h4 class="p-2">[ Using Javascript, Google-charts. ]</h4>
 </div>
 
-<div class="container mt-2 p-3 bg-gradient">
+<div class="container mt-2 p-3">
 
-    <div class="row">
-        <h4>Please enter values and click submit to Draw Chart below.</h4>
+    <div class="row mb-4">
 
-        <!-- chart form starts -->
-        <form>
-            <div class="my-3">
-                <label for="work" class="form-label">Work :</label>
-                <input name="hours[]" type="text" class="form-control" id="work" value=10>
-            </div>
-            <div class="my-3">
-                <label for="sleep" class="form-label">Sleep :</label>
-                <input name="hours[]" type="text" class="form-control" id="sleep" value=10>
-            </div>
-            <div class="my-3">
-                <label for="watchtv" class="form-label">Watch TV :</label>
-                <input name="hours[]" type="text" class="form-control" id="watchtv" value=3>
-            </div>
-            <div class="my-3">
-                <label for="eat" class="form-label">Eat :</label>
-                <input name="hours[]" type="text" class="form-control" id="eat" value=2>
-            </div>
+        <div class="col-sm-4">
+            <div id="piechart_3d"></div>
+        </div>
 
-            <div class="mt-3">
-                <input type="button" value="Submit" onclick="return Validate()" class="btn btn-outline-secondary btn-lg">
-            </div>
-        </form>
+        <div class="col-sm-8 m-2">
+            <h4>Please enter values and click submit to Draw Chart below.</h4>
+
+            <!-- chart form starts -->
+            <form>
+                <div class="my-3">
+                    <label for="work" class="form-label">Work :</label>
+                    <input name="hours[]" type="text" class="form-control" id="work" value=8>
+                </div>
+                <div class="my-3">
+                    <label for="sleep" class="form-label">Sleep :</label>
+                    <input name="hours[]" type="text" class="form-control" id="sleep" value=6>
+                </div>
+                <div class="my-3">
+                    <label for="watchtv" class="form-label">Watch TV :</label>
+                    <input name="hours[]" type="text" class="form-control" id="watchtv" value=4>
+                </div>
+                <div class="my-3">
+                    <label for="eat" class="form-label">Eat :</label>
+                    <input name="hours[]" type="text" class="form-control" id="eat" value=4>
+                </div>
+
+                <div class="mt-3">
+                    <input type="button" value="Submit" onclick="return Validate()" class="btn btn-outline-secondary btn-lg">
+                </div>
+            </form>
+
+        </div>
     </div>
 
-    <div class="row">
-        <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
-    </div>
 </div>
 
 
@@ -61,9 +69,9 @@
             ]);
 
             var options = {
-                backgroundColor: 'transparent',
                 is3D: true,
-                fontSize: 20
+                fontSize: 20,
+                backgroundColor: 'transparent'
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
