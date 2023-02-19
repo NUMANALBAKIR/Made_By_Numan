@@ -1,11 +1,9 @@
 ﻿
-
-
 <div class="container mt-5">
     <div class="row">
 
-        <div class="col-4">
-            <div class="card border-dark" style="width: 60%;">
+        <div class="col-sm-4 mb-4">
+            <div class="card border-dark" style="width:230px;">
                 <img class="card-img-top p-3" src="~/images/Numan.jpg" alt="Card image" style="width:100%">
 
                 <div class="card-body">
@@ -28,44 +26,52 @@
             </div>
         </div>
 
-        <div class="col-8 pt-5 p-4 text-bg-secondary">
-            <h4>
-                I (Numan) developed this site using real-world software-development designs and practices.
-            </h4>
-            <h4>
-                Link to Source-code of this project is in my Resume.
-            </h4>
-            <h4>
-                Nowhere else in the world exists this project, except in my repositories.
-            </h4>
+        <div class="col-sm-8 mb-4 text-bg-secondary">
+            <div class="p-4">
+                <h4>
+                    I (Numan) developed this site using real-world software-development designs and practices.
+                </h4>
+                <h4>
+                    Link to Source-code of this project is in my Resume.
+                </h4>
+                <h4>
+                    Nowhere else in the world exists this project, except in my repositories.
+                </h4>
 
-            <h4 class="pt-3">
-                <b><u>About the -Order Food- link above:</u></b> <br />
-            </h4>
-            <h4 class="pt-1">
-                I collected that Food-Ordering website's template from <a target="_blank" style="color:black;" href="https://bootstrapmade.com/demo/Yummy/">https://bootstrapmade.com/demo/Yummy/</a> ,
-                and used my .NET development knowledge to integrate it; extended it and made it functional: Food ordering, Emailing works; also, integrated it with Bank-of-Numan.
-            </h4>
+                <h4 class="pt-3">
+                    <b>
+                        <u>About the -Order Food- link above:</u>
+                    </b>
+                    <br />
+                </h4>
+                <h4 class="pt-1">
+                    I collected that Food-Ordering website's template from <a target="_blank" style="color:black;" href="https://bootstrapmade.com/demo/Yummy/">https://bootstrapmade.com/demo/Yummy/</a> ,
+                    and used my .NET development knowledge to integrate it; extended it and made it functional: Food ordering, Emailing works; also, integrated it with Bank-of-Numan.
+                </h4>
 
-            <h4 class="text-bg-secondary pt-2">
-                <u>Using: </u>
-                <ul>
-                    <li class="pt-2">
-                        Main Technologies: ASP.NET Core MVC, RESTful Web API, Entity Framework Core, SQL Server, Razor Pages (little), Identity (little).
-                    </li>
-                    <li class="pt-2">
-                        Other Technologies: HTML, CSS, Bootstrap, JavaScript, C#.
-                    </li>
-                    <li class="pt-2">
-                        Design Patterns and principles: N-Tier Architecture, SOLID, OOP, Dependency Injection, Repository pattern with Unit-of-Work, Services, DTOs, AutoMapper, Async Programming.
-                    </li>
-                    <li class="pt-2">
-                        Others: Git, Swagger, JSON, Visual Studio, Debugger.
-                    </li>
-                </ul>
-            </h4>
+                <h4 class="text-bg-secondary pt-2">
+                    <u>Using: </u>
+                    <ul>
+                        <li class="pt-2">
+                            Main Technologies: ASP.NET Core MVC, RESTful Web API, Entity Framework Core, SQL Server, Razor Pages (little), Identity (little).
+                        </li>
+                        <li class="pt-2">
+                            Other Technologies: HTML, CSS, Bootstrap, JavaScript, C#.
+                        </li>
+                        <li class="pt-2">
+                            Design Patterns and principles: N-Tier Architecture, SOLID, OOP, Dependency Injection, Repository pattern with Unit-of-Work, Services, DTOs, AutoMapper, Async Programming.
+                        </li>
+                        <li class="pt-2">
+                            Others: Git, Swagger, JSON, Visual Studio, Debugger.
+                        </li>
+                    </ul>
+                </h4>
+            </div>
+
         </div>
+
     </div>
+    <hr class="d-sm-none">
 </div>
 
 
@@ -76,6 +82,7 @@
 
 @section Scripts{
     <script>
+
         $(document).ready(function () {
 
             $('#sIcons').click(function () {
@@ -83,7 +90,6 @@
             });
 
         });
-
 
     </script>
 }
