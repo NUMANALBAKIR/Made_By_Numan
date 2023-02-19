@@ -178,6 +178,7 @@ public class OrderFoodController : Controller
             var stringList = Convert.ToString(response.Data);
             orderHeaders = JsonConvert.DeserializeObject<List<OrderHeaderDTO>>(stringList);
         }
+        orderHeaders.Reverse();
         return View(orderHeaders);
     }
 
