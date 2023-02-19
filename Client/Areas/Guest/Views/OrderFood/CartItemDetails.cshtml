@@ -7,73 +7,75 @@
 <h1>Cart-Item Details</h1>
 <hr />
 
-<form method="post">
+<div class="container">
 
     <div class="row">
 
-        <div class="col-4">
+        <div class="col-sm-4">
             <img src="~/@Model.Food.ImageURL" style="height:200px;" />
         </div>
 
-        <div class="col-8">
-            <dl class="row">
+        <div class="col-sm-8">
+            <form method="post">
+                <dl>
+                    <input asp-for="@Model.FoodId" hidden />
+                    <input asp-for="@Model.CurrentPrice" hidden />
 
-                <input asp-for="@Model.FoodId" hidden />
-                <input asp-for="@Model.CurrentPrice" hidden />
+                    <dt class="col-sm-2">
+                        Name :
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Model.Food.Name
+                    </dd>
 
-                <dt class="col-sm-2">
-                    Name :
-                </dt>
-                <dd class="col-sm-10">
-                    @Model.Food.Name
-                </dd>
+                    <dt class="col-sm-2">
+                        Price :
+                    </dt>
+                    <dd class="col-sm-10 text-danger">
+                        @Model.Food.Price.ToString("c")
+                    </dd>
 
-                <dt class="col-sm-2">
-                    Price :
-                </dt>
-                <dd class="col-sm-10 text-danger">
-                    @Model.Food.Price.ToString("c")
-                </dd>
+                    <dt class="col-sm-2">
+                        Description :
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Model.Food.Description
+                    </dd>
 
-                <dt class="col-sm-2">
-                    Description :
-                </dt>
-                <dd class="col-sm-10">
-                    @Model.Food.Description
-                </dd>
+                    <dt class="col-sm-2">
+                        Category :
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Model.Food.Category.Name
+                    </dd>
 
-                <dt class="col-sm-2">
-                    Category :
-                </dt>
-                <dd class="col-sm-10">
-                    @Model.Food.Category.Name
-                </dd>
+                    <dt class="col-sm-2">
+                        Number of this item :
+                    </dt>
+                    <dd class="col-sm-10">
+                        <input asp-for="@Model.Count" />
+                        <span asp-validation-for="@Model.Count" class="text-danger"></span>
+                    </dd>
+                </dl>
 
-                <dt class="col-sm-2">
-                    Number of this item :
-                </dt>
-                <dd class="col-sm-10">
-                    <input asp-for="@Model.Count" />
-			        <span asp-validation-for="@Model.Count" class="text-danger"></span>
-                </dd>
-
-            </dl>
-
-            <div>
-                <a class="btn btn-outline-success" asp-area="Guest" asp-controller="orderFood" asp-action="Index" asp-fragment="menu">Back to menu</a>                
-                <button type="submit" class="btn btn-outline-primary">Add to Cart</button>
-            </div>
+                <div>
+                    <a class="btn btn-outline-success" asp-area="Guest" asp-controller="orderFood" asp-action="Index" asp-fragment="menu">Back to menu</a>
+                    <button type="submit" class="btn btn-outline-primary">Add to Cart</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
-</form>
- 
+<hr />
+
 
 @section Scripts{
     <style>
         .footer {
-                position: absolute;
-                bottom: 0;
+            position: page;
+            line-height: 80px;
+            bottom: 0;
         }
     </style>
 }

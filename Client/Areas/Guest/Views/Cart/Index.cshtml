@@ -5,15 +5,16 @@
     decimal total = 0;
 }
 
-<form method="post">
-    <br />
-    <div class="container">
+
+<div class="container">
+    <h1><b>Cart</b> </h1>
+    
+    <form method="post">
         <div class="card">
             <div class="card-header ml-0">
                 <div class="row d-flex justify-content-between">
-                    <div class ="d-flex justify-content-between">
-                        <b>Cart</b>
-                        <a asp-controller="OrderFood" asp-action="Index" asp-fragment="menu" class="btn btn-small btn-outline-info">Add more items from Menu</a>
+                    <div class="d-flex justify-content-between">
+                        <a asp-controller="OrderFood" asp-action="Index" asp-fragment="menu" class="btn btn-small btn-info">Add more Foods</a>
                         <a asp-controller="Cart" asp-action="Summary" class="btn btn-small btn-success">Proceed to Order</a>
                     </div>
                 </div>
@@ -31,7 +32,7 @@
                             <h5><strong>@item.Food.Name</strong></h5>
                             <p><small>@item.Food.Description</small></p>
                         </div>
-                        <div class="col-12  col-lg-5 text-center row">
+                        <div class="row col-12 col-lg-5 text-center">
                             <div class="text-md-right pt-4">
                                 <h6>@item.CurrentPrice.ToString("c")<span class="text-muted">x </span>@item.Count plate(s)</h6>
 
@@ -42,26 +43,26 @@
                             </div>
 
                             @*<div class="col-6 col-sm-4 col-lg-6 pt-2">
-                                <div class="w-75 btn-group" role="group">
+                        <div class="w-75 btn-group" role="group">
 
-                                    <i class="bi bi-plus-square px-2"></i>
+                        <i class="bi bi-plus-square px-2"></i>
 
-                                    <i class="bi bi-dash-square"></i>
+                        <i class="bi bi-dash-square"></i>
 
-                                    <a asp-action="plus" asp-route-cartId="@item.id" class="btn btn-primary">
-                                        <i class="bi bi-plus-square"></i>
-                                    </a> &nbsp;
-                                    <a asp-action="minus" asp-route-cartId="@item.Id" class="btn btn-warning">
-                                        <i class="bi bi-dash-square"></i>
-                                    </a>
-                                 </div>
+                        <a asp-action="plus" asp-route-cartId="@item.id" class="btn btn-primary">
+                        <i class="bi bi-plus-square"></i>
+                        </a> &nbsp;
+                        <a asp-action="minus" asp-route-cartId="@item.Id" class="btn btn-warning">
+                        <i class="bi bi-dash-square"></i>
+                        </a>
+                        </div>
 
-                            </div>
-                            <div class="col-2 col-sm-4 col-lg-2 text-right pt-2">
-                                 <a asp-action="remove" class="btn btn-danger">
-                                  <i class="bi bi-trash-fill"></i>
-                                </a>
-                            </div>*@
+                        </div>
+                        <div class="col-2 col-sm-4 col-lg-2 text-right pt-2">
+                        <a asp-action="remove" class="btn btn-danger">
+                        <i class="bi bi-trash-fill"></i>
+                        </a>
+                        </div>*@
                         </div>
                     </div>
                     <hr />
@@ -71,8 +72,8 @@
                     <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 pr-4">
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between bg-light">
-                                <span class="text-info"> Total (USD)</span>
-                                <strong class="text-info">@total.ToString("c")</strong>
+                                <span class="text-success"> Total (USD)</span>
+                                <strong class="text-success">@total.ToString("c")</strong>
                             </li>
                         </ul>
                     </div>
@@ -80,14 +81,15 @@
 
             </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
 
 
 @section Scripts{
     <style>
         .footer {
-            position: absolute;
+            position: page;
+            line-height: 80px;
             bottom: 0;
         }
     </style>
