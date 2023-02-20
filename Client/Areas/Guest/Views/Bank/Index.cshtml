@@ -20,8 +20,8 @@
             </h4>
         </div>
         <div class="col-8">
-            <h4 style ="color:maroon;">
-                 @Model.BankAccount.HolderName 
+            <h4 style="color:maroon;">
+                @Model.BankAccount.HolderName
             </h4>
         </div>
     </div>
@@ -54,10 +54,10 @@
     </div>
 
     <!-- row 2 -->
-    <div class="row mt-4">
+    <div class="row mt-2">
 
         <!-- Accordion div begins -->
-        <div class="col-sm-4 mt-4">
+        <div class="col-sm-4 col-md-4">
             <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
@@ -164,12 +164,23 @@
                 </div>
             </div><!-- Accordion ends -->
         </div> <!-- Accordion div ends -->
+        
         <!-- transactions div begins-->
-        <div class="col-sm-8 mt-4">
+        <div class="col-sm-8 col-md-6 col-md-offset-2 mt-2">
             <h4 class="text-white">Transactions History (Last on top)</h4>
 
             <table class="table table-striped table-hover">
                 <thead class="table-secondary">
+                    <tr>
+                        <td></td>
+                        <td></td>
+
+                        <th colspan="2">
+                            Previous Balances
+                        </th>
+                        <td></td>
+                    </tr>
+
                     <tr>
                         <th>
                             Transaction Id
@@ -177,12 +188,8 @@
                         <th>
                             Transaction Message
                         </th>
-                        <th>
-                            Previous Checkings Balance
-                        </th>
-                        <th>
-                            Previous Savings Balance
-                        </th>
+                        <th>Checkings</th>
+                        <th>Savings</th>
                         <th>
                             Date
                         </th>
@@ -224,8 +231,3 @@
     </div>
 
 </div>
-
-
-
-
-

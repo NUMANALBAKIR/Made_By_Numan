@@ -157,7 +157,8 @@ public class RegisterModel : PageModel
                 else
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
+                    //return LocalRedirect(returnUrl);
+                    return LocalRedirect("/Identity/Account/Login");
                 }
             }
             foreach (var error in result.Errors)

@@ -108,7 +108,9 @@ public class LoginModel : PageModel
             if (result.Succeeded)
             {
                 _logger.LogInformation("User logged in.");
-                return LocalRedirect(returnUrl);
+                //return LocalRedirect(returnUrl);
+
+                return LocalRedirect("/Guest/Bank");
             }
             if (result.RequiresTwoFactor)
             {

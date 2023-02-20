@@ -241,10 +241,10 @@ public class CartController : Controller
     public async Task<IActionResult> OrderConfirmation(int orderHeaderid)
     {
         // prevent page refresh.
-        if (TempData["success"] != null)
-        {
-            return RedirectToAction("Index", "OrderFood");
-        }
+        //if (TempData["success"] != null)
+        //{
+        //    return RedirectToAction("Index", "OrderFood");
+        //}
 
         // get order info
         OrderHeaderDTO headerDto = new();
