@@ -11,13 +11,13 @@
         @if (TempData["successBalance"] != null)
         {
             <div style="font-size:18px;" class="alert alert-primary" role="alert">
-                    Your Bank-of-Numan <b>Checkings balance: $@TempData["successBalance"]</b>. You <b>can</b> place order.
+                Your Bank-of-Numan <b>Checkings balance is $@TempData["successBalance"]</b>. You <b>can</b> place order.
             </div>
         }
         else if (TempData["errorBalance"] != null)
         {
             <div style="font-size:18px;" class="alert alert-warning" role="alert">
-                    Your Bank-of-Numan <b>Checkings balance: $@TempData["errorBalance"]</b>. You <b>CAN NOT</b> place order. Please update balance.
+                Your Bank-of-Numan <b>Checkings balance is $@TempData["errorBalance"]</b>. You <b>CAN NOT</b> place order. Please add balance <a asp-action="Index" asp-controller="Bank">here</a>.
             </div>
         }
 
@@ -113,6 +113,10 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <button type="submit" id="orderButton" value="Place Order" class="btn btn-primary form-control">Place Order</button>
+
+                        <p style="display: none;font-size:16px;" class="text-danger" id="WaitP">
+                            <b>Placing order. Please wait.</b>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -133,16 +137,20 @@
 
     <script>
         let btn = document.getElementById('orderButton');
+
         let checkingsBalance = parseFloat(@TempData["errorBalance"]);
         let orderTotal = parseFloat(@Model.OrderHeaderDTO.OrderTotal);
 
-        if (checkingsBalance < orderTotal){
+        let waitP = document.getElementById('WaitP');;
+
+        if (checkingsBalance < orderTotal) {
             btn.style.visibility = 'hidden';
         }
 
-        btn.addEventListener('click', () => 
-        {
+        btn.addEventListener('click', () => {
             btn.style.display = 'none';
+            waitP.style.display = 'block';
         });
+
     </script>
 }
