@@ -30,7 +30,7 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
-// sequence of AddHttpClient is important !
+// order of AddHttpClient and its service is important !
 builder.Services.AddHttpClient<IFoodService, FoodService>();
 builder.Services.AddScoped<IFoodService, FoodService>();
 

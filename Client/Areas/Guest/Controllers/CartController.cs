@@ -275,6 +275,7 @@ public class CartController : Controller
     }
 
 
+    // emailing works on Azure site; but, on this development machine, sometimes that doesn't work.
     private void SendEmailMessage(OrderHeaderDTO confirmationHeader)
     {
         string emailBody = $"<h2>A Food Order of total <u>{confirmationHeader.OrderTotal.ToString("c")}</u> has been placed for your address <u>{confirmationHeader.DeliveryAddress}</u> at <u>{DateTime.Now.ToShortTimeString()}</u>.</h2>";
