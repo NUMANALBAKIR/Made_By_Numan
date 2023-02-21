@@ -1,11 +1,6 @@
 ﻿
 <div class="container mt-5">
 
-    <div class="row alert alert-warning" id="div" style="font-size:18px; display: none;" role="alert">
-        <p>
-            <b>Hello!</b> I added those icons just for prettifying!
-        </p>
-    </div>
 
     <div class="row">
 
@@ -19,11 +14,15 @@
                     <p class="card-text">Aspiring Full Stack .Net Developer.</p>
                     <p class="card-text">This website portrays my work.</p>
 
-                    <div id="sIcons" class="d-flex justify-content-between mb-2">
+                    <div id="sIcons" class="d-flex justify-content-between">
                         <i class="fa fa-twitter fa-lg"></i>
                         <i class="fa fa-linkedin fa-lg text-warning"></i>
                         <i class="fa fa-facebook fa-lg text-info"></i>
                         <i class="fa fa-github fa-lg"></i>
+                    </div>
+
+                    <div class="card-footer alert alert-secondary mt-4" id="div" style="font-size:18px; display: none;" role="alert">
+                        These icons are just for prettifying!
                     </div>
                 </div>
             </div>
@@ -48,7 +47,7 @@
                     <br />
                 </h4>
                 <h4 class="pt-1">
-                    I collected that Food-Ordering website's template from <a target="_blank" style="color:black;" href="https://bootstrapmade.com/demo/Yummy/">https://bootstrapmade.com/demo/Yummy/</a> ,
+                    I collected that Food-Ordering website's Home-page template (only) from <a target="_blank" style="color:black; word-wrap:break-word;" href="https://bootstrapmade.com/demo/Yummy/">https://bootstrapmade.com/demo/Yummy/</a> ,
                     and used my .NET development knowledge to integrate it; extended it and made it functional: Food ordering, Emailing works; also, integrated it with Bank-of-Numan.
                 </h4>
 
@@ -85,7 +84,7 @@
         $(document).ready(function () {
 
             $('#sIcons').click(function () {
-                $("#div").show("fast").delay(2500).hide("fast");
+                $("#div").show("fast").delay(3000).hide("fast");
             });
 
         });

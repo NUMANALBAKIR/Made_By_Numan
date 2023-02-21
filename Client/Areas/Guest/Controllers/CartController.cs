@@ -241,10 +241,10 @@ public class CartController : Controller
     public async Task<IActionResult> OrderConfirmation(int orderHeaderid)
     {
         // prevent page refresh.
-        //if (TempData["success"] != null)
-        //{
-        //    return RedirectToAction("Index", "OrderFood");
-        //}
+        if (TempData["success"] != null)
+        {
+            return RedirectToAction("Index", "OrderFood");
+        }
 
         // get order info
         OrderHeaderDTO headerDto = new();
@@ -255,7 +255,7 @@ public class CartController : Controller
             headerDto = JsonConvert.DeserializeObject<OrderHeaderDTO>(stringHeader);
         }
         // add tempdata for bank
-        TempData["success"] = $"Food purchase of ${headerDto.OrderTotal} done.";
+        TempData["success"] = $"Food purchase of ${headerDto.OrderTotal} done. 'Transactions History' table contains details.";
 
         return View(headerDto);
     }

@@ -141,7 +141,7 @@ public class BankController : Controller
         // update balances to db and redirect
         APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
 
-        TempData["success"] = $"${dashboard.BankAccount.TransactionAmount} added to Savings.";
+        TempData["success"] = $"${dashboard.BankAccount.TransactionAmount} added to Savings. 'Transactions History' table contains details.";
 
         // add this transaction to db
         TransactionCreateDTO createDto = new()
@@ -177,7 +177,7 @@ public class BankController : Controller
             // update balances to db and redirect
             APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
 
-            TempData["success"] = $"${dashboard.BankAccount.TransactionAmount} transferred from Savings to Checkings.";
+            TempData["success"] = $"${dashboard.BankAccount.TransactionAmount} transferred from Savings to Checkings. 'Transactions History' table contains details.";
 
             // add this transaction to db
             TransactionCreateDTO createDto = new()
@@ -215,7 +215,7 @@ public class BankController : Controller
             // update balances to db and redirect
             APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
 
-            TempData["success"] = $"${dashboard.BankAccount.TransactionAmount} transferred from Checkings to Savings.";
+            TempData["success"] = $"${dashboard.BankAccount.TransactionAmount} transferred from Checkings to Savings. Transactions History table contains details.";
 
             // add this transaction to db
             TransactionCreateDTO createDto = new()
@@ -251,7 +251,7 @@ public class BankController : Controller
             // update balances to db and redirect
             APIResponse updateResponse = await _bankAccountService.UpdateAsync<APIResponse>(bankAccountUpdateDTO, "");
 
-            TempData["success"] = $"${dashboard.BankAccount.TransactionAmount} withdrawn from Checkings.";
+            TempData["success"] = $"${dashboard.BankAccount.TransactionAmount} cash withdrawn from Checkings. 'Transactions History' table contains details.";
 
             // add this transaction to db
             TransactionCreateDTO createDto = new()
