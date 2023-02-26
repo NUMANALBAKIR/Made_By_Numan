@@ -159,10 +159,18 @@ public class OrderFoodController : Controller
 
     public IActionResult EmailUs(EmailUsDTO emailUsDTO)
     {
-        string emailBody = $"<h4>\r\n    Copy of the Email you sent:\r\n</h4> \r\n\r\n<p>\r\n    Name:    {emailUsDTO.Name}\r\n</p>\r\n<p>\r\n    Email:   {emailUsDTO.Email}\r\n</p>\r\n<p>\r\n    Subject: {emailUsDTO.Subject}\r\n</p>\r\n<p>\r\n    Message: {emailUsDTO.Message}\r\n</p>";
+        // prevent browser refresh
+        if (TempData["info"] != null)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+
+        string emailBody = $"<h4>\r\n    <h3>Thank you for contacting us!</h3><br />Copy of the Email you sent:\r\n</h4> \r\n\r\n<p>\r\n    Name:    {emailUsDTO.Name}\r\n</p>\r\n<p>\r\n    Email:   {emailUsDTO.Email}\r\n</p>\r\n<p>\r\n    Subject: {emailUsDTO.Subject}\r\n</p>\r\n<p>\r\n    Message: {emailUsDTO.Message}\r\n</p>";
 
         _emailSender.SendEmailAsync(emailUsDTO.Email, "Copy of the email you sent.", emailBody);
-        //_emailSender.SendEmailAsync("numan.al.developer@gmail.com", "Copy of the email you sent.", emailBody);
+        _emailSender.SendEmailAsync("numanalbakir@gmail.com", "Email that was sent.", emailBody);
+
+        TempData["info"] = "Email sent!";
 
         return View(emailUsDTO);
     }
