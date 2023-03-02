@@ -17,16 +17,19 @@ public class OrderFoodController : Controller
     private readonly ICartItemService _cartItemService;
     private readonly IEmailSender _emailSender;
     private readonly IOrderHeaderService _orderHeaderService;
+    private readonly IConfiguration _configuration;
 
     public OrderFoodController(IFoodService foodService,
         ICartItemService cartItemService,
         IEmailSender emailSender,
-        IOrderHeaderService orderHeaderService)
+        IOrderHeaderService orderHeaderService,
+        IConfiguration configuration)
     {
         _foodService = foodService;
         _cartItemService = cartItemService;
         _emailSender = emailSender;
         _orderHeaderService = orderHeaderService;
+        _configuration = configuration;
     }
 
 
@@ -168,7 +171,9 @@ public class OrderFoodController : Controller
         string emailBody = $"<h4>\r\n    <h3>Thank you for contacting us!</h3><br />Copy of the Email you sent:\r\n</h4> \r\n\r\n<p>\r\n    Name:    {emailUsDTO.Name}\r\n</p>\r\n<p>\r\n    Email:   {emailUsDTO.Email}\r\n</p>\r\n<p>\r\n    Subject: {emailUsDTO.Subject}\r\n</p>\r\n<p>\r\n    Message: {emailUsDTO.Message}\r\n</p>";
 
         _emailSender.SendEmailAsync(emailUsDTO.Email, "Copy of the email you sent.", emailBody);
-        _emailSender.SendEmailAsync("numanalbakir@gmail.com", "Email that was sent.", emailBody);
+        // A copy of the email to me
+        string myEmailAddress = _configuration.GetValue<string>("MyCredentials:MyEmail");
+        _emailSender.SendEmailAsync(myEmailAddress, "A user's email copy.", "<h3>Contact message from a user: </h3>" + emailBody);
 
         TempData["info"] = "Email sent!";
 

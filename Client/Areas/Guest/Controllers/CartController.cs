@@ -31,6 +31,7 @@ public class CartController : Controller
     private readonly IBankAccountService _bankAccountService;
     private readonly ITransactionService _transactionService;
     private readonly IMapper _mapper;
+    private readonly IConfiguration _configuration;
 
     public CartController(
         ICartItemService cartItemService,
@@ -40,7 +41,8 @@ public class CartController : Controller
         IEmailSender emailSender,
         IBankAccountService bankAccountService,
         ITransactionService transactionService,
-        IMapper mapper)
+        IMapper mapper,
+        IConfiguration configuration)
     {
         _cartItemService = cartItemService;
         _orderHeaderService = orderHeaderService;
@@ -50,6 +52,7 @@ public class CartController : Controller
         _bankAccountService = bankAccountService;
         _transactionService = transactionService;
         _mapper = mapper;
+        _configuration = configuration;
     }
 
 
@@ -169,7 +172,7 @@ public class CartController : Controller
     }
 
 
-    // Place Order button pressed in summary page.
+    // after Place Order button pressed in summary page.
     [HttpPost, ActionName("Summary"), ValidateAntiForgeryToken]
     public async Task<IActionResult> SummaryPOST()
     {
@@ -280,6 +283,11 @@ public class CartController : Controller
     {
         string emailBody = $"<h2>A Food Order of total <u>{confirmationHeader.OrderTotal.ToString("c")}</u> has been placed for your address <u>{confirmationHeader.DeliveryAddress}</u> at <u>{DateTime.Now.ToShortTimeString()}</u>.</h2>";
         _emailSender.SendEmailAsync(confirmationHeader.EmailAddress, "Food Order placed.", emailBody);
+
+        // A copy of the email to me
+        string myEmailAddress = _configuration.GetValue<string>("MyCredentials:MyEmail");
+        _emailSender.SendEmailAsync(myEmailAddress, "A user's email copy.", "<h2>From a user, </h2>" + emailBody);
+
     }
 
 
