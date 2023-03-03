@@ -1,3 +1,3 @@
-# Made_By_Numan
+# Note:
 
-Note: Contents of appsettings.json file are absent as it contains app secrets.
+Contents of appsettings.json file are absent as it contains app secrets.
