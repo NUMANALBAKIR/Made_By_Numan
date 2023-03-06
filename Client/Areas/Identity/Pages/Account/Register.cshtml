@@ -6,14 +6,14 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<h3 class="text-bg-warning p-2">You must <span class="text-dark">Register (or Log In if already Registered)</span> to use Bank-of-Numan, - Order Food - in navigation menu.</h3>
+<h3 class="text-bg-warning p-2">You must <span class="text-dark">Register below (or Log In if already Registered)</span> to use Bank-of-Numan, -Order Food- in navigation menu.</h3>
 
 <div class="row">
 
     <div class="col-sm-4 col-md-4 mb-3">
         <div>
             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                <h2>Create a new account.</h2>
+                @*<h2>Create a new account.</h2>*@
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
@@ -43,15 +43,19 @@
                     <span asp-validation-for="Input.Address" class="text-danger"></span>
                 </div>
 
-                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+
+                <!--Spinner-->
+                <div style="display: none;font-size:18px;" id="waitMessage" class="text-center my-2">
+                    <b>
+                        <span class="spinner-border text-dark"></span> &nbsp;Loading. Please Wait.
+                    </b>
+                </div>
+
+                <button onclick="showWait()" id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
             </form>
         </div>
 
-        <div style="display: none;font-size:20px;" class="text-center my-3" id="waitMessage">
-            <b>
-                <span class="spinner-border text-dark"></span> &nbsp;Loading
-            </b>
-        </div>
+
 
     </div>
 
@@ -100,12 +104,17 @@
     <partial name="_ValidationScriptsPartial" />
 
     <script>
-        let btn = document.getElementById('registerSubmit');
-        let waitMessage = document.getElementById('waitMessage');;
+        let waitMessage = document.getElementById('waitMessage');
+        let registerSubmit = document.getElementById('registerSubmit');
 
-        btn.addEventListener('click', () => {
-            waitMessage.style.display = 'block';
-        });
-
+        // show spinner only when submit a valid form
+        // collected from: https://stackoverflow.com/questions/24949326/page-clientvalidate-in-undefined
+        function showWait() {
+            if ($('#registerForm').valid()) {
+                waitMessage.style.display = 'block';
+                registerSubmit.style.display = 'none';
+            }
+        }
     </script>
+
 }

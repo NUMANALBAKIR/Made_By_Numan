@@ -123,7 +123,7 @@ public class LoginModel : PageModel
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                ModelState.AddModelError(string.Empty, "Something is wrong with username and/or password.");
                 return Page();
             }
         }
