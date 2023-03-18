@@ -22,11 +22,11 @@ builder.Services.AddSwaggerGen(options =>
     {
         Version = "v1",
         Title = "API I used to develop the site.",
-        Description = "Numan's Swagger-API.",
-        Contact = new OpenApiContact
-        {
-            Url = new Uri("https://madebynumanclient.azurewebsites.net/")
-        }
+        Description = "Numan's Swagger-API."
+        //,Contact = new OpenApiContact
+        //{
+        //    Url = new Uri("https://madebynumanclient.azurewebsites.net/")
+        //}
     })
 );
 
