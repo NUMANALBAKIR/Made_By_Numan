@@ -18,23 +18,6 @@ public class EmailSender : IEmailSender
 
     public Task SendEmailAsync(string emailAddress, string subject, string htmlMessage)
     {
-        // using gmail
-        //var emailMessage = new MimeMessage();
-        //emailMessage.From.Add(MailboxAddress.Parse("@gmail.com"));
-        //emailMessage.To.Add(MailboxAddress.Parse(emailAddress));
-        //emailMessage.Subject = subject;
-        //emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = htmlMessage };
-
-        //// send
-        //using (var client = new SmtpClient())
-        //{
-        //    client.Connect("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
-        //    client.Authenticate("@gmail.com", "");
-        //    client.Send(emailMessage);
-        //    client.Disconnect(true);
-        //}
-        //return Task.CompletedTask;
-
         // using sendinblue
         var emailMessage = new MimeMessage();
         emailMessage.From.Add(MailboxAddress.Parse(_smtpEmail));
