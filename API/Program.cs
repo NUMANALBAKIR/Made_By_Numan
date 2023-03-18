@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "API I used to develop the site.",
+        Title = "API I used to develop the sites.",
         Description = "Numan's Swagger-API."
         //,Contact = new OpenApiContact
         //{
