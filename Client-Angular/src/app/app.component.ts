@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Client-Angular';
+
+  // let student = {
+  //   id: 1,
+  //   name: "Numan",
+  //   class: 5,
+  //   dob: "1-1-2000",
+  //   age: 23,
+  //   gender: "male",
+  //   country: "Bangladesh"
+  // }
+
 }
