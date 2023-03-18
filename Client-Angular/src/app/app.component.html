@@ -1,8 +1,8 @@
 <!-- nav bar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Made_by_Numan: Angular</a>
-        
+        <a class="navbar-brand" href="#">Made_by_Numan <span style="color:red">Angular</span></a>
+
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
             aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,9 +11,7 @@
         <div class="navbar-collapse collapse show" id="navbarColor02">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Tab 1
-                        <!-- <span class="visually-hidden">(current)</span> -->
-                    </a>
+                    <a class="nav-link" href="#">Tab 1</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Tab 2</a>
@@ -36,8 +34,8 @@
                         <a class="dropdown-item" href="#">Separated link</a>
                     </div>
                 </li> -->
-
             </ul>
+
             <!-- <form class="d-flex">
                 <input class="form-control me-sm-2" type="search" placeholder="Search">
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -47,11 +45,64 @@
     </div>
 </nav>
 
+<!-- Table of Students -->
+<div class="container mt-5">
+    <h3 class="my-3 text-dark">List of Students:</h3>
 
-<div class="container">
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="table-warning">
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Date Of Birth</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Class</th>
+                <th class="table-info">Actions</th>
+            </tr>
+        </thead>
 
-    <h1>Hello!</h1>
+        <tbody>
+            <tr>
+                <th>1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>Mark</td>
+                <td class="d-flex justify-content-around">
+                    <button class="btn btn-warning">Edit</button>
+                    <button class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
 
-    <button class="btn btn-outline-primary">Click</button>
+            <tr>
+                <th>2</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>Mark</td>
+                <td class="d-flex justify-content-around">
+                    <button class="btn btn-warning">Edit</button>
+                    <button class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+
+            <tr>
+                <th>3</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>Mark</td>
+                <td class="d-flex justify-content-around">
+                    <button class="btn btn-warning">Edit</button>
+                    <button class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
 
 </div>
