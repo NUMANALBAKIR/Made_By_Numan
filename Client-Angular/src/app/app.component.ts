@@ -1,21 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'Client-Angular';
-  thisYear: number = new Date().getFullYear();
+export class AppComponent implements OnInit {
+  title: string = '';
+  year: number = 0;
 
-  // let student = {
-  //   id: 1,
-  //   name: "Numan",
-  //   dob: "1-1-2000",
-  //   age: 23,
-  //   gender: "male",
-  //   class: 5,
-  // }
-  
+
+  ngOnInit(): void {
+    this.title = 'Client-Angular';
+    this.year = new Date().getFullYear();
+
+  }
+
+
 }
