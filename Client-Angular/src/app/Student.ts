@@ -4,7 +4,6 @@ export interface Student {
     Name: string;
     DateOfBirth: string;
     Age: number;
-    Gender: string;
-    Class: number;
+    Pass: string;
     Subjects: any[];
 }

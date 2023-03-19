@@ -5,32 +5,37 @@
     <table class="table table-striped table-bordered table-hover">
         <thead class="table-warning">
             <tr>
-                <th>ID</th>
+                <th>#</th>
                 <th>Name</th>
                 <th>Date Of Birth</th>
                 <th>Age</th>
-                <th>Gender</th>
-                <th>Class</th>
+                <th>Pass/Fail</th>
                 <th>Subjects</th>
                 <th class="table-info" style="text-align: center;">Actions</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr *ngFor="let student of students">
-                <td>{{student.ID}}</td>
+            <tr *ngFor="let student of students; let i = index">
+                <td>{{i+1}}</td>
                 <th>{{student.Name}}</th>
                 <td>{{student.DateOfBirth}}</td>
                 <td>{{student.Age}}</td>
-                <td>{{student.Gender}}</td>
-                <td>{{student.Class}}</td>
-                <td>
-                    <span *ngFor="let subject of student.Subjects">
-                        {{subject.Name}},
-                    </span>
+                <td [style.color]="(student.Pass=='passed')? 'green':'red'">
+                    {{student.Pass}}
                 </td>
+                <td>
+                    <ng-container *ngFor="let subject of student.Subjects; let j = index">
+                        {{subject.Name}}
+                        <span *ngIf="j < student.Subjects.length-1; then commaTemplate; else noneTemplate"></span>
+                        
+                        <ng-template #commaTemplate>,</ng-template>
+                        <ng-template #noneTemplate></ng-template>
+                    </ng-container>
+                </td>
+
                 <td class="d-flex justify-content-around">
-                    <button class="btn btn-info">Details</button>
+                    <button (click)="onButtonClick($event)" class="btn btn-info">Details</button>
                     <button class="btn btn-warning">Edit</button>
                     <button class="btn btn-danger">Delete</button>
                 </td>

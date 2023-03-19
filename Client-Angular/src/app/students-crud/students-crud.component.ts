@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Student } from '../Student';
 
 @Component({
   selector: 'app-students-crud',
@@ -10,16 +9,16 @@ export class StudentsCRUDComponent implements OnInit {
 
   students: any[] = []; //instead of Student[], just for learning.
 
+
   ngOnInit(): void {
 
     this.students = [
       {
         ID: 1,
-        Name: "Numan",
+        Name: "Sam",
         DateOfBirth: "1-1-2000",
         Age: 23,
-        Gender: "male",
-        Class: 5,
+        Pass: 'passed',
         Subjects: [
           {
             Name: 'English',
@@ -33,11 +32,10 @@ export class StudentsCRUDComponent implements OnInit {
       },
       {
         ID: 2,
-        Name: "st 2",
+        Name: "Iram",
         DateOfBirth: "2-2-2002",
         Age: 24,
-        Gender: "male",
-        Class: 6,
+        Pass: 'failed',
         Subjects: [
           {
             Name: 'English',
@@ -55,11 +53,10 @@ export class StudentsCRUDComponent implements OnInit {
       },
       {
         ID: 3,
-        Name: "st 3",
+        Name: "Zina",
         DateOfBirth: "3-3-2003",
         Age: 25,
-        Gender: "female",
-        Class: 7,
+        Pass: 'passed',
         Subjects: [
           {
             Name: 'English',
@@ -72,6 +69,11 @@ export class StudentsCRUDComponent implements OnInit {
         ]
       }
     ];
+  }
+
+  onButtonClick($event: any){
+    console.log($event.target.innerHTML);
+    $event.target.innerHTML= 'Just checking';
   }
 
 }
