@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Client-Angular';
+  thisYear: number = new Date().getFullYear();
 
   // let student = {
   //   id: 1,

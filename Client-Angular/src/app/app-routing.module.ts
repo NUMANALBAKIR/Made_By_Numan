@@ -4,9 +4,9 @@ import { AboutComponent } from './about/about.component';
 import { StudentsCRUDComponent } from './students-crud/students-crud.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'about' },
   { path: 'about', component: AboutComponent },
-  { path: 'studentscrud', component: StudentsCRUDComponent }
+  { path: 'studentscrud', component: StudentsCRUDComponent },
+  { path: '', redirectTo: 'about', pathMatch:'full' }
 ];
 
 @NgModule({
