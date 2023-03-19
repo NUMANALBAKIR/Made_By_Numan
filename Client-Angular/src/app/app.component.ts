@@ -16,5 +16,5 @@ export class AppComponent {
   //   gender: "male",
   //   class: 5,
   // }
-
+  
 }
