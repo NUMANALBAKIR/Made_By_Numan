@@ -17,16 +17,7 @@ namespace API.Controllers
     {
         private readonly AppDbContext _context;
 
-        public StudentsController(AppDbContext context)
-        {
-            _context = context;
-        }
-
-        // GET: api/Students
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
-        {
-            var students = new List<Student>()
+        private List<Student> students = new()
             {
                 new Student()
                 {
@@ -53,6 +44,18 @@ namespace API.Controllers
                     Pass= "passed"
                 }
             };
+
+
+        public StudentsController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET: api/Students
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
+        {
+
             return students;
 
             //return await _context.Students.ToListAsync();
@@ -62,7 +65,8 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)
         {
-            var student = await _context.Students.FindAsync(id);
+            //var student = await _context.Students.FindAsync(id);
+            var student = students.Find(x => x.StudentId == id);
 
             if (student == null)
             {
@@ -72,8 +76,8 @@ namespace API.Controllers
             return student;
         }
 
+        // not implemented
         // PUT: api/Students/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStudent(int id, Student student)
         {
@@ -103,12 +107,15 @@ namespace API.Controllers
             return NoContent();
         }
 
+
         // POST: api/Students
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {
-            _context.Students.Add(student);
+            //_context.Students.Add(student);
+            students.Add(student);
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -128,25 +135,35 @@ namespace API.Controllers
             return CreatedAtAction("GetStudent", new { id = student.StudentId }, student);
         }
 
+
         // DELETE: api/Students/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudent(int id)
         {
-            var student = await _context.Students.FindAsync(id);
+            //var student = await _context.Students.FindAsync(id);
+            var student = students.Find(x => x.StudentId == id);
+
+
             if (student == null)
             {
                 return NotFound();
             }
 
-            _context.Students.Remove(student);
+            //_context.Students.Remove(student);
             await _context.SaveChangesAsync();
+
+            students.Remove(student);
+
 
             return NoContent();
         }
 
+
         private bool StudentExists(int id)
         {
-            return _context.Students.Any(e => e.StudentId == id);
+            //return _context.Students.Any(e => e.StudentId == id);
+            return students.Any(e => e.StudentId == id);
+
         }
     }
 }
