@@ -15,7 +15,7 @@ import { StudentsService } from './students.service';
     AppRoutingModule,
     AdminModule
   ],
-  providers: [StudentsService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

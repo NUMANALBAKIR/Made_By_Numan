@@ -1,5 +1,6 @@
 ﻿using API.Models.Bank;
 using API.Models.OrderFood;
+using API.Models.StudentCRUD;
 using API.Models.User;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,10 @@ public class AppDbContext : IdentityDbContext
     public DbSet<Transaction> Transactions { get; set; }
 
     public DbSet<AppUser> AppUsers { get; set; }
+
+    public DbSet<Student> Students { get; set; }
+    public DbSet<Subject> Subjects { get; set; }
+
 
 
 }
