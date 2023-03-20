@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Student } from 'src/app/student';
 import { StudentsService } from 'src/app/students.service';
 
 @Component({
@@ -8,17 +9,19 @@ import { StudentsService } from 'src/app/students.service';
 })
 export class StudentsCRUDComponent implements OnInit {
 
-  constructor(private studentsService: StudentsService){
+  constructor(private studentsService: StudentsService) {
   }
 
-  students: any[] = []; //instead of Student[]...just for learning
-
+  students: Student[] = [];
+  
   ngOnInit(): void {
-    this.students= this.studentsService.getStudents();
+    this.studentsService.getStudents().subscribe(
+      (response: Student[]) => { this.students = response }
+    );
 
   }
 
-  onDetailsClick($event: any){
+  onDetailsClick($event: any) {
     console.log($event.target.innerHTML);
     $event.target.remove();
   }

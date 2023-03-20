@@ -10,7 +10,7 @@
                 <th>Date Of Birth</th>
                 <th>Age</th>
                 <th>Pass/Fail</th>
-                <th>Subjects</th>
+                <!-- <th>Subjects</th> -->
                 <th class="table-info" style="text-align: center;">Actions</th>
             </tr>
         </thead>
@@ -24,7 +24,8 @@
                 <td [style.color]="((student.Pass | lowercase ) =='passed')? 'green':'red'">
                     {{student.Pass}}
                 </td>
-                <td>
+                
+                <!-- <td>
                     <ng-container *ngFor="let subject of student.Subjects; let j = index">
                         {{subject.Name}}
                         <span *ngIf="j < student.Subjects.length-1; then commaTemplate; else noneTemplate"></span>
@@ -32,7 +33,7 @@
                         <ng-template #commaTemplate>,</ng-template>
                         <ng-template #noneTemplate></ng-template>
                     </ng-container>
-                </td>
+                </td> -->
 
                 <td class="d-flex justify-content-around">
                     <button (mouseenter)="onDetailsClick($event)" class="btn btn-info">Details</button>
