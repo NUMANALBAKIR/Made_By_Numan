@@ -77,7 +77,7 @@ export class StudentsService {
   // }
 
   getStudents(): Observable<Student[]> {
-    return this.httpClient.get<Student[]>(this._apiUrl + '/api/Students');
+    return this.httpClient.get<Student[]>(this._apiUrl + '/api/Students', { responseType: 'json' });
   }
 
 }
