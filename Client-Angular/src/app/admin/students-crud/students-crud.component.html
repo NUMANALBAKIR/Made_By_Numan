@@ -18,26 +18,26 @@
         <tbody>
             <tr *ngFor="let student of students; let i = index">
                 <td>{{i+1}}</td>
-                <th>{{student.Name}}</th>
+                <th>{{student.Name }}</th>
                 <td>{{student.DateOfBirth}}</td>
                 <td>{{student.Age}}</td>
-                <td [style.color]="(student.Pass=='passed')? 'green':'red'">
+                <td [style.color]="((student.Pass | lowercase ) =='passed')? 'green':'red'">
                     {{student.Pass}}
                 </td>
                 <td>
                     <ng-container *ngFor="let subject of student.Subjects; let j = index">
                         {{subject.Name}}
                         <span *ngIf="j < student.Subjects.length-1; then commaTemplate; else noneTemplate"></span>
-                        
+
                         <ng-template #commaTemplate>,</ng-template>
                         <ng-template #noneTemplate></ng-template>
                     </ng-container>
                 </td>
 
                 <td class="d-flex justify-content-around">
-                    <button (click)="onButtonClick($event)" class="btn btn-info">Details</button>
-                    <button class="btn btn-warning">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
+                    <button (mouseenter)="onDetailsClick($event)" class="btn btn-info">Details</button>
+                    <button (mouseenter)="onDetailsClick($event)" class="btn btn-warning">Edit</button>
+                    <button (mouseenter)="onDetailsClick($event)" class="btn btn-danger">Delete</button>
                 </td>
             </tr>
         </tbody>

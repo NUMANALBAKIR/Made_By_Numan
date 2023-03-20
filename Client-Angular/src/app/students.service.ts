@@ -1,24 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-@Component({
-  selector: 'app-students-crud',
-  templateUrl: './students-crud.component.html',
-  styleUrls: ['./students-crud.component.css']
-})
-export class StudentsCRUDComponent implements OnInit {
-
-  students: any[] = []; //instead of Student[], just for learning.
+@Injectable()
+export class StudentsService {
 
 
-  ngOnInit(): void {
+  getStudents(): any[] {
 
-    this.students = [
+    const students = [
       {
         ID: 1,
         Name: "Sam",
         DateOfBirth: "1-1-2000",
         Age: 23,
-        Pass: 'passed',
+        Pass: 'Passed',
         Subjects: [
           {
             Name: 'English',
@@ -69,11 +63,9 @@ export class StudentsCRUDComponent implements OnInit {
         ]
       }
     ];
+
+    return students;
   }
 
-  onButtonClick($event: any){
-    console.log($event.target.innerHTML);
-    $event.target.innerHTML= 'Just checking';
-  }
 
 }

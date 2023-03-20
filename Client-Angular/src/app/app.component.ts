@@ -7,12 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title: string = '';
-  year: number = 0;
+  today: Date =  new Date();
 
 
   ngOnInit(): void {
     this.title = 'Client-Angular';
-    this.year = new Date().getFullYear();
 
   }
 
