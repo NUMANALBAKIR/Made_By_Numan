@@ -2,6 +2,7 @@
 using API.Models.StudentCRUD;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,36 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
-            return await _context.Students.ToListAsync();
+            var students = new List<Student>()
+            {
+                new Student()
+                {
+                    StudentId= 1,
+                    Name= "Sam",
+                    DateOfBirth= DateTime.Now,
+                    Age= 23,
+                    Pass= "Passed"
+                },
+                new Student()
+                {
+                    StudentId= 2,
+                    Name= "Iram",
+                    DateOfBirth= DateTime.Now,
+                    Age= 24,
+                    Pass= "failed"
+                },
+                new Student()
+                {
+                    StudentId= 3,
+                    Name= "Zina",
+                    DateOfBirth= DateTime.Now,
+                    Age= 25,
+                    Pass= "passed"
+                }
+            };
+            return students;
+
+            //return await _context.Students.ToListAsync();
         }
 
         // GET: api/Students/5
@@ -79,7 +109,21 @@ namespace API.Controllers
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {
             _context.Students.Add(student);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (StudentExists(student.StudentId))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return CreatedAtAction("GetStudent", new { id = student.StudentId }, student);
         }

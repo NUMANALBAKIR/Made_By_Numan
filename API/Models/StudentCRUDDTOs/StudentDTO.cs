@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace API.Models.StudentCRUD;
+namespace API.Models.StudentCRUDDTOs;
 
-public class Student
+public class StudentDTO
 {
-    [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int StudentId { get; set; }
     public string Name { get; set; }
     public DateTime DateOfBirth { get; set; }

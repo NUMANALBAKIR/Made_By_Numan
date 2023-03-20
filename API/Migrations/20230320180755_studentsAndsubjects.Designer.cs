@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230320163706_addstudentssubjects")]
-    partial class addstudentssubjects
+    [Migration("20230320180755_studentsAndsubjects")]
+    partial class studentsAndsubjects
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -235,10 +235,7 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.StudentCRUD.Student", b =>
                 {
                     b.Property<int>("StudentId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentId"));
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
@@ -260,10 +257,7 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.StudentCRUD.Subject", b =>
                 {
                     b.Property<int>("SubjectId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubjectId"));
 
                     b.Property<double>("Grade")
                         .HasColumnType("float");

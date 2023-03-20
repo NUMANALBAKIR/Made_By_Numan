@@ -232,10 +232,7 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.StudentCRUD.Student", b =>
                 {
                     b.Property<int>("StudentId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentId"));
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
@@ -257,10 +254,7 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.StudentCRUD.Subject", b =>
                 {
                     b.Property<int>("SubjectId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubjectId"));
 
                     b.Property<double>("Grade")
                         .HasColumnType("float");

@@ -2,6 +2,8 @@
 using API.Models.BankDTOs;
 using API.Models.OrderFood;
 using API.Models.OrderFoodDTOs;
+using API.Models.StudentCRUD;
+using API.Models.StudentCRUDDTOs;
 using API.Models.User;
 using AutoMapper;
 
@@ -47,6 +49,12 @@ public class AutoMapperConfig : Profile
         CreateMap<TransactionUpdateDTO, Transaction>().ReverseMap();
         CreateMap<Transaction, TransactionDTO>().ReverseMap();
 
+        CreateMap<Student, StudentDTO>().ReverseMap();
+        CreateMap<Student, StudentCreateDTO>().ReverseMap();
+        CreateMap<Student, StudentUpdateDTO>().ReverseMap();
 
+        CreateMap<Subject, SubjectDTO>().ReverseMap();
+        CreateMap<Subject, SubjectCreateDTO>().ReverseMap();
+        CreateMap<Subject, SubjectUpdateDTO>().ReverseMap();
     }
 }

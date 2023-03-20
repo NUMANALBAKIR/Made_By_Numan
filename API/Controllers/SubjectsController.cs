@@ -79,7 +79,21 @@ namespace API.Controllers
         public async Task<ActionResult<Subject>> PostSubject(Subject subject)
         {
             _context.Subjects.Add(subject);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (SubjectExists(subject.SubjectId))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return CreatedAtAction("GetSubject", new { id = subject.SubjectId }, subject);
         }
