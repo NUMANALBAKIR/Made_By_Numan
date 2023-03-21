@@ -18,11 +18,11 @@
         <tbody>
             <tr *ngFor="let student of students; let i = index">
                 <td>{{i+1}}</td>
-                <th>{{student }}</th>
-                <td>{{student.DateOfBirth}}</td>
-                <td>{{student.Age}}</td>
-                <td [style.color]="((student.Pass | lowercase ) =='passed')? 'green':'red'">
-                    {{student.Pass}}
+                <th>{{student.name }}</th>
+                <td>{{student.dateOfBirth | date}}</td>
+                <td>{{student.age}}</td>
+                <td [style.color]="((student.pass | lowercase ) =='passed')? 'green':'red'">
+                    {{student.pass}}
                 </td>
 
                 <!-- <td>
@@ -46,4 +46,5 @@
 </div>
 
 
-{{students[0] |json }}
+
+{{students | json}}
