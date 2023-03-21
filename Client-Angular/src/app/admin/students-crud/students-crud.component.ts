@@ -27,4 +27,12 @@ export class StudentsCRUDComponent implements OnInit {
     $event.target.remove();
   }
 
+  onEditClick($event: any, i: number){
+
+  }
+
+  onDeleteClick($event: any, i: number) {
+
+  }
+
 }

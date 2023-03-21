@@ -4,28 +4,30 @@ import { StudentsService } from 'src/app/students.service';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-add-student',
-  templateUrl: './add-student.component.html',
-  styleUrls: ['./add-student.component.css']
+  selector: 'app-edit-student',
+  templateUrl: './edit-student.component.html',
+  styleUrls: ['./edit-student.component.css']
 })
-export class AddStudentComponent implements OnInit {
+export class EditStudentComponent implements OnInit {
 
   constructor(
     private studentsService: StudentsService,
     private location: Location
   ) { }
 
-  newStudent: Student = new Student();
+  editStudent: Student = new Student();
 
   ngOnInit(): void {
   }
 
-  onAddClick() {
-    this.studentsService.insertStudent(this.newStudent).subscribe(
-      (r) => { },
+  onEditClick(){
+    this.studentsService.editStudent(this.editStudent).subscribe(
+      (r) => {
+        
+       },
       (e) => { console.log(e) }
     );
-    
+
     this.location.back();    
   }
 
