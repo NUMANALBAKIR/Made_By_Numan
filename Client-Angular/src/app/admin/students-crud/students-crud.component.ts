@@ -13,10 +13,11 @@ export class StudentsCRUDComponent implements OnInit {
   }
 
   students: Student[] = [];
-  
+
   ngOnInit(): void {
     this.studentsService.getStudents().subscribe(
-      (response: Student[]) => { this.students = response }
+      (response: Student[]) => { this.students = response },
+      (error) => { console.log(error) }
     );
 
   }

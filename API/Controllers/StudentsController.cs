@@ -22,32 +22,9 @@ namespace API.Controllers
         private readonly AppDbContext _context;
 
         private List<Student> students = new()
-            {
-                new Student()
-                {
-                    StudentId= 1,
-                    Name= "Sam",
-                    DateOfBirth= DateTime.Now,
-                    Age= 23,
-                    Pass= "Passed"
-                },
-                new Student()
-                {
-                    StudentId= 2,
-                    Name= "Iram",
-                    DateOfBirth= DateTime.Now,
-                    Age= 24,
-                    Pass= "failed"
-                },
-                new Student()
-                {
-                    StudentId= 3,
-                    Name= "Zina",
-                    DateOfBirth= DateTime.Now,
-                    Age= 25,
-                    Pass= "passed"
-                }
-            };
+        {
+
+        };
 
 
         public StudentsController(AppDbContext context)

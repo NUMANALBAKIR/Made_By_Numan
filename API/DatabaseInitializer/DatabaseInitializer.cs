@@ -1,5 +1,6 @@
 ﻿using API.Data;
 using API.Models.OrderFood;
+using API.Models.StudentCRUD;
 
 namespace API.DatabaseInitializer;
 
@@ -15,6 +16,36 @@ public class DatabaseInitializer : IDatabaseInitializer
     // Add Food, Category lists to Db
     public void Initialize()
     {
+        // Add students
+        if (_db.Students.Count() == 0)
+        {
+            _db.Students.Add(new Student()
+            {
+                StudentId = 1,
+                Name = "Sam",
+                DateOfBirth = DateTime.Now,
+                Age = 23,
+                Pass = "Passed"
+            });
+            _db.Students.Add(new Student()
+            {
+                StudentId = 2,
+                Name = "Iram",
+                DateOfBirth = DateTime.Now,
+                Age = 24,
+                Pass = "failed"
+            });
+            _db.Students.Add(new Student()
+            {
+                StudentId = 3,
+                Name = "Zina",
+                DateOfBirth = DateTime.Now,
+                Age = 25,
+                Pass = "passed"
+            });
+            _db.SaveChanges();
+        }
+
         // Add categories
         if (_db.Categories.Count() == 0)
         {
