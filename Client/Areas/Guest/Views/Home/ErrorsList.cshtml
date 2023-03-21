@@ -1,0 +1,315 @@
+﻿<div class="container mt-5">
+
+    <div class="row">
+        <div class="mb-4 p-4 text-bg-secondary">
+            <h4> Library of Errors
+                I learn from errors. Learning these help me fix errors quickly. Errors that I found when developing:
+                Legend: => means solution.
+                <hr />
+
+                "NullReferenceException: Object reference not set to an instance of 
+                an object"
+                <br /> => Trying to use somehing whose value is null.
+                <hr />
+
+                Cannot implicitly convert type 'System.Threading.Tasks.Task<bool>' to 'bool'
+                <br /> => check AsyncTask related things like: await, ...Async, etc.
+                <hr/>
+
+
+                visual studio restarts when debugging
+                    <br /> => start VS as admin by right-clicking it's icon. 
+
+                <hr />
+
+                "A connection was successfully established with the server, but then an error occurred during the login process. (provider: SSL Provider, error: 0 - The certificate chain was issued by an authority that is not trusted.)"
+                    <br /> => to ConnectionString add "TrustServerCertificate=True;"
+                
+                <hr />
+
+                when scaffolding 'MVC Area', got: "there was an error running the selected code generator scaffolding failed"
+                <br />=> Step 1: add (if absent) within < ItemGroup>, < PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.0" />.
+                Step 2 (if needed): update all nuget packages.
+                        
+                <hr />
+
+                "Unable to resolve service for type (interface) "IAuth...."
+                while attempting to activate '...' --> need to add a Service in
+                program.cs injecting Auth into IAuth.
+                        
+                <hr />
+
+                ".AutoMapperMappingException: Missing type map configuration or unsupported mapping."
+                => Check destinations, sources in automapper's :Profile implementation class; also whereever .Map<>() is done
+
+                <hr />
+
+                "SqlException: Invalid object name 'Categorie'" --> check
+                "DbSet<T> Categorie" in DbContext impl and corresponding table
+                in Database.
+
+                <hr />
+
+                "The model item passed into the ViewDataDictionary is of type 
+                'CoverType', but this ViewDataDictionaryinstance requires a model
+                item of type 'Category'" -> check what object controller passes
+                to view and what is after '@@model' of the view .cshtml
+
+                <hr />
+
+                "CS0246 The type or namespace name 'Category' could not be found
+                (are you missing a using directive or an assembly reference?) 
+                .../Areas_Admin_Views_Category_Edit_cshtml.g.cs" => missing 
+                _ViewImports.cshtml in Views folder maybe. (note the .g.cs)
+                            
+                <hr />
+
+                DataTables warning: table id=myTable - Requested unknown parameter 'Title' for row 0, column 0.
+                => check json's 'Title' property.
+
+
+                "'An error was generated for 
+                warning '....EntityFrameworkCore.Query.InvalidIncludePathError': Unable to find navigation ' covertype' specified in string based include path ' covertype'."
+                => check things related to  .Include(...)
+
+                <hr />
+
+                Unexpected token '{' (at product.js:19:13) -->
+                check the ending commas
+                            
+                <hr />
+
+                red-unederline error-messages at return; saying "cannot implicitly convert type ... to ..." --> check if all types are matching, especially the return-type.
+
+                            <hr />
+
+                Cannot implicitly convert type '...UserDto' to '...AppUser>'
+                -> check return types of method's above and below.
+
+                            <hr />
+
+                cannot implicitly convert type  IEnu<...>  to  List<...>"   -->
+                just make .toList();
+
+                                    <hr />
+
+                "No overload for method 'method' takes 'number' arguments" --> check the method of both interface and implementation classes
+
+                                    <hr />
+
+                'cannot copy "" to "". Exceeded retry count of 10. Failed. IIS run'
+                => stop IIS processes in taskmanager and build again
+
+                                    <hr />
+
+                "Operator '!' cannot be applied to operands of type 'method group' 
+                => change  !context.ProductBands.Any
+                To      !context.ProductBands.Any()
+
+                                    <hr />
+
+                "cannot convert from 'int' to 'System.IO.Stream'" -->
+
+                                    <hr />
+
+                cannot delete database in sql server
+                => check close existing connections then retry
+
+                                    <hr />
+
+                SqlException: Cannot insert explicit value for identity column in table '...' when IDENTITY_INSERT is set to OFF.
+                => in sql server go to table's design, select that column, go to column properties, click (is identity) and set it to No
+
+                                    <hr />
+
+                [controller method error] "cannot implicitly convert type 
+                ....Task<....List<T>>  to 
+                ....ActionResult<List<T>> "-->
+                put inside Ok(). Eg: return Ok(_repo.GetProducts());
+
+                <hr />
+
+                OkObjectResult does not contain a a definition for GetAwaiter -->
+                it's: return Ok(await _repo.GetProducts());
+                not: return await Ok(_repo.GetProducts());
+
+                <hr />
+
+                turning .js debugging launches totally new(bad) browser.
+
+                <hr />
+
+                A connection was successfully established with the server, but then an error occurred during the login process. (provider: SSL Provider, error: 0 - The certificate chain was issued by an authority that is not trusted.)
+                => add ";encrypt=false"" to "DefaultConnection" or go to
+                https://www.conradakunga.com/blog/fix-ssl-provider-error-0-the-certificate-chain-was-issued-by-an-authority-that-is-not-trusted/
+
+                <hr />
+
+                Error: error:0308010C:digital envelope routines::unsupported at new Hash (node:internal/crypto/hash:71:19) ->
+                versions of nodejs and ng must be supported. works on nodejs 16.13.0 and ng 14 (14.2.9)
+
+                <hr />
+
+                Failed to launch debug adapter. Additional information may be available in the output window. 
+                Unable to launch browser: "Unable to find an installation of the browser on your system." ->
+                set only angular project as startup and change browser name in start button.
+                (also works if running without debugging. or, when running with debugger keeping error alert open.)
+
+                <hr />
+
+                npm console keeps restarting
+                OR, console shows "Project Al does not exist"
+                OR, console shows "Error: Unknown arguments: ssl, ssl-cert, ssl-key, Bakir\AppData\Roaming\ASP.NET\https\a.pem, Al, Bakir\AppData\Roaming\ASP.NET\https\a.key"
+                ->
+                issue is with account's folder-name space in C:\Users\. reformat 'start' in package.json like:
+                NET\\https\\%npm_package_name%.pem\" --ssl-key \"%APPDATA%\\ASP.NET\\https\\%npm_package_name%.key\"",
+
+                <hr />
+
+                [HPM] Error occurred while trying to proxy request /weatherforecast from localhost:4200 to https://localhost:5001 (ECONNREFUSED)
+                ->
+                beacuse browser window that VS opened is closed
+
+                <hr />
+
+                Cannot find module '...client\node_modules\@@schematics\angular\utility\test.js'
+                <br />=> steps (inside angular project, run):
+                npm uninstall @@schematics/angular<br />
+                npm uninstall ngx-bootstrap<br />
+                npm install @@schematics/angular@@12.2.18 <br />
+                ng add ngx-bootstrap<br />
+                OR do, https://www.youtube.com/watch?v=tkicOwOmxH8&ab_channel=ComputerProgramming
+
+                <hr />
+
+                (browser console error) access to XMLHttpRequest at 'https://localhost:5001/api/users' from origin 'https://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+                ->
+                add to services: services.AddCors();
+                add to http pipeline before authentication: app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+
+                <hr />
+
+                (browser console error) GET https://localhost:4200/weatherforecast 404 (Not Found)    app.component.ts:13
+                -> check controller's Route
+
+                <hr />
+
+                Could not copy "obj\Debug\...exe" to "bin\Debug\...exe". Exceeded retry count of 10. Failed. The file is locked by: "... (7388)"
+                (and,)
+                Unable to copy file "obj\Debug\...exe" to "bin\Debug\...exe". The process cannot access the file 'bin\Debug\...exe' because it is being used by another process.
+                -> something from previous launch of program is still running. Close all and retry.
+
+                <hr />
+
+                "the instance of entity type 'Villa' cannot be tracked because another instance with the same key value for {'id'} is already being tracked."
+                => EF trying to track 2 entity instance with same id; so confusion. Chain .AsNoTracking() to first tracking (eg: .firstordefault tracking).
+
+                <hr />
+
+                the alter table statement conflicted with the foreign key constraint '..'. the conflict occurred in database .., table .., column ...
+                => conflict between existing record and new altered table-design. deleting existing record might help.
+
+                <hr />
+
+                (Inner exception) InvalidOperationException: Unable to resolve service for type 'System.Net.Http.IHttpClientFactory' while attempting to activate 'MagicVilla_Web.Services.AuthService'.
+                => add builder.Services.AddHttpClient<IAuthService, AuthService>();
+
+                    <hr />
+
+                Visual Studio ran into an unexpected problem, and may affect some project system functions
+                => try starting in another way like start-without-debugging.
+
+                <hr />
+
+                A suitable constructor for type 'Made_By_Numan.Client.Services.FoodService' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.
+                => solution: sequence below is important! 
+                builder.Services.AddHttpClient<IFoodService, FoodService>();
+                builder.Services.AddScoped<IFoodService, FoodService>();
+                FoodService ctor's param IHttpClientFactory needs to be registered before FoodService.
+
+                <hr />
+
+                The instance of entity type 'OrderHeader' cannot be tracked because another instance with the same key value for {'OrderHeaderId'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached.
+                => two class-table instances having same primary key 'OrderHeaderId' are being tracked by db.
+
+                <hr />
+
+                Cannot find Data context (DbContext) when trying to scaffold Identity
+                => 1.AppDbContext:IdentityDbContext 2.add reference to project containing AppDbContext.
+
+                <hr />
+
+                Identity's Login/Register button-click shows: "No webpage was found for the web address: https://localhost:5002/Identity?page=%2FAccount%2FLogin" . HTTP ERROR 404
+                => add: builder.Services.AddRazorPages(); app.MapRazorPages();
+
+
+                No webpage was found for the web address: https://localhost:5002/Account/Login?ReturnUrl=%2FGuest%2FOrderFood%2FCartItemDetails%3FfoodId%3D3 . HTTP ERROR 404
+                => Note '/Identity' is missing. [Authorize] needs proper redirection. Add in program.cs: builder.Services.ConfigureApplicationCookie(options =>
+                {
+                    options.LoginPath = $"/Identity/Account/Login";
+                    options.LogoutPath = $"/Identity/Account/Logout";
+                    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+                });
+
+                <hr />
+
+                Unable to resolve service for type 'Microsoft.AspNetCore.Identity.SignInManager`1[Microsoft.AspNetCore.Identity.IdentityUser]' while attempting to activate 'Client.Areas.Identity.Pages.Account.LoginModel'.
+                => in program.cs make sure it's 'IdentityUser' in, builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+
+                <hr />
+
+                The 'await' operator can only be used within an async method.
+                => notice the 'within'
+
+                <hr />
+
+                '...' is an ambiguous reference between '...' and '...'
+                => check using statements.
+
+                <hr />
+
+                build failed but no errors shown =>
+                open .cshtl files and press f6
+
+                <hr />
+
+                Cannot open server '...' requested by the login. Client with IP address 'xxx.xx.xxx.xxx' is not allowed to access the server. To enable access, use the Windows Azure Management Portal or run sp_set_firewall_rule on the master database to create a firewall rule for this IP address or address range. It may take up to five minutes for this change to take effect.
+                => azure => All resources => SQL server => Add firewall rule with VS output's 'xxx.xx.xxx.xxx'
+
+                <hr />
+
+                publish failed => retry as admin
+
+                <hr />
+
+                all code correct but still wrong data
+                => appsetting's connection maybe still with azure.
+
+                <hr />
+
+                Error: The loader "C:/...dashboard.component.css" didn't return a string.
+                => make sure @@Component's styleUrl's name+suffix is correct
+
+                <hr />
+
+                Property 'value' does not exist on type 'EventTarget' 
+                => add $any like: $any($event.target).value
+
+                <hr />
+
+                Error: Uncaught (in promise): NullInjectorError: R3InjectorError(AppModule)
+                [StudentsService -> HttpClient -> HttpClient -> HttpClient]: NullInjectorError: No provider for HttpClient!
+                => in app.module.ts, import HttpClientModule from @@angular/common/http.
+                Add HttpClientModule to the @@NgModule imports array.
+
+                <hr />
+
+                Access to XMLHttpRequest at 'https://localhost:5001/api/Students' from origin 'http://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource
+                => add,
+                app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+                app.UseHttpsRedirection();
+
+            </h4>
+        </div>
+    </div>
+</div>
