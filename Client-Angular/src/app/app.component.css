@@ -3,5 +3,6 @@
     bottom: 0;
     width: 100%;
     white-space: nowrap;
+    /* padding: 20px; */
     line-height: 60px;
 }
