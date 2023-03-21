@@ -80,4 +80,8 @@ export class StudentsService {
     return this.httpClient.get<Student[]>(this._apiUrl + '/api/StudentsAPI', { responseType: 'json' });
   }
 
+  insertStudent(newStudent: Student): Observable<Student>{
+    return this.httpClient.post<Student>(this._apiUrl + '/api/StudentsAPI', newStudent, { responseType: 'json' });
+  }
+
 }
