@@ -285,8 +285,8 @@ public class CartController : Controller
         _emailSender.SendEmailAsync(confirmationHeader.EmailAddress, "Food Order placed.", emailBody);
 
         // A copy of the email to me
-        string myEmailAddress = _configuration.GetValue<string>("MyCredentials:MyEmail");
-        _emailSender.SendEmailAsync(myEmailAddress, "A user's email copy.", "<h2>From a user, </h2>" + emailBody);
+        //string myEmailAddress = _configuration.GetValue<string>("MyCredentials:MyEmail");
+        //_emailSender.SendEmailAsync(myEmailAddress, "A user's email copy.", "<h2>From a user, </h2>" + emailBody);
 
     }
 

@@ -18,9 +18,10 @@ export class AddStudentComponent implements OnInit {
   newStudent: Student = new Student();
 
   ngOnInit(): void {
+
   }
 
-  onAddClick() {
+  onConfirmClick() {
     this.studentsService.insertStudent(this.newStudent).subscribe(
       (r) => { },
       (e) => { console.log(e) }

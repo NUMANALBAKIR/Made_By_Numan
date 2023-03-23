@@ -8,10 +8,12 @@ import { Student } from './student';
 )
 export class StudentsService {
 
-  private _apiUrl = 'https://localhost:5001';
+  private _apiUrl: string = 'https://localhost:5001';
+  public studentIdPassed: number = 0;
 
   constructor(private httpClient: HttpClient) {
   }
+
 
   // getStudents(): any[] {
 
@@ -76,15 +78,19 @@ export class StudentsService {
   //   return students;
   // }
 
+  getStudent(studentId: number): Observable<Student> {
+    return this.httpClient.get<Student>(this._apiUrl + '/api/StudentsAPI/' + studentId, { responseType: 'json' });
+  }
+
   getStudents(): Observable<Student[]> {
     return this.httpClient.get<Student[]>(this._apiUrl + '/api/StudentsAPI', { responseType: 'json' });
   }
 
-  insertStudent(newStudent: Student): Observable<Student>{
+  insertStudent(newStudent: Student): Observable<Student> {
     return this.httpClient.post<Student>(this._apiUrl + '/api/StudentsAPI', newStudent, { responseType: 'json' });
   }
 
-  editStudent(editStudent: Student): Observable<Student>{
+  editStudent(editStudent: Student): Observable<Student> {
     return this.httpClient.put<Student>(this._apiUrl + '/api/StudentsAPI/' + editStudent.studentId, editStudent, { responseType: 'json' });
   }
 

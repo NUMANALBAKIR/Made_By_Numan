@@ -2,7 +2,7 @@
 <div class="container border mt-3 p-2">
     <div class="row">
         <div class="col">
-            <h2 class="text-primary">List of Students</h2>
+            <h2 class="text-primary">Students CRUD</h2>
         </div>
         <div class="col text-end">
             <a routerLink="/addstudent" class="btn btn-primary">Add Student</a>
@@ -49,8 +49,8 @@
                 </td> -->
 
                 <td class="d-flex justify-content-around">
-                    <button (click)="onDetailsClick($event)" class="btn btn-outline-info"><b>Details</b></button>
-                    <button (click)="onEditClick($event, i)" class="btn btn-outline-warning"><b>Edit</b></button>
+                    <button  (click)="onDetailsClick($event)" class="btn btn-outline-info"><b>Details</b></button>
+                    <a routerLink="/editstudent" (click)="onEditClick($event, student.studentId)" class="btn btn-outline-warning"><b>Edit</b></a>
                     <button (click)="onDeleteClick($event, i)" class="btn btn-outline-danger"><b>Delete</b></button>
                 </td>
             </tr>

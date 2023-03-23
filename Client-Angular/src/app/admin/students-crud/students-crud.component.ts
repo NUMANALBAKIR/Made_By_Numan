@@ -13,6 +13,8 @@ export class StudentsCRUDComponent implements OnInit {
   }
 
   students: Student[] = [];
+  
+
 
   ngOnInit(): void {
     this.studentsService.getStudents().subscribe(
@@ -27,8 +29,8 @@ export class StudentsCRUDComponent implements OnInit {
     $event.target.remove();
   }
 
-  onEditClick($event: any, i: number){
-
+  onEditClick($event: any, studentId: number){
+    this.studentsService.studentIdPassed = studentId;
   }
 
   onDeleteClick($event: any, i: number) {
