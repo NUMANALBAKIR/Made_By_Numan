@@ -19,7 +19,7 @@ export class EditStudentComponent implements OnInit {
   studentId: number = this.studentsService.studentIdPassed;
 
   ngOnInit(): void {
-    // find student info by id
+    // set student info by id
     this.studentsService.getStudent(this.studentId).subscribe(
       (response: Student) => { this.editStudent = response },
       (error) => { console.log(error) }

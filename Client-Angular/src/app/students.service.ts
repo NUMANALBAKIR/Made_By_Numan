@@ -8,7 +8,7 @@ import { Student } from './student';
 )
 export class StudentsService {
 
-  private _apiUrl: string = 'https://localhost:5001';
+  private _apiUrl: string = 'https://localhost:5001/api/StudentsAPI';
   public studentIdPassed: number = 0;
 
   constructor(private httpClient: HttpClient) {
@@ -79,19 +79,19 @@ export class StudentsService {
   // }
 
   getStudent(studentId: number): Observable<Student> {
-    return this.httpClient.get<Student>(this._apiUrl + '/api/StudentsAPI/' + studentId, { responseType: 'json' });
+    return this.httpClient.get<Student>(this._apiUrl + '/' + studentId, { responseType: 'json' });
   }
 
   getStudents(): Observable<Student[]> {
-    return this.httpClient.get<Student[]>(this._apiUrl + '/api/StudentsAPI', { responseType: 'json' });
+    return this.httpClient.get<Student[]>(this._apiUrl, { responseType: 'json' });
   }
 
   insertStudent(newStudent: Student): Observable<Student> {
-    return this.httpClient.post<Student>(this._apiUrl + '/api/StudentsAPI', newStudent, { responseType: 'json' });
+    return this.httpClient.post<Student>(this._apiUrl, newStudent, { responseType: 'json' });
   }
 
   editStudent(editStudent: Student): Observable<Student> {
-    return this.httpClient.put<Student>(this._apiUrl + '/api/StudentsAPI/' + editStudent.studentId, editStudent, { responseType: 'json' });
+    return this.httpClient.put<Student>(this._apiUrl + '/' + editStudent.studentId, editStudent, { responseType: 'json' });
   }
 
 }
