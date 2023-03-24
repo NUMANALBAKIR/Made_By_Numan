@@ -15,14 +15,14 @@ export class AddStudentComponent implements OnInit {
     private location: Location
   ) { }
 
-  newStudent: Student = new Student();
+  studentToAdd: Student = new Student();
 
   ngOnInit(): void {
 
   }
 
   onConfirmClick() {
-    this.studentsService.insertStudent(this.newStudent).subscribe(
+    this.studentsService.addStudent(this.studentToAdd).subscribe(
       (r) => { },
       (e) => { console.log(e) }
     );

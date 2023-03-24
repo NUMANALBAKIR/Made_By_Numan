@@ -15,19 +15,19 @@ export class EditStudentComponent implements OnInit {
     private location: Location
   ) { }
 
-  editStudent: Student = new Student();
+  studentToEdit: Student = new Student();
   studentId: number = this.studentsService.studentIdPassed;
 
   ngOnInit(): void {
     // set student info by id
     this.studentsService.getStudent(this.studentId).subscribe(
-      (response: Student) => { this.editStudent = response },
+      (response: Student) => { this.studentToEdit = response },
       (error) => { console.log(error) }
     );
   }
 
   onConfirmClick(){
-    this.studentsService.editStudent(this.editStudent).subscribe(
+    this.studentsService.editStudent(this.studentToEdit).subscribe(
       (r) => {
         
        },

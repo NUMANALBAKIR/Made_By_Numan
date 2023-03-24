@@ -86,12 +86,16 @@ export class StudentsService {
     return this.httpClient.get<Student[]>(this._apiUrl, { responseType: 'json' });
   }
 
-  insertStudent(newStudent: Student): Observable<Student> {
-    return this.httpClient.post<Student>(this._apiUrl, newStudent, { responseType: 'json' });
+  addStudent(studentToAdd: Student): Observable<Student> {
+    return this.httpClient.post<Student>(this._apiUrl, studentToAdd, { responseType: 'json' });
   }
 
-  editStudent(editStudent: Student): Observable<Student> {
-    return this.httpClient.put<Student>(this._apiUrl + '/' + editStudent.studentId, editStudent, { responseType: 'json' });
+  editStudent(studentToEdit: Student): Observable<Student> {
+    return this.httpClient.put<Student>(this._apiUrl + '/' + studentToEdit.studentId, studentToEdit, { responseType: 'json' });
+  }
+
+  deleteStudent(studentId: number): Observable<string> {
+    return this.httpClient.delete<string>(this._apiUrl + '/' + studentId, { responseType: 'json' });
   }
 
 }

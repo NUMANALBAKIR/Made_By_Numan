@@ -10,7 +10,7 @@
                 <label for="studentId" class="control-label pt-2" style="font-size:20px;">Id</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="studentId" [(ngModel)]="newStudent.studentId" type="text" id="studentId" class="form-control" />
+                <input name="studentId" [(ngModel)]="studentToAdd.studentId" type="text" id="studentId" class="form-control" />
                 <span asp-validation-for="studentId" class="text-danger"></span>
             </div> -->
 
@@ -18,7 +18,7 @@
                 <label for="name" class="control-label pt-2" style="font-size:20px;">Name</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="name" [(ngModel)]="newStudent.name" type="text" id="name" class="form-control" />
+                <input name="name" [(ngModel)]="studentToAdd.name" type="text" id="name" class="form-control" />
                 <span asp-validation-for="name" class="text-danger"></span>
             </div>
 
@@ -26,7 +26,7 @@
                 <label for="dateOfBirth" class="control-label pt-2" style="font-size:20px;">Date Of Birth</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="dateOfBirth" [(ngModel)]="newStudent.dateOfBirth" type="text" id="dateOfBirth" class="form-control" />
+                <input name="dateOfBirth" [(ngModel)]="studentToAdd.dateOfBirth" type="text" id="dateOfBirth" class="form-control" />
                 <span asp-validation-for="Rate" class="text-danger"></span>
             </div>
 
@@ -34,7 +34,7 @@
                 <label for="age" class="control-label pt-2" style="font-size:20px;">Age</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="age" [(ngModel)]="newStudent.age" type="text" id="age" class="form-control" />
+                <input name="age" [(ngModel)]="studentToAdd.age" type="text" id="age" class="form-control" />
                 <span asp-validation-for="Details" class="text-danger"></span>
             </div>
 
@@ -42,7 +42,7 @@
                 <label for="pass" class="control-label pt-2" style="font-size:20px;">Pass/Fail</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="pass" [(ngModel)]="newStudent.pass" type="text" id="pass" class="form-control" />
+                <input name="pass" [(ngModel)]="studentToAdd.pass" type="text" id="pass" class="form-control" />
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
 

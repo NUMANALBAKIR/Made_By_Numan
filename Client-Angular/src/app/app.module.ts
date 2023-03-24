@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
 import { HttpClientModule } from '@angular/common/http';
+import { DeleteStudentComponent } from './admin/delete-student/delete-student.component';
 
 @NgModule({
   declarations: [
