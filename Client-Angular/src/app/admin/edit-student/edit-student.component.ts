@@ -28,7 +28,7 @@ export class EditStudentComponent implements OnInit {
 
   onConfirmClick(){
     this.studentsService.editStudent(this.studentToEdit).subscribe(
-      (r) => {
+      (r: Student) => {
         
        },
       (e) => { console.log(e) }

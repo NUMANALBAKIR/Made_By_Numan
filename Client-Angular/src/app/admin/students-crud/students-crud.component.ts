@@ -13,11 +13,6 @@ export class StudentsCRUDComponent implements OnInit {
   constructor(
     private studentsService: StudentsService,
     private router: Router) {
-
-    //needed
-    this.router.routeReuseStrategy.shouldReuseRoute = () => {
-      return false;
-    };
   }
 
   students: Student[] = [];
@@ -32,24 +27,29 @@ export class StudentsCRUDComponent implements OnInit {
 
   }
 
-  onDetailsClick($event: any, studentId: number) {
-    console.log($event.target.innerHTML);
-    $event.target.remove();
+  onDetailsClick(event: any, studentId: number) {
+    console.log(event.target.innerHTML);
+    event.target.remove();
   }
 
-  onEditClick($event: any, studentId: number) {
+  onEditClick(event: any, studentId: number) {
     this.studentsService.studentIdPassed = studentId;
   }
 
-  onDeleteClick($event: any, i: number) {
+  onDeleteClick(event: any, i: number) {
     this.i = i;
   }
 
   onConfirmDelete() {
     this.studentsService.deleteStudent(this.students[this.i].studentId).subscribe(
-      (r) => { },
+      (r: string) => { },
       (e) => { console.log(e) }
     );
+
+    //needed
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
 
     this.router.navigateByUrl('/studentscrud');
   }

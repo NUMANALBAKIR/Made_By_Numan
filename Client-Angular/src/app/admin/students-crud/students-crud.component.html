@@ -52,8 +52,7 @@
                         class="btn btn-outline-info"><b>Details</b></button>
                     <a routerLink="/editstudent" (click)="onEditClick($event, student.studentId)"
                         class="btn btn-outline-warning"><b>Edit</b></a>
-                    <button data-bs-toggle="modal" data-bs-target="#myModal"
-                        (click)="onDeleteClick($event, i)"
+                    <button data-bs-toggle="modal" data-bs-target="#myModal" (click)="onDeleteClick($event, i)"
                         class="btn btn-outline-danger"><b>Delete</b></button>
                 </td>
             </tr>
@@ -65,7 +64,7 @@
 <!-- Modal delete Student -->
 <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content p-2">
 
             <!-- Modal Header -->
             <div class="modal-header">
@@ -75,59 +74,58 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <!-- <div class="row"> -->
+                <div class="col-2">
+                    <label for="studentId" class="control-label pt-2" style="font-size:20px;">Id</label>
+                </div>
+                <div class="col-10 pb-3">
+                    <input disabled="disabled" name="studentId" [(ngModel)]="students[i].studentId" type="text" id="studentId"
+                        class="form-control-plain-text" />
+                    <span asp-validation-for="studentId" class="text-danger"></span>
+                </div>
 
-                    <div class="col-2">
-                        <label for="studentId" class="control-label pt-2" style="font-size:20px;">Id</label>
-                    </div>
-                    <div class="col-10 pb-3">
-                        <input readonly name="studentId" [(ngModel)]="students[i].studentId" type="text"
-                            id="studentId" class="form-control" />
-                        <span asp-validation-for="studentId" class="text-danger"></span>
-                    </div>
+                <div class="col-2">
+                    <label for="name" class="control-label pt-2" style="font-size:20px;">Name</label>
+                </div>
+                <div class="col-10 pb-3">
+                    <input disabled="disabled"  name="name" [(ngModel)]="students[i].name" type="text" id="name"
+                        class="form-control" />
+                    <span asp-validation-for="name" class="text-danger"></span>
+                </div>
 
-                    <div class="col-2">
-                        <label  for="name" class="control-label pt-2" style="font-size:20px;">Name</label>
-                    </div>
-                    <div class="col-10 pb-3">
-                        <input readonly name="name" [(ngModel)]="students[i].name" type="text" id="name"
-                            class="form-control" />
-                        <span asp-validation-for="name" class="text-danger"></span>
-                    </div>
+                <div class="col-2">
+                    <label for="dateOfBirth" class="control-label pt-2" style="font-size:20px;">Date Of
+                        Birth</label>
+                </div>
+                <div class="col-10 pb-3">
+                    <input disabled="disabled"  name="dateOfBirth" [(ngModel)]="students[i].dateOfBirth" type="text"
+                        id="dateOfBirth" class="form-control" />
+                    <span asp-validation-for="Rate" class="text-danger"></span>
+                </div>
 
-                    <div class="col-2">
-                        <label for="dateOfBirth" class="control-label pt-2" style="font-size:20px;">Date Of
-                            Birth</label>
-                    </div>
-                    <div class="col-10 pb-3">
-                        <input readonly name="dateOfBirth" [(ngModel)]="students[i].dateOfBirth" type="text" id="dateOfBirth"
-                            class="form-control" />
-                        <span asp-validation-for="Rate" class="text-danger"></span>
-                    </div>
+                <div class="col-2">
+                    <label for="age" class="control-label pt-2" style="font-size:20px;">Age</label>
+                </div>
+                <div class="col-10 pb-3">
+                    <input disabled="disabled"  name="age" [(ngModel)]="students[i].age" type="text" id="age"
+                        class="form-control" />
+                    <span asp-validation-for="Details" class="text-danger"></span>
+                </div>
 
-                    <div class="col-2">
-                        <label for="age" class="control-label pt-2" style="font-size:20px;">Age</label>
-                    </div>
-                    <div class="col-10 pb-3">
-                        <input readonly name="age" [(ngModel)]="students[i].age" type="text" id="age" class="form-control" />
-                        <span asp-validation-for="Details" class="text-danger"></span>
-                    </div>
+                <div class="col-2">
+                    <label for="pass" class="control-label pt-2" style="font-size:20px;">Pass/Fail</label>
+                </div>
+                <div class="col-10 pb-3">
+                    <input disabled="disabled"  name="pass" [(ngModel)]="students[i].pass" type="text" id="pass"
+                        class="form-control" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
 
-                    <div class="col-2">
-                        <label for="pass" class="control-label pt-2" style="font-size:20px;">Pass/Fail</label>
-                    </div>
-                    <div class="col-10 pb-3">
-                        <input readonly name="pass" [(ngModel)]="students[i].pass" type="text" id="pass"
-                            class="form-control" />
-                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
-                    </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button (click)="onConfirmDelete()" type="button" class="btn btn-danger"
+                        data-bs-dismiss="modal">Confirm</button>
+                </div>
+
             </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button (click)="onConfirmDelete()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Confirm</button>
-            </div>
-
         </div>
     </div>
-</div>

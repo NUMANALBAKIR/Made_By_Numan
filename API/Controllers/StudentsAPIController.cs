@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 /*
-    This Controller is for project 'Client-Angular', which is now under development.
+    This Controller is for Student 'Client-Angular', which is now under development.
 */
 
 namespace API.Controllers;
@@ -25,12 +25,53 @@ public class StudentsAPIController : ControllerBase
         _context = context;
     }
 
+
+    [HttpGet]
+    [Route("api/Students/search/{searchby}/{searchtext}")]
+    // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public IActionResult Search(string searchBy, string searchText)
+    {
+        List<Student> students = null;
+
+        if (searchBy == "StudentId")
+        {
+            students = _context.Students
+            // .Include(x=> x.Subjects)
+            .Where(x => x.StudentId.ToString().Contains(searchText))
+            .ToList();
+        }
+        else if (searchBy == "Name")
+        {
+            students = _context.Students
+            // .Include(x=> x.Subjects)
+            .Where(x => x.Name.Contains(searchText))
+            .ToList();
+        }
+        else if (searchBy == "DateOfBirth")
+        {
+            students = _context.Students
+            // .Include(x=> x.Subjects)
+            .Where(x => x.DateOfBirth.ToString().Contains(searchText))
+            .ToList();
+        }
+        else if (searchBy == "Pass")
+        {
+            students = _context.Students
+            // .Include(x=> x.Subjects)
+            .Where(x => x.Pass.ToString().Contains(searchText))
+            .ToList();
+        }
+        return Ok(students);
+    }
+
+
     // GET: api/StudentsAPI
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
     {
         return await _context.Students.ToListAsync();
     }
+
 
     // GET: api/StudentsAPI/5
     [HttpGet("{id}")]
@@ -45,6 +86,7 @@ public class StudentsAPIController : ControllerBase
 
         return student;
     }
+
 
     // PUT: api/StudentsAPI/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -73,9 +115,9 @@ public class StudentsAPIController : ControllerBase
                 throw;
             }
         }
-
         return NoContent();
     }
+
 
     // POST: api/StudentsAPI
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -102,6 +144,7 @@ public class StudentsAPIController : ControllerBase
         return CreatedAtAction("GetStudent", new { id = student.StudentId }, student);
     }
 
+
     // DELETE: api/StudentsAPI/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteStudent(int id)
@@ -117,6 +160,7 @@ public class StudentsAPIController : ControllerBase
 
         return NoContent();
     }
+
 
     private bool StudentExists(int id)
     {

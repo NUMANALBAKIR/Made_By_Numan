@@ -23,7 +23,7 @@ export class AddStudentComponent implements OnInit {
 
   onConfirmClick() {
     this.studentsService.addStudent(this.studentToAdd).subscribe(
-      (r) => { },
+      (r: Student) => { },
       (e) => { console.log(e) }
     );
     
