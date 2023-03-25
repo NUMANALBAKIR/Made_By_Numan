@@ -27,11 +27,12 @@ public class StudentsAPIController : ControllerBase
 
 
     [HttpGet]
-    [Route("api/Students/search/{searchby}/{searchtext}")]
+    [Route("{searchBy}/{searchText}")]
     // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public IActionResult Search(string searchBy, string searchText)
     {
         List<Student> students = null;
+        searchText = searchText.ToLower();
 
         if (searchBy == "StudentId")
         {
@@ -44,7 +45,7 @@ public class StudentsAPIController : ControllerBase
         {
             students = _context.Students
             // .Include(x=> x.Subjects)
-            .Where(x => x.Name.Contains(searchText))
+            .Where(x => x.Name.ToLower().Contains(searchText))
             .ToList();
         }
         else if (searchBy == "DateOfBirth")
@@ -58,7 +59,7 @@ public class StudentsAPIController : ControllerBase
         {
             students = _context.Students
             // .Include(x=> x.Subjects)
-            .Where(x => x.Pass.ToString().Contains(searchText))
+            .Where(x => x.Pass.ToLower().Contains(searchText))
             .ToList();
         }
         return Ok(students);
