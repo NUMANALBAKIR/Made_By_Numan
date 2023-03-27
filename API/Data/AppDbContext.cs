@@ -24,7 +24,7 @@ public class AppDbContext : IdentityDbContext
     public DbSet<AppUser> AppUsers { get; set; }
 
     public DbSet<Student> Students { get; set; }
-    public DbSet<Subject> Subjects { get; set; }
+    public DbSet<SubjectsList> SubjectsLists { get; set; }
 
 
 

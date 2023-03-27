@@ -1,17 +1,13 @@
 export class Student {
-    studentId: any;
-    name: any;
-    dateOfBirth: any;
-    age: any;
-    pass: any;
-    // Subjects: any[];
+  studentId: any = null;
+  name: any = null;
+  dateOfBirth: any = null;
+  age: any = null;
+  passedOrFailed: any = null;
+  country: any = null;
 
-    constructor() {
-        this.studentId = 0;
-        this.name = null;
-        this.dateOfBirth = null;
-        this.age = 0;
-        this.pass = null;
-    }
-    
+
+  // Subjects: any[];
+
+
 }

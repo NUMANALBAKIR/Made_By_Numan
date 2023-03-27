@@ -41,7 +41,7 @@
             </form>
 
             <form *ngIf="loginService.username != null" class="d-flex">
-                <button class="btn btn-secondary my-2 my-sm-0" (click)="loginService.Logout()">Log Out</button>
+                <button class="btn btn-secondary my-2 my-sm-0" (click)="loginService.Logout()">Log Out - {{loginService.username}}</button>
             </form>
 
         </div>

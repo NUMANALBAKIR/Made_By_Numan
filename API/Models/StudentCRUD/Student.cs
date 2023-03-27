@@ -10,7 +10,13 @@ public class Student
     public string Name { get; set; }
     public DateTime DateOfBirth { get; set; }
     public int Age { get; set; }
-    public string Pass { get; set; }
+    public string PassedOrFailed { get; set; }
+    public string Country { get; set; }
+
+    public int SubjectsListId { get; set; }
+    [ForeignKey(nameof(SubjectsListId))]
+    public SubjectsList SubjectsList { get; set; }
+
 
     //public ICollection<Subject> Subjects { get; set; }
 

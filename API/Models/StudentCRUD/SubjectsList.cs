@@ -6,12 +6,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Models.StudentCRUD;
 
-public class Subject
+public class SubjectsList
 {
-    [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public int SubjectId { get; set; }
-    public string Name { get; set; }
-    public double Grade { get; set; }
+    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int SubjectsListId { get; set; }
+
+    public double English { get; set; }
+    public double Math { get; set; }
+    public double Physics { get; set; }
+    public double Chemistry { get; set; }
+    public double Biology { get; set; }
+
 
     //public int StudentId { get; set; }
     //[ValidateNever, ForeignKey(nameof(StudentId))]

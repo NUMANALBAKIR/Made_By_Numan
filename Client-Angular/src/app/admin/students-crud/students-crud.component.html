@@ -17,10 +17,9 @@
         <div class="col-3 text-info">
             <label for="searchByDropdown">Select Search Category:</label>
             <select class="form-control" id="searchByDropdown" name="searchBy" [(ngModel)]="searchBy">
-                <option value="studentID">Student ID</option>
                 <option value="name">Student Name</option>
                 <option value="dateOfBirth">Date of Birth</option>
-                <option value="pass">Pass / Fail</option>
+                <option value="passedOrFailed">Pass / Fail</option>
             </select>
         </div>
 
@@ -58,8 +57,8 @@
                 <th>{{student.name }}</th>
                 <td>{{student.dateOfBirth | date}}</td>
                 <td>{{student.age}}</td>
-                <td [style.color]="((student.pass | lowercase ) =='passed')? 'green':'red'">
-                    {{student.pass}}
+                <td [style.color]="((student.passedOrFailed | lowercase ) =='passed')? 'green':'red'">
+                    {{student.passedOrFailed}}
                 </td>
 
                 <!-- <td>
@@ -137,10 +136,10 @@
                 </div>
 
                 <div class="col-2">
-                    <label for="pass" class="control-label pt-2" style="font-size:20px;">Pass/Fail</label>
+                    <label for="passedOrFailed" class="control-label pt-2" style="font-size:20px;">Pass/Fail</label>
                 </div>
                 <div class="col-10 pb-3">
-                    <input readonly name="pass" [(ngModel)]="students[i].pass" type="text" id="pass"
+                    <input readonly name="passedOrFailed" [(ngModel)]="students[i].passedOrFailed" type="text" id="passedOrFailed"
                         class="form-control" />
                     <span asp-validation-for="ImageUrl" class="text-danger"></span>
                 </div> 

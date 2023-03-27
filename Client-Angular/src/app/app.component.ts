@@ -8,13 +8,16 @@ import { LoginService } from './login.service';
 })
 export class AppComponent implements OnInit {
   title: string = '';
-  today: Date =  new Date();
+  today: Date = new Date();
 
-  constructor(public loginService:LoginService){}
+  constructor(public loginService: LoginService) { }
 
   ngOnInit(): void {
     this.title = 'Client-Angular';
+  }
 
+  onLogoutClick(event: any) {
+    this.loginService.Logout();
   }
 
 }
