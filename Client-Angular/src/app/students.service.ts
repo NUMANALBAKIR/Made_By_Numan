@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Student } from './student';
+import { LowerCasePipe } from '@angular/common';
 
 @Injectable(
   { providedIn: 'root' }
@@ -83,7 +85,17 @@ export class StudentsService {
   }
 
   getStudents(): Observable<Student[]> {
-    return this.httpClient.get<Student[]>(this._apiUrl, { responseType: 'json' });
+    return this.httpClient.get<Student[]>(this._apiUrl, { responseType: 'json' })
+      .pipe(map(
+        (data: Student[]) => {
+          
+          for (let i = 0; i < data.length; i++) {
+            data[i].pass = data[i].pass.toLowerCase();
+          }
+
+          return data;
+        }
+      ));
   }
 
   addStudent(studentToAdd: Student): Observable<Student> {

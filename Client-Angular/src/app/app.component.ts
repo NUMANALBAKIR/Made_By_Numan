@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Student } from './student';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +10,7 @@ export class AppComponent implements OnInit {
   title: string = '';
   today: Date =  new Date();
 
+  constructor(public loginService:LoginService){}
 
   ngOnInit(): void {
     this.title = 'Client-Angular';
