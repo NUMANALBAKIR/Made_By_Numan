@@ -13,7 +13,7 @@ public class SubjectsList
 
     public double English { get; set; }
     public double Math { get; set; }
-    public double Physics { get; set; }
+    public double Accounting { get; set; }
     public double Chemistry { get; set; }
     public double Biology { get; set; }
 

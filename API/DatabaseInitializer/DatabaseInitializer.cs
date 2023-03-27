@@ -25,7 +25,7 @@ public class DatabaseInitializer : IDatabaseInitializer
                 Name = "Sam",
                 DateOfBirth = DateTime.Now,
                 Age = 23,
-                Pass = "Passed"
+                PassedOrFailed = "Passed"
             });
             _db.Students.Add(new Student()
             {
@@ -33,7 +33,7 @@ public class DatabaseInitializer : IDatabaseInitializer
                 Name = "Iram",
                 DateOfBirth = DateTime.Now,
                 Age = 24,
-                Pass = "failed"
+                PassedOrFailed = "failed"
             });
             _db.Students.Add(new Student()
             {
@@ -41,7 +41,7 @@ public class DatabaseInitializer : IDatabaseInitializer
                 Name = "Zina",
                 DateOfBirth = DateTime.Now,
                 Age = 25,
-                Pass = "passed"
+                PassedOrFailed = "passed"
             });
             _db.SaveChanges();
         }
