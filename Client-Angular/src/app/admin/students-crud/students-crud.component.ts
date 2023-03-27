@@ -45,15 +45,16 @@ export class StudentsCRUDComponent implements OnInit {
 
   onConfirmDelete() {
     this.studentsService.deleteStudent(this.students[this.i].studentId).subscribe(
-      (r: string) => { },
-      (e) => { console.log(e) }
+      (r: string) => {        
+      },
+      (e: any) => {
+        console.log(e);
+      }
     );
-
     //needed
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
-
     this.router.navigateByUrl('/studentscrud');
   }
 
@@ -62,7 +63,7 @@ export class StudentsCRUDComponent implements OnInit {
       (r: Student[]) => {
         this.students = r;
       },
-      (e: any) => { 
+      (e: any) => {
         console.log(e);
       }
     );
