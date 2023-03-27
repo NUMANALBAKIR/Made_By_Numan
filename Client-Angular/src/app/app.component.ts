@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Student } from './student';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +16,5 @@ export class AppComponent implements OnInit {
     this.title = 'Client-Angular';
 
   }
-
 
 }

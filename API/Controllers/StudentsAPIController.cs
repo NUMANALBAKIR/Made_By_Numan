@@ -33,29 +33,30 @@ public class StudentsAPIController : ControllerBase
     {
         List<Student> students = null;
         searchText = searchText.ToLower();
+        searchBy = searchBy.ToLower();
 
-        if (searchBy == "StudentId")
+        if (searchBy == "StudentId".ToLower())
         {
             students = _context.Students
             // .Include(x=> x.Subjects)
             .Where(x => x.StudentId.ToString().Contains(searchText))
             .ToList();
         }
-        else if (searchBy == "Name")
+        else if (searchBy == "Name".ToLower())
         {
             students = _context.Students
             // .Include(x=> x.Subjects)
             .Where(x => x.Name.ToLower().Contains(searchText))
             .ToList();
         }
-        else if (searchBy == "DateOfBirth")
+        else if (searchBy == "DateOfBirth".ToLower())
         {
             students = _context.Students
             // .Include(x=> x.Subjects)
             .Where(x => x.DateOfBirth.ToString().Contains(searchText))
             .ToList();
         }
-        else if (searchBy == "Pass")
+        else if (searchBy == "Pass".ToLower())
         {
             students = _context.Students
             // .Include(x=> x.Subjects)

@@ -17,6 +17,9 @@ export class StudentsCRUDComponent implements OnInit {
 
   students: Student[] = [];
   i: number = 0;
+  searchBy: string = 'name';
+  searchText: string = '';
+
 
   ngOnInit(): void {
     // get and set list of students
@@ -53,5 +56,18 @@ export class StudentsCRUDComponent implements OnInit {
 
     this.router.navigateByUrl('/studentscrud');
   }
+
+  onSearchClick() {
+    return this.studentsService.searchStudents(this.searchBy, this.searchText).subscribe(
+      (r: Student[]) => {
+        this.students = r;
+      },
+      (e: any) => { 
+        console.log(e);
+      }
+    );
+  }
+
+
 
 }

@@ -10,6 +10,31 @@
     </div>
 </div>
 
+<!-- searching -->
+<div class="container border mt-3 p-2">
+
+    <div class="row">
+        <div class="col-3 text-info">
+            <label for="searchByDropdown">Select Search Category:</label>
+            <select class="form-control" id="searchByDropdown" name="searchBy" [(ngModel)]="searchBy">
+                <option value="studentID">Student ID</option>
+                <option value="name">Student Name</option>
+                <option value="dateOfBirth">Date of Birth</option>
+                <option value="pass">Pass / Fail</option>
+            </select>
+        </div>
+
+        <div class="col-3 text-info">
+            <div class="input-group">
+                <label for="searchText">Type Search Text: </label>
+                <input type="text" class="form-control" id="searchText" name="searchText" [(ngModel)]="searchText">                
+            </div>
+        </div>
+        <div class="col input-group-append" (click)="onSearchClick()">
+            <span class="input-group-text"><i class="fa fa-search fa-xl" style="color: teal;"></i></span>
+        </div>
+    </div>
+</div>
 
 <!-- Table -->
 <div class="container mt-3">
@@ -73,13 +98,14 @@
             </div>
 
             <!-- Modal body -->
-            <div class="modal-body">
+            <!-- 
+                <div class="modal-body">
                 <div class="col-2">
                     <label for="studentId" class="control-label pt-2" style="font-size:20px;">Id</label>
                 </div>
                 <div class="col-10 pb-3">
-                    <input disabled="disabled" name="studentId" [(ngModel)]="students[i].studentId" type="text" id="studentId"
-                        class="form-control-plain-text" />
+                    <input disabled="disabled" name="studentId" [(ngModel)]="students[i].studentId" type="text"
+                        id="studentId" class="form-control" />
                     <span asp-validation-for="studentId" class="text-danger"></span>
                 </div>
 
@@ -87,7 +113,7 @@
                     <label for="name" class="control-label pt-2" style="font-size:20px;">Name</label>
                 </div>
                 <div class="col-10 pb-3">
-                    <input disabled="disabled"  name="name" [(ngModel)]="students[i].name" type="text" id="name"
+                    <input readonly name="name" [(ngModel)]="students[i].name" type="text" id="name"
                         class="form-control" />
                     <span asp-validation-for="name" class="text-danger"></span>
                 </div>
@@ -97,7 +123,7 @@
                         Birth</label>
                 </div>
                 <div class="col-10 pb-3">
-                    <input disabled="disabled"  name="dateOfBirth" [(ngModel)]="students[i].dateOfBirth" type="text"
+                    <input readonly name="dateOfBirth" [(ngModel)]="students[i].dateOfBirth" type="text"
                         id="dateOfBirth" class="form-control" />
                     <span asp-validation-for="Rate" class="text-danger"></span>
                 </div>
@@ -106,7 +132,7 @@
                     <label for="age" class="control-label pt-2" style="font-size:20px;">Age</label>
                 </div>
                 <div class="col-10 pb-3">
-                    <input disabled="disabled"  name="age" [(ngModel)]="students[i].age" type="text" id="age"
+                    <input readonly name="age" [(ngModel)]="students[i].age" type="text" id="age"
                         class="form-control" />
                     <span asp-validation-for="Details" class="text-danger"></span>
                 </div>
@@ -115,17 +141,17 @@
                     <label for="pass" class="control-label pt-2" style="font-size:20px;">Pass/Fail</label>
                 </div>
                 <div class="col-10 pb-3">
-                    <input disabled="disabled"  name="pass" [(ngModel)]="students[i].pass" type="text" id="pass"
+                    <input readonly name="pass" [(ngModel)]="students[i].pass" type="text" id="pass"
                         class="form-control" />
                     <span asp-validation-for="ImageUrl" class="text-danger"></span>
-                </div>
-
-                <!-- Modal footer -->
+                </div> 
+                            
                 <div class="modal-footer">
                     <button (click)="onConfirmDelete()" type="button" class="btn btn-danger"
                         data-bs-dismiss="modal">Confirm</button>
                 </div>
-
             </div>
+            -->
         </div>
     </div>
+</div>

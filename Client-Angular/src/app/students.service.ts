@@ -98,4 +98,12 @@ export class StudentsService {
     return this.httpClient.delete<string>(this._apiUrl + '/' + studentId, { responseType: 'json' });
   }
 
+  searchStudents(searchBy: string, searchText: string): Observable<Student[]> {
+    let url = this._apiUrl + '/' + searchBy + '/' + searchText;
+    // debugger;
+    return this.httpClient.get<Student[]>(url, { responseType: 'json' });
+  }
+
+
+
 }
