@@ -8,11 +8,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-/*
-    This Controller is for Student 'Client-Angular', which is now under development.
-*/
-
 namespace API.Controllers;
+
+/*
+    Note: This Controller is for 'Client-Angular', which is now under development.
+*/
 
 [Route("api/[controller]")]
 [ApiController]

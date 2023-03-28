@@ -1,108 +1,111 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using API.Data;
+using API.Models.StudentCRUD;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using API.Data;
-using API.Models.StudentCRUD;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace API.Controllers
+namespace API.Controllers;
+
+/*
+    Note: This Controller is for 'Client-Angular', which is now under development.
+*/
+
+[Route("api/[controller]")]
+[ApiController]
+public class SubjectsListsAPIController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class SubjectsListsAPIController : ControllerBase
+    private readonly AppDbContext _context;
+
+    public SubjectsListsAPIController(AppDbContext context)
     {
-        private readonly AppDbContext _context;
+        _context = context;
+    }
 
-        public SubjectsListsAPIController(AppDbContext context)
+    // GET: api/SubjectsListsAPI
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<SubjectsList>>> GetSubjectsLists()
+    {
+        return await _context.SubjectsLists.ToListAsync();
+    }
+
+    // GET: api/SubjectsListsAPI/5
+    [HttpGet("{id}")]
+    public async Task<ActionResult<SubjectsList>> GetSubjectsList(int id)
+    {
+        var subjectsList = await _context.SubjectsLists.FindAsync(id);
+
+        if (subjectsList == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        // GET: api/SubjectsListsAPI
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<SubjectsList>>> GetSubjectsLists()
+        return subjectsList;
+    }
+
+    // PUT: api/SubjectsListsAPI/5
+    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutSubjectsList(int id, SubjectsList subjectsList)
+    {
+        if (id != subjectsList.SubjectsListId)
         {
-            return await _context.SubjectsLists.ToListAsync();
+            return BadRequest();
         }
 
-        // GET: api/SubjectsListsAPI/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<SubjectsList>> GetSubjectsList(int id)
-        {
-            var subjectsList = await _context.SubjectsLists.FindAsync(id);
+        _context.Entry(subjectsList).State = EntityState.Modified;
 
-            if (subjectsList == null)
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!SubjectsListExists(id))
             {
                 return NotFound();
             }
-
-            return subjectsList;
-        }
-
-        // PUT: api/SubjectsListsAPI/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSubjectsList(int id, SubjectsList subjectsList)
-        {
-            if (id != subjectsList.SubjectsListId)
+            else
             {
-                return BadRequest();
+                throw;
             }
-
-            _context.Entry(subjectsList).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SubjectsListExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
         }
 
-        // POST: api/SubjectsListsAPI
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<SubjectsList>> PostSubjectsList(SubjectsList subjectsList)
+        return NoContent();
+    }
+
+    // POST: api/SubjectsListsAPI
+    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [HttpPost]
+    public async Task<ActionResult<SubjectsList>> PostSubjectsList(SubjectsList subjectsList)
+    {
+        _context.SubjectsLists.Add(subjectsList);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction("GetSubjectsList", new { id = subjectsList.SubjectsListId }, subjectsList);
+    }
+
+    // DELETE: api/SubjectsListsAPI/5
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteSubjectsList(int id)
+    {
+        var subjectsList = await _context.SubjectsLists.FindAsync(id);
+        if (subjectsList == null)
         {
-            _context.SubjectsLists.Add(subjectsList);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetSubjectsList", new { id = subjectsList.SubjectsListId }, subjectsList);
+            return NotFound();
         }
 
-        // DELETE: api/SubjectsListsAPI/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSubjectsList(int id)
-        {
-            var subjectsList = await _context.SubjectsLists.FindAsync(id);
-            if (subjectsList == null)
-            {
-                return NotFound();
-            }
+        _context.SubjectsLists.Remove(subjectsList);
+        await _context.SaveChangesAsync();
 
-            _context.SubjectsLists.Remove(subjectsList);
-            await _context.SaveChangesAsync();
+        return NoContent();
+    }
 
-            return NoContent();
-        }
-
-        private bool SubjectsListExists(int id)
-        {
-            return _context.SubjectsLists.Any(e => e.SubjectsListId == id);
-        }
+    private bool SubjectsListExists(int id)
+    {
+        return _context.SubjectsLists.Any(e => e.SubjectsListId == id);
     }
 }
