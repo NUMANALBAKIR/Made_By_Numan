@@ -4,6 +4,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230328165411_updateTables")]
+    partial class updateTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -243,18 +246,6 @@ namespace API.Migrations
                     b.HasKey("CountryId");
 
                     b.ToTable("Countries");
-
-                    b.HasData(
-                        new
-                        {
-                            CountryId = 1,
-                            Name = "USA"
-                        },
-                        new
-                        {
-                            CountryId = 2,
-                            Name = "Bangladesh"
-                        });
                 });
 
             modelBuilder.Entity("API.Models.StudentCRUD.Student", b =>
@@ -287,38 +278,6 @@ namespace API.Migrations
                     b.HasIndex("SubjectsListId");
 
                     b.ToTable("Students");
-
-                    b.HasData(
-                        new
-                        {
-                            StudentId = 1,
-                            CountryId = 1,
-                            DateOfBirth = new DateTime(2001, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Gender = "Female",
-                            Name = "Zina",
-                            Passed = true,
-                            SubjectsListId = 1
-                        },
-                        new
-                        {
-                            StudentId = 2,
-                            CountryId = 2,
-                            DateOfBirth = new DateTime(2002, 2, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Gender = "Male",
-                            Name = "Sam",
-                            Passed = false,
-                            SubjectsListId = 2
-                        },
-                        new
-                        {
-                            StudentId = 3,
-                            CountryId = 2,
-                            DateOfBirth = new DateTime(2003, 3, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Gender = "Other",
-                            Name = "Ren",
-                            Passed = true,
-                            SubjectsListId = 3
-                        });
                 });
 
             modelBuilder.Entity("API.Models.StudentCRUD.SubjectsList", b =>
@@ -347,35 +306,6 @@ namespace API.Migrations
                     b.HasKey("SubjectsListId");
 
                     b.ToTable("SubjectsLists");
-
-                    b.HasData(
-                        new
-                        {
-                            SubjectsListId = 1,
-                            Accounting = 77.0,
-                            Biology = 87.0,
-                            Chemistry = 88.0,
-                            English = 80.0,
-                            Math = 65.0
-                        },
-                        new
-                        {
-                            SubjectsListId = 2,
-                            Accounting = 78.0,
-                            Biology = 84.0,
-                            Chemistry = 89.0,
-                            English = 60.0,
-                            Math = 85.0
-                        },
-                        new
-                        {
-                            SubjectsListId = 3,
-                            Accounting = 87.0,
-                            Biology = 88.0,
-                            Chemistry = 85.0,
-                            English = 70.0,
-                            Math = 95.0
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

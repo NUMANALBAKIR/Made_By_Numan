@@ -49,13 +49,13 @@ public class StudentsAPIController : ControllerBase
             .Where(x => x.DateOfBirth.ToString().Contains(searchText))
             .ToList();
         }
-        else if (searchBy == "PassedOrFailed".ToLower())
-        {
-            students = _context.Students
-            // .Include(x=> x.Subjects)
-            .Where(x => x.PassedOrFailed.ToLower().Contains(searchText))
-            .ToList();
-        }
+        //else if (searchBy == "Passed".ToLower())
+        //{
+        //    students = _context.Students
+        //    // .Include(x=> x.Subjects)
+        //    .Where(x => x.Passed.ToString() == searchText))
+        //    .ToList();
+        //}
         return Ok(students);
     }
 
@@ -64,7 +64,10 @@ public class StudentsAPIController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
     {
-        return await _context.Students.ToListAsync();
+        return await _context.Students
+            .Include(x => x.Country)
+            .Include(x => x.SubjectsList)
+            .ToListAsync();
     }
 
 
@@ -72,7 +75,10 @@ public class StudentsAPIController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Student>> GetStudent(int id)
     {
-        var student = await _context.Students.FindAsync(id);
+        var student = await _context.Students
+             .Include(x => x.Country)
+            .Include(x => x.SubjectsList)
+            .FirstOrDefaultAsync(x => x.SubjectsListId == id);
 
         if (student == null)
         {
