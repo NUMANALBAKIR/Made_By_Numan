@@ -4,6 +4,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230330184800_apicleanup")]
+    partial class apicleanup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +55,7 @@ namespace API.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("BankAccounts", (string)null);
+                    b.ToTable("BankAccounts");
                 });
 
             modelBuilder.Entity("API.Models.Bank.Transaction", b =>
@@ -82,7 +85,7 @@ namespace API.Migrations
 
                     b.HasKey("TransactionId");
 
-                    b.ToTable("Transactions", (string)null);
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("API.Models.OrderFood.CartItem", b =>
@@ -112,7 +115,7 @@ namespace API.Migrations
 
                     b.HasIndex("FoodId");
 
-                    b.ToTable("CartItems", (string)null);
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("API.Models.OrderFood.Category", b =>
@@ -128,7 +131,7 @@ namespace API.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("API.Models.OrderFood.Food", b =>
@@ -159,7 +162,7 @@ namespace API.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Foods", (string)null);
+                    b.ToTable("Foods");
                 });
 
             modelBuilder.Entity("API.Models.OrderFood.OrderDetail", b =>
@@ -189,7 +192,7 @@ namespace API.Migrations
 
                     b.HasIndex("OrderHeaderId");
 
-                    b.ToTable("OrderDetails", (string)null);
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("API.Models.OrderFood.OrderHeader", b =>
@@ -226,7 +229,7 @@ namespace API.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("OrderHeaders", (string)null);
+                    b.ToTable("OrderHeaders");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
