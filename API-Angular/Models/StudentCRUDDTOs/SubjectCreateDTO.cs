@@ -1,4 +1,4 @@
-﻿namespace API.Models.StudentCRUDDTOs;
+﻿namespace API_Angular.Models.StudentCRUDDTOs;
 
 public class SubjectCreateDTO
 {

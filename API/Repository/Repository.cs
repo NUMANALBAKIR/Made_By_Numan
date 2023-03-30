@@ -1,6 +1,5 @@
 ﻿using API.Data;
 using API.Repository.IRepository;
-using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace API.Repository;

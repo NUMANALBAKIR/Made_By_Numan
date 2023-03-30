@@ -1,7 +1,6 @@
 ﻿using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using MimeKit;
-using System.Configuration;
 
 namespace Client.Areas.Identity.EmailSender;
 

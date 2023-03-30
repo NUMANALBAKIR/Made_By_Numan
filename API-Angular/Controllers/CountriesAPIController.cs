@@ -1,14 +1,9 @@
 ﻿using API_Angular.Data;
 using API_Angular.Models.StudentCRUD;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace API.Controllers;
+namespace API_Angular.Controllers;
 
 /*
     Note: This Controller is for 'Client-Angular', which is now under development.
