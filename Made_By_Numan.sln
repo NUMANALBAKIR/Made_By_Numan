@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csp
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Client-Angular", "Client-Angular\Client-Angular.esproj", "{E6365FF1-0D1D-4834-9F6A-B8A79B103243}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API-Angular", "API-Angular\API-Angular.csproj", "{054590BF-C165-43AD-AECF-258D361EAAD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API-Angular", "API-Angular\API-Angular.csproj", "{054590BF-C165-43AD-AECF-258D361EAAD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
