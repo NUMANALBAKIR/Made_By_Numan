@@ -1,8 +1,4 @@
-using API;
-using API.Data;
-using API.DatabaseInitializer;
-using API.Repository;
-using API.Repository.IRepository;
+using API_Angular.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -30,12 +26,6 @@ builder.Services.AddSwaggerGen(options =>
     })
 );
 
-builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
-
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-builder.Services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
-
 var app = builder.Build();
 
 
@@ -58,7 +48,6 @@ app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseHttpsRedirection();
 
-SeedDatabase();
 
 app.UseAuthorization();
 
@@ -66,11 +55,3 @@ app.MapControllers();
 
 app.Run();
 
-void SeedDatabase()
-{
-    using (var scope = app.Services.CreateScope())
-    {
-        var databaseInitializer = scope.ServiceProvider.GetRequiredService<IDatabaseInitializer>();
-        databaseInitializer.Initialize();
-    }
-}

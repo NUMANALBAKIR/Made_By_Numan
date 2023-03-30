@@ -1,5 +1,6 @@
-﻿using API.Data;
-using API.Models.StudentCRUD;
+﻿using API_Angular.Data;
+using API_Angular.Data;
+using API_Angular.Models.StudentCRUD;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

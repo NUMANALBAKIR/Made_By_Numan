@@ -1,10 +1,8 @@
-﻿
-using API.Models.OrderFood;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace API.Models.StudentCRUD;
+namespace API_Angular.Models.StudentCRUD;
 
 public class SubjectsList
 {
