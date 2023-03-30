@@ -24,9 +24,16 @@ export class StudentsCRUDComponent implements OnInit {
   ngOnInit(): void {
     // get and set list of students
     this.studentsService.getStudents().subscribe(
-      (response: Student[]) => { this.students = response },
-      (error) => { console.log(error) }
+      (response: Student[]) => {
+        this.students = response;
+      },
+      (error) => {
+        console.log(error);
+      }
     );
+
+    debugger;
+
 
   }
 
@@ -45,7 +52,7 @@ export class StudentsCRUDComponent implements OnInit {
 
   onConfirmDelete() {
     this.studentsService.deleteStudent(this.students[this.i].studentId).subscribe(
-      (r: string) => {        
+      (r: string) => {
       },
       (e: any) => {
         console.log(e);
@@ -69,7 +76,7 @@ export class StudentsCRUDComponent implements OnInit {
     );
   }
 
-  
+
 
 
 

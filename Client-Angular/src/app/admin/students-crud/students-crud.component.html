@@ -19,14 +19,14 @@
             <select class="form-control" id="searchByDropdown" name="searchBy" [(ngModel)]="searchBy">
                 <option value="name">Student Name</option>
                 <option value="dateOfBirth">Date of Birth</option>
-                <option value="passedOrFailed">Pass / Fail</option>
+                <option value="passed">Pass / Fail</option>
             </select>
         </div>
 
         <div class="col-3 text-info">
             <div class="input-group">
                 <label for="searchText">Type Search Text: </label>
-                <input type="text" class="form-control" id="searchText" name="searchText" [(ngModel)]="searchText">                
+                <input type="text" class="form-control" id="searchText" name="searchText" [(ngModel)]="searchText">
             </div>
         </div>
         <div class="col input-group-append" (click)="onSearchClick()">
@@ -44,7 +44,6 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Date Of Birth</th>
-                <th>Age</th>
                 <th>Pass/Fail</th>
                 <!-- <th>Subjects</th> -->
                 <th class="table-info" style="text-align: center;">Actions</th>
@@ -56,9 +55,8 @@
                 <td>{{student.studentId}}</td>
                 <th>{{student.name }}</th>
                 <td>{{student.dateOfBirth | date}}</td>
-                <td>{{student.age}}</td>
-                <td [style.color]="((student.passedOrFailed | lowercase ) =='passed')? 'green':'red'">
-                    {{student.passedOrFailed}}
+                <td [style.color]="(student.passed  == true)? 'green':'red'">
+                    {{student.passed}}
                 </td>
 
                 <!-- <td>
@@ -86,17 +84,16 @@
 
 
 <!-- Modal delete Student -->
-<div class="modal fade" id="myModal">
+<!-- 
+    <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-2">
 
-            <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">Delete Student ?</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            <!-- Modal body -->
                 <div class="modal-body">
                 <div class="col-2">
                     <label for="studentId" class="control-label pt-2" style="font-size:20px;">Id</label>
@@ -144,7 +141,6 @@
                     <span asp-validation-for="ImageUrl" class="text-danger"></span>
                 </div> 
                             
-            <!-- Modal footer -->
                 <div class="modal-footer">
                     <button (click)="onConfirmDelete()" type="button" class="btn btn-danger"
                         data-bs-dismiss="modal">Confirm</button>
@@ -153,4 +149,5 @@
             
         </div>
     </div>
-</div>
+</div> 
+-->

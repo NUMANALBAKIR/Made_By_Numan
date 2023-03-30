@@ -10,7 +10,7 @@ import { LowerCasePipe } from '@angular/common';
 )
 export class StudentsService {
 
-  private _apiUrl: string = 'https://localhost:5001/api/StudentsAPI';
+  private _apiUrl: string = 'http://localhost:5091/api/StudentsAPI';
   public studentIdPassed: number = 0;
 
   constructor(private httpClient: HttpClient) {
@@ -90,9 +90,10 @@ export class StudentsService {
         (data: Student[]) => {
           
           for (let i = 0; i < data.length; i++) {
-            data[i].pass = data[i].pass.toLowerCase();
+            data[i].name = data[i].name.toLowerCase();
           }
 
+          debugger;
           return data;
         }
       ));
