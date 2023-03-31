@@ -43,7 +43,6 @@ export class CountriesService {
 
   searchCountries(searchBy: string, searchText: string): Observable<Country[]> {
     let url = this._apiUrl + '/' + searchBy + '/' + searchText;
-    // debugger;
     return this.httpClient.get<Country[]>(url, { responseType: 'json' });
   }
 }

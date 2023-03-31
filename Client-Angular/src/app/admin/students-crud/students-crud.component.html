@@ -4,6 +4,10 @@
         <div class="col">
             <h2 class="text-primary">Students CRUD</h2>
         </div>
+
+        <div class="spinner-border text-dark" *ngIf="showSpinner">    
+        </div>
+
         <div class="col text-end">
             <a routerLink="/addstudent" class="btn btn-primary">Add Student</a>
         </div>
@@ -35,6 +39,8 @@
     </div>
 </div>
 
+
+
 <!-- Table -->
 <div class="container mt-3">
 
@@ -45,24 +51,28 @@
                 <th>Name</th>
                 <th>Date Of Birth</th>
                 <th>Pass/Fail</th>
+                <th>Gender</th>
+                <th>Country</th>
                 <!-- <th>Subjects</th> -->
                 <th class="table-info" style="text-align: center;">Actions</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr *ngFor="let student of students; let i = index">
+            <tr *ngFor="let student of students; let i = index" [ngClass]="{'text-danger': !student.passed}">
                 <td>{{student.studentId}}</td>
                 <th>{{student.name }}</th>
                 <td>{{student.dateOfBirth | date}}</td>
-                <td [style.color]="(student.passed  == true)? 'green':'red'">
+                <td [style.color]="(student.passed  == true)? 'green':'blue'">
                     {{student.passed}}
                 </td>
+                <th>{{student.gender }}</th>
+                <th>{{student.country.name }}</th>
 
                 <!-- <td>
-                    <ng-container *ngFor="let subject of student.Subjects; let j = index">
-                        {{subject.Name}}
-                        <span *ngIf="j < student.Subjects.length-1; then commaTemplate; else noneTemplate"></span>
+                    <ng-container *ngFor="let subject of student.subjectsList; let j = index">                    
+                        {{subject.name}}
+                        <span *ngIf="j < student.subjectsList.length-1; then commaTemplate; else noneTemplate"></span>
 
                         <ng-template #commaTemplate>,</ng-template>
                         <ng-template #noneTemplate></ng-template>
@@ -81,6 +91,12 @@
         </tbody>
     </table>
 </div>
+
+<!-- {{countries| json}} -->
+<!-- <hr> -->
+<!-- {{subjectsLists| json}} -->
+<!-- <hr> -->
+{{students | json}}
 
 
 <!-- Modal delete Student -->

@@ -15,7 +15,7 @@ export class SubjectsListsService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getCountry(subjectsListId: number): Observable<SubjectsList> {
+  getSubjectsList(subjectsListId: number): Observable<SubjectsList> {
     return this.httpClient.get<SubjectsList>(this._apiUrl + '/' + subjectsListId, { responseType: 'json' });
   }
 
@@ -31,21 +31,20 @@ export class SubjectsListsService {
   }
 
 
-  addCountry(subjectsListToAdd: SubjectsList): Observable<SubjectsList> {
+  addSubjectsList(subjectsListToAdd: SubjectsList): Observable<SubjectsList> {
     return this.httpClient.post<SubjectsList>(this._apiUrl, subjectsListToAdd, { responseType: 'json' });
   }
 
-  editCountry(subjectsListToEdit: SubjectsList): Observable<SubjectsList> {
+  editSubjectsList(subjectsListToEdit: SubjectsList): Observable<SubjectsList> {
     return this.httpClient.put<SubjectsList>(this._apiUrl + '/' + subjectsListToEdit.subjectsListId, subjectsListToEdit, { responseType: 'json' });
   }
 
-  deleteCountry(subjectsListId: number): Observable<string> {
+  deleteSubjectsList(subjectsListId: number): Observable<string> {
     return this.httpClient.delete<string>(this._apiUrl + '/' + subjectsListId, { responseType: 'json' });
   }
 
   searchSubjectsLists(searchBy: string, searchText: string): Observable<SubjectsList[]> {
     let url = this._apiUrl + '/' + searchBy + '/' + searchText;
-    // debugger;
     return this.httpClient.get<SubjectsList[]>(url, { responseType: 'json' });
   }
 }

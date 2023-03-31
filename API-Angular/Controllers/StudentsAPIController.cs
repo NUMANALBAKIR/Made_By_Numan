@@ -59,6 +59,8 @@ public class StudentsAPIController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
     {
+        System.Threading.Thread.Sleep(3000);
+        
         return await _context.Students
             .Include(x => x.Country)
             .Include(x => x.SubjectsList)
