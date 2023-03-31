@@ -5,13 +5,14 @@ namespace API_Angular.Models.StudentCRUDDTOs;
 
 public class StudentDTO
 {
-    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int StudentId { get; set; }
     public string Name { get; set; }
-    public DateTime DateOfBirth { get; set; }
-    public int Age { get; set; }
-    public string Pass { get; set; }
+    public string DateOfBirth { get; set; } // string
+    public bool Passed { get; set; } // checkbox
+    public string Gender { get; set; } // radio
 
-    //public ICollection<Subject> Subjects { get; set; }
+    public int CountryId { get; set; }
+    public CountryDTO Country { get; set; }    // cl...
+
 
 }

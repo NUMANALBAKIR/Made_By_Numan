@@ -14,7 +14,7 @@ public class Student
 
     public int CountryId { get; set; }
     [ForeignKey(nameof(CountryId))]
-    public Country Country { get; set; }
+    public Country Country { get; set; }    // cl...
 
     public int SubjectsListId { get; set; }
     [ForeignKey(nameof(SubjectsListId))]

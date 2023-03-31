@@ -1,27 +1,32 @@
+import { Country } from "./country";
+import { SubjectsList } from "./subjects-list";
+
 export class Student {
-  studentId: any = null;
-  name: any = null;
-  dateOfBirth: any = null; 
-  passed: any = null;
-  country: any = null;
 
+  studentId: number | any;
+  name: string | any;
+  dateOfBirth: string | any;
+  passed: boolean | any;  // checkbox ... act
+  gender: string | any;   // radio ... sta
 
-  // Subjects: any[];
+  countryId: number | any;    // cli...
+  country: Country | any;     // cli...
 
+  subjectsListId: number | any;
+  subjectsList: SubjectsList | any;
 
-//   public int StudentId { get; set; }
-//     public string Name { get; set; }
-//     public DateTime DateOfBirth { get; set; }
-//     public bool Passed { get; set; } // checkbox
-//     public string Gender { get; set; } // radio
+  constructor() {
+    this.studentId = null;
+    this.name = null;
+    this.dateOfBirth = null;
+    this.passed = true;
+    this.gender = null;
 
-//     public int CountryId { get; set; }
-// [ForeignKey(nameof(CountryId))]
-//     public Country Country { get; set; }
+    this.countryId = null;
+    this.country = new Country();
 
-//     public int SubjectsListId { get; set; }
-// [ForeignKey(nameof(SubjectsListId))]
-//     public SubjectsList SubjectsList { get; set; }
-
+    this.subjectsListId = null;
+    this.subjectsList = new SubjectsList();
+  }
 
 }
