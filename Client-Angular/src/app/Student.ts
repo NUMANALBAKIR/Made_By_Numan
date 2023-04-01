@@ -12,8 +12,8 @@ export class Student {
   countryId: number | any;    // cli...
   country: Country | any;     // cli...
 
-  subjectsListId: number | any;
-  subjectsList: SubjectsList | any;
+  // subjectsListId: number | any;
+  // subjectsList: SubjectsList | any;
 
   constructor() {
     this.studentId = null;
@@ -25,8 +25,8 @@ export class Student {
     this.countryId = null;
     this.country = new Country();
 
-    this.subjectsListId = null;
-    this.subjectsList = new SubjectsList();
+    // this.subjectsListId = null;
+    // this.subjectsList = new SubjectsList();
   }
 
 }

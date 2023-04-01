@@ -41,16 +41,6 @@ export class StudentsCRUDComponent implements OnInit {
       }
     );
 
-    // get and set list of countries
-    this.countriesService.getCountries().subscribe(
-      (response: Country[]) => {
-        this.countries = response;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-
     // get and set list of subjectslist
     this.subjectsListsService.getSubjectsLists().subscribe(
       (response: SubjectsList[]) => {

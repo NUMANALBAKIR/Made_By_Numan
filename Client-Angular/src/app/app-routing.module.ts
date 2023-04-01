@@ -8,7 +8,7 @@ import { StudentsCRUDComponent } from './admin/students-crud/students-crud.compo
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'studentscrud', pathMatch: 'full' },
+  { path: '', redirectTo: 'addstudent', pathMatch: 'full' },
   { path: 'about', component: AboutComponent },
   { path: 'studentscrud', component: StudentsCRUDComponent },
   { path: 'addstudent', component: AddStudentComponent },

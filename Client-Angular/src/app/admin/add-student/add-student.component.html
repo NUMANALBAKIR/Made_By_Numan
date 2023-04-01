@@ -26,34 +26,66 @@
                 <label for="dateOfBirth" class="control-label pt-2" style="font-size:20px;">Date Of Birth</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="dateOfBirth" [(ngModel)]="studentToAdd.dateOfBirth" type="date" id="dateOfBirth" class="form-control" />
+                <input name="dateOfBirth" [(ngModel)]="studentToAdd.dateOfBirth" type="date" id="dateOfBirth"
+                    class="form-control" />
                 <!-- <span asp-validation-for="Rate" class="text-danger"></span> -->
             </div>
 
+            <!-- Checkbox -->
             <div class="col-2">
-                <label for="passed" class="control-label pt-2" style="font-size:20px;">Pass/Fail</label>
+                <label for="checkbox" class="control-label pt-2" style="font-size:20px;">Passed? </label>
             </div>
             <div class="col-10 pb-3">
-                <input name="passed" [(ngModel)]="studentToAdd.passed" type="text" id="passed" class="form-control" />
+                <div class="form-check">
+                    <input type="checkbox" id="checkbox" value="true" class="form-check-input"
+                        [(ngModel)]="studentToAdd.passed" name="passed">
+                </div>
                 <!-- <span asp-validation-for="ImageUrl" class="text-danger"></span> -->
             </div>
 
-            <div class="col-2">
-                <label for="country" class="control-label pt-2" style="font-size:20px;">Country</label>
-            </div>
-            <div class="col-10 pb-3">
-                <input name="country" [(ngModel)]="studentToAdd.country" type="text" id="country" class="form-control" />
-                <!-- <span asp-validation-for="ImageUrl" class="text-danger"></span> -->
-            </div>
-
+            <!-- Radio -->
             <div class="col-2">
                 <label for="gender" class="control-label pt-2" style="font-size:20px;">Gender</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="gender" [(ngModel)]="studentToAdd.gender" type="text" id="gender" class="form-control" />
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" id="gender" value="female" class="form-check-input" name="gender"
+                        [(ngModel)]="studentToAdd.gender" required="required" #gender="ngModel">
+                    <label for="gender" class="form-check-label">Female</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" id="gender" value="male" class="form-check-input" name="gender"
+                        [(ngModel)]="studentToAdd.gender" required="required" #gender="ngModel">
+                    <label for="gender" class="form-check-label">Male</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" id="gender" value="other" class="form-check-input" name="gender"
+                        [(ngModel)]="studentToAdd.gender" required="required" #gender="ngModel">
+                    <label for="gender" class="form-check-label">Other</label>
+                </div>
                 <!-- <span asp-validation-for="ImageUrl" class="text-danger"></span> -->
             </div>
 
+
+            <!-- dropdown -->
+            <div class="col-2">
+                <label for="country" class="control-label pt-2" style="font-size:20px;">Country</label>
+            </div>
+
+            <div class="col-10 pb-3">
+                 <select id="country" class="form-control" name="country" [(ngModel)]="studentToAdd.countryId" required="required" #country="ngModel">
+                    
+                    <option value="null">- Select Country -</option>
+                    <option *ngFor="let country of countries" [value]="country.countryId">
+                        {{country.name}}
+                    </option>
+                    
+                </select>
+                <!-- <span asp-validation-for="ImageUrl" class="text-danger"></span> -->
+            </div>
 
             <div>
                 <button (click)="onConfirmClick()" class="btn btn-success form-control">Confirm</button>

@@ -60,10 +60,10 @@ public class StudentsAPIController : ControllerBase
     public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
     {
         System.Threading.Thread.Sleep(3000);
-        
+
         return await _context.Students
             .Include(x => x.Country)
-            .Include(x => x.SubjectsList)
+            //.Include(x => x.SubjectsList)
             .ToListAsync();
     }
 
@@ -74,8 +74,8 @@ public class StudentsAPIController : ControllerBase
     {
         var student = await _context.Students
              .Include(x => x.Country)
-            .Include(x => x.SubjectsList)
-            .FirstOrDefaultAsync(x => x.SubjectsListId == id);
+            //.Include(x => x.SubjectsList)
+            .FirstOrDefaultAsync(x => x.StudentId == id);
 
         if (student == null)
         {

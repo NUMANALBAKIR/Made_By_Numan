@@ -29,12 +29,17 @@ public class AppDbContext : DbContext
             new SubjectsList() { SubjectsListId = 3, English = 70, Math = 95, Accounting = 87, Chemistry = 85, Biology = 88 }
         );
 
-        modelBuilder.Entity<Student>().HasData(
-            new Student() { StudentId = 1, Name = "Zina", Passed = true, Gender = "Female", DateOfBirth = Convert.ToDateTime("2001-1-21"), CountryId = 1, SubjectsListId = 1 },
-            new Student() { StudentId = 2, Name = "Sam", Passed = false, Gender = "Male", DateOfBirth = Convert.ToDateTime("2002-2-22"), CountryId = 2, SubjectsListId = 2 },
-            new Student() { StudentId = 3, Name = "Ren", Passed = true, Gender = "Other", DateOfBirth = Convert.ToDateTime("2003-3-23"), CountryId = 2, SubjectsListId = 3 }
-        );
+        //modelBuilder.Entity<Student>().HasData(
+        //    new Student() { StudentId = 1, Name = "Zina", Passed = true, Gender = "Female", DateOfBirth = Convert.ToDateTime("2001-1-21"), CountryId = 1, SubjectsListId = 1 },
+        //    new Student() { StudentId = 2, Name = "Sam", Passed = false, Gender = "Male", DateOfBirth = Convert.ToDateTime("2002-2-22"), CountryId = 2, SubjectsListId = 2 },
+        //    new Student() { StudentId = 3, Name = "Ren", Passed = true, Gender = "Other", DateOfBirth = Convert.ToDateTime("2003-3-23"), CountryId = 2, SubjectsListId = 3 }
+        //);
 
+        modelBuilder.Entity<Student>().HasData(
+    new Student() { StudentId = 1, Name = "Zina", Passed = true, Gender = "Female", DateOfBirth = Convert.ToDateTime("2001-1-21"), CountryId = 1 },
+    new Student() { StudentId = 2, Name = "Sam", Passed = false, Gender = "Male", DateOfBirth = Convert.ToDateTime("2002-2-22"), CountryId = 2 },
+    new Student() { StudentId = 3, Name = "Ren", Passed = true, Gender = "Other", DateOfBirth = Convert.ToDateTime("2003-3-23"), CountryId = 2 }
+);
 
     }
 
