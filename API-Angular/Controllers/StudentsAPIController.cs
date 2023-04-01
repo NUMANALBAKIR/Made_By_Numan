@@ -1,5 +1,7 @@
 ﻿using API_Angular.Data;
 using API_Angular.Models.StudentCRUD;
+using API_Angular.Models.StudentCRUDDTOs;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,9 +16,11 @@ namespace API_Angular.Controllers;
 public class StudentsAPIController : ControllerBase
 {
     private readonly AppDbContext _context;
+    private readonly IMapper _mapper;
 
-    public StudentsAPIController(AppDbContext context)
+    public StudentsAPIController(AppDbContext context, IMapper mapper)
     {
+        _mapper = mapper;
         _context = context;
     }
 
@@ -59,12 +63,18 @@ public class StudentsAPIController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
     {
-        System.Threading.Thread.Sleep(3000);
+        System.Threading.Thread.Sleep(2000);
 
-        return await _context.Students
+        var students = await _context.Students
             .Include(x => x.Country)
             //.Include(x => x.SubjectsList)
             .ToListAsync();
+
+        // foreach (var student in students)
+        // {
+        //     student.DateOfBirth.ToString("dd/MM/yyyy");
+        // }
+        return students;
     }
 
 
@@ -81,7 +91,7 @@ public class StudentsAPIController : ControllerBase
         {
             return NotFound();
         }
-
+        // student.DateOfBirth.ToString("dd/MM/yyyy");
         return student;
     }
 
@@ -89,8 +99,9 @@ public class StudentsAPIController : ControllerBase
     // PUT: api/StudentsAPI/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutStudent(int id, Student student)
+    public async Task<IActionResult> PutStudent(int id, StudentUpdateDTO updateDto)
     {
+        var student = _mapper.Map<Student>(updateDto);
         if (id != student.StudentId)
         {
             return BadRequest();
@@ -120,8 +131,9 @@ public class StudentsAPIController : ControllerBase
     // POST: api/StudentsAPI
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-    public async Task<ActionResult<Student>> PostStudent(Student student)
+    public async Task<ActionResult<Student>> PostStudent(StudentCreateDTO createDto)
     {
+        Student student = _mapper.Map<Student>(createDto);
         _context.Students.Add(student);
         try
         {
@@ -138,7 +150,7 @@ public class StudentsAPIController : ControllerBase
                 throw;
             }
         }
-
+        // student.DateOfBirth.ToString("dd/MM/yyyy");
         return CreatedAtAction("GetStudent", new { id = student.StudentId }, student);
     }
 

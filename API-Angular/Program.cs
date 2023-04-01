@@ -1,3 +1,4 @@
+using API_Angular;
 using API_Angular.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -25,6 +26,8 @@ builder.Services.AddSwaggerGen(options =>
         //}
     })
 );
+
+builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
 var app = builder.Build();
 

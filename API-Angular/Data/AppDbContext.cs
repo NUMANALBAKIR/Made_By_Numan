@@ -36,10 +36,10 @@ public class AppDbContext : DbContext
         //);
 
         modelBuilder.Entity<Student>().HasData(
-    new Student() { StudentId = 1, Name = "Zina", Passed = true, Gender = "Female", DateOfBirth = Convert.ToDateTime("2001-1-21"), CountryId = 1 },
-    new Student() { StudentId = 2, Name = "Sam", Passed = false, Gender = "Male", DateOfBirth = Convert.ToDateTime("2002-2-22"), CountryId = 2 },
-    new Student() { StudentId = 3, Name = "Ren", Passed = true, Gender = "Other", DateOfBirth = Convert.ToDateTime("2003-3-23"), CountryId = 2 }
-);
+            new Student() { StudentId = 1, Name = "Zina", Passed = true, Gender = "Female", DateOfBirth = "2001-12-21", CountryId = 1 },
+            new Student() { StudentId = 2, Name = "Sam", Passed = false, Gender = "Male", DateOfBirth = "2002-12-22", CountryId = 2 },
+            new Student() { StudentId = 3, Name = "Ren", Passed = true, Gender = "Other", DateOfBirth = "2003-12-23", CountryId = 2 }
+        );
 
     }
 

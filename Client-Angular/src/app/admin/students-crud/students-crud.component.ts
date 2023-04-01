@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CountriesService } from 'src/app/countries.service';
 import { Country } from 'src/app/country';
-import { Student } from 'src/app/student';
+import { Student } from 'src/app/Student';
 import { StudentsService } from 'src/app/students.service';
 import { SubjectsList } from 'src/app/subjects-list';
 import { SubjectsListsService } from 'src/app/subjects-lists.service';
@@ -51,7 +51,7 @@ export class StudentsCRUDComponent implements OnInit {
       }
     );
 
-    debugger;
+    // debugger;
   }
 
   onDetailsClick(event: any, studentId: number) {

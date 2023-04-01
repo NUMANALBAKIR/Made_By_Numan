@@ -1,6 +1,7 @@
-﻿namespace API_Angular.Models.StudentCRUDDTOs;
+﻿
+namespace API_Angular.Models.StudentCRUD;
 
-public class StudentUpdateDTO
+public class StudentVM
 {
     public int StudentId { get; set; }
     public string Name { get; set; }
@@ -9,5 +10,7 @@ public class StudentUpdateDTO
     public string Gender { get; set; } // radio
 
     public int CountryId { get; set; }
+    public Country Country { get; set; }    // cl...
+
 
 }

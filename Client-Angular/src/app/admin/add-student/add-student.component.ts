@@ -36,7 +36,9 @@ export class AddStudentComponent implements OnInit {
 
   }
 
-  onConfirmClick() {
+  onConfirmClick() {    
+    debugger;
+
     this.studentsService.addStudent(this.studentToAdd).subscribe(
       (r: Student) => {
       },

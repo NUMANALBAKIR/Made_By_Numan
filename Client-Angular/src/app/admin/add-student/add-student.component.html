@@ -6,13 +6,13 @@
 
         <div class="row">
 
-            <!-- <div class="col-2">
+            <div class="col-2">
                 <label for="studentId" class="control-label pt-2" style="font-size:20px;">Id</label>
             </div>
             <div class="col-10 pb-3">
                 <input name="studentId" [(ngModel)]="studentToAdd.studentId" type="text" id="studentId" class="form-control" />
                 <span asp-validation-for="studentId" class="text-danger"></span>
-            </div> -->
+            </div>
 
             <div class="col-2">
                 <label for="name" class="control-label pt-2" style="font-size:20px;">Name</label>
@@ -23,7 +23,7 @@
             </div>
 
             <div class="col-2">
-                <label for="dateOfBirth" class="control-label pt-2" style="font-size:20px;">Date Of Birth</label>
+                <label for="dateOfBirth" class="control-label pt-2" style="font-size:20px;">Date Of Birth (click calender icon):</label>
             </div>
             <div class="col-10 pb-3">
                 <input name="dateOfBirth" [(ngModel)]="studentToAdd.dateOfBirth" type="date" id="dateOfBirth"
@@ -31,7 +31,7 @@
                 <!-- <span asp-validation-for="Rate" class="text-danger"></span> -->
             </div>
 
-            <!-- Checkbox -->
+            <!-- passed? Checkbox -->
             <div class="col-2">
                 <label for="checkbox" class="control-label pt-2" style="font-size:20px;">Passed? </label>
             </div>
@@ -43,7 +43,7 @@
                 <!-- <span asp-validation-for="ImageUrl" class="text-danger"></span> -->
             </div>
 
-            <!-- Radio -->
+            <!-- gender Radio -->
             <div class="col-2">
                 <label for="gender" class="control-label pt-2" style="font-size:20px;">Gender</label>
             </div>
@@ -70,16 +70,16 @@
             </div>
 
 
-            <!-- dropdown -->
+            <!-- country dropdown -->
             <div class="col-2">
                 <label for="country" class="control-label pt-2" style="font-size:20px;">Country</label>
             </div>
 
             <div class="col-10 pb-3">
-                 <select id="country" class="form-control" name="country" [(ngModel)]="studentToAdd.countryId" required="required" #country="ngModel">
+                 <select id="country" class="form-control" name="country" [(ngModel)]="studentToAdd.country" required="required" #country="ngModel">
                     
                     <option value="null">- Select Country -</option>
-                    <option *ngFor="let country of countries" [value]="country.countryId">
+                    <option *ngFor="let country of countries" [value]="country">
                         {{country.name}}
                     </option>
                     
