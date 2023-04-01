@@ -7,18 +7,18 @@
         <div class="row">
 
             <div class="col-2">
-                <label for="studentId" class="control-label pt-2" style="font-size:20px;">Id</label>
+                <label for="studentId" class="control-label pt-2" style="font-size:20px;">Student Id:</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="studentId" [(ngModel)]="studentToAdd.studentId" type="text" id="studentId" class="form-control" />
-                <span asp-validation-for="studentId" class="text-danger"></span>
+                <input name="studentId" [(ngModel)]="studentCreateDTO.studentId" type="text" id="studentId" class="form-control" />
+                <!-- <span asp-validation-for="studentId" class="text-danger"></span> -->
             </div>
 
             <div class="col-2">
-                <label for="name" class="control-label pt-2" style="font-size:20px;">Name</label>
+                <label for="name" class="control-label pt-2" style="font-size:20px;">Name:</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="name" [(ngModel)]="studentToAdd.name" type="text" id="name" class="form-control" />
+                <input name="name" [(ngModel)]="studentCreateDTO.name" type="text" id="name" class="form-control" />
                 <!-- <span asp-validation-for="name" class="text-danger"></span> -->
             </div>
 
@@ -26,44 +26,44 @@
                 <label for="dateOfBirth" class="control-label pt-2" style="font-size:20px;">Date Of Birth (click calender icon):</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="dateOfBirth" [(ngModel)]="studentToAdd.dateOfBirth" type="date" id="dateOfBirth"
+                <input name="dateOfBirth" [(ngModel)]="studentCreateDTO.dateOfBirth" type="date" id="dateOfBirth"
                     class="form-control" />
                 <!-- <span asp-validation-for="Rate" class="text-danger"></span> -->
             </div>
 
             <!-- passed? Checkbox -->
             <div class="col-2">
-                <label for="checkbox" class="control-label pt-2" style="font-size:20px;">Passed? </label>
+                <label for="checkbox" class="control-label pt-2" style="font-size:20px;">Passed? :</label>
             </div>
             <div class="col-10 pb-3">
                 <div class="form-check">
                     <input type="checkbox" id="checkbox" value="true" class="form-check-input"
-                        [(ngModel)]="studentToAdd.passed" name="passed">
+                        [(ngModel)]="studentCreateDTO.passed" name="passed">
                 </div>
                 <!-- <span asp-validation-for="ImageUrl" class="text-danger"></span> -->
             </div>
 
             <!-- gender Radio -->
             <div class="col-2">
-                <label for="gender" class="control-label pt-2" style="font-size:20px;">Gender</label>
+                <label for="gender" class="control-label pt-2" style="font-size:20px;">Gender:</label>
             </div>
             <div class="col-10 pb-3">
 
                 <div class="form-check form-check-inline">
                     <input type="radio" id="gender" value="female" class="form-check-input" name="gender"
-                        [(ngModel)]="studentToAdd.gender" required="required" #gender="ngModel">
+                        [(ngModel)]="studentCreateDTO.gender" required="required" #gender="ngModel">
                     <label for="gender" class="form-check-label">Female</label>
                 </div>
 
                 <div class="form-check form-check-inline">
                     <input type="radio" id="gender" value="male" class="form-check-input" name="gender"
-                        [(ngModel)]="studentToAdd.gender" required="required" #gender="ngModel">
+                        [(ngModel)]="studentCreateDTO.gender" required="required" #gender="ngModel">
                     <label for="gender" class="form-check-label">Male</label>
                 </div>
 
                 <div class="form-check form-check-inline">
                     <input type="radio" id="gender" value="other" class="form-check-input" name="gender"
-                        [(ngModel)]="studentToAdd.gender" required="required" #gender="ngModel">
+                        [(ngModel)]="studentCreateDTO.gender" required="required" #gender="ngModel">
                     <label for="gender" class="form-check-label">Other</label>
                 </div>
                 <!-- <span asp-validation-for="ImageUrl" class="text-danger"></span> -->
@@ -72,14 +72,14 @@
 
             <!-- country dropdown -->
             <div class="col-2">
-                <label for="country" class="control-label pt-2" style="font-size:20px;">Country</label>
+                <label for="country" class="control-label pt-2" style="font-size:20px;">Country:</label>
             </div>
 
             <div class="col-10 pb-3">
-                 <select id="country" class="form-control" name="country" [(ngModel)]="studentToAdd.country" required="required" #country="ngModel">
+                 <select id="countryId" class="form-control" name="countryId" [(ngModel)]="studentCreateDTO.countryId" required="required">
                     
                     <option value="null">- Select Country -</option>
-                    <option *ngFor="let country of countries" [value]="country">
+                    <option *ngFor="let country of countries" [value]="country.countryId">
                         {{country.name}}
                     </option>
                     
@@ -89,6 +89,7 @@
 
             <div>
                 <button (click)="onConfirmClick()" class="btn btn-success form-control">Confirm</button>
+
                 <a routerLink="/studentscrud" class="btn-outline-primary btn form-control mt-3">Back to List</a>
             </div>
         </div>

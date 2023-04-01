@@ -1,5 +1,4 @@
 import { Country } from "./country";
-import { SubjectsList } from "./subjects-list";
 
 export class Student {
 

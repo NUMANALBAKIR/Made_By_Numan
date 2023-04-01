@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Student } from 'src/app/Student';
 import { StudentsService } from 'src/app/students.service';
 import { Location } from '@angular/common';
+import { StudentUpdateDTO } from 'src/app/Models/StudentUpdateDTO';
 
 @Component({
   selector: 'app-edit-student',
@@ -15,7 +16,7 @@ export class EditStudentComponent implements OnInit {
     private location: Location
   ) { }
 
-  studentToEdit: Student = new Student();
+  studentToEdit: StudentUpdateDTO = new StudentUpdateDTO();
   studentId: number = this.studentsService.studentIdPassed;
 
   ngOnInit(): void {

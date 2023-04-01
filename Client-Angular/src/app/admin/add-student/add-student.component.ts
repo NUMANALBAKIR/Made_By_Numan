@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Country } from 'src/app/country';
 import { CountriesService } from 'src/app/countries.service';
 import { Student } from 'src/app/Student';
+import { StudentCreateDTO } from 'src/app/Models/StudentCreateDTO';
 
 @Component({
   selector: 'app-add-student',
@@ -18,7 +19,7 @@ export class AddStudentComponent implements OnInit {
     private location: Location
   ) { }
 
-  studentToAdd: Student = new Student();
+  studentCreateDTO: StudentCreateDTO = new StudentCreateDTO();
   countries: Country[] = [];
 
 
@@ -37,10 +38,11 @@ export class AddStudentComponent implements OnInit {
   }
 
   onConfirmClick() {    
-    debugger;
+    // debugger;
 
-    this.studentsService.addStudent(this.studentToAdd).subscribe(
+    this.studentsService.addStudent(this.studentCreateDTO).subscribe(
       (r: Student) => {
+
       },
       (e) => { 
         console.log(e);

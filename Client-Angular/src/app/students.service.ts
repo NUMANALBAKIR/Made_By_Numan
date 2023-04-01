@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Student } from './Student';
+import { StudentCreateDTO } from './Models/StudentCreateDTO';
+import { StudentUpdateDTO } from './Models/StudentUpdateDTO';
 
 @Injectable(
   { providedIn: 'root' }
@@ -37,11 +39,11 @@ export class StudentsService {
   }
 
 
-  addStudent(studentToAdd: Student): Observable<Student> {
+  addStudent(studentToAdd: StudentCreateDTO): Observable<Student> {
     return this.httpClient.post<Student>(this._apiUrl, studentToAdd, { responseType: 'json' });
   }
 
-  editStudent(studentToEdit: Student): Observable<Student> {
+  editStudent(studentToEdit: StudentUpdateDTO): Observable<Student> {
     return this.httpClient.put<Student>(this._apiUrl + '/' + studentToEdit.studentId, studentToEdit, { responseType: 'json' });
   }
 
