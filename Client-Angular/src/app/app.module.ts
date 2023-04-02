@@ -9,11 +9,13 @@ import { DeleteStudentComponent } from './admin/delete-student/delete-student.co
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AgeValidatorDirective } from './admin/age-validator.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    AgeValidatorDirective
   ],
   imports: [
     BrowserModule,

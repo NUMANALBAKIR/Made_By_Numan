@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CountriesService } from 'src/app/countries.service';
 import { Country } from 'src/app/country';
@@ -6,6 +6,7 @@ import { Student } from 'src/app/Student';
 import { StudentsService } from 'src/app/students.service';
 import { SubjectsList } from 'src/app/subjects-list';
 import { SubjectsListsService } from 'src/app/subjects-lists.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-students-crud',
@@ -27,14 +28,15 @@ export class StudentsCRUDComponent implements OnInit {
   students: Student[] = [];
   countries: Country[] = [];
   subjectsLists: SubjectsList[] = [];
-  showSpinner: boolean= true; 
+  showSpinner: boolean = true;
 
   ngOnInit(): void {
+    debugger;
     // get and set list of students
     this.studentsService.getStudents().subscribe(
       (response: Student[]) => {
         this.students = response;
-        this.showSpinner= false;
+        this.showSpinner = false;
       },
       (error) => {
         console.log(error);
@@ -75,11 +77,13 @@ export class StudentsCRUDComponent implements OnInit {
         console.log(e);
       }
     );
+
     //needed
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
     this.router.navigateByUrl('/studentscrud');
+
   }
 
   onSearchClick() {
@@ -93,7 +97,10 @@ export class StudentsCRUDComponent implements OnInit {
     );
   }
 
-
+  
+  onCancelClick(){
+    $("#crossIcon").trigger("click");
+  }
 
 
 

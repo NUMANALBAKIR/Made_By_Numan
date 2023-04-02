@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StudentsService } from 'src/app/students.service';
 import { Location } from '@angular/common';
 import { Country } from 'src/app/country';
 import { CountriesService } from 'src/app/countries.service';
 import { Student } from 'src/app/Student';
 import { StudentCreateDTO } from 'src/app/Models/StudentCreateDTO';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-student',
@@ -12,6 +13,9 @@ import { StudentCreateDTO } from 'src/app/Models/StudentCreateDTO';
   styleUrls: ['./add-student.component.css']
 })
 export class AddStudentComponent implements OnInit {
+
+  @ViewChild('newForm') newForm: NgForm | any = null;
+
 
   constructor(
     private studentsService: StudentsService,
@@ -21,6 +25,7 @@ export class AddStudentComponent implements OnInit {
 
   studentCreateDTO: StudentCreateDTO = new StudentCreateDTO();
   countries: Country[] = [];
+  currYear: number = new Date().getFullYear(); 
 
 
   ngOnInit(): void {
@@ -37,19 +42,26 @@ export class AddStudentComponent implements OnInit {
 
   }
 
-  onConfirmClick() {    
-    // debugger;
+  onConfirmClick() {
+    debugger;
 
-    this.studentsService.addStudent(this.studentCreateDTO).subscribe(
-      (r: Student) => {
-
-      },
-      (e) => { 
-        console.log(e);
-       }
-    );
+    if (this.newForm.valid) {
+      this.studentsService.addStudent(this.studentCreateDTO).subscribe(
+        (r: Student) => {
   
-    this.location.back();    
+        },
+        (e) => {
+          console.log(e);
+        }
+      );
+  
+      this.location.back();      
+    }
+  }
+
+
+  onResetClick(){
+    this.newForm.resetForm();
   }
 
 }

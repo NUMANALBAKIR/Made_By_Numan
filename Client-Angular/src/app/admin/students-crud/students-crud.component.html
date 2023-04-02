@@ -5,7 +5,7 @@
             <h2 class="text-primary">Students CRUD</h2>
         </div>
 
-        <div class="spinner-border text-dark" *ngIf="showSpinner">    
+        <div class="spinner-border text-dark" *ngIf="showSpinner">
         </div>
 
         <div class="col text-end">
@@ -38,7 +38,7 @@
         </div>
     </div>
 </div>
- 
+
 <!-- Table -->
 <div class="container mt-3">
 
@@ -90,25 +90,22 @@
     </table>
 </div>
 
-<!-- {{countries| json}} -->
-<!-- <hr> -->
-<!-- {{subjectsLists| json}} -->
-<!-- <hr> -->
+
 {{students | json}}
 
 
 <!-- Modal delete Student -->
-<!-- 
-    <div class="modal fade" id="myModal">
+
+<div class="modal fade" id="myModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-2">
 
             <div class="modal-header">
                 <h4 class="modal-title">Delete Student ?</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button id="crossIcon" type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-                <div class="modal-body">
+            <div class="modal-body">
                 <div class="col-2">
                     <label for="studentId" class="control-label pt-2" style="font-size:20px;">Id</label>
                 </div>
@@ -127,41 +124,14 @@
                     <span asp-validation-for="name" class="text-danger"></span>
                 </div>
 
-                <div class="col-2">
-                    <label for="dateOfBirth" class="control-label pt-2" style="font-size:20px;">Date Of
-                        Birth</label>
-                </div>
-                <div class="col-10 pb-3">
-                    <input readonly name="dateOfBirth" [(ngModel)]="students[i].dateOfBirth" type="text"
-                        id="dateOfBirth" class="form-control" />
-                    <span asp-validation-for="Rate" class="text-danger"></span>
-                </div>
-
-                <div class="col-2">
-                    <label for="age" class="control-label pt-2" style="font-size:20px;">Age</label>
-                </div>
-                <div class="col-10 pb-3">
-                    <input readonly name="age" [(ngModel)]="students[i].age" type="text" id="age"
-                        class="form-control" />
-                    <span asp-validation-for="Details" class="text-danger"></span>
-                </div>
-
-                <div class="col-2">
-                    <label for="passedOrFailed" class="control-label pt-2" style="font-size:20px;">Pass/Fail</label>
-                </div>
-                <div class="col-10 pb-3">
-                    <input readonly name="passedOrFailed" [(ngModel)]="students[i].passedOrFailed" type="text" id="passedOrFailed"
-                        class="form-control" />
-                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
-                </div> 
-                            
                 <div class="modal-footer">
                     <button (click)="onConfirmDelete()" type="button" class="btn btn-danger"
                         data-bs-dismiss="modal">Confirm</button>
+
+                    <button (click)="onCancelClick()" type="button" class="btn btn-secondary">Cancel</button>
                 </div>
             </div>
-            
+
         </div>
     </div>
-</div> 
--->
+</div>
