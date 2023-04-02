@@ -18,20 +18,31 @@ public class EmailSender : IEmailSender
     public Task SendEmailAsync(string emailAddress, string subject, string htmlMessage)
     {
         // using sendinblue
-        var emailMessage = new MimeMessage();
-        emailMessage.From.Add(MailboxAddress.Parse(_smtpEmail));
-        emailMessage.To.Add(MailboxAddress.Parse(emailAddress));
-        emailMessage.Subject = subject;
-        emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = htmlMessage };
-
-        // send
-        using (var client = new SmtpClient())
+        try
         {
-            client.Connect("smtp-relay.sendinblue.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
-            client.Authenticate(_smtpEmail, _smtpPassword);
-            client.Send(emailMessage);
-            client.Disconnect(true);
+            var emailMessage = new MimeMessage();
+            emailMessage.From.Add(MailboxAddress.Parse(_smtpEmail));
+            emailMessage.To.Add(MailboxAddress.Parse(emailAddress));
+            emailMessage.Subject = subject;
+            emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = htmlMessage };
+
+            // send
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp-relay.sendinblue.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
+                client.Authenticate(_smtpEmail, _smtpPassword);
+                client.Send(emailMessage);
+                client.Disconnect(true);
+            }
         }
+        catch (Exception e)
+        {
+            Console.WriteLine("-- ERROR: " + e);
+        }
+        finally
+        {
+        }
+
         return Task.CompletedTask;
     }
 }
