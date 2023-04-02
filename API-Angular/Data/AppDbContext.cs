@@ -20,7 +20,8 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<Country>().HasData(
             new Country() { CountryId = 1, Name = "USA" },
-            new Country() { CountryId = 2, Name = "Bangladesh" }
+            new Country() { CountryId = 2, Name = "Bangladesh" },
+            new Country() { CountryId = 3, Name = "Other" }
         );
 
         modelBuilder.Entity<SubjectsList>().HasData(

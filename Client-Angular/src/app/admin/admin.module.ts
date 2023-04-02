@@ -7,6 +7,7 @@ import { EditStudentComponent } from './edit-student/edit-student.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DeleteStudentComponent } from './delete-student/delete-student.component';
+import { GenderCountryValidatorDirective } from '../gender-country-validator.directive';
 
 
 @NgModule({
