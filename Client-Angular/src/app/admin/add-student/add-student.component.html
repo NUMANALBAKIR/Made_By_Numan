@@ -25,7 +25,7 @@
                 <label for="name" class="control-label pt-2" style="font-size:20px;">Name:</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="name" [(ngModel)]="studentCreateDTO.name" type="text" id="name" class="form-control" required="required" pattern="^[A-Za-z /-]*$" minlength="3"
+                <input name="name" [(ngModel)]="studentCreateDTO.name" type="text" id="name" class="form-control" required="required" pattern="^[A-Za-z]*$" minlength="3"
                 #newStudentName="ngModel" [ngClass]="{'is-invalid': newStudentName.invalid && (newStudentName.touched || newStudentName.dirty || newForm.submitted), 'is-valid': newStudentName.valid && (newStudentName.touched || newStudentName.dirty || newForm.submitted) }"  />
 
                 <span class="text-danger" *ngIf="newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newForm.submitted) && newStudentName.errors?.required">Name must be filled.</span>

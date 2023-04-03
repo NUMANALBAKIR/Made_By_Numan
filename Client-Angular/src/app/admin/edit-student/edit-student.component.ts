@@ -3,7 +3,7 @@ import { Student } from 'src/app/Student';
 import { StudentsService } from 'src/app/students.service';
 import { Location } from '@angular/common';
 import { StudentUpdateDTO } from 'src/app/Models/StudentUpdateDTO';
-import { FormArray, FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Country } from 'src/app/country';
 import { CountriesService } from 'src/app/countries.service';
 
@@ -22,7 +22,8 @@ export class EditStudentComponent implements OnInit {
   constructor(
     private studentsService: StudentsService,
     private countriesService: CountriesService,
-    private location: Location
+    private location: Location,
+    private formBuilder: FormBuilder
   ) {
   }
 
@@ -33,15 +34,29 @@ export class EditStudentComponent implements OnInit {
   genders: string[] = ['Female', 'Male', 'Other'];  // for dynamic radio buttons
   studentUpdateDTO: StudentUpdateDTO = new StudentUpdateDTO();
 
-  updateFormReactve: FormGroup = new FormGroup({
-    studentId: new FormControl(this.studentUpdateDTO.studentId),
-    name: new FormControl(),
-    dateOfBirth: new FormControl(),
-    passed: new FormControl(),
-    gender: new FormControl(),
-    countryId: new FormControl(),
-    subjects: new FormArray([])
+  // way 1. (validators like ways 2 below can also be applied here.)
+  // updateFormReactve: FormGroup = new FormGroup({
+  //   studentId: new FormControl(this.studentUpdateDTO.studentId),
+  //   name: new FormControl(),
+  //   dateOfBirth: new FormControl(),
+  //   passed: new FormControl(),
+  //   gender: new FormControl(),
+  //   countryId: new FormControl(),
+  //   subjects: new FormArray([])
+  // });
+
+  // way 2: using formBuilder
+  updateFormReactve: FormGroup = this.formBuilder.group({
+    studentId: null,
+    name: [null, [Validators.required, Validators.minLength(3), Validators.pattern(/^[A-Za-z ]+$/)]],
+    dateOfBirth: [null, [Validators.required]],
+    passed: [null, [Validators.required]],
+    gender: [null, [Validators.required]],
+    countryId: [null, [Validators.required]],
+    subjects: this.formBuilder.array([])
   });
+
+
 
 
   ngOnInit() {
@@ -69,16 +84,16 @@ export class EditStudentComponent implements OnInit {
 
     // wait for service responses and then populate.
     setTimeout(() => {
-      this.populate();
+      this.populateForm();
     }, 1000);
 
 
     // valueChanges
-    this.updateFormReactve.valueChanges.subscribe(
-      (value: any) => {
-        console.log(value);
-      }
-    );
+    // this.updateFormReactve.valueChanges.subscribe(
+    //   (value: any) => {
+    //     console.log(value);
+    //   }
+    // );
 
 
   }
@@ -88,35 +103,55 @@ export class EditStudentComponent implements OnInit {
     return <FormArray>this.updateFormReactve.get('subjects');
   }
 
+  
 
   onAddClick() {
-    var newFormGroup = new FormGroup({
-      subjectName: new FormControl(),
-      marks: new FormControl()
+
+    // way 1. way 2 is below
+    // var newFormGroup = new FormGroup({
+    //   subjectName: new FormControl(),
+    //   marks: new FormControl()
+    // });
+
+    // way 2
+    var newFormGroup = this.formBuilder.group({
+      subjectName: [null, [Validators.required]],
+      marks: [null, [Validators.required]]
     });
 
     this.formSubjectsArr.push(newFormGroup);
+    
+    if(this.formSubjectsArr.valid){
+    }
+
 
   }
 
-  onRemoveClick(i: number){
+  onRemoveClick(i: number) {
     this.formSubjectsArr.removeAt(i);
   }
 
 
   onSubmitClick() {
-
+    
     if (this.updateFormReactve.valid) {
-      this.studentsService.editStudent(this.studentUpdateDTO).subscribe(
-        (r: Student) => {
-        },
-        (e) => {
-          console.log(e);
-        }
-      );
+      
+      console.log(this.updateFormReactve);
 
-      this.location.back();
+      
     }
+
+    // if (this.updateFormReactve.valid) {
+    //   this.studentsService.editStudent(this.studentUpdateDTO).subscribe(
+    //     (r: Student) => {
+    //     },
+    //     (e) => {
+    //       console.log(e);
+    //     }
+    //   );
+
+    //   this.location.back();
+    // }
 
   }
 
@@ -138,15 +173,14 @@ export class EditStudentComponent implements OnInit {
 
 
   // populate form
-  populate(): void {
+  private populateForm(): void {
     this.updateFormReactve.patchValue({
       studentId: this.studentUpdateDTO.studentId,
       name: this.studentUpdateDTO.name,
       dateOfBirth: this.studentUpdateDTO.dateOfBirth,
       passed: this.studentUpdateDTO.passed,
       gender: this.studentUpdateDTO.gender,
-      countryId: this.studentUpdateDTO.countryId,
-      subjects: []
+      countryId: this.studentUpdateDTO.countryId
     });
   }
 

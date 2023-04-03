@@ -1,3 +1,7 @@
+
+<!-- validations ~ 50% added -->
+
+
 <form [formGroup]="updateFormReactve" (ngSubmit)="onSubmitClick()">
     <br />
     <div class="container border p-3">
@@ -13,35 +17,33 @@
             <div class="col-9 pb-3">
                 <input readonly type="text" class="form-control" id="studentId" name="studentId"
                     formControlName="studentId">
-
-                <!-- <span class="text-danger"
-                    *ngIf="newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newForm.submitted) && newStudentId.errors?.required">Id
-                    must be filled.</span>
-                <span class="text-danger"
-                    *ngIf="newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newForm.submitted) && newStudentId.errors?.pattern">Only
-                    numbers allowed in pattern.</span>
-                <span class="text-danger"
-                    *ngIf="newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newForm.submitted) && newStudentId.errors?.uniqueId">Id
-                    already exists.</span> -->
             </div>
+
 
             <!-- name -->
             <div class="col-3 pt-2">
                 <label for="name" class="control-label" style="font-size:20px;">Name:</label>
             </div>
             <div class="col-9 pb-3">
-                <input type="text" class="form-control" id="name" name="name" formControlName="name">
+                <input type="text" class="form-control" id="name" name="name" formControlName="name"
+                    [ngClass]="{'is-invalid': updateFormReactve.get('name')?.invalid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched),
+                
+                'is-valid': updateFormReactve.get('name')?.valid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched) }">
 
-                <!-- <span class="text-danger"
-                    *ngIf="newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newForm.submitted) && newStudentName.errors?.required">Name
-                    must be filled.</span>
                 <span class="text-danger"
-                    *ngIf="newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newForm.submitted) && newStudentName.errors?.pattern">Allowed:
-                    alphabets, space, /, -.</span>
+                    *ngIf="updateFormReactve.get('name')?.invalid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched) && updateFormReactve.get('name')?.errors?.required">
+                    Name can't be blank</span>
+
                 <span class="text-danger"
-                    *ngIf="newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newForm.submitted) && newStudentName.errors?.minlength">Minimum
-                    3 characters long.</span> -->
+                    *ngIf="updateFormReactve.get('name')?.invalid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched) && updateFormReactve.get('name')?.errors?.pattern">
+                    Only alphabets are allowed.</span>
+
+                <span class="text-danger"
+                    *ngIf="updateFormReactve.get('name')?.invalid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched) && updateFormReactve.get('name')?.errors?.minlength">
+                    Name must contain at least 3 letters.</span>
             </div>
+
+
 
             <!-- dob -->
             <div class="col-3 pt-2">
@@ -52,9 +54,11 @@
                 <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
                     formControlName="dateOfBirth">
 
-                <!-- <span class="text-danger" *ngIf="newStudentDob.invalid && newStudentDob.errors?.required">Date of birth
-                    can't be blank</span> -->
+                <span class="text-danger"
+                    *ngIf="updateFormReactve.get('dateOfBirth')?.invalid && (updateFormReactve.get('dateOfBirth')?.dirty || updateFormReactve.get('dateOfBirth')?.touched) && updateFormReactve.get('dateOfBirth')?.errors?.required">
+                    Date of Birth must be selected.</span>
             </div>
+
 
             <!-- passed? Checkbox -->
             <div class="col-3 pt-2">
@@ -66,6 +70,7 @@
                         formControlName="passed">
                 </div>
             </div>
+
 
             <!-- gender Radio -->
             <div class="col-3">
@@ -105,41 +110,45 @@
 
 
             <!-- subjects -->
-            <!-- <div class="form-group form-row"> -->
-                <div class="col-3 pt-2">
-                    <label for="subjects" class="control-label" style="font-size:20px;">Subjects:</label>
+            <div class="col-3 pt-2">
+                <label for="subjects" class="control-label" style="font-size:20px;">Subjects:</label>
+            </div>
+
+            <div class="col-9 pb-3" formArrayName="subjects">
+
+                <div class="row" *ngFor="let subject of formSubjectsArr.controls; let i=index" [formGroupName]="i">
+
+                    <div class="col">
+                        <input type="text" class="form-control" id="subjectName" name="subjectName"
+                            placeholder="Subject Name" formControlName="subjectName"
+                            [ngClass]="{'is-invalid': subject.get('subjectName')?.invalid && (subject.get('subjectName')?.dirty || subject.get('subjectName')?.touched),
+                
+                'is-valid': subject.get('subjectName')?.valid && (subject.get('subjectName')?.dirty || subject.get('subjectName')) }">
+                    </div>
+
+                    <div class="col">
+                        <input type="text" class="form-control" id="marks" name="marks" placeholder="marks"
+                            formControlName="marks" [ngClass]="{'is-invalid': subject.get('marks')?.invalid && (subject.get('marks')?.dirty || subject.get('marks')?.touched),
+                
+                'is-valid': subject.get('marks')?.valid && (subject.get('marks')?.dirty || subject.get('marks')) }">
+                    </div>
+
+                    <div class="col">
+                        <button type="button" class="btn btn-danger" (click)="onRemoveClick(i)">Remove</button>
+                    </div>
+
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-dark" (click)="onAddClick()">Add Subject</button>
                 </div>
 
-                <div class="col-9 pb-3" formArrayName="subjects">
-
-                    <div class="row" *ngFor="let subject of formSubjectsArr.controls; let i=index" [formGroupName]="i">
-
-                        <div class="col">
-                            <input type="text" class="form-control" id="subjectName" name="subjectName"
-                                placeholder="Subject Name" formControlName="subjectName">
-                        </div>
-
-                        <div class="col">
-                            <input type="text" class="form-control" id="marks" name="marks" placeholder="marks"
-                                formControlName="marks">
-                        </div>
-
-                        <div class="col">
-                            <button type="button" class="btn btn-danger" (click)="onRemoveClick(i)">Remove</button>
-                        </div>
-                        
-                    </div>
-                    <div class="col">
-                        <button type="button" class="btn btn-dark" (click)="onAddClick()">Add Subject</button>
-                    </div>
-
-                    <!-- <div class="row">
+                <!-- <div class="row">
                         <div class="col-3" *ngFor="let subject of formSubjectsArr.controls; let i=index">
                             {{i}}
                         </div>
                     </div> -->
-                </div>
-            <!-- </div> -->
+            </div>
+
 
             <!-- buttons -->
             <div>
