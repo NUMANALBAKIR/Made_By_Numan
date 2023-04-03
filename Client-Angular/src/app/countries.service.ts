@@ -22,7 +22,8 @@ export class CountriesService {
   getCountries(): Observable<Country[]> {
     return this.httpClient.get<Country[]>(this._apiUrl, { responseType: 'json' })
       .pipe(map(
-        (data: Country[]) => {          
+        (data: Country[]) => {
+          // debugger;          
           return data;
         }
       ));

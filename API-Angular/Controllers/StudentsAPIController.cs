@@ -89,7 +89,7 @@ public class StudentsAPIController : ControllerBase
 
         if (student == null)
         {
-            return NotFound();
+            return NotFound(student);
         }
         // student.DateOfBirth.ToString("dd/MM/yyyy");
         return student;

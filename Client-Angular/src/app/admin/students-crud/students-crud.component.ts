@@ -31,7 +31,7 @@ export class StudentsCRUDComponent implements OnInit {
   showSpinner: boolean = true;
 
   ngOnInit(): void {
-    debugger;
+    // debugger;
     // get and set list of students
     this.studentsService.getStudents().subscribe(
       (response: Student[]) => {
@@ -61,7 +61,7 @@ export class StudentsCRUDComponent implements OnInit {
     event.target.remove();
   }
 
-  onEditClick(event: any, studentId: number) {
+  onUpdateClick(event: any, studentId: number) {
     this.studentsService.studentIdPassed = studentId;
   }
 

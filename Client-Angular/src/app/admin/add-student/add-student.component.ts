@@ -43,7 +43,7 @@ export class AddStudentComponent implements OnInit {
   }
 
   onConfirmClick() {
-    debugger;
+    // debugger;
 
     if (this.newForm.valid) {
       this.studentsService.addStudent(this.studentCreateDTO).subscribe(

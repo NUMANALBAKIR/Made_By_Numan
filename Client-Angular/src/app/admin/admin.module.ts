@@ -5,9 +5,8 @@ import { StudentsCRUDComponent } from './students-crud/students-crud.component';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { EditStudentComponent } from './edit-student/edit-student.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteStudentComponent } from './delete-student/delete-student.component';
-import { GenderCountryValidatorDirective } from '../gender-country-validator.directive';
 
 
 @NgModule({
@@ -21,7 +20,8 @@ import { GenderCountryValidatorDirective } from '../gender-country-validator.dir
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     AboutComponent,

@@ -10,13 +10,15 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AgeValidatorDirective } from './age-validator.directive';
 import { GenderCountryValidatorDirective } from './gender-country-validator.directive';
+import { StudentIdUniqueValidatorDirective } from './student-id-unique-validator.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     AgeValidatorDirective,
-    GenderCountryValidatorDirective
+    GenderCountryValidatorDirective,
+    StudentIdUniqueValidatorDirective
   ],
   imports: [
     BrowserModule,

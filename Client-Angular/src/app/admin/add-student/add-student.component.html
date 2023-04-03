@@ -3,30 +3,23 @@
 <form #newForm="ngForm" novalidate="novalidate" appGenderCountryValidator>
     <div class="container border p-3">
         <h3 class="text-primary">Add Student (Template Driven Form)</h3>
-        <h3 class="text-primary">Add Student (Template Driven Form)</h3>
         <hr />
 
         <div class="row">
 
-            <!-- id -->
             <!-- id -->
             <div class="col-2">
                 <label for="studentId" class="control-label pt-2" style="font-size:20px;">Student Id:</label>
             </div>
             <div class="col-10 pb-3">
                 <input name="studentId" [(ngModel)]="studentCreateDTO.studentId" type="text" id="studentId" class="form-control" required="required" pattern="^[0-9]*$" 
-                #newStudentId="ngModel" [ngClass]="{'is-invalid': newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newForm.submitted), 'is-valid': newStudentId.valid && (newStudentId.dirty || newStudentId.touched || newForm.submitted) }" />
+                appStudentIdUniqueValidator #newStudentId="ngModel" [ngClass]="{'is-invalid': newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newForm.submitted), 'is-valid': newStudentId.valid && (newStudentId.dirty || newStudentId.touched || newForm.submitted) }" />
                 
                 <span class="text-danger" *ngIf="newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newForm.submitted) && newStudentId.errors?.required">Id must be filled.</span>
                 <span class="text-danger" *ngIf="newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newForm.submitted) && newStudentId.errors?.pattern">Only numbers allowed in pattern.</span>
-                <input name="studentId" [(ngModel)]="studentCreateDTO.studentId" type="text" id="studentId" class="form-control" required="required" pattern="^[0-9]*$" 
-                #newStudentId="ngModel" [ngClass]="{'is-invalid': newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newForm.submitted), 'is-valid': newStudentId.valid && (newStudentId.dirty || newStudentId.touched || newForm.submitted) }" />
-                
-                <span class="text-danger" *ngIf="newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newForm.submitted) && newStudentId.errors?.required">Id must be filled.</span>
-                <span class="text-danger" *ngIf="newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newForm.submitted) && newStudentId.errors?.pattern">Only numbers allowed in pattern.</span>
+                <span class="text-danger" *ngIf="newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newForm.submitted) && newStudentId.errors?.uniqueId">Id already exists.</span>
             </div>
 
-            <!-- name -->
             <!-- name -->
             <div class="col-2">
                 <label for="name" class="control-label pt-2" style="font-size:20px;">Name:</label>
@@ -38,24 +31,17 @@
                 <span class="text-danger" *ngIf="newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newForm.submitted) && newStudentName.errors?.required">Name must be filled.</span>
                 <span class="text-danger" *ngIf="newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newForm.submitted) && newStudentName.errors?.pattern">Allowed: alphabets, space, /, -.</span>
                 <span class="text-danger" *ngIf="newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newForm.submitted) && newStudentName.errors?.minlength">Minimum 3 characters long.</span>
-                <input name="name" [(ngModel)]="studentCreateDTO.name" type="text" id="name" class="form-control" required="required" pattern="^[A-Za-z /-]*$" minlength="3"
-                #newStudentName="ngModel" [ngClass]="{'is-invalid': newStudentName.invalid && (newStudentName.touched || newStudentName.dirty || newForm.submitted), 'is-valid': newStudentName.valid && (newStudentName.touched || newStudentName.dirty || newForm.submitted) }"  />
-
-                <span class="text-danger" *ngIf="newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newForm.submitted) && newStudentName.errors?.required">Name must be filled.</span>
-                <span class="text-danger" *ngIf="newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newForm.submitted) && newStudentName.errors?.pattern">Allowed: alphabets, space, /, -.</span>
-                <span class="text-danger" *ngIf="newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newForm.submitted) && newStudentName.errors?.minlength">Minimum 3 characters long.</span>
             </div>
 
-            <!-- dob -->
             <!-- dob -->
             <div class="col-2">
                 <label for="dateOfBirth" class="control-label pt-2" style="font-size:20px;">Date Of Birth (click calender icon):</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="dateOfBirth" class="form-control" [(ngModel)]="studentCreateDTO.dateOfBirth" type="date" id="dateOfBirth" required="required"
-                appAgeValidator #newStudentDob="ngModel" [ngClass]="{ 'is-invalid': newStudentDob.invalid && (newStudentDob.dirty || newStudentDob.touched || newForm.submitted), 'is-valid': newStudentDob.valid && (newStudentDob.dirty || newStudentDob.touched || newForm.submitted) }" />
+            <input name="dateOfBirth" class="form-control" [(ngModel)]="studentCreateDTO.dateOfBirth" type="date" id="dateOfBirth" required="required"
+                appAgeValidator #newStudentDob="ngModel" [ngClass]="{ 'is-invalid': newStudentDob.invalid, 'is-valid': newStudentDob.valid }" />
 
-            <span class="text-danger" *ngIf="newStudentDob.invalid && (newStudentDob.dirty || newStudentDob.touched || newForm.submitted) && newStudentDob.errors?.required">Date of birth can't be blank</span>
+            <span class="text-danger" *ngIf="newStudentDob.invalid && newStudentDob.errors?.required">Date of birth can't be blank</span>
 
             </div>
 
@@ -66,7 +52,7 @@
             <div class="col-10 pb-3">
                 <div class="form-check">
                     <input type="checkbox" id="checkbox" value="true" class="form-check-input"
-                        [(ngModel)]="studentCreateDTO.passed" name="passed">
+                        [(ngModel)]="studentCreateDTO.passed" name="passed"/>
                 </div>
             </div>
 
@@ -77,21 +63,21 @@
             <div class="col-10 pb-3">
 
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="gender" value="female" class="form-check-input" name="gender"
+                    <input type="radio" id="female" value="female" class="form-check-input" name="gender"
                         [(ngModel)]="studentCreateDTO.gender" required="required" #female="ngModel">
-                    <label for="gender" class="form-check-label">Female</label>
+                    <label for="female" class="form-check-label">Female</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="gender" value="male" class="form-check-input" name="gender"
+                    <input type="radio" id="male" value="male" class="form-check-input" name="gender"
                         [(ngModel)]="studentCreateDTO.gender" required="required" #male="ngModel">
-                    <label for="gender" class="form-check-label">Male</label>
+                    <label for="male" class="form-check-label">Male</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="gender" value="other" class="form-check-input" name="gender"
+                    <input type="radio" id="other" value="other" class="form-check-input" name="gender"
                         [(ngModel)]="studentCreateDTO.gender" required="required" #other="ngModel">
-                    <label for="gender" class="form-check-label">Other</label>
+                    <label for="other" class="form-check-label">Other</label>
                 </div>
 
                 <span class="text-danger" *ngIf="female.invalid">( Gender must be selected. )</span>
@@ -105,7 +91,7 @@
 
             <div class="col-10 pb-3">
                 <select id="countryId" class="form-control" name="countryId" [(ngModel)]="studentCreateDTO.countryId" required="required"
-                 #newCountryId="ngModel" [ngClass]="{'is-invalid': newCountryId === null }" >                    
+                 #newCountryId="ngModel" [ngClass]="{'is-invalid': newCountryId.toString() === 'null' }" >                    
                     <option value="null">- Select Country -</option>
                     <option *ngFor="let country of countries" [value]="country.countryId">
                         &nbsp; {{country.name}}
@@ -117,19 +103,17 @@
                 <span class="text-danger" *ngIf="newForm.errors?.bothOthers">Both gender and country can't be 'Other'.</span>
             </div>
 
-            <!-- buttons -->
+
             <!-- buttons -->
             <div>
                 <button (click)="onConfirmClick()" class="btn btn-success form-control mt-3 text-white">Confirm</button>
                 
-                <button (click)="onConfirmClick()" class="btn btn-success form-control mt-3 text-white">Confirm</button>
-                
                 <a routerLink="/studentscrud" class="btn-outline-primary btn form-control mt-3">Back to List</a>
-                
-                <button (click)="onResetClick()" class="btn btn-outline-danger form-control mt-3">Reset Form</button>
-                
+                                
                 <button (click)="onResetClick()" class="btn btn-outline-danger form-control mt-3">Reset Form</button>
             </div>
         </div>
     </div>
 </form>
+
+For development purpose: {{studentCreateDTO | json}}

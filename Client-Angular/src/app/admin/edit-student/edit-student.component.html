@@ -1,67 +1,123 @@
-<form #editForm="ngForm" novalidate="novalidate" >
+<form [formGroup]="updateFormReactve">
     <br />
     <div class="container border p-3">
-        <h3 class="text-primary">Edit Student</h3>
+        <h3 class="text-primary">Update Student (Reactive Form) -</h3>
         <hr />
 
         <div class="row">
 
+            <!-- id -->
             <div class="col-2">
-                <label for="studentId" class="control-label pt-2" style="font-size:20px;">Id</label>
+                <label for="studentId" class="control-label pt-2" style="font-size:20px;">Student Id:</label>
             </div>
             <div class="col-10 pb-3">
-                <input readonly name="studentId" [(ngModel)]="studentToEdit.studentId" type="text" id="studentId"
-                    class="form-control" />
-                <!-- <span asp-validation-for="studentId" class="text-danger"></span> -->
+                <input type="text" class="form-control" id="studentId" name="studentId"
+                    formControlName="studentId">
+
+                <!-- <span class="text-danger"
+                    *ngIf="newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newForm.submitted) && newStudentId.errors?.required">Id
+                    must be filled.</span>
+                <span class="text-danger"
+                    *ngIf="newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newForm.submitted) && newStudentId.errors?.pattern">Only
+                    numbers allowed in pattern.</span>
+                <span class="text-danger"
+                    *ngIf="newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newForm.submitted) && newStudentId.errors?.uniqueId">Id
+                    already exists.</span> -->
             </div>
 
-            <div class="col-2">
-                <label for="name" class="control-label pt-2" style="font-size:20px;">Name</label>
+            <!-- name -->
+            <div class="col-2 pt-2">
+                <label for="name" class="control-label" style="font-size:20px;">Name:</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="name" [(ngModel)]="studentToEdit.name" type="text" id="name" class="form-control" />
-                <!-- <span asp-validation-for="name" class="text-danger"></span> -->
+                <input type="text" class="form-control" id="name" name="name" formControlName="name">
+
+                <!-- <span class="text-danger"
+                    *ngIf="newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newForm.submitted) && newStudentName.errors?.required">Name
+                    must be filled.</span>
+                <span class="text-danger"
+                    *ngIf="newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newForm.submitted) && newStudentName.errors?.pattern">Allowed:
+                    alphabets, space, /, -.</span>
+                <span class="text-danger"
+                    *ngIf="newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newForm.submitted) && newStudentName.errors?.minlength">Minimum
+                    3 characters long.</span> -->
             </div>
 
-            <div class="col-2">
-                <label for="dateOfBirth" class="control-label pt-2" style="font-size:20px;">Date Of Birth</label>
+            <!-- dob -->
+            <div class="col-2 pt-2">
+                <label for="dateOfBirth" class="control-label" style="font-size:20px;">Date Of Birth (click
+                    calender icon):</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="dateOfBirth" [(ngModel)]="studentToEdit.dateOfBirth" type="date" id="dateOfBirth"
-                    class="form-control" />
-                <!-- <span asp-validation-for="Rate" class="text-danger"></span> -->
+                <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
+                    formControlName="dateOfBirth">
+
+                <!-- <span class="text-danger" *ngIf="newStudentDob.invalid && newStudentDob.errors?.required">Date of birth
+                    can't be blank</span> -->
             </div>
 
-            <div class="col-2">
-                <label for="passed" class="control-label pt-2" style="font-size:20px;">Pass/Fail</label>
+            <!-- passed? Checkbox -->
+            <div class="col-2 pt-2">
+                <label for="checkbox" class="control-label" style="font-size:20px;">Passed? :</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="passed" [(ngModel)]="studentToEdit.passed" type="text" id="passed" class="form-control" />
-                <!-- <span asp-validation-for="ImageUrl" class="text-danger"></span> -->
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="checkbox" name="passed" value="true"
+                        formControlName="passed">
+                </div>
             </div>
 
+            <!-- gender Radio -->
             <div class="col-2">
-                <label for="country" class="control-label pt-2" style="font-size:20px;">Country</label>
+                <label for="gender" class="control-label pt-2" style="font-size:20px;">Gender:</label>
             </div>
             <div class="col-10 pb-3">
-                <input name="country" [(ngModel)]="studentToEdit.countryId" type="text" id="country" class="form-control" />
-                <!-- <span asp-validation-for="ImageUrl" class="text-danger"></span> -->
+
+                <div class="form-check form-check-inline" *ngFor="let gender of genders">
+                    <input type="radio" class="form-check-input" [id]="gender" name="gender" [value]="gender"
+                        formControlName="gender">
+                    <label [for]="gender" class="form-check-label">{{gender}}</label>
+                </div>
+
+                <!-- <span class="text-danger" *ngIf="female.invalid">( Gender must be selected. )</span> -->
             </div>
-            
+
+
+            <!-- country dropdown -->
             <div class="col-2">
-                <label for="gender" class="control-label pt-2" style="font-size:20px;">Gender</label>
+                <label for="country" class="control-label pt-2" style="font-size:20px;">Country:</label>
             </div>
+
             <div class="col-10 pb-3">
-                <input name="gender" [(ngModel)]="studentToEdit.gender" type="text" id="gender" class="form-control" />
-                <!-- <span asp-validation-for="ImageUrl" class="text-danger"></span> -->
+                <select class="form-control" id="countryId" name="countryId" formControlName="countryId">
+                    <option value="null">- Select Country -</option>
+                    <option *ngFor="let country of countries" [value]="country.countryId">
+                        &nbsp;
+                        {{country.name}}
+                    </option>
+                </select>
+
+                <!-- <span class="text-danger" *ngIf="newCountryId.invalid">Country must be selected.</span>
+
+                <span class="text-danger" *ngIf="newForm.errors?.bothOthers">Both gender and country can't be
+                    'Other'.</span> -->
             </div>
 
 
-
+            <!-- buttons -->
             <div>
-                <button (click)="onConfirmClick()" class="btn btn-success form-control">Confirm</button>
+                <button (click)="onConfirmClick()" class="btn btn-success form-control mt-3 text-white">Confirm</button>
+
                 <a routerLink="/studentscrud" class="btn-outline-primary btn form-control mt-3">Back to List</a>
+
+                <button (click)="populate()" class="btn btn-outline-info form-control mt-3">Populate Form</button>
             </div>
         </div>
     </div>
 </form>
+
+form - {{updateFormReactve.value|json}} 
+<hr>
+dto - {{studentUpdateDTO|json}}
+
+<!-- For development purpose: {{updateFormReactve.value | json}} -->

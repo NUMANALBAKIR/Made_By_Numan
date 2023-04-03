@@ -80,8 +80,8 @@
                 <td class="d-flex justify-content-around">
                     <button (click)="onDetailsClick($event, student.studentId)"
                         class="btn btn-outline-info"><b>Details</b></button>
-                    <a routerLink="/editstudent" (click)="onEditClick($event, student.studentId)"
-                        class="btn btn-outline-warning"><b>Edit</b></a>
+                    <a routerLink="/editstudent" (click)="onUpdateClick($event, student.studentId)"
+                        class="btn btn-outline-warning"><b>Update</b></a>
                     <button data-bs-toggle="modal" data-bs-target="#myModal" (click)="onDeleteClick($event, i)"
                         class="btn btn-outline-danger"><b>Delete</b></button>
                 </td>
@@ -91,12 +91,9 @@
 </div>
 
 
-{{students | json}}
-
-
 <!-- Modal delete Student -->
 
-<div class="modal fade" id="myModal">
+<!-- <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-2">
 
@@ -134,4 +131,4 @@
 
         </div>
     </div>
-</div>
+</div> -->
