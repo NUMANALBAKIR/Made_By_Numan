@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { CountriesService } from 'src/app/countries.service';
 import { Country } from 'src/app/country';
 import { Student } from 'src/app/Student';
 import { StudentsService } from 'src/app/students.service';
 import { SubjectsList } from 'src/app/subjects-list';
-import { SubjectsListsService } from 'src/app/subjects-lists.service';
 import * as $ from 'jquery';
 
 @Component({
@@ -17,8 +15,6 @@ export class StudentsCRUDComponent implements OnInit {
 
   constructor(
     private studentsService: StudentsService,
-    private countriesService: CountriesService,
-    private subjectsListsService: SubjectsListsService,
     private router: Router) {
   }
 
@@ -39,19 +35,13 @@ export class StudentsCRUDComponent implements OnInit {
         this.showSpinner = false;
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
       }
     );
 
-    // get and set list of subjectslist
-    this.subjectsListsService.getSubjectsLists().subscribe(
-      (response: SubjectsList[]) => {
-        this.subjectsLists = response;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    setTimeout(() => {
+      console.log(this.i);
+    }, 500);
 
     // debugger;
   }

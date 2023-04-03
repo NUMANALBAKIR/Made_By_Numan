@@ -7,6 +7,11 @@ import { Student } from 'src/app/Student';
 import { StudentCreateDTO } from 'src/app/Models/StudentCreateDTO';
 import { NgForm } from '@angular/forms';
 
+/*
+Template Driven Form
+*/
+
+
 @Component({
   selector: 'app-add-student',
   templateUrl: './add-student.component.html',
