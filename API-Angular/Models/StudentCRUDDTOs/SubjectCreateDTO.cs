@@ -2,11 +2,9 @@
 
 public class SubjectCreateDTO
 {
-    public string Name { get; set; }
-    public double Grade { get; set; }
-
-    //public int StudentId { get; set; }
-    //[ValidateNever, ForeignKey(nameof(StudentId))]
-    //public Student Student { get; set; }
+    public int SubjectId { get; set; }
+    public string SubjectName { get; set; }
+    public int Mark { get; set; }
+    public int StudentId { get; set; }
 
 }

@@ -16,10 +16,8 @@ public class Student
     [ForeignKey(nameof(CountryId))]
     public Country Country { get; set; }    // cl...
 
-    //public int SubjectsListId { get; set; }
-    //[ForeignKey(nameof(SubjectsListId))]
-    //public SubjectsList SubjectsList { get; set; }
+    //public List<Subject> Subjects { get; set; } // sk..
 
-    //public ICollection<Subject> Subjects { get; set; }
+
 
 }

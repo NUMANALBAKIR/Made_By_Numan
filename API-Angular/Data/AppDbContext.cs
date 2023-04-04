@@ -11,6 +11,7 @@ public class AppDbContext : DbContext
     public DbSet<Student> Students { get; set; }
     public DbSet<SubjectsList> SubjectsLists { get; set; }
     public DbSet<Country> Countries { get; set; }
+    public DbSet<Subject> Subjects { get; set; }
 
 
     // seed tables students, countries, SubjectsLists.
@@ -24,11 +25,12 @@ public class AppDbContext : DbContext
             new Country() { CountryId = 3, Name = "Other" }
         );
 
-        modelBuilder.Entity<SubjectsList>().HasData(
-            new SubjectsList() { SubjectsListId = 1, English = 80, Math = 65, Accounting = 77, Chemistry = 88, Biology = 87 },
-            new SubjectsList() { SubjectsListId = 2, English = 60, Math = 85, Accounting = 78, Chemistry = 89, Biology = 84 },
-            new SubjectsList() { SubjectsListId = 3, English = 70, Math = 95, Accounting = 87, Chemistry = 85, Biology = 88 }
-        );
+
+        //modelBuilder.Entity<SubjectsList>().HasData(
+        //    new SubjectsList() { SubjectsListId = 1, English = 80, Math = 65, Accounting = 77, Chemistry = 88, Biology = 87 },
+        //    new SubjectsList() { SubjectsListId = 2, English = 60, Math = 85, Accounting = 78, Chemistry = 89, Biology = 84 },
+        //    new SubjectsList() { SubjectsListId = 3, English = 70, Math = 95, Accounting = 87, Chemistry = 85, Biology = 88 }
+        //);
 
         //modelBuilder.Entity<Student>().HasData(
         //    new Student() { StudentId = 1, Name = "Zina", Passed = true, Gender = "Female", DateOfBirth = Convert.ToDateTime("2001-1-21"), CountryId = 1, SubjectsListId = 1 },
@@ -37,9 +39,33 @@ public class AppDbContext : DbContext
         //);
 
         modelBuilder.Entity<Student>().HasData(
-            new Student() { StudentId = 1, Name = "Zina", Passed = true, Gender = "Female", DateOfBirth = "2001-12-21", CountryId = 1 },
-            new Student() { StudentId = 2, Name = "Sam", Passed = false, Gender = "Male", DateOfBirth = "2002-12-22", CountryId = 2 },
-            new Student() { StudentId = 3, Name = "Ren", Passed = true, Gender = "Other", DateOfBirth = "2003-12-23", CountryId = 2 }
+            new Student()
+            {
+                StudentId = 1,
+                Name = "Jina",
+                Passed = true,
+                Gender = "Female",
+                DateOfBirth = "2001-12-21",
+                CountryId = 1
+            },
+            new Student()
+            {
+                StudentId = 2,
+                Name = "Sam",
+                Passed = false,
+                Gender = "Male",
+                DateOfBirth = "2002-12-22",
+                CountryId = 2
+            },
+            new Student()
+            {
+                StudentId = 3,
+                Name = "Ren",
+                Passed = true,
+                Gender = "Other",
+                DateOfBirth = "2003-12-23",
+                CountryId = 2
+            }
         );
 
     }

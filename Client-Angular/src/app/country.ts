@@ -1,9 +1,9 @@
 export class Country {
-    countryId: any;
-    name: any;
+  countryId: any;
+  name: any;
 
-    constructor() {
-        this.countryId = null;
-        this.name = null;
-    }
+  constructor() {
+    this.countryId = null;
+    this.name = null;
+  }
 }

@@ -3,6 +3,7 @@ using API_Angular.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_Angular.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230404172718_changedSubject2")]
+    partial class changedSubject2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,7 +90,7 @@ namespace API_Angular.Migrations
                             CountryId = 1,
                             DateOfBirth = "2001-12-21",
                             Gender = "Female",
-                            Name = "Jina",
+                            Name = "Zina",
                             Passed = true
                         },
                         new
@@ -129,6 +132,8 @@ namespace API_Angular.Migrations
 
                     b.HasKey("SubjectId");
 
+                    b.HasIndex("StudentId");
+
                     b.ToTable("Subjects");
                 });
 
@@ -169,6 +174,20 @@ namespace API_Angular.Migrations
                         .IsRequired();
 
                     b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("API_Angular.Models.StudentCRUD.Subject", b =>
+                {
+                    b.HasOne("API_Angular.Models.StudentCRUD.Student", null)
+                        .WithMany("Subjects")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("API_Angular.Models.StudentCRUD.Student", b =>
+                {
+                    b.Navigation("Subjects");
                 });
 #pragma warning restore 612, 618
         }

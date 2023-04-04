@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using API_Angular.Models.StudentCRUD;
 
 namespace API_Angular.Models.StudentCRUDDTOs;
 
@@ -11,7 +10,9 @@ public class StudentDTO
     public bool Passed { get; set; } // checkbox
     public string Gender { get; set; } // radio
 
-    public int CountryId { get; set; } 
+    public int CountryId { get; set; }
+
+    //public List<Subject> Subjects { get; set; } // sk..
 
 
 }
