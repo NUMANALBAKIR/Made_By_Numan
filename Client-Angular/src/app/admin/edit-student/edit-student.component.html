@@ -1,4 +1,3 @@
-
 <!-- validations ~ 50% added -->
 
 
@@ -26,20 +25,20 @@
             </div>
             <div class="col-9 pb-3">
                 <input type="text" class="form-control" id="name" name="name" formControlName="name"
-                    [ngClass]="{'is-invalid': updateFormReactve.get('name')?.invalid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched),
+                    [ngClass]="{'is-invalid': updateFormReactve.get('name')?.invalid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched || submitted),
                 
-                'is-valid': updateFormReactve.get('name')?.valid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched) }">
+                'is-valid': updateFormReactve.get('name')?.valid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched || submitted) }">
 
                 <span class="text-danger"
-                    *ngIf="updateFormReactve.get('name')?.invalid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched) && updateFormReactve.get('name')?.errors?.required">
+                    *ngIf="updateFormReactve.get('name')?.invalid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched || submitted) && updateFormReactve.get('name')?.errors?.required">
                     Name can't be blank</span>
 
                 <span class="text-danger"
-                    *ngIf="updateFormReactve.get('name')?.invalid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched) && updateFormReactve.get('name')?.errors?.pattern">
+                    *ngIf="updateFormReactve.get('name')?.invalid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched || submitted) && updateFormReactve.get('name')?.errors?.pattern">
                     Only alphabets are allowed.</span>
 
                 <span class="text-danger"
-                    *ngIf="updateFormReactve.get('name')?.invalid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched) && updateFormReactve.get('name')?.errors?.minlength">
+                    *ngIf="updateFormReactve.get('name')?.invalid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched || submitted) && updateFormReactve.get('name')?.errors?.minlength">
                     Name must contain at least 3 letters.</span>
             </div>
 
@@ -47,16 +46,23 @@
 
             <!-- dob -->
             <div class="col-3 pt-2">
-                <label for="dateOfBirth" class="control-label" style="font-size:20px;">Date Of Birth (click
+                <label for="dateOfBirth" class="control-label" style="font-size:20px;">Date Of Birth (please click
                     calender icon):</label>
             </div>
             <div class="col-9 pb-3">
                 <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
-                    formControlName="dateOfBirth">
+                    formControlName="dateOfBirth"
+                    [ngClass]="{'is-invalid': updateFormReactve.get('dateOfBirth')?.invalid && (updateFormReactve.get('dateOfBirth')?.dirty || updateFormReactve.get('dateOfBirth')?.touched || submitted),
+                
+                'is-valid': updateFormReactve.get('dateOfBirth')?.valid && (updateFormReactve.get('dateOfBirth')?.dirty || updateFormReactve.get('dateOfBirth')?.touched || submitted) }">
 
                 <span class="text-danger"
-                    *ngIf="updateFormReactve.get('dateOfBirth')?.invalid && (updateFormReactve.get('dateOfBirth')?.dirty || updateFormReactve.get('dateOfBirth')?.touched) && updateFormReactve.get('dateOfBirth')?.errors?.required">
+                    *ngIf="updateFormReactve.get('dateOfBirth')?.invalid && (updateFormReactve.get('dateOfBirth')?.dirty || updateFormReactve.get('dateOfBirth')?.touched || submitted) && updateFormReactve.get('dateOfBirth')?.errors?.required">
                     Date of Birth must be selected.</span>
+
+                <span class="text-danger"
+                    *ngIf="updateFormReactve.get('dateOfBirth')?.invalid && (updateFormReactve.get('dateOfBirth')?.dirty || updateFormReactve.get('dateOfBirth')?.touched || submitted) && updateFormReactve.get('dateOfBirth')?.errors?.hasminage">
+                    Age must be at least 7.</span>
             </div>
 
 
@@ -69,6 +75,9 @@
                     <input type="checkbox" class="form-check-input" id="checkbox" name="passed" value="true"
                         formControlName="passed">
                 </div>
+                <div>
+                    {{updateFormReactve.value.passed}}
+                </div>
             </div>
 
 
@@ -80,11 +89,21 @@
 
                 <div class="form-check form-check-inline" *ngFor="let gender of genders">
                     <input type="radio" class="form-check-input" [id]="gender" name="gender" [value]="gender"
-                        formControlName="gender">
+                        formControlName="gender"
+                        [ngClass]="{'is-invalid': updateFormReactve.get('gender')?.invalid && (updateFormReactve.get('gender')?.dirty || updateFormReactve.get('gender')?.touched || submitted),
+                
+                'is-valid': updateFormReactve.get('gender')?.valid && (updateFormReactve.get('gender')?.dirty || updateFormReactve.get('gender')?.touched || submitted) }">
+
                     <label [for]="gender" class="form-check-label">{{gender}}</label>
                 </div>
 
-                <!-- <span class="text-danger" *ngIf="female.invalid">( Gender must be selected. )</span> -->
+                <span class="text-danger"
+                    *ngIf="updateFormReactve.get('gender')?.invalid && (updateFormReactve.get('gender')?.dirty || updateFormReactve.get('gender')?.touched || submitted) && updateFormReactve.get('gender')?.errors?.required">
+                    Gender can't be blank</span>
+
+                <span class="text-danger"
+                    *ngIf="updateFormReactve.get('gender')?.invalid && (updateFormReactve.get('gender')?.dirty || updateFormReactve.get('gender')?.touched || submitted) && updateFormReactve.get('gender')?.errors?.notBothOther">
+                    Both Gender and Country can't be 'Other'.</span>
             </div>
 
 
@@ -94,18 +113,23 @@
             </div>
 
             <div class="col-9 pb-3">
-                <select class="form-control" id="countryId" name="countryId" formControlName="countryId">
+                <select class="form-control" id="countryId" name="countryId" formControlName="countryId"
+                    [ngClass]="{'is-invalid': updateFormReactve.get('countryId')?.invalid && (updateFormReactve.get('countryId')?.dirty || updateFormReactve.get('countryId')?.touched || submitted),
+                
+                'is-valid': updateFormReactve.get('countryId')?.valid && (updateFormReactve.get('countryId')?.dirty || updateFormReactve.get('countryId')?.touched || submitted) }">
+
                     <option value="null">- Select Country -</option>
+
                     <option *ngFor="let country of countries" [value]="country.countryId">
                         &nbsp;
                         {{country.name}}
                     </option>
                 </select>
 
-                <!-- <span class="text-danger" *ngIf="newCountryId.invalid">Country must be selected.</span>
+                <span class="text-danger"
+                    *ngIf="updateFormReactve.get('countryId')?.invalid && (updateFormReactve.get('countryId')?.dirty || updateFormReactve.get('countryId')?.touched || submitted) && updateFormReactve.get('countryId')?.errors?.required">
+                    Country must be selected.</span>
 
-                <span class="text-danger" *ngIf="newForm.errors?.bothOthers">Both gender and country can't be
-                    'Other'.</span> -->
             </div>
 
 
@@ -118,26 +142,50 @@
 
                 <div class="row" *ngFor="let subject of formSubjectsArr.controls; let i=index" [formGroupName]="i">
 
+                    <!-- subject name -->
                     <div class="col">
                         <input type="text" class="form-control" id="subjectName" name="subjectName"
                             placeholder="Subject Name" formControlName="subjectName"
-                            [ngClass]="{'is-invalid': subject.get('subjectName')?.invalid && (subject.get('subjectName')?.dirty || subject.get('subjectName')?.touched),
+                            [ngClass]="{'is-invalid': subject.get('subjectName')?.invalid && (subject.get('subjectName')?.dirty || subject.get('subjectName')?.touched || submitted),
                 
                 'is-valid': subject.get('subjectName')?.valid && (subject.get('subjectName')?.dirty || subject.get('subjectName')) }">
+
+                        <span class="text-danger"
+                            *ngIf="updateFormReactve.get('subjectName')?.invalid && (updateFormReactve.get('subjectName')?.dirty || updateFormReactve.get('subjectName')?.touched || submitted) && updateFormReactve.get('subjectName')?.errors?.required">
+                            Subject name can not be blank.</span>
+
+                        <span class="text-danger"
+                            *ngIf="updateFormReactve.get('subjectName')?.invalid && (updateFormReactve.get('subjectName')?.dirty || updateFormReactve.get('subjectName')?.touched || submitted) && updateFormReactve.get('subjectName')?.errors?.minlength">
+                            Subject name must have at least 3 letters.</span>
+
                     </div>
 
+                    <!-- mark range -->
                     <div class="col">
-                        <input type="text" class="form-control" id="marks" name="marks" placeholder="marks"
-                            formControlName="marks" [ngClass]="{'is-invalid': subject.get('marks')?.invalid && (subject.get('marks')?.dirty || subject.get('marks')?.touched),
+                        <input type="range" class="form-range" id="mark" name="mark" min="0" max="100"
+                            formControlName="mark"
+                            [ngClass]="{'is-invalid': subject.get('mark')?.invalid && (subject.get('mark')?.dirty || subject.get('mark')?.touched || submitted),
                 
-                'is-valid': subject.get('marks')?.valid && (subject.get('marks')?.dirty || subject.get('marks')) }">
+                                    'is-valid': subject.get('mark')?.valid && (subject.get('mark')?.dirty || subject.get('mark')?.touched || submitted) }">
+
+                        <span class="text-danger"
+                            *ngIf="updateFormReactve.get('mark')?.invalid && (updateFormReactve.get('mark')?.dirty || updateFormReactve.get('mark')?.touched || submitted) && updateFormReactve.get('mark')?.errors?.required">
+                            Mark Slider must be selected.</span>
                     </div>
 
+                    <!-- display mark -->
+                    <div class="col-1">
+                        {{ subject.value.mark }}
+                    </div>
+
+                    <!-- remove button -->
                     <div class="col">
                         <button type="button" class="btn btn-danger" (click)="onRemoveClick(i)">Remove</button>
                     </div>
 
                 </div>
+
+                <!-- Add Subject button -->
                 <div class="col">
                     <button type="button" class="btn btn-dark" (click)="onAddClick()">Add Subject</button>
                 </div>

@@ -6,6 +6,7 @@ import { StudentUpdateDTO } from 'src/app/Models/StudentUpdateDTO';
 import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Country } from 'src/app/country';
 import { CountriesService } from 'src/app/countries.service';
+import { CustomValidatorsService } from 'src/app/custom-validators.service';
 
 
 /*
@@ -23,13 +24,15 @@ export class EditStudentComponent implements OnInit {
     private studentsService: StudentsService,
     private countriesService: CountriesService,
     private location: Location,
+    private customValidatorsService: CustomValidatorsService,
     private formBuilder: FormBuilder
+
   ) {
   }
 
 
-  // studentId: number = this.studentsService.studentIdPassed;
   studentId: number = 1;
+  // studentId: number = this.studentsService.studentIdPassed;
   countries: Country[] = [];
   genders: string[] = ['Female', 'Male', 'Other'];  // for dynamic radio buttons
   studentUpdateDTO: StudentUpdateDTO = new StudentUpdateDTO();
@@ -49,13 +52,19 @@ export class EditStudentComponent implements OnInit {
   updateFormReactve: FormGroup = this.formBuilder.group({
     studentId: null,
     name: [null, [Validators.required, Validators.minLength(3), Validators.pattern(/^[A-Za-z ]+$/)]],
-    dateOfBirth: [null, [Validators.required]],
-    passed: [null, [Validators.required]],
-    gender: [null, [Validators.required]],
+    dateOfBirth: [null, [Validators.required, this.customValidatorsService.minAge(7)]],
+    passed: ['', [Validators.required]],
+    gender: ['', [Validators.required]],
     countryId: [null, [Validators.required]],
     subjects: this.formBuilder.array([])
+  },
+  {
+    validators: [
+      this.customValidatorsService.compareOthers('gender','countryId')
+    ]
   });
 
+  submitted = false;
 
 
 
@@ -89,11 +98,12 @@ export class EditStudentComponent implements OnInit {
 
 
     // valueChanges
-    // this.updateFormReactve.valueChanges.subscribe(
-    //   (value: any) => {
-    //     console.log(value);
-    //   }
-    // );
+    this.updateFormReactve.valueChanges.subscribe(
+      (value: any) => {
+        // console.log(value);
+        console.log(this.updateFormReactve);
+      }
+    );
 
 
   }
@@ -110,13 +120,13 @@ export class EditStudentComponent implements OnInit {
     // way 1. way 2 is below
     // var newFormGroup = new FormGroup({
     //   subjectName: new FormControl(),
-    //   marks: new FormControl()
+    //   mark: new FormControl()
     // });
 
     // way 2
     var newFormGroup = this.formBuilder.group({
       subjectName: [null, [Validators.required]],
-      marks: [null, [Validators.required]]
+      mark: [null, [Validators.required]]
     });
 
     this.formSubjectsArr.push(newFormGroup);
@@ -134,11 +144,12 @@ export class EditStudentComponent implements OnInit {
 
   onSubmitClick() {
     
+    this.submitted = true;
+
+    
     if (this.updateFormReactve.valid) {
       
       console.log(this.updateFormReactve);
-
-      
     }
 
     // if (this.updateFormReactve.valid) {
@@ -167,7 +178,8 @@ export class EditStudentComponent implements OnInit {
 
     // similar to above
     this.updateFormReactve.reset({
-      studentId: this.studentId
+      studentId: this.studentUpdateDTO.studentId,
+      gender: this.studentUpdateDTO.gender
     });
   }
 
