@@ -169,16 +169,17 @@ export class EditStudentComponent implements OnInit {
 
   onResetClick() {
 
-    // this.updateFormReactve.reset();
-
-    // patchValue
+    // using 'patchValue'
     // this.updateFormReactve.patchValue({
     //   studentId: this.studentId
     // });
 
-    // similar to above
+    // this.updateFormReactve.reset();
+
+    // similar to aboves
     this.updateFormReactve.reset({
       studentId: this.studentUpdateDTO.studentId,
+      passed: this.studentUpdateDTO.passed,
       gender: this.studentUpdateDTO.gender
     });
   }

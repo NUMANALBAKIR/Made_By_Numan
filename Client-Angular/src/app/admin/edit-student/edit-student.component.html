@@ -1,4 +1,4 @@
-<!-- validations ~ 50% added -->
+<!-- validations ~ 75% added -->
 
 
 <form [formGroup]="updateFormReactve" (ngSubmit)="onSubmitClick()">
@@ -74,9 +74,7 @@
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="checkbox" name="passed" value="true"
                         formControlName="passed">
-                </div>
-                <div>
-                    {{updateFormReactve.value.passed}}
+                    &nbsp; {{ updateFormReactve.value.passed }}
                 </div>
             </div>
 
@@ -213,7 +211,7 @@
 </form>
 
 
-<!-- For development purpose: {{updateFormReactve.value | json}} -->
+<!-- For development purpose: -->
 form - {{updateFormReactve.value | json}}
 <hr>
 dto - {{studentUpdateDTO | json}}
