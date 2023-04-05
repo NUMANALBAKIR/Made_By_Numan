@@ -50,14 +50,17 @@ export class StudentsService {
     return this.httpClient.post<Student>(this._apiUrl, studentToAdd, { responseType: 'json' });
   }
 
+
   updateStudent(studentToUpdate: StudentUpdateDTO): Observable<Student> {
     return this.httpClient.put<Student>(this._apiUrl + '/' + studentToUpdate.studentId, studentToUpdate, { responseType: 'json' });
   }
+
 
   deleteStudent(studentId: number): Observable<string> {
     return this.httpClient.delete<string>(this._apiUrl + '/' + studentId, { responseType: 'json' });
   }
 
+  
   searchStudents(searchBy: string, searchText: string): Observable<StudentDTO[]> {
     let url = this._apiUrl + '/' + searchBy + '/' + searchText;
     // debugger;

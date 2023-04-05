@@ -24,6 +24,7 @@ public class StudentsAPIController : ControllerBase
     {
         _mapper = mapper;
         _context = context;
+        _subjectsAPIController = new SubjectsAPIController(_context, _mapper);
     }
 
 
@@ -139,11 +140,12 @@ public class StudentsAPIController : ControllerBase
         {
             try
             {
-            await _subjectsAPIController.PutSubject(subjectUpdateDto.SubjectId, subjectUpdateDto);                
+                await _subjectsAPIController.PutSubject(subjectUpdateDto.SubjectId, subjectUpdateDto);                
             }
             catch (NullReferenceException)
             {
-                await _subjectsAPIController.PostSubject(_mapper.Map<SubjectCreateDTO>(subjectUpdateDto));
+                var createDto =_mapper.Map<SubjectCreateDTO>(subjectUpdateDto);
+                await _subjectsAPIController.PostSubject(createDto);
             }
         }
 
