@@ -32,11 +32,15 @@ namespace API_Angular.Controllers
         // GET: api/SubjectsAPI
         // Get All subjects of this StudentId
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Subject>>> GetSubjects(int StudentId)
+        public async Task<List<SubjectDTO>> GetSubjects(int StudentId)
         {
-            return await _context.Subjects
+            var subjects = await _context.Subjects
             .Where(x => x.StudentId == StudentId)
             .ToListAsync();
+
+            var list = _mapper.Map<List<SubjectDTO>>(subjects);
+
+            return list;
         }
 
 

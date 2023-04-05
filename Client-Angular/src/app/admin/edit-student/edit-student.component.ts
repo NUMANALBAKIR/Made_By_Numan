@@ -97,7 +97,7 @@ export class EditStudentComponent implements OnInit {
     // wait for service responses and then populate.
     setTimeout(() => {
       this.populateForm();
-    }, 1000);
+    }, 500);
 
 
     // valueChanges

@@ -2,7 +2,7 @@
 <div class="container border mt-3 p-2">
     <div class="row">
         <div class="col">
-            <h2 class="text-primary">Students CRUD</h2>
+            <h2 class="text-primary">Students CRUD - <span class="h4 text-dark">sorted by name</span></h2>
         </div>
 
         <div class="spinner-border text-dark" *ngIf="showSpinner">
@@ -57,11 +57,11 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let student of students; let i = index" [ngClass]="{'text-danger': !student.passed}">
+            <tr *ngFor="let student of students; let i = index" [ngClass]="{'border border-danger': !student.passed}">
                 <td>{{student.studentId}}</td>
                 <th>{{student.name }}</th>
                 <td>{{student.dateOfBirth | date}}</td>
-                <td [style.color]="(student.passed  == true)? 'green':'blue'">
+                <td [style.color]="(student.passed == true)? 'green':'blue'">
                     {{student.passed}}
                 </td>
                 <th>{{student.gender }}</th>
@@ -80,8 +80,10 @@
                 <td class="d-flex justify-content-around">
                     <button (click)="onDetailsClick($event, student.studentId)"
                         class="btn btn-outline-info"><b>Details</b></button>
+
                     <a routerLink="/editstudent" (click)="onUpdateClick($event, student.studentId)"
                         class="btn btn-outline-warning"><b>Update</b></a>
+
                     <button data-bs-toggle="modal" data-bs-target="#myModal" (click)="onDeleteClick($event, i)"
                         class="btn btn-outline-danger"><b>Delete</b></button>
                 </td>
@@ -132,4 +134,4 @@
     </div>
 </div> -->
 
-i th- {{students[i] | json}}
+For development purpose- {{students | json }}

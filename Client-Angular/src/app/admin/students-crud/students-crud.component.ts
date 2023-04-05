@@ -36,22 +36,20 @@ export class StudentsCRUDComponent implements OnInit {
         this.showSpinner = false;
       },
       (error) => {
-        // console.log(error);
+        console.log(error);
       }
     );
 
-    setTimeout(() => {
-      console.log(this.i);
-    }, 500);
-
     // debugger;
   }
+
 
   onDetailsClick(event: any, studentId: number) {
     console.log(event.target.innerHTML);
     event.target.remove();
   }
 
+  
   onUpdateClick(event: any, studentId: number) {
     this.studentsService.studentIdPassed = studentId;
   }

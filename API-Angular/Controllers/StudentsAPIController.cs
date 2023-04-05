@@ -63,6 +63,7 @@ public class StudentsAPIController : ControllerBase
     {
         var students = await _context.Students
             .Include(x => x.Country)
+            .OrderBy(x => x.Name)  // notice
             .ToListAsync();
 
         var list = students.Select(x => _mapper.Map<StudentDTO>(x)).ToList();
@@ -77,7 +78,7 @@ public class StudentsAPIController : ControllerBase
     public async Task<ActionResult<StudentDTO>> GetStudent(int id)
     {
         var student = await _context.Students
-             .Include(x => x.Country)
+            .Include(x => x.Country)
             .FirstOrDefaultAsync(x => x.StudentId == id);
 
         if (student == null)
@@ -85,9 +86,13 @@ public class StudentsAPIController : ControllerBase
             return NotFound(student);
         }
 
-        var StudentDto = _mapper.Map<StudentDTO>(student);
+        var studentDto = _mapper.Map<StudentDTO>(student);
 
-        return StudentDto;
+        // get, set subjects list
+        var subjects = await _subjectsAPIController.GetSubjects(id);
+        studentDto.Subjects = subjects;
+
+        return studentDto;
     }
 
 
@@ -132,7 +137,14 @@ public class StudentsAPIController : ControllerBase
 
         foreach (var subjectUpdateDto in updateDto.Subjects)
         {
-            await _subjectsAPIController.PutSubject(subjectUpdateDto.SubjectId, subjectUpdateDto);
+            try
+            {
+            await _subjectsAPIController.PutSubject(subjectUpdateDto.SubjectId, subjectUpdateDto);                
+            }
+            catch (NullReferenceException)
+            {
+                await _subjectsAPIController.PostSubject(_mapper.Map<SubjectCreateDTO>(subjectUpdateDto));
+            }
         }
 
         Student student = _mapper.Map<Student>(updateDto);

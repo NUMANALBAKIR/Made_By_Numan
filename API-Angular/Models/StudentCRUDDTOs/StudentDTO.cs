@@ -11,8 +11,9 @@ public class StudentDTO
     public string Gender { get; set; } // radio
 
     public int CountryId { get; set; }
+    public Country Country { get; set; }
 
-    public List<Subject> Subjects { get; set; } // sk..
+    public List<SubjectDTO> Subjects { get; set; } // sk..
 
 
 }
