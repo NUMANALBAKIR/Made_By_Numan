@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { AgeValidatorDirective } from './age-validator.directive';
 import { GenderCountryValidatorDirective } from './gender-country-validator.directive';
 import { StudentIdUniqueValidatorDirective } from './student-id-unique-validator.directive';
+import { BadgesComponent } from './badges/badges.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { StudentIdUniqueValidatorDirective } from './student-id-unique-validator
     LoginComponent,
     AgeValidatorDirective,
     GenderCountryValidatorDirective,
-    StudentIdUniqueValidatorDirective
+    StudentIdUniqueValidatorDirective,
+    BadgesComponent
   ],
   imports: [
     BrowserModule,

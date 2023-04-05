@@ -7,6 +7,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } fr
 import { Country } from 'src/app/country';
 import { CountriesService } from 'src/app/countries.service';
 import { CustomValidatorsService } from 'src/app/custom-validators.service';
+import { Router } from '@angular/router';
+import { StudentDTO } from 'src/app/Models/StudentDTO';
 
 
 /*
@@ -25,7 +27,9 @@ export class EditStudentComponent implements OnInit {
     private countriesService: CountriesService,
     private location: Location,
     private customValidatorsService: CustomValidatorsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
+
 
   ) {
   }
@@ -67,7 +71,6 @@ export class EditStudentComponent implements OnInit {
   submitted = false;
 
 
-
   ngOnInit() {
 
     // get, set countries list by id
@@ -82,7 +85,7 @@ export class EditStudentComponent implements OnInit {
 
     // get, set student info by id
     this.studentsService.getStudent(this.studentId).subscribe(
-      (response: Student) => {
+      (response: StudentDTO) => {
         this.studentUpdateDTO = response;
       },
       (e) => {
@@ -114,7 +117,6 @@ export class EditStudentComponent implements OnInit {
   }
 
   
-
   onAddClick() {
 
     // way 1. way 2 is below
@@ -126,7 +128,8 @@ export class EditStudentComponent implements OnInit {
     // way 2
     var newFormGroup = this.formBuilder.group({
       subjectName: [null, [Validators.required]],
-      mark: [50, [Validators.required]]
+      mark: [50, [Validators.required]],
+      studentId: this.updateFormReactve.value.studentId
     });
 
     this.formSubjectsArr.push(newFormGroup);
@@ -137,6 +140,7 @@ export class EditStudentComponent implements OnInit {
 
   }
 
+
   onRemoveClick(i: number) {
     this.formSubjectsArr.removeAt(i);
   }
@@ -145,24 +149,30 @@ export class EditStudentComponent implements OnInit {
   onSubmitClick() {
     
     this.submitted = true;
-
     
-    if (this.updateFormReactve.valid) {
-      
-      console.log(this.updateFormReactve);
-    }
-
-    // if (this.updateFormReactve.valid) {
-    //   this.studentsService.editStudent(this.studentUpdateDTO).subscribe(
-    //     (r: Student) => {
-    //     },
-    //     (e) => {
-    //       console.log(e);
-    //     }
-    //   );
-
-    //   this.location.back();
+    // if (this.updateFormReactve.valid) {     
+    //   this.studentUpdateDTO = this.updateFormReactve.value as StudentUpdateDTO;
+    //   console.log(this.updateFormReactve);
     // }
+
+    if (this.updateFormReactve.valid) {
+
+      this.studentUpdateDTO = this.updateFormReactve.value as StudentUpdateDTO;
+
+      this.studentsService.updateStudent(this.studentUpdateDTO).subscribe(
+        (r: Student) => {
+        },
+        (e) => {
+          console.log(e);
+        }
+      );
+
+      // better alternaive is router below
+      // this.location.back();
+
+      this.router.navigate(['','studentscrud']); // [ parent, child ]
+
+    }
 
   }
 
@@ -193,7 +203,8 @@ export class EditStudentComponent implements OnInit {
       dateOfBirth: this.studentUpdateDTO.dateOfBirth,
       passed: this.studentUpdateDTO.passed,
       gender: this.studentUpdateDTO.gender,
-      countryId: this.studentUpdateDTO.countryId
+      countryId: this.studentUpdateDTO.countryId,
+      subjects: this.studentUpdateDTO.subjects
     });
   }
 

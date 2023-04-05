@@ -5,6 +5,7 @@ import { Student } from 'src/app/Student';
 import { StudentsService } from 'src/app/students.service';
 import { SubjectsList } from 'src/app/subjects-list';
 import * as $ from 'jquery';
+import { StudentDTO } from 'src/app/Models/StudentDTO';
 
 @Component({
   selector: 'app-students-crud',
@@ -21,7 +22,7 @@ export class StudentsCRUDComponent implements OnInit {
   i: number = 0;
   searchBy: string = 'name';
   searchText: string = '';
-  students: Student[] = [];
+  students: StudentDTO[] = [];
   countries: Country[] = [];
   subjectsLists: SubjectsList[] = [];
   showSpinner: boolean = true;
@@ -30,7 +31,7 @@ export class StudentsCRUDComponent implements OnInit {
     // debugger;
     // get and set list of students
     this.studentsService.getStudents().subscribe(
-      (response: Student[]) => {
+      (response: StudentDTO[]) => {
         this.students = response;
         this.showSpinner = false;
       },
@@ -78,7 +79,7 @@ export class StudentsCRUDComponent implements OnInit {
 
   onSearchClick() {
     return this.studentsService.searchStudents(this.searchBy, this.searchText).subscribe(
-      (r: Student[]) => {
+      (r: StudentDTO[]) => {
         this.students = r;
       },
       (e: any) => {

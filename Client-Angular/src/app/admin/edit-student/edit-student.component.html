@@ -161,14 +161,7 @@
                     <!-- mark range -->
                     <div class="col">
                         <input type="range" class="form-range" id="mark" name="mark" min="0" max="100" value="50"
-                            formControlName="mark"
-                            [ngClass]="{'is-invalid': subject.get('mark')?.invalid && (subject.get('mark')?.dirty || subject.get('mark')?.touched || submitted),
-                
-                                    'is-valid': subject.get('mark')?.valid && (subject.get('mark')?.dirty || subject.get('mark')?.touched || submitted) }">
-
-                        <span class="text-danger"
-                            *ngIf="updateFormReactve.get('mark')?.invalid && (updateFormReactve.get('mark')?.dirty || updateFormReactve.get('mark')?.touched || submitted) && updateFormReactve.get('mark')?.errors?.required">
-                            Mark Slider must be selected.</span>
+                            formControlName="mark">
                     </div>
 
                     <!-- display mark -->

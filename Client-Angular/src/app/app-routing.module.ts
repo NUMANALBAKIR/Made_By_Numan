@@ -6,6 +6,7 @@ import { DeleteStudentComponent } from './admin/delete-student/delete-student.co
 import { EditStudentComponent } from './admin/edit-student/edit-student.component';
 import { StudentsCRUDComponent } from './admin/students-crud/students-crud.component';
 import { LoginComponent } from './login/login.component';
+import { BadgesComponent } from './badges/badges.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'editstudent', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'editstudent', component: EditStudentComponent },
   { path: 'deletestudent', component: DeleteStudentComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'badges', component: BadgesComponent }
 
 ];
 

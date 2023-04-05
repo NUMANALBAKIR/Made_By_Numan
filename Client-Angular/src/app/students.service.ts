@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Student } from './Student';
 import { StudentCreateDTO } from './Models/StudentCreateDTO';
 import { StudentUpdateDTO } from './Models/StudentUpdateDTO';
+import { StudentDTO } from './Models/StudentDTO';
 
 @Injectable(
   { providedIn: 'root' }
@@ -18,10 +19,10 @@ export class StudentsService {
   }
 
 
-  getStudent(studentId: number): Observable<Student> {
-    return this.httpClient.get<Student>(this._apiUrl + '/' + studentId, { responseType: 'json' })
+  getStudent(studentId: number): Observable<StudentDTO> {
+    return this.httpClient.get<StudentDTO>(this._apiUrl + '/' + studentId, { responseType: 'json' })
     .pipe(map(
-      (data: Student)=> {
+      (data: StudentDTO)=> {
         // debugger;
         return data;
       }
@@ -29,10 +30,10 @@ export class StudentsService {
   }
 
 
-  getStudents(): Observable<Student[]> {
-    return this.httpClient.get<Student[]>(this._apiUrl, { responseType: 'json' })
+  getStudents(): Observable<StudentDTO[]> {
+    return this.httpClient.get<StudentDTO[]>(this._apiUrl, { responseType: 'json' })
       .pipe(map(
-        (data: Student[]) => {
+        (data: StudentDTO[]) => {
           
           for (let i = 0; i < data.length; i++) {
             data[i].name = data[i].name.toUpperCase();
@@ -49,18 +50,18 @@ export class StudentsService {
     return this.httpClient.post<Student>(this._apiUrl, studentToAdd, { responseType: 'json' });
   }
 
-  editStudent(studentToEdit: StudentUpdateDTO): Observable<Student> {
-    return this.httpClient.put<Student>(this._apiUrl + '/' + studentToEdit.studentId, studentToEdit, { responseType: 'json' });
+  updateStudent(studentToUpdate: StudentUpdateDTO): Observable<Student> {
+    return this.httpClient.put<Student>(this._apiUrl + '/' + studentToUpdate.studentId, studentToUpdate, { responseType: 'json' });
   }
 
   deleteStudent(studentId: number): Observable<string> {
     return this.httpClient.delete<string>(this._apiUrl + '/' + studentId, { responseType: 'json' });
   }
 
-  searchStudents(searchBy: string, searchText: string): Observable<Student[]> {
+  searchStudents(searchBy: string, searchText: string): Observable<StudentDTO[]> {
     let url = this._apiUrl + '/' + searchBy + '/' + searchText;
     // debugger;
-    return this.httpClient.get<Student[]>(url, { responseType: 'json' });
+    return this.httpClient.get<StudentDTO[]>(url, { responseType: 'json' });
   }
 
 

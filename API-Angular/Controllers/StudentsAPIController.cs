@@ -20,10 +20,9 @@ public class StudentsAPIController : ControllerBase
     private readonly IMapper _mapper;
     private readonly SubjectsAPIController _subjectsAPIController;
 
-    public StudentsAPIController(AppDbContext context, IMapper mapper, SubjectsAPIController subjectsAPIController)
+    public StudentsAPIController(AppDbContext context, IMapper mapper)
     {
         _mapper = mapper;
-        _subjectsAPIController = subjectsAPIController;
         _context = context;
     }
 
@@ -44,13 +43,7 @@ public class StudentsAPIController : ControllerBase
             .Where(x => x.Name.ToLower().Contains(searchText))
             .ToList();
         }
-        else if (searchBy == "DateOfBirth".ToLower())
-        {
-            students = _context.Students
-            // .Include(x=> x.Subjects)
-            .Where(x => x.DateOfBirth.ToString().Contains(searchText))
-            .ToList();
-        }
+
         //else if (searchBy == "Passed".ToLower())
         //{
         //    students = _context.Students
@@ -58,44 +51,43 @@ public class StudentsAPIController : ControllerBase
         //    .Where(x => x.Passed.ToString() == searchText))
         //    .ToList();
         //}
-        return Ok(students);
-    }
 
+        var list = students.Select(x => _mapper.Map<StudentDTO>(x)).ToList();
+
+        return Ok(list);
+    }
 
     // GET: api/StudentsAPI
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
+    public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudents()
     {
-        System.Threading.Thread.Sleep(2000);
-
         var students = await _context.Students
             .Include(x => x.Country)
-            //.Include(x => x.SubjectsList)
             .ToListAsync();
 
-        // foreach (var student in students)
-        // {
-        //     student.DateOfBirth.ToString("dd/MM/yyyy");
-        // }
-        return students;
+        var list = students.Select(x => _mapper.Map<StudentDTO>(x)).ToList();
+
+        return list;
     }
 
 
+    // student + its subjects
     // GET: api/StudentsAPI/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<Student>> GetStudent(int id)
+    public async Task<ActionResult<StudentDTO>> GetStudent(int id)
     {
         var student = await _context.Students
              .Include(x => x.Country)
-            //.Include(x => x.SubjectsList)
             .FirstOrDefaultAsync(x => x.StudentId == id);
 
         if (student == null)
         {
             return NotFound(student);
         }
-        // student.DateOfBirth.ToString("dd/MM/yyyy");
-        return student;
+
+        var StudentDto = _mapper.Map<StudentDTO>(student);
+
+        return StudentDto;
     }
 
 

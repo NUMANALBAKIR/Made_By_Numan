@@ -12,7 +12,7 @@ export class Student {
   countryId: number | any;    // cli...
   country: Country;     // cli...
 
-  subjects: Subject[];
+  // subjects: Subject[];
 
 
   // subjectsListId: number | any;
@@ -28,7 +28,7 @@ export class Student {
     this.countryId = null;
     this.country = new Country();
 
-    this.subjects = [];
+    // this.subjects = [];
 
 
     // this.subjectsListId = null;

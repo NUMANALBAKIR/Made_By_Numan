@@ -28,12 +28,17 @@ namespace API_Angular.Controllers
 
         }
 
+
         // GET: api/SubjectsAPI
+        // Get All subjects of this StudentId
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Subject>>> GetSubjects()
+        public async Task<ActionResult<IEnumerable<Subject>>> GetSubjects(int StudentId)
         {
-            return await _context.Subjects.ToListAsync();
+            return await _context.Subjects
+            .Where(x => x.StudentId == StudentId)
+            .ToListAsync();
         }
+
 
         // GET: api/SubjectsAPI/5
         [HttpGet("{id}")]
