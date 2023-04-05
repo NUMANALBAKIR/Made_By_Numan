@@ -31,7 +31,7 @@
 
                 <span class="text-danger"
                     *ngIf="updateFormReactve.get('name')?.invalid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched || submitted) && updateFormReactve.get('name')?.errors?.required">
-                    Name can't be blank</span>
+                    Name can't be blank.</span>
 
                 <span class="text-danger"
                     *ngIf="updateFormReactve.get('name')?.invalid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched || submitted) && updateFormReactve.get('name')?.errors?.pattern">
@@ -101,7 +101,7 @@
 
                 <span class="text-danger"
                     *ngIf="updateFormReactve.get('gender')?.invalid && (updateFormReactve.get('gender')?.dirty || updateFormReactve.get('gender')?.touched || submitted) && updateFormReactve.get('gender')?.errors?.notBothOther">
-                    Both Gender and Country can't be 'Other'.</span>
+                    ( Both Gender and Country can't be 'Other'. )</span>
             </div>
 
 
@@ -160,7 +160,7 @@
 
                     <!-- mark range -->
                     <div class="col">
-                        <input type="range" class="form-range" id="mark" name="mark" min="0" max="100"
+                        <input type="range" class="form-range" id="mark" name="mark" min="0" max="100" value="50"
                             formControlName="mark"
                             [ngClass]="{'is-invalid': subject.get('mark')?.invalid && (subject.get('mark')?.dirty || subject.get('mark')?.touched || submitted),
                 

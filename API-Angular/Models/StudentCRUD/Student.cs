@@ -16,7 +16,7 @@ public class Student
     [ForeignKey(nameof(CountryId))]
     public Country Country { get; set; }    // cl...
 
-    //public List<Subject> Subjects { get; set; } // sk..
+    // public List<Subject> Subjects { get; set; } // sk..
 
 
 

@@ -12,6 +12,6 @@ public class StudentCreateDTO
 
     public int CountryId { get; set; }
 
-    //public List<Subject> Subjects { get; set; } // sk..
+    public List<SubjectCreateDTO> Subjects { get; set; } // sk..
 
 }

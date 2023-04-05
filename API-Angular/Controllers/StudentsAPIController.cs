@@ -2,6 +2,7 @@
 using API_Angular.Models.StudentCRUD;
 using API_Angular.Models.StudentCRUDDTOs;
 using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,10 +18,12 @@ public class StudentsAPIController : ControllerBase
 {
     private readonly AppDbContext _context;
     private readonly IMapper _mapper;
+    private readonly SubjectsAPIController _subjectsAPIController;
 
-    public StudentsAPIController(AppDbContext context, IMapper mapper)
+    public StudentsAPIController(AppDbContext context, IMapper mapper, SubjectsAPIController subjectsAPIController)
     {
         _mapper = mapper;
+        _subjectsAPIController = subjectsAPIController;
         _context = context;
     }
 
@@ -96,12 +99,52 @@ public class StudentsAPIController : ControllerBase
     }
 
 
+    // POST: api/StudentsAPI
+    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [HttpPost]
+    public async Task<ActionResult<Student>> PostStudent(StudentCreateDTO createDto)
+    {
+        foreach (var subjectCreateDto in createDto.Subjects)
+        {
+            await _subjectsAPIController.PostSubject(subjectCreateDto);
+        }
+
+        Student student = _mapper.Map<Student>(createDto);
+        _context.Students.Add(student);
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateException)
+        {
+            if (StudentExists(student.StudentId))
+            {
+                return Conflict();
+            }
+            else
+            {
+                throw;
+            }
+        }
+        // student.DateOfBirth.ToString("dd/MM/yyyy");
+        return CreatedAtAction("GetStudent", new { id = student.StudentId }, student);
+    }
+
+
     // PUT: api/StudentsAPI/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
     public async Task<IActionResult> PutStudent(int id, StudentUpdateDTO updateDto)
     {
-        var student = _mapper.Map<Student>(updateDto);
+
+        foreach (var subjectUpdateDto in updateDto.Subjects)
+        {
+            await _subjectsAPIController.PutSubject(subjectUpdateDto.SubjectId, subjectUpdateDto);
+        }
+
+        Student student = _mapper.Map<Student>(updateDto);
+
         if (id != student.StudentId)
         {
             return BadRequest();
@@ -125,33 +168,6 @@ public class StudentsAPIController : ControllerBase
             }
         }
         return NoContent();
-    }
-
-
-    // POST: api/StudentsAPI
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    [HttpPost]
-    public async Task<ActionResult<Student>> PostStudent(StudentCreateDTO createDto)
-    {
-        Student student = _mapper.Map<Student>(createDto);
-        _context.Students.Add(student);
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateException)
-        {
-            if (StudentExists(student.StudentId))
-            {
-                return Conflict();
-            }
-            else
-            {
-                throw;
-            }
-        }
-        // student.DateOfBirth.ToString("dd/MM/yyyy");
-        return CreatedAtAction("GetStudent", new { id = student.StudentId }, student);
     }
 
 

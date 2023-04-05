@@ -12,7 +12,7 @@ public class StudentDTO
 
     public int CountryId { get; set; }
 
-    //public List<Subject> Subjects { get; set; } // sk..
+    public List<Subject> Subjects { get; set; } // sk..
 
 
 }

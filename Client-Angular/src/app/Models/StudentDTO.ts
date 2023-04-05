@@ -1,7 +1,7 @@
-import { Country } from "./country";
-import { Subject } from "./subject";
+import { Country } from "../country";
+import { Subject } from "../subject";
 
-export class Student {
+export class StudentDTO {
 
   studentId: number | any;
   name: string | any;
@@ -13,7 +13,6 @@ export class Student {
   country: Country;     // cli...
 
   subjects: Subject[];
-
 
   // subjectsListId: number | any;
   // subjectsList: SubjectsList | any;
@@ -29,7 +28,6 @@ export class Student {
     this.country = new Country();
 
     this.subjects = [];
-
 
     // this.subjectsListId = null;
     // this.subjectsList = new SubjectsList();

@@ -5,5 +5,6 @@ public class SubjectUpdateDTO
     public int SubjectId { get; set; }
     public string SubjectName { get; set; }
     public int Mark { get; set; }
+    
     public int StudentId { get; set; }
 }

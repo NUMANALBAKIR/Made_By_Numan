@@ -126,7 +126,7 @@ export class EditStudentComponent implements OnInit {
     // way 2
     var newFormGroup = this.formBuilder.group({
       subjectName: [null, [Validators.required]],
-      mark: [null, [Validators.required]]
+      mark: [50, [Validators.required]]
     });
 
     this.formSubjectsArr.push(newFormGroup);
