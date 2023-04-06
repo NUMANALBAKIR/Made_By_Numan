@@ -10,9 +10,14 @@ export class ParentComponent implements OnInit {
   constructor() { }
 
   parentColorValue: string = '';
-  toChildColorValue: string = ''; 
+  toChildColorValue: string = '';
 
   ngOnInit(): void {
+  }
+
+  parentsMethod(event: any) {
+    debugger;
+    this.parentColorValue = event.parentColor;
   }
 
 }

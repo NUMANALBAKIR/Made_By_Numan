@@ -73,6 +73,8 @@ export class EditStudentComponent implements OnInit {
 
   ngOnInit() {
 
+    // this.updateFormReactve.reset();
+
     // get, set countries list by id
     this.countriesService.getCountries().subscribe(
       (response: Country[]) => {

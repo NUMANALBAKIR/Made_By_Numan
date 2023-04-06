@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+
 @Component({
   selector: 'app-child',
   templateUrl: './child.component.html',
@@ -11,7 +12,7 @@ export class ChildComponent implements OnInit {
 
   @Input('childColorValue') childColorValue: string = '';
   colorForGrandChild: string = '';
-  @Output('clickInChild') clickInChild = new EventEmitter<any[]>();
+  @Output('childsClickEmitter') childsClickEmitter = new EventEmitter<any>();
 
 
 
@@ -20,10 +21,15 @@ export class ChildComponent implements OnInit {
 
 
 
-  onClickInChild(event: any) 
-  {
-    this.clickInChild.emit(event );
-  }  
+  onClickToParent(event: any) {
+    this.childsClickEmitter.emit({
+      childEvent: event, 
+      parentColor: this.childColorValue
+    });
+
+    // debugger;
+
+  }
 
 
 }
