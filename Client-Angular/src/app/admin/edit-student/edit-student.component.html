@@ -9,13 +9,31 @@
 
         <div class="row">
 
-            <!-- id -->
+            <!-- studen id -->
             <div class="col-3">
                 <label for="studentId" class="control-label pt-2" style="font-size:20px;">Student Id:</label>
             </div>
             <div class="col-9 pb-3">
                 <input type="text" class="form-control" id="studentId" name="studentId"
-                    formControlName="studentId">
+                    formControlName="studentId" 
+                    [ngClass]="{'is-invalid': updateFormReactve.get('studentId')?.invalid && (updateFormReactve.get('studentId')?.dirty || updateFormReactve.get('studentId')?.touched || submitted),
+                
+                'is-valid': updateFormReactve.get('studentId')?.valid && (updateFormReactve.get('studentId')?.dirty || updateFormReactve.get('studentId')?.touched || submitted) }">
+
+                <span class="text-danger"
+                    *ngIf="updateFormReactve.get('studentId')?.invalid && (updateFormReactve.get('studentId')?.dirty || updateFormReactve.get('studentId')?.touched || submitted) && updateFormReactve.get('studentId')?.errors?.required">
+                    Id must be filled.
+                </span>
+
+                <span class="text-danger"
+                    *ngIf="updateFormReactve.get('studentId')?.invalid && (updateFormReactve.get('studentId')?.dirty || updateFormReactve.get('studentId')?.touched || submitted) && updateFormReactve.get('studentId')?.errors?.pattern">
+                    Numbers only.
+                </span>
+
+                <span class="text-danger"
+                    *ngIf="updateFormReactve.get('studentId')?.invalid && (updateFormReactve.get('studentId')?.dirty || updateFormReactve.get('studentId')?.touched || submitted) && updateFormReactve.get('studentId')?.errors?.uniqueStudentId">
+                Id already exists.
+                </span>
             </div>
 
 

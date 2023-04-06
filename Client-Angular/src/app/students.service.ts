@@ -22,7 +22,7 @@ export class StudentsService {
   getStudent(studentId: number): Observable<StudentDTO> {
     return this.httpClient.get<StudentDTO>(this._apiUrl + '/' + studentId, { responseType: 'json' })
     .pipe(map(
-      (data: StudentDTO)=> {
+      (data: StudentDTO) => {
         // debugger;
         return data;
       }

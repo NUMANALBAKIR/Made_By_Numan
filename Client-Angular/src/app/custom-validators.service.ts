@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { StudentsService } from './students.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomValidatorsService {
 
-  constructor() { }
+  constructor(private _studentsService: StudentsService) { }
 
   // true if age equal or more than param age
   // below, 'minAge' param is passed, but 'control' is implicitly the input to which this validation rule is applied.
@@ -31,7 +34,7 @@ export class CustomValidatorsService {
       }
     };
   }
-  
+
 
   // true if gender and country are both 'Other'.
   // params sequence: gender, countryId
@@ -58,11 +61,34 @@ export class CustomValidatorsService {
         control1.setErrors({ notBothOther: { valid: false } });
         return { notBothOther: { valid: false } };
       } else {
-        control1.setErrors( null);   // important?
+        control1.setErrors(null);   // important?
         return null;
       }
 
     };
   }
 
+
+  // valid false if student id 
+  public UniqueStudentId(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+
+      let id = control.value;
+
+      return this._studentsService.getStudent(id)
+        .pipe(map((existingStudent: any) => {
+
+          debugger;
+          
+          if (existingStudent == null) {
+            return null;
+          }
+          else {
+            control.setErrors({ uniqueStudentId: { valid: false } }); // optional in this case 
+            return { uniqueStudentId: { valid: false } };
+          }
+        }));
+
+    };
+  }
 }

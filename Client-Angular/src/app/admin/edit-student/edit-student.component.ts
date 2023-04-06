@@ -54,7 +54,7 @@ export class EditStudentComponent implements OnInit {
 
   // way 2: using formBuilder
   updateFormReactve: FormGroup = this.formBuilder.group({
-    studentId: null,
+    studentId: [null, [Validators.required, Validators.pattern(/^[0-9]*$/)], [this.customValidatorsService.UniqueStudentId()], { updateOn: 'blur' }],
     name: [null, [Validators.required, Validators.minLength(3), Validators.pattern(/^[A-Za-z ]+$/)]],
     dateOfBirth: [null, [Validators.required, this.customValidatorsService.minAge(7)]],
     passed: ['', [Validators.required]],
@@ -62,11 +62,11 @@ export class EditStudentComponent implements OnInit {
     countryId: [null, [Validators.required]],
     subjects: this.formBuilder.array([])
   },
-  {
-    validators: [
-      this.customValidatorsService.compareOthers('gender','countryId')
-    ]
-  });
+    {
+      validators: [
+        this.customValidatorsService.compareOthers('gender', 'countryId')
+      ]
+    });
 
   submitted = false;
 
@@ -89,7 +89,7 @@ export class EditStudentComponent implements OnInit {
         this.studentUpdateDTO = response;
       },
       (e) => {
-        console.log(e);
+        console.log('-- From editComponent: ' + e);
       }
     );
 
@@ -104,7 +104,7 @@ export class EditStudentComponent implements OnInit {
     this.updateFormReactve.valueChanges.subscribe(
       (value: any) => {
         // console.log(value);
-        console.log(this.updateFormReactve);
+        // console.log(this.updateFormReactve);
       }
     );
 
@@ -116,7 +116,7 @@ export class EditStudentComponent implements OnInit {
     return <FormArray>this.updateFormReactve.get('subjects');
   }
 
-  
+
   onAddClick() {
 
     // way 1. way 2 is below
@@ -133,8 +133,8 @@ export class EditStudentComponent implements OnInit {
     });
 
     this.formSubjectsArr.push(newFormGroup);
-    
-    if(this.formSubjectsArr.valid){
+
+    if (this.formSubjectsArr.valid) {
     }
 
 
@@ -147,9 +147,9 @@ export class EditStudentComponent implements OnInit {
 
 
   onSubmitClick() {
-    
+
     this.submitted = true;
-    
+
     // if (this.updateFormReactve.valid) {     
     //   this.studentUpdateDTO = this.updateFormReactve.value as StudentUpdateDTO;
     //   console.log(this.updateFormReactve);
@@ -170,7 +170,7 @@ export class EditStudentComponent implements OnInit {
       // better alternaive is router below
       // this.location.back();
 
-      this.router.navigate(['','studentscrud']); // [ parent, child ]
+      this.router.navigate(['', 'studentscrud']); // [ parent, child ]
 
     }
 
@@ -188,7 +188,6 @@ export class EditStudentComponent implements OnInit {
 
     // similar to aboves
     this.updateFormReactve.reset({
-      studentId: this.studentUpdateDTO.studentId,
       passed: this.studentUpdateDTO.passed,
       gender: this.studentUpdateDTO.gender
     });
