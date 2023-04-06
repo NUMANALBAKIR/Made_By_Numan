@@ -7,16 +7,19 @@ import { EditStudentComponent } from './admin/edit-student/edit-student.componen
 import { StudentsCRUDComponent } from './admin/students-crud/students-crud.component';
 import { LoginComponent } from './login/login.component';
 import { BadgesComponent } from './badges/badges.component';
+import { ParentComponent } from './parent/parent.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'editstudent', pathMatch: 'full' },
+  { path: '', redirectTo: 'componentcommunications', pathMatch: 'full' },
   { path: 'about', component: AboutComponent },
   { path: 'studentscrud', component: StudentsCRUDComponent },
   { path: 'addstudent', component: AddStudentComponent },
   { path: 'editstudent', component: EditStudentComponent },
   { path: 'deletestudent', component: DeleteStudentComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'badges', component: BadgesComponent }
+  { path: 'badges', component: BadgesComponent },
+  { path: 'componentcommunications', component: ParentComponent }
+
 
 ];
 

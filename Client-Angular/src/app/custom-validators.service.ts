@@ -3,6 +3,7 @@ import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidationEr
 import { StudentsService } from './students.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { StudentDTO } from './Models/StudentDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -69,23 +70,23 @@ export class CustomValidatorsService {
   }
 
 
-  // valid false if student id 
+  // valid false if student id exists
   public UniqueStudentId(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
 
       let id = control.value;
+      
+      // debugger;
 
       return this._studentsService.getStudent(id)
-        .pipe(map((existingStudent: any) => {
-
-          debugger;
+        .pipe(map((response: StudentDTO | null) => {
           
-          if (existingStudent == null) {
-            return null;
+          if (response != null ) {
+            // control.setErrors({ uniqueStudentId: { valid: false } }); // optional in this case 
+            return { uniqueStudentId: { valid: false } }; 
           }
           else {
-            control.setErrors({ uniqueStudentId: { valid: false } }); // optional in this case 
-            return { uniqueStudentId: { valid: false } };
+            return null;
           }
         }));
 

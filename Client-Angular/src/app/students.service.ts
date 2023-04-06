@@ -21,12 +21,16 @@ export class StudentsService {
 
   getStudent(studentId: number): Observable<StudentDTO> {
     return this.httpClient.get<StudentDTO>(this._apiUrl + '/' + studentId, { responseType: 'json' })
-    .pipe(map(
-      (data: StudentDTO) => {
-        // debugger;
-        return data;
-      }
-    ));
+      .pipe(map(
+
+
+        (data: StudentDTO | any) => {
+
+          // debugger;
+
+          return data;
+        }
+      ));
   }
 
 
@@ -34,7 +38,7 @@ export class StudentsService {
     return this.httpClient.get<StudentDTO[]>(this._apiUrl, { responseType: 'json' })
       .pipe(map(
         (data: StudentDTO[]) => {
-          
+
           for (let i = 0; i < data.length; i++) {
             data[i].name = data[i].name.toUpperCase();
           }
@@ -60,7 +64,7 @@ export class StudentsService {
     return this.httpClient.delete<string>(this._apiUrl + '/' + studentId, { responseType: 'json' });
   }
 
-  
+
   searchStudents(searchBy: string, searchText: string): Observable<StudentDTO[]> {
     let url = this._apiUrl + '/' + searchBy + '/' + searchText;
     // debugger;

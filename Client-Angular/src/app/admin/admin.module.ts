@@ -7,6 +7,7 @@ import { EditStudentComponent } from './edit-student/edit-student.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteStudentComponent } from './delete-student/delete-student.component';
+import { StudentComponent } from './student/student.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { DeleteStudentComponent } from './delete-student/delete-student.componen
     StudentsCRUDComponent,
     AddStudentComponent,
     EditStudentComponent,
-    DeleteStudentComponent
+    DeleteStudentComponent,
+    StudentComponent
   ],
   imports: [
     CommonModule,

@@ -101,12 +101,12 @@ export class EditStudentComponent implements OnInit {
 
 
     // valueChanges
-    this.updateFormReactve.valueChanges.subscribe(
-      (value: any) => {
-        // console.log(value);
-        // console.log(this.updateFormReactve);
-      }
-    );
+    // this.updateFormReactve.valueChanges.subscribe(
+    //   (value: any) => {
+    //     // console.log(value);
+    //     // console.log(this.updateFormReactve);
+    //   }
+    // );
 
 
   }

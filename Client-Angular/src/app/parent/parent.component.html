@@ -1,0 +1,23 @@
+<div class="container mt-5">
+
+    <div class="card border-primary mb-3" style="max-width: 24rem;" [style.background-color]="parentColorValue">
+        <div class="card-header">Parent</div>
+        <div class="card-body">
+
+            <h4 class="card-title">
+                Change Parent Color:
+                <input type="color" id="parentcolor" name="parentcolor" [(ngModel)]="parentColorValue">
+            </h4>
+
+            <hr>
+
+            <h4 class="card-title">
+                Change Child Color:
+                <input type="color" id="childcolor" name="childcolor" [(ngModel)]="toChildColorValue">
+            </h4>
+        </div>
+    </div>
+    
+    <app-child [childColorValue]="toChildColorValue">
+    </app-child>
+</div>
