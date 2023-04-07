@@ -1,9 +1,8 @@
-<hr>
 
-<div class="card border-primary mb-3" style="max-width: 24rem;" [style.background-color]="childColorValue">
-        <div class="card-header">
-            <h5>Child</h5>
-        </div>
+<div class="card border-warning mx-4 mb-4" [style.background-color]="childColorValue">
+    <div class="card-header">
+        <h5>Child</h5>
+    </div>
     <div class="card-body">
 
         <h4 class="card-title">
@@ -11,24 +10,32 @@
             <input type="color" id="parentcolor" name="parentcolor" [(ngModel)]="childColorValue">
         </h4>
 
-        <hr>
-
-        <div class="mt-3">
+        <div>
             <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
                 (click)="onClickToParent($event)">
-                Set: Child Color => Parent Color 
+                Trigger Parent's method by Child's @Output Emitter (having Color)
             </button>
         </div>
+        
+        <br>
 
-        <hr>
-
-        <h4 class="card-title">
-            Change Grand-Child Color:
+        <!-- <h4 class="card-title">
+            Send Color to Grand-Child as @Input:
             <input type="color" id="grandchildcolor" name="grandchildcolor" [(ngModel)]="colorForGrandChild">
-        </h4>
+        </h4> -->
     </div>
+
+    <div class="row">
+        <div class="col">
+            <app-grand-child [grandChildColorValue]="colorForGrandChild">
+            </app-grand-child>
+        </div>
+
+        <div class="col">
+            <app-grand-child2>
+            </app-grand-child2>
+        </div>
+    </div>
+
+
 </div>
-
-
-<app-grand-child [grandChildColorValue]="colorForGrandChild">
-</app-grand-child>

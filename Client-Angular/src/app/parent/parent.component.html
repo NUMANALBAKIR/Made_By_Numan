@@ -1,6 +1,7 @@
-<div class="container mt-5">
 
-    <div class="card border-primary mb-3" style="max-width: 24rem;" [style.background-color]="parentColorValue">
+<div class="container m-4">
+
+    <div class="card border-primary mb-3" [style.background-color]="parentColorValue">
         <div class="card-header">
             <h5>Parent</h5>
         </div>
@@ -11,15 +12,14 @@
                 <input type="color" id="parentcolor" name="parentcolor" [(ngModel)]="parentColorValue">
             </h4>
 
-            <hr>
-
             <h4 class="card-title">
-                Change Child Color:
+                Send Color to Child as @Input:
                 <input type="color" id="childcolor" name="childcolor" [(ngModel)]="toChildColorValue">
             </h4>
         </div>
+        
+
+        <app-child [childColorValue]="toChildColorValue" (childsClickEmitter)="parentsMethod($event)">
+        </app-child>
     </div>
-    
-    <app-child [childColorValue]="toChildColorValue" (childsClickEmitter)="parentsMethod($event)">
-    </app-child>
 </div>

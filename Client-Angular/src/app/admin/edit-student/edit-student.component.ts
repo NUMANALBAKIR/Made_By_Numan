@@ -72,9 +72,7 @@ export class EditStudentComponent implements OnInit {
 
 
   ngOnInit() {
-
-    // this.updateFormReactve.reset();
-
+    
     // get, set countries list by id
     this.countriesService.getCountries().subscribe(
       (response: Country[]) => {
@@ -83,9 +81,9 @@ export class EditStudentComponent implements OnInit {
       (e) => {
         console.log(e);
       }
-    );
+      );
 
-    // get, set student info by id
+      // get, set student info by id
     this.studentsService.getStudent(this.studentId).subscribe(
       (response: StudentDTO) => {
         this.studentUpdateDTO = response;
@@ -95,7 +93,8 @@ export class EditStudentComponent implements OnInit {
       }
     );
 
-
+    this.updateFormReactve.reset();
+    
     // wait for service responses and then populate.
     setTimeout(() => {
       this.populateForm();

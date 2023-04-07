@@ -16,6 +16,7 @@ import { StudentComponent } from './admin/student/student.component';
 import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
 import { GrandChildComponent } from './grand-child/grand-child.component';
+import { GrandChild2Component } from './grand-child2/grand-child2.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { GrandChildComponent } from './grand-child/grand-child.component';
     BadgesComponent,
     ParentComponent,
     ChildComponent,
-    GrandChildComponent
+    GrandChildComponent,
+    GrandChild2Component
   ],
   imports: [
     BrowserModule,

@@ -15,8 +15,8 @@ export class ParentComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // receive emitter upon child button click 
   parentsMethod(event: any) {
-    debugger;
     this.parentColorValue = event.parentColor;
   }
 

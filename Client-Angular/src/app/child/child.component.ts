@@ -27,8 +27,6 @@ export class ChildComponent implements OnInit {
       parentColor: this.childColorValue
     });
 
-    // debugger;
-
   }
 
 
