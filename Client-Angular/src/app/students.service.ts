@@ -15,6 +15,7 @@ export class StudentsService {
   private _apiUrl: string = 'http://localhost:5091/api/StudentsAPI';
   public studentIdPassed: number = 0;
 
+
   constructor(private httpClient: HttpClient) {
   }
 
@@ -70,6 +71,8 @@ export class StudentsService {
     // debugger;
     return this.httpClient.get<StudentDTO[]>(url, { responseType: 'json' });
   }
+
+
 
 
 

@@ -9,9 +9,23 @@ export class GrandChildComponent implements OnInit {
 
   constructor() { }
 
-  @Input('grandChildColorValue') grandChildColorValue : string = '';
+  
+  grandChildColor : string = 'white';
+  white = true;
+
 
   ngOnInit(): void {
+  }
+
+
+  toggleBlackWhite() {
+    if (this.white) {
+      this.grandChildColor = 'black';
+      this.white = !this.white;
+    } else {
+      this.grandChildColor = 'white';
+      this.white = !this.white;
+    }
   }
 
 }

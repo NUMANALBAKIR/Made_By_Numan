@@ -1,4 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { GrandChildComponent } from '../grand-child/grand-child.component';
+import { GrandChild2Component } from '../grand-child2/grand-child2.component';
+import { StudentsService } from '../students.service';
+import { ComponentCommunicationsService } from '../component-communications.service';
 
 
 @Component({
@@ -8,26 +12,42 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ChildComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _compCommuService: ComponentCommunicationsService) { }
 
-  @Input('childColorValue') childColorValue: string = '';
+  @Input('childColor') childColor: string = '';
   colorForGrandChild: string = '';
   @Output('childsClickEmitter') childsClickEmitter = new EventEmitter<any>();
 
+  @ViewChild('gc1') gc1: GrandChildComponent = {} as GrandChildComponent;
+  @ViewChild('gc2') gc2: GrandChild2Component = {} as GrandChild2Component;
+  @ViewChildren('gcs') gcs = {} as QueryList<GrandChildComponent>;
 
 
   ngOnInit(): void {
   }
 
 
-
   onClickToParent(event: any) {
     this.childsClickEmitter.emit({
-      childEvent: event, 
-      parentColor: this.childColorValue
+      childEvent: event,
+      parentColor: this.childColor
     });
-
   }
+
+
+  toggleBothBlackWhite() {
+    let gcsArr = this.gcs.toArray();
+    gcsArr.forEach(element => {
+      element.toggleBlackWhite();
+    });
+  }
+
+
+  // this child => service => grandchild2
+  TurnBlueGrandChild2() {
+    this._compCommuService.turnBlue();
+  }
+
 
 
 }

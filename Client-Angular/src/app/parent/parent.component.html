@@ -1,5 +1,7 @@
-
 <div class="container m-4">
+    <h4 class="text-info">
+        Component-Communications -
+    </h4>
 
     <div class="card border-primary mb-3" [style.background-color]="parentColorValue">
         <div class="card-header">
@@ -19,7 +21,7 @@
         </div>
         
 
-        <app-child [childColorValue]="toChildColorValue" (childsClickEmitter)="parentsMethod($event)">
+        <app-child [childColor]="toChildColorValue" (childsClickEmitter)="parentsMethod($event)">
         </app-child>
     </div>
 </div>

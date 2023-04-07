@@ -1,5 +1,4 @@
-
-<div class="card border-warning mx-4 mb-4" [style.background-color]="childColorValue">
+<div class="card border-warning mx-4 mt-3 mb-4" [style.background-color]="childColor">
     <div class="card-header">
         <h5>Child</h5>
     </div>
@@ -7,35 +6,55 @@
 
         <h4 class="card-title">
             Change Child Color:
-            <input type="color" id="parentcolor" name="parentcolor" [(ngModel)]="childColorValue">
+            <input type="color" id="parentcolor" name="parentcolor" [(ngModel)]="childColor">
         </h4>
 
         <div>
             <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
                 (click)="onClickToParent($event)">
-                Trigger Parent's method by Child's @Output Emitter (having Color)
+                Trigger Parent's method using Child's @Output Emitter (Set Color)
             </button>
         </div>
-        
+
         <br>
 
-        <!-- <h4 class="card-title">
-            Send Color to Grand-Child as @Input:
-            <input type="color" id="grandchildcolor" name="grandchildcolor" [(ngModel)]="colorForGrandChild">
-        </h4> -->
+        <div>
+            <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
+                (click)="gc1.toggleBlackWhite()">
+                Toggle Grand-Child-1's method using @ViewChild
+            </button>
+        </div>
+
+        <br>
+
+        <div>
+            <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
+                (click)="toggleBothBlackWhite()">
+                Toggle both Grand-Childs methods using @ViewChildren
+            </button>
+        </div>
+
+        <br>
+
+        <div>
+            <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent" 
+            (click)="TurnBlueGrandChild2()" >
+                Turn Grand-Child-2 Blue using Custom RxJS Obsevable Service
+            </button>
+        </div>
+
     </div>
 
     <div class="row">
         <div class="col">
-            <app-grand-child [grandChildColorValue]="colorForGrandChild">
+            <app-grand-child #gcs #gc1>
             </app-grand-child>
         </div>
 
         <div class="col">
-            <app-grand-child2>
+            <app-grand-child2 #gcs #gc2>
             </app-grand-child2>
         </div>
     </div>
-
 
 </div>
