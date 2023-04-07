@@ -27,6 +27,7 @@ export class ChildComponent implements OnInit {
   }
 
 
+  // Emit Output to its parent
   onClickToParent(event: any) {
     this.childsClickEmitter.emit({
       childEvent: event,
@@ -34,7 +35,8 @@ export class ChildComponent implements OnInit {
     });
   }
 
-
+  
+  // viewchildren
   toggleBothBlackWhite() {
     let gcsArr = this.gcs.toArray();
     gcsArr.forEach(element => {

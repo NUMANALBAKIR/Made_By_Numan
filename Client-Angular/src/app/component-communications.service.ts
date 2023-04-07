@@ -9,12 +9,13 @@ export class ComponentCommunicationsService {
   constructor() { }
 
   public color: string = '';
-  //subscribers //note: [] is after <>
+  // subscribers/observers (just an array) // note: [] is after <>
   private obseversGrandChilds: Observer<string>[] = [];
 
-  public observableChild: Observable<string> = new Observable(
-    (observer: Observer<string>) => {
-      this.obseversGrandChilds.push(observer);
+  // everytime something new subscribes (is observer), is added to arr of observers
+  public observableChild = new Observable<string>(
+    (observerGrandChild: Observer<string>) => {
+      this.obseversGrandChilds.push(observerGrandChild);
     }
   );
 
@@ -24,8 +25,8 @@ export class ComponentCommunicationsService {
 
     this.color = 'blue';
 
-    this.obseversGrandChilds.forEach(element => {
-      element.next(this.color);
+    this.obseversGrandChilds.forEach(observer => {
+      observer.next(this.color); // notify change to grandchild2
     });
   }
 

@@ -11,18 +11,21 @@ export class GrandChild2Component implements OnInit {
 
   constructor(private _compCommuService: ComponentCommunicationsService) { }
 
-  grandChild2Color: string = 'white'; 
+  grandChild2Color: string = 'white';
   white = true;
 
-  
+
   ngOnInit(): void {
 
-      // child => service => this grandchild2
-     this._compCommuService.observableChild.subscribe(
-      (color : string )=> {
+    // child => service => this grandchild2
+    this._compCommuService.observableChild.subscribe(
+      (color: string) => {
         this.grandChild2Color = color;
+      },
+      (e) => {
+        console.log(e);
       }
-     );
+    );
   }
 
 
