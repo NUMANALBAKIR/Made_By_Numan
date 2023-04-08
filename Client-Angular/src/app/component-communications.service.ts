@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,16 +19,35 @@ export class ComponentCommunicationsService {
     }
   );
 
+  //-
+  subjectParent = new Subject<string>();
 
-  // child => this service => grandchild2
+  // this service => grandchild2
   turnBlue() {
 
-    this.color = 'blue';
+    if (this.color != 'blue') {
+      this.color = 'blue';
+    }
+    else {
+      this.color = 'white';
+    }
 
     this.obseversGrandChilds.forEach(observer => {
       observer.next(this.color); // notify change to grandchild2
     });
   }
 
+  // this service => both grandchilds
+  turnRed() {
+    if (this.color != 'red') {
+      this.color = 'red';
+    }
+    else {
+      this.color = 'white';
+    }
+
+    this.subjectParent.next(this.color);
+
+  }
 
 }

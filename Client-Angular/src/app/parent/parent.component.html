@@ -18,8 +18,18 @@
                 Send Color to Child as @Input:
                 <input type="color" id="childcolor" name="childcolor" [(ngModel)]="toChildColorValue">
             </h4>
+
+            <div>
+                <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
+                    (click)="TurnBothRed()">
+                    Turn both Grand-Childs Red using RxJS Subject
+                </button>
+            </div>
+
         </div>
-        
+
+
+
 
         <app-child [childColor]="toChildColorValue" (childsClickEmitter)="parentsMethod($event)">
         </app-child>

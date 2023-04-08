@@ -20,6 +20,15 @@
 
         <div>
             <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
+                (click)="toggleBothBlackWhite()">
+                Toggle both Grand-Children methods using @ViewChildren
+            </button>
+        </div>
+
+        <br>
+
+        <div>
+            <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
                 (click)="gc1.toggleBlackWhite()">
                 Toggle Grand-Child-1's method using @ViewChild
             </button>
@@ -28,18 +37,9 @@
         <br>
 
         <div>
-            <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
-                (click)="toggleBothBlackWhite()">
-                Toggle both Grand-Childs methods using @ViewChildren
-            </button>
-        </div>
-
-        <br>
-
-        <div>
             <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent" 
             (click)="TurnBlueGrandChild2()" >
-                Turn Grand-Child-2 Blue using Custom RxJS Obsevable Service
+                Turn Grand-Child-2 Blue using Custom RxJS Obsevable 
             </button>
         </div>
 

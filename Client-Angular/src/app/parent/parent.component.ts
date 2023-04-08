@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ComponentCommunicationsService } from '../component-communications.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-parent',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _compCommuService: ComponentCommunicationsService) { }
 
   parentColorValue: string = '';
   toChildColorValue: string = '';
@@ -19,5 +21,12 @@ export class ParentComponent implements OnInit {
   parentsMethod(event: any) {
     this.parentColorValue = event.parentColor;
   }
+
+
+  // parent => comp.Commu service=> both grandChilds
+  TurnBothRed(){
+    this._compCommuService.turnRed();
+  }
+
 
 }

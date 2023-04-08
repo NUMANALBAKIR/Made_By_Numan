@@ -1,20 +1,30 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ComponentCommunicationsService } from '../component-communications.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-grand-child',
   templateUrl: './grand-child.component.html',
   styleUrls: ['./grand-child.component.css']
 })
-export class GrandChildComponent implements OnInit {
+export class GrandChildComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  constructor(private _compCommuService: ComponentCommunicationsService) { }
 
-  
-  grandChildColor : string = 'white';
+
+  grandChildColor: string = 'white';
   white = true;
-
+  subscription = new Subscription();
 
   ngOnInit(): void {
+
+    this.subscription =
+      this._compCommuService.subjectParent.subscribe(
+        (color) => {
+          this.grandChildColor = color;
+        }
+      );
+
   }
 
 
@@ -28,4 +38,8 @@ export class GrandChildComponent implements OnInit {
     }
   }
 
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }
