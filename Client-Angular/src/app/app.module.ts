@@ -17,6 +17,7 @@ import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
 import { GrandChildComponent } from './grand-child/grand-child.component';
 import { GrandChild2Component } from './grand-child2/grand-child2.component';
+import { GrandChild3Component } from './grand-child3/grand-child3.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { GrandChild2Component } from './grand-child2/grand-child2.component';
     ParentComponent,
     ChildComponent,
     GrandChildComponent,
-    GrandChild2Component
+    GrandChild2Component,
+    GrandChild3Component
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,9 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { GrandChildComponent } from '../grand-child/grand-child.component';
 import { GrandChild2Component } from '../grand-child2/grand-child2.component';
 import { StudentsService } from '../students.service';
 import { ComponentCommunicationsService } from '../component-communications.service';
+import { GrandChild3Component } from '../grand-child3/grand-child3.component';
 
 
 @Component({
@@ -10,9 +11,10 @@ import { ComponentCommunicationsService } from '../component-communications.serv
   templateUrl: './child.component.html',
   styleUrls: ['./child.component.css']
 })
-export class ChildComponent implements OnInit {
+export class ChildComponent implements OnInit,AfterContentInit {
 
   constructor(private _compCommuService: ComponentCommunicationsService) { }
+
 
   @Input('childColor') childColor: string = '';
   colorForGrandChild: string = '';
@@ -22,11 +24,19 @@ export class ChildComponent implements OnInit {
   @ViewChild('gc2') gc2: GrandChild2Component = {} as GrandChild2Component;
   @ViewChildren('gcs') gcs = {} as QueryList<GrandChildComponent>;
 
+  @ContentChild('grandChild3FromParent') grandChild3FromParent = {} as GrandChild3Component;
+
 
   ngOnInit(): void {
+    this.grandChild3FromParent.grandChild3Color = 'green';
+
   }
 
 
+  ngAfterContentInit(): void {
+    
+  }
+  
   // Emit Output to its parent
   onClickToParent(event: any) {
     this.childsClickEmitter.emit({
@@ -35,7 +45,7 @@ export class ChildComponent implements OnInit {
     });
   }
 
-  
+
   // viewchildren
   toggleBothBlackWhite() {
     let gcsArr = this.gcs.toArray();
@@ -50,6 +60,10 @@ export class ChildComponent implements OnInit {
     this._compCommuService.turnBlue();
   }
 
+
+  getGC3Color(){
+    this.childColor = this.grandChild3FromParent.grandChild3Color;
+  }
 
 
 }

@@ -26,12 +26,25 @@
                 </button>
             </div>
 
+            <br>
+
+            <!-- <div>
+                <button #thisButtonRef type="button" class="btn btn-primary" (click)="ToggleParent()" style="background-color:violet">
+                    Togggle this button color using ElementRef
+                </button>
+            </div> -->
+
+
+
+            <app-child [childColor]="toChildColorValue" (childsClickEmitter)="parentsMethod($event)">
+
+                <!-- content from parent -->
+                <app-grand-child3 #grandChild3FromParent >
+                </app-grand-child3>
+
+            </app-child>
+
         </div>
 
-
-
-
-        <app-child [childColor]="toChildColorValue" (childsClickEmitter)="parentsMethod($event)">
-        </app-child>
     </div>
 </div>

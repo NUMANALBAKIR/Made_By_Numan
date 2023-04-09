@@ -21,7 +21,7 @@
         <div>
             <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
                 (click)="toggleBothBlackWhite()">
-                Toggle both Grand-Children methods using @ViewChildren
+                Toggle Grand-Children 1+2 methods using @ViewChildren
             </button>
         </div>
 
@@ -34,6 +34,15 @@
             </button>
         </div>
 
+        <br>
+
+        <div>
+            <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
+                (click)="getGC3Color()">
+                Get Grand-Child-3 color using @ContentChild
+            </button>
+        </div>
+        
         <br>
 
         <div>
@@ -55,6 +64,10 @@
             <app-grand-child2 #gcs #gc2>
             </app-grand-child2>
         </div>
+        
+        <ng-content>
+        </ng-content>
+
     </div>
 
 </div>

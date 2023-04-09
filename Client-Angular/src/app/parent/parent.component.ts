@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { ComponentCommunicationsService } from '../component-communications.service';
 import { Subscription } from 'rxjs';
 
@@ -14,6 +14,10 @@ export class ParentComponent implements OnInit {
   parentColorValue: string = '';
   toChildColorValue: string = '';
 
+
+  // thisButtonRef = {} as ElementRef<HTMLButtonElement>; 
+
+
   ngOnInit(): void {
   }
 
@@ -28,5 +32,20 @@ export class ParentComponent implements OnInit {
     this._compCommuService.turnRed();
   }
 
+
+  // ToggleParent(){
+
+  //   let buttonColor = this.thisButtonRef.nativeElement.style.background;
+
+  //   if (buttonColor != 'black'){
+  //     buttonColor = 'black'; 
+  //   }else{
+  //     buttonColor = 'white';
+  //   }
+  // }
+
+  // @HostListener('mouseenter') onMouseEnter() { //SEE HERE
+  //   this.thisButtonRef.nativeElement.style.color = 'blue';
+  // }
 
 }
