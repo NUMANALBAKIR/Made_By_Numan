@@ -12,7 +12,6 @@ import { AgeValidatorDirective } from './age-validator.directive';
 import { GenderCountryValidatorDirective } from './gender-country-validator.directive';
 import { StudentIdUniqueValidatorDirective } from './student-id-unique-validator.directive';
 import { BadgesComponent } from './badges/badges.component';
-import { StudentComponent } from './admin/student/student.component';
 import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
 import { GrandChildComponent } from './grand-child/grand-child.component';

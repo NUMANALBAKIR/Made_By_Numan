@@ -22,16 +22,17 @@
             <div>
                 <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
                     (click)="TurnBothRed()">
-                    Turn both Grand-Childs Red using RxJS Subject
+                    Turn both Grand-Children Red using RxJS Subject
                 </button>
             </div>
 
             <br>
 
+            <!-- not working -->
             <!-- <div>
-                <button #thisButtonRef type="button" class="btn btn-primary" (click)="ToggleParent()" style="background-color:violet">
-                    Togggle this button color using ElementRef
-                </button>
+                This text was set using ElementRef.
+                <input type="text" #h1Ref>
+                <button type="button" (click)="setInput()" class="btn btn-primary" >change input</button>
             </div> -->
 
 

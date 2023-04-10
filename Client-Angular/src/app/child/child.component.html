@@ -42,13 +42,13 @@
                 Get Grand-Child-3 color using @ContentChild
             </button>
         </div>
-        
+
         <br>
 
         <div>
-            <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent" 
-            (click)="TurnBlueGrandChild2()" >
-                Turn Grand-Child-2 Blue using Custom RxJS Obsevable 
+            <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
+                (click)="TurnBlueGrandChild2()">
+                Turn Grand-Child-2 Blue using Custom RxJS Obsevable
             </button>
         </div>
 
@@ -64,8 +64,9 @@
             <app-grand-child2 #gcs #gc2>
             </app-grand-child2>
         </div>
-        
+
         <ng-content>
+
         </ng-content>
 
     </div>

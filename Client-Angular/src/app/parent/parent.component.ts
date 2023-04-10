@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ComponentCommunicationsService } from '../component-communications.service';
 import { Subscription } from 'rxjs';
 
@@ -15,37 +15,28 @@ export class ParentComponent implements OnInit {
   toChildColorValue: string = '';
 
 
-  // thisButtonRef = {} as ElementRef<HTMLButtonElement>; 
+  @ViewChild('h1Ref') h1Ref = {} as ElementRef<HTMLInputElement>;
 
 
   ngOnInit(): void {
   }
-
+  
   // receive emitter upon child button click 
   parentsMethod(event: any) {
     this.parentColorValue = event.parentColor;
   }
-
-
+  
+  
   // parent => comp.Commu service=> both grandChilds
   TurnBothRed(){
     this._compCommuService.turnRed();
   }
 
-
-  // ToggleParent(){
-
-  //   let buttonColor = this.thisButtonRef.nativeElement.style.background;
-
-  //   if (buttonColor != 'black'){
-  //     buttonColor = 'black'; 
-  //   }else{
-  //     buttonColor = 'white';
-  //   }
-  // }
-
-  // @HostListener('mouseenter') onMouseEnter() { //SEE HERE
-  //   this.thisButtonRef.nativeElement.style.color = 'blue';
+// not working
+  // setInput(){
+  //   debugger;
+  //   let thisElement = this.h1Ref.nativeElement;
+  //   thisElement.innerText = 'This text was set using ElementRef.';
   // }
 
 }
