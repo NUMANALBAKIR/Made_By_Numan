@@ -1,4 +1,5 @@
 using API_Angular;
+using API_Angular.Controllers;
 using API_Angular.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -11,6 +12,8 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(connectionString);
 });
+
+builder.Services.AddScoped<ISubjectsAPIController, SubjectsAPIController>();
 
 builder.Services.AddControllers();
 

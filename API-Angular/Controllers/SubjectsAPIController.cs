@@ -2,128 +2,122 @@
 using API_Angular.Models.StudentCRUD;
 using API_Angular.Models.StudentCRUDDTOs;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace API_Angular.Controllers
+namespace API_Angular.Controllers;
+
+
+[Route("api/[controller]")]
+[ApiController]
+public class SubjectsAPIController : ControllerBase, ISubjectsAPIController
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class SubjectsAPIController : ControllerBase
+    private readonly AppDbContext _context;
+    private readonly IMapper _mapper;
+
+
+    public SubjectsAPIController(AppDbContext context, IMapper mapper)
     {
-        private readonly AppDbContext _context;
-        private readonly IMapper _mapper;
+        _context = context;
+        _mapper = mapper;
+
+    }
 
 
-        public SubjectsAPIController(AppDbContext context, IMapper mapper)
+    // GET: api/SubjectsAPI
+    // Get All subjects of this StudentId
+    [HttpGet]
+    public async Task<List<SubjectDTO>> GetSubjects(int StudentId)
+    {
+        var subjects = await _context.Subjects
+        .Where(x => x.StudentId == StudentId)
+        .ToListAsync();
+
+        var list = _mapper.Map<List<SubjectDTO>>(subjects);
+
+        return list;
+    }
+
+
+    // GET: api/SubjectsAPI/5
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Subject>> GetSubject(int id)
+    {
+        var subject = await _context.Subjects.FindAsync(id);
+
+        if (subject == null)
         {
-            _context = context;
-            _mapper = mapper;
-
+            return NotFound();
         }
 
+        return subject;
+    }
 
-        // GET: api/SubjectsAPI
-        // Get All subjects of this StudentId
-        [HttpGet]
-        public async Task<List<SubjectDTO>> GetSubjects(int StudentId)
+    // PUT: api/SubjectsAPI/5
+    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutSubject(int id, SubjectUpdateDTO updateDto)
+    {
+
+        Subject subject = _mapper.Map<Subject>(updateDto);
+
+        if (id != subject.SubjectId)
         {
-            var subjects = await _context.Subjects
-            .Where(x => x.StudentId == StudentId)
-            .ToListAsync();
-
-            var list = _mapper.Map<List<SubjectDTO>>(subjects);
-
-            return list;
+            return BadRequest();
         }
 
+        _context.Entry(subject).State = EntityState.Modified;
 
-        // GET: api/SubjectsAPI/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Subject>> GetSubject(int id)
+        try
         {
-            var subject = await _context.Subjects.FindAsync(id);
-
-            if (subject == null)
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!SubjectExists(id))
             {
                 return NotFound();
             }
-
-            return subject;
-        }
-
-        // PUT: api/SubjectsAPI/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSubject(int id, SubjectUpdateDTO updateDto)
-        {
-
-            Subject subject = _mapper.Map<Subject>(updateDto);
-
-            if (id != subject.SubjectId)
+            else
             {
-                return BadRequest();
+                throw;
             }
-
-            _context.Entry(subject).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SubjectExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
         }
 
-        // POST: api/SubjectsAPI
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Subject>> PostSubject(SubjectCreateDTO createDto)
+        return NoContent();
+    }
+
+    // POST: api/SubjectsAPI
+    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [HttpPost]
+    public async Task<ActionResult<Subject>> PostSubject(SubjectCreateDTO createDto)
+    {
+
+        Subject subject = _mapper.Map<Subject>(createDto);
+        _context.Subjects.Add(subject);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction("GetSubject", new { id = subject.SubjectId }, subject);
+    }
+
+    // DELETE: api/SubjectsAPI/5
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteSubject(int id)
+    {
+        var subject = await _context.Subjects.FindAsync(id);
+        if (subject == null)
         {
-
-            Subject subject = _mapper.Map<Subject>(createDto);
-            _context.Subjects.Add(subject);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetSubject", new { id = subject.SubjectId }, subject);
+            return NotFound();
         }
 
-        // DELETE: api/SubjectsAPI/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSubject(int id)
-        {
-            var subject = await _context.Subjects.FindAsync(id);
-            if (subject == null)
-            {
-                return NotFound();
-            }
+        _context.Subjects.Remove(subject);
+        await _context.SaveChangesAsync();
 
-            _context.Subjects.Remove(subject);
-            await _context.SaveChangesAsync();
+        return NoContent();
+    }
 
-            return NoContent();
-        }
-
-        private bool SubjectExists(int id)
-        {
-            return _context.Subjects.Any(e => e.SubjectId == id);
-        }
+    private bool SubjectExists(int id)
+    {
+        return _context.Subjects.Any(e => e.SubjectId == id);
     }
 }

@@ -12,7 +12,7 @@ namespace API.Controllers;
 [ApiController]
 public class CategoriesAPIController : ControllerBase
 {
-    protected APIResponse _response;
+    protected IAPIResponse _response;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
@@ -20,7 +20,8 @@ public class CategoriesAPIController : ControllerBase
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
-        _response = new APIResponse();
+        _response = Factory.NewAPIResponse();
+
     }
 
 

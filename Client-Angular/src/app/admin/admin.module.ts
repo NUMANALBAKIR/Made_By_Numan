@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteStudentComponent } from './delete-student/delete-student.component';
 import { StudentComponent } from './student/student.component';
+import { ToUpperPipe } from './to-upper.pipe';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { StudentComponent } from './student/student.component';
     AddStudentComponent,
     EditStudentComponent,
     DeleteStudentComponent,
-    StudentComponent
+    StudentComponent,
+    ToUpperPipe
   ],
   imports: [
     CommonModule,

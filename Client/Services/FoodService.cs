@@ -10,7 +10,7 @@ public class FoodService : BaseService, IFoodService
 
     public FoodService(IConfiguration configuration, IHttpClientFactory httpClientFactory) : base(httpClientFactory)
     {
-        _APIUrl = configuration.GetValue<string>("ServiceUrls:APIUrl");
+        _APIUrl = configuration.GetValue<string>("ServiceUrls:APIUrl"); // returned is <string>
     }
 
     public Task<T> CreateAsync<T>(FoodCreateDTO dto, string token)

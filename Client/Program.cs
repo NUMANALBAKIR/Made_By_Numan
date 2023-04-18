@@ -13,6 +13,7 @@ builder.Services.AddControllersWithViews();
 
 // needed for identity
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(connectionString);
@@ -60,7 +61,6 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     //options.LoginPath = $"/Identity/Account/Login";
     options.LoginPath = $"/Identity/Account/Register";
-
     options.LogoutPath = $"/Identity/Account/Logout";
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 });

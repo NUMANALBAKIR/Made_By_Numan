@@ -1,6 +1,7 @@
 using API;
 using API.Data;
 using API.DatabaseInitializer;
+using API.Models;
 using API.Repository;
 using API.Repository.IRepository;
 using Microsoft.OpenApi.Models;
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to container.
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(connectionString);

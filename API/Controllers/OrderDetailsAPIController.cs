@@ -11,7 +11,7 @@ namespace API.Controllers;
 [ApiController]
 public class OrderDetailsAPIController : ControllerBase
 {
-    protected APIResponse _response;
+    protected IAPIResponse _response;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
@@ -19,7 +19,8 @@ public class OrderDetailsAPIController : ControllerBase
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
-        _response = new APIResponse();
+        _response = Factory.NewAPIResponse();
+
     }
 
 

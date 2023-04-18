@@ -2,7 +2,6 @@
 using API_Angular.Models.StudentCRUD;
 using API_Angular.Models.StudentCRUDDTOs;
 using AutoMapper;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,13 +17,13 @@ public class StudentsAPIController : ControllerBase
 {
     private readonly AppDbContext _context;
     private readonly IMapper _mapper;
-    private readonly SubjectsAPIController _subjectsAPIController;
+    private readonly ISubjectsAPIController _subjectsAPIController;
 
-    public StudentsAPIController(AppDbContext context, IMapper mapper)
+    public StudentsAPIController(AppDbContext context, IMapper mapper, ISubjectsAPIController subjectsAPIController)
     {
         _mapper = mapper;
         _context = context;
-        _subjectsAPIController = new SubjectsAPIController(_context, _mapper);
+        _subjectsAPIController = subjectsAPIController;
     }
 
 
@@ -140,11 +139,11 @@ public class StudentsAPIController : ControllerBase
         {
             try
             {
-                await _subjectsAPIController.PutSubject(subjectUpdateDto.SubjectId, subjectUpdateDto);                
+                await _subjectsAPIController.PutSubject(subjectUpdateDto.SubjectId, subjectUpdateDto);
             }
             catch (NullReferenceException)
             {
-                var createDto =_mapper.Map<SubjectCreateDTO>(subjectUpdateDto);
+                var createDto = _mapper.Map<SubjectCreateDTO>(subjectUpdateDto);
                 await _subjectsAPIController.PostSubject(createDto);
             }
         }

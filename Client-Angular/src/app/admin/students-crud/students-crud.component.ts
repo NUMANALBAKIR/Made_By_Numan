@@ -39,7 +39,7 @@ export class StudentsCRUDComponent implements OnInit {
         console.log(error);
       }
     );
-    
+
   }
 
 
@@ -48,7 +48,7 @@ export class StudentsCRUDComponent implements OnInit {
     event.target.remove();
   }
 
-  
+
   onUpdateClick(event: any, studentId: number) {
     this.studentsService.studentIdPassed = studentId;
   }
@@ -66,7 +66,7 @@ export class StudentsCRUDComponent implements OnInit {
       }
     );
 
-    //needed
+    //  needed
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
@@ -85,8 +85,8 @@ export class StudentsCRUDComponent implements OnInit {
     );
   }
 
-  
-  onCancelClick(){
+
+  onCancelClick() {
     $("#crossIcon").trigger("click");
   }
 

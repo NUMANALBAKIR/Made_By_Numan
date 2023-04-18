@@ -202,10 +202,10 @@
                 <hr />
 
                 A suitable constructor for type 'Made_By_Numan.Client.Services.FoodService' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.
-                <br />=> sequence below is important! add: 
-                builder.Services.AddHttpClient< IFoodService, FoodService>();
-                builder.Services.AddScoped< IFoodService, FoodService>();
-                FoodService ctor's param IHttpClientFactory needs to be registered before FoodService.
+                <br />=> sequence is important! add: 
+                <br />builder.Services.AddHttpClient< IFoodService, FoodService>();
+                <br />builder.Services.AddScoped< IFoodService, FoodService>();
+                <br />FoodService ctor's param IHttpClientFactory needs to be registered before FoodService.
 
                 <hr />
 

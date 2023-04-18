@@ -1,6 +1,4 @@
-﻿using API_Angular.Models.StudentCRUD;
-
-namespace API_Angular.Models.StudentCRUDDTOs;
+﻿namespace API_Angular.Models.StudentCRUDDTOs;
 
 public class StudentCreateDTO
 {
