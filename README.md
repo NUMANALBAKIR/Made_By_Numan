@@ -5,3 +5,5 @@ But, if you are a Job-Employer and would like to run my project, please let me k
 
 2. Projects 'Client' (ASP.NET Core MVC) and 'API' are complete. 
 Projects 'Client-Angular' and 'API-Angular' are incomplete, as currently under-development.
+
+3. I've implemented design patterns and principles in Project 'API'. So, I didn't implement those again in project 'API-Angular', to save time.
