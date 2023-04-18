@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <h4>
-                Below are about 50 Errors and their solutions that I found when developing. I learn errors; Learning errors help me fix future-errors quickly. (Legend: => means solution).
+                Below are about <b>50</b> Errors and their solutions that I found when developing. I learn errors; Learning errors help me fix future-errors quickly. (Legend: => means solution).
             </h4>
         </div>
     </div>
@@ -275,6 +275,79 @@
 
                 not showing 'using' of a class => check namespace of that class.
                 <hr />
+
+<!-- below Added on 18 apr -->
+
+                            vscode migration command error:
+                            <br /> "Could not execute because the specified command or file was not found. Possible reasons for this include:
+                            <br /> * You misspelled a built-in dotnet command.
+                            <br /> * You intended to execute a .NET program, but dotnet-ef does not exist.
+                            <br /> * You intended to run a global tool, but a dotnet-prefixed executable with this name could not be found on the PATH."
+                            <br /> =>  for .net7, do: dotnet tool install --global dotnet-ef
+                            <br /> for .net6 do: dotnet tool install --global dotnet-ef --version 6...
+
+                            <hr />
+
+                            Type 'number' is not assignable to type 'NumberConstructor'.ts(2322)
+                            => write like: let num: number  = 3;
+
+                            <hr />
+
+                            An argument for 'controls' was not provided
+                            => initialize like, myArr: new FormArray([])
+
+                            <hr />
+
+                            Property 'controls' does not exist on type 'AbstractControl'
+                            <br />  => need to typecast to < FormArray>
+                                , which has controls.
+                            <br />      in .ts add method- get formArr() { return < FormArray> this.myform.get('formArrName'); }
+                            <br />        in.html- < div *ngFor="let item of formArr.controls">
+
+                                <hr />
+
+
+                                        "Object is possibly 'null'.ngtsc(2531)" in "formReactive.get('name').invalid"
+                            <br /> => do, formReactive.get('name')?.invalid
+                            <br /> Or, read https://www.angularjswiki.com/angular/object-is-possibly-null-error-fix/
+
+                                <hr />
+
+                                        "formGroup: FormGroup" shows error: "Type '(formGroup: FormGroup) => ValidationErrors | null' is not assignable to type 'ValidatorFn'. Types of parameters 'formGroup' and 'control' are incompatible. Type 'AbstractControl' is missing the following properties from type 'FormGroup': controls, registerControl, addControl, removeControl, and 3 more.ts(2322)"
+                            <br /> => error because ValidatorFn works with controls. so do, "formGroup: AbstractControl"
+
+                                <hr />
+
+                                        "this.updateFormReactve as StudentUpdateDTO" shows error: Conversion of type 'FormGroup' to type 'StudentUpdateDTO' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first. Type 'FormGroup' is missing the following properties from type 'StudentUpdateDTO': studentId, name, dateOfBirth, passed, and 3 more.ts(2352)
+                            <br /> => do, this.updateFormReactve.value as StudentUpdateDTO
+
+                                <hr />
+
+                                                                                    @@ViewChild initializer error on Angular 13. "Property 'viewChild1' has no initializer and is not definitely assigned in the constructor.ts(2564)"
+                            <br /> => (I like), @@ViewChild('child') child: ChildComponent = {} as ChildComponent;
+                            <br /> Or, @@ViewChild('child') child: ChildComponent = {} as ElementRef;
+                            <br /> Or, (not sure) @@ViewChild('child') child: ChildComponent = new ChildComponent;
+
+                                <hr />
+
+                                        '...' is deprecated.ts(6385)
+                                        => hover to show popup, ctrl+click to link takes to hints
+
+                                <hr />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             </h4>
         </div>
