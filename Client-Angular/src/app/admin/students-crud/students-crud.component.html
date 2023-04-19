@@ -57,7 +57,8 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let student of students | filter: searchBy: searchText ; let i = index" [ngClass]="{'border border-danger': !student.passed}">
+            <tr *ngFor="let student of students | filter: searchBy: searchText ; let i = index"
+                [ngClass]="{'border border-danger': !student.passed}">
                 <td>{{student.studentId}}</td>
                 <th>{{student.name }}</th>
                 <td>{{student.dateOfBirth | date}}</td>
