@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteStudentComponent } from './delete-student/delete-student.component';
 import { StudentComponent } from './student/student.component';
 import { ToUpperPipe } from './to-upper.pipe';
+import { FilterPipe } from './filter.pipe';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ToUpperPipe } from './to-upper.pipe';
     EditStudentComponent,
     DeleteStudentComponent,
     StudentComponent,
-    ToUpperPipe
+    ToUpperPipe,
+    FilterPipe
   ],
   imports: [
     CommonModule,

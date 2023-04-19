@@ -39,18 +39,27 @@ public class StudentsAPIController : ControllerBase
         if (searchBy == "Name".ToLower())
         {
             students = _context.Students
-            // .Include(x=> x.Subjects)
             .Where(x => x.Name.ToLower().Contains(searchText))
+            .ToList();
+        }      
+        else if (searchBy == "country".ToLower())
+        {
+           students = _context.Students
+           .Include(x=> x.Country)
+           .Where(x => x.Country.Name.ToLower().Contains(searchText))
+           .ToList();
+        }
+        else if (searchBy == "passed".ToLower())
+        {
+            students = _context.Students
+            .Where(x => x.Passed.ToString().Contains(searchText))
             .ToList();
         }
 
-        //else if (searchBy == "Passed".ToLower())
-        //{
-        //    students = _context.Students
-        //    // .Include(x=> x.Subjects)
-        //    .Where(x => x.Passed.ToString() == searchText))
-        //    .ToList();
-        //}
+
+
+
+
 
         var list = students.Select(x => _mapper.Map<StudentDTO>(x)).ToList();
 

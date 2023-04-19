@@ -10,7 +10,7 @@ import { BadgesComponent } from './badges/badges.component';
 import { ParentComponent } from './parent/parent.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'componentcommunications', pathMatch: 'full' },
+  { path: '', redirectTo: 'studentscrud', pathMatch: 'full' },
   { path: 'about', component: AboutComponent },
   { path: 'studentscrud', component: StudentsCRUDComponent },
   { path: 'addstudent', component: AddStudentComponent },
@@ -19,7 +19,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'badges', component: BadgesComponent },
   { path: 'componentcommunications', component: ParentComponent }
-
 
 ];
 

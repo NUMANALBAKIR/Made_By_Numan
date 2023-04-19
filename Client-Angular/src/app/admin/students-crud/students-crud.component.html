@@ -22,7 +22,7 @@
             <label for="searchByDropdown">Select Search Category:</label>
             <select class="form-control" id="searchByDropdown" name="searchBy" [(ngModel)]="searchBy">
                 <option value="name">Student Name</option>
-                <option value="dateOfBirth">Date of Birth</option>
+                <option value="country">Country</option>
                 <option value="passed">Pass / Fail</option>
             </select>
         </div>
@@ -57,7 +57,7 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let student of students; let i = index" [ngClass]="{'border border-danger': !student.passed}">
+            <tr *ngFor="let student of students | filter: searchBy: searchText ; let i = index" [ngClass]="{'border border-danger': !student.passed}">
                 <td>{{student.studentId}}</td>
                 <th>{{student.name }}</th>
                 <td>{{student.dateOfBirth | date}}</td>
