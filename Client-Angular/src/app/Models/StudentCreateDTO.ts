@@ -13,9 +13,6 @@ export class StudentCreateDTO {
 
   subjects: Subject[];
 
-  // subjectsListId: number | any;
-  // subjectsList: SubjectsList | any;
-
   constructor() {
     this.studentId = null;
     this.name = null;
@@ -27,8 +24,6 @@ export class StudentCreateDTO {
 
     this.subjects = [];
 
-    // this.subjectsListId = null;
-    // this.subjectsList = new SubjectsList();
   }
 
 }

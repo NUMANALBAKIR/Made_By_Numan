@@ -12,11 +12,13 @@ import { StudentDTO } from './Models/StudentDTO';
 )
 export class StudentsService {
 
-  private _apiUrl: string = 'http://localhost:5091/api/StudentsAPI';
-  public studentIdPassed: number = 0;
+  private _apiUrl: string;
+  studentIdPassed: number;
 
 
   constructor(private httpClient: HttpClient) {
+    this._apiUrl = 'http://localhost:5091/api/StudentsAPI';
+    this.studentIdPassed = 0;
   }
 
 

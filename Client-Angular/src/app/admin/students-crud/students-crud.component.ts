@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Country } from 'src/app/country';
 import { Student } from 'src/app/Student';
 import { StudentsService } from 'src/app/students.service';
-import { SubjectsList } from 'src/app/subjects-list';
 import * as $ from 'jquery';
 import { StudentDTO } from 'src/app/Models/StudentDTO';
 
@@ -14,21 +13,25 @@ import { StudentDTO } from 'src/app/Models/StudentDTO';
 })
 export class StudentsCRUDComponent implements OnInit {
 
-  constructor(
-    private studentsService: StudentsService,
-    private router: Router) {
+  i: number;
+  searchBy: string;
+  searchText: string;
+  students: StudentDTO[];
+  countries: Country[];
+  showSpinner: boolean;
+
+
+  constructor(private studentsService: StudentsService, private router: Router) {
+    this.i = 0;
+    this.searchBy = 'name';
+    this.searchText = '';
+    this.students = [];
+    this.countries = [];
+    this.showSpinner = true;
   }
 
-  i: number = 0;
-  searchBy: string = 'name';
-  searchText: string = '';
-  students: StudentDTO[] = [];
-  countries: Country[] = [];
-  subjectsLists: SubjectsList[] = [];
-  showSpinner: boolean = true;
 
   ngOnInit(): void {
-    // debugger;
     // get and set list of students
     this.studentsService.getStudents().subscribe(
       (response: StudentDTO[]) => {
@@ -38,8 +41,9 @@ export class StudentsCRUDComponent implements OnInit {
       (error) => {
         console.log(error);
       }
-    );
-
+      );
+      
+      // debugger;
   }
 
 

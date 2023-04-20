@@ -21,6 +21,8 @@ export class FilterPipe implements PipeTransform {
 
     for (let student of studentsArr) {
 
+      // debugger;
+
       let valueToCompare = String(student[searchBy]).toLowerCase();
 
       if (valueToCompare.indexOf(searchText) != -1) {

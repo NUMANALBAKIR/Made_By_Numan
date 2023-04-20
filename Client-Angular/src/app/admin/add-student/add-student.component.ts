@@ -19,18 +19,25 @@ Template Driven Form
 })
 export class AddStudentComponent implements OnInit {
 
-  @ViewChild('newForm') newForm: NgForm | any = null;
+
+  @ViewChild('newStudentForm') newStudentForm: NgForm | any;
+  studentCreateDTO: StudentCreateDTO;
+  countries: Country[];
+  currYear: number;
+  genders: string[];     // for dynamic radio buttons
 
 
   constructor(
     private studentsService: StudentsService,
     private countriesService: CountriesService,
     private location: Location
-  ) { }
-
-  studentCreateDTO: StudentCreateDTO = new StudentCreateDTO();
-  countries: Country[] = [];
-  currYear: number = new Date().getFullYear(); 
+  ) {
+    this.newStudentForm = null;
+    this.studentCreateDTO = new StudentCreateDTO();
+    this.countries = [];
+    this.currYear = new Date().getFullYear();
+    this.genders = ['Female', 'Male', 'Other'];
+  }
 
 
   ngOnInit(): void {
@@ -47,26 +54,26 @@ export class AddStudentComponent implements OnInit {
 
   }
 
-  onConfirmClick() {
-    // debugger;
+  onSubmitClick() {
+    debugger;
 
-    if (this.newForm.valid) {
+    if (this.newStudentForm.valid) {
       this.studentsService.addStudent(this.studentCreateDTO).subscribe(
         (r: Student) => {
-  
+
         },
         (e) => {
           console.log(e);
         }
       );
-  
-      this.location.back();      
+
+      this.location.back();
     }
   }
 
 
-  onResetClick(){
-    this.newForm.resetForm();
+  onResetClick() {
+    this.newStudentForm.resetForm();
   }
 
 }

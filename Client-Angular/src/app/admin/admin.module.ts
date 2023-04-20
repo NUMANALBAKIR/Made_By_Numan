@@ -6,8 +6,6 @@ import { AddStudentComponent } from './add-student/add-student.component';
 import { EditStudentComponent } from './edit-student/edit-student.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DeleteStudentComponent } from './delete-student/delete-student.component';
-import { StudentComponent } from './student/student.component';
 import { ToUpperPipe } from './to-upper.pipe';
 import { FilterPipe } from './filter.pipe';
 
@@ -18,8 +16,6 @@ import { FilterPipe } from './filter.pipe';
     StudentsCRUDComponent,
     AddStudentComponent,
     EditStudentComponent,
-    DeleteStudentComponent,
-    StudentComponent,
     ToUpperPipe,
     FilterPipe
   ],

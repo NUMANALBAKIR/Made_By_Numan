@@ -29,17 +29,19 @@ export class EditStudentComponent implements OnInit {
     private customValidatorsService: CustomValidatorsService,
     private formBuilder: FormBuilder,
     private router: Router
-
-
   ) {
+    this.studentId = this.studentsService.studentIdPassed;
+    this.countries = [];
+    this.genders = ['Female', 'Male', 'Other'];
+    this.studentUpdateDTO = new StudentUpdateDTO();
+    this.submitted = false;
   }
 
-
-  studentId: number = 1;
-  // studentId: number = this.studentsService.studentIdPassed;
-  countries: Country[] = [];
-  genders: string[] = ['Female', 'Male', 'Other'];  // for dynamic radio buttons
-  studentUpdateDTO: StudentUpdateDTO = new StudentUpdateDTO();
+  studentId: number;
+  countries: Country[];
+  genders: string[]; // for dynamic radio buttons
+  studentUpdateDTO: StudentUpdateDTO;
+  submitted: boolean;
 
   // way 1. (validators like ways 2 below can also be applied here.)
   // updateFormReactve: FormGroup = new FormGroup({
@@ -68,11 +70,9 @@ export class EditStudentComponent implements OnInit {
       ]
     });
 
-  submitted = false;
-
 
   ngOnInit() {
-    
+
     // get, set countries list by id
     this.countriesService.getCountries().subscribe(
       (response: Country[]) => {
@@ -81,9 +81,9 @@ export class EditStudentComponent implements OnInit {
       (e) => {
         console.log(e);
       }
-      );
+    );
 
-      // get, set student info by id
+    // get, set student info by id
     this.studentsService.getStudent(this.studentId).subscribe(
       (response: StudentDTO) => {
         this.studentUpdateDTO = response;
@@ -94,7 +94,7 @@ export class EditStudentComponent implements OnInit {
     );
 
     this.updateFormReactve.reset();
-    
+
     // wait for service responses and then populate.
     setTimeout(() => {
       this.populateForm();

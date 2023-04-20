@@ -14,8 +14,6 @@ export class StudentUpdateDTO {
 
   subjects: Subject[];
 
-  // subjectsListId: number | any;
-  // subjectsList: SubjectsList | any;
 
   constructor() {
     this.studentId = null;
@@ -28,8 +26,6 @@ export class StudentUpdateDTO {
 
     this.subjects = [];
 
-    // this.subjectsListId = null;
-    // this.subjectsList = new SubjectsList();
   }
 
 }

@@ -42,11 +42,11 @@ public class StudentsAPIController : ControllerBase
             .Where(x => x.Name.ToLower().Contains(searchText))
             .ToList();
         }      
-        else if (searchBy == "country".ToLower())
+        else if (searchBy == "gender".ToLower())
         {
            students = _context.Students
            .Include(x=> x.Country)
-           .Where(x => x.Country.Name.ToLower().Contains(searchText))
+           .Where(x => x.Gender.ToString().Contains(searchText))
            .ToList();
         }
         else if (searchBy == "passed".ToLower())

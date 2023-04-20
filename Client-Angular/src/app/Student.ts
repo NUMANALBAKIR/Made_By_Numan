@@ -12,12 +12,9 @@ export class Student {
   countryId: number | any;    // cli...
   country: Country;     // cli...
 
-  // subjects: Subject[];
-
-
-  // subjectsListId: number | any;
-  // subjectsList: SubjectsList | any;
-
+  subjects: Subject[];
+ 
+  
   constructor() {
     this.studentId = null;
     this.name = null;
@@ -28,11 +25,8 @@ export class Student {
     this.countryId = null;
     this.country = new Country();
 
-    // this.subjects = [];
-
-
-    // this.subjectsListId = null;
-    // this.subjectsList = new SubjectsList();
+    this.subjects = [];
+ 
   }
 
 }
