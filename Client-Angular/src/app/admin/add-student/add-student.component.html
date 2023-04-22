@@ -1,8 +1,8 @@
 <br />
 
-<form #newStudentForm="ngForm" novalidate="novalidate" appGenderCountryValidator>
+<form #newStudentForm="ngForm" novalidate="novalidate" appGenderCountryValidator (ngSubmit)="onSubmitClick()">
     <div class="container border p-3">
-        <h3 class="text-primary">Add Student (Template Driven Form) -</h3>
+        <h3 class="text-primary">Create Student (Template Driven Form) -</h3>
         <hr />
 
         <div class="row">
@@ -12,7 +12,7 @@
                 <label for="studentId" class="control-label pt-2" style="font-size:20px;">Student Id:</label>
             </div>
             <div class="col-9 pb-3">
-                <input type="text" class="form-control" id="studentId" name="studentId" required="required"
+                <input type="text" class="form-control" id="studentId" name="studentId" required="required" 
                     pattern="^[0-9]*$" appStudentIdUniqueValidator [(ngModel)]="studentCreateDTO.studentId"
                     #newStudentId="ngModel"
                     [ngClass]="{'is-invalid': newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newStudentForm.submitted),                            
@@ -58,15 +58,14 @@
                     Name must contain at least 3 letters.</span>
             </div>
 
-
-
+ 
             <!-- dob -->
             <div class="col-3 pt-2">
                 <label for="dateOfBirth" class="control-label" style="font-size:20px;">Date Of Birth (please click
                     calender icon):</label>
             </div>
             <div class="col-9 pb-3">
-                <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
+                <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" appAgeValidator= {{currYear}} 
                     [(ngModel)]="studentCreateDTO.dateOfBirth" #newStudentDob="ngModel" required="required"
                     [ngClass]="{'is-invalid': newStudentDob.invalid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted),                            
                             'is-valid': newStudentDob.valid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted) }">
@@ -76,8 +75,8 @@
                     Date of Birth must be selected.</span>
 
                 <span class="text-danger"
-                    *ngIf="newStudentDob.invalid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted) && newStudentDob.errors?.hasminage">
-                    Age must be at least 7.</span>
+                    *ngIf="newStudentDob.invalid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted) && newStudentDob.errors?.correctAge">
+                    Age must be between 6 and 18.</span>
             </div>
 
 
@@ -113,7 +112,7 @@
                         ( Gender can't be blank.)</span>
 
                     <span class="text-danger"
-                        *ngIf="newStudentGender.invalid && (newStudentGender.dirty || newStudentGender.touched || newStudentForm.submitted) && newStudentGender.errors?.notBothOther">
+                        *ngIf="newStudentGender.invalid && (newStudentGender.dirty || newStudentGender.touched || newStudentForm.submitted) && newStudentGender.errors?.bothOther">
                         ( Both Gender and Country can't be 'Other'. )</span>
                 </div>
 
@@ -148,8 +147,8 @@
 
             <!-- buttons -->
             <div>
-                <button type="submit" (click)="onSubmitClick()"
-                    class="btn btn-success form-control mt-3 text-white">Submit</button>
+                <button type="submit" [disabled]="!newStudentForm.form.valid"
+                class="btn btn-success form-control mt-3 text-white">Submit</button>
 
                 <a type="button" routerLink="/studentscrud" class="btn btn-outline-primary form-control mt-3">Back to
                     List</a>
@@ -164,4 +163,4 @@
 
 
 
-For development purpose- {{studentCreateDTO | json}}
+For development purpose- {{ studentCreateDTO | json }}

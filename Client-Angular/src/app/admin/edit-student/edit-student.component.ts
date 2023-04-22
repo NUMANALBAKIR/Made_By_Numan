@@ -58,7 +58,7 @@ export class EditStudentComponent implements OnInit {
   updateFormReactve: FormGroup = this.formBuilder.group({
     studentId: [null, [Validators.required, Validators.pattern(/^[0-9]*$/)], [this.customValidatorsService.UniqueStudentId()], { updateOn: 'blur' }],
     name: [null, [Validators.required, Validators.minLength(3), Validators.pattern(/^[A-Za-z ]+$/)]],
-    dateOfBirth: [null, [Validators.required, this.customValidatorsService.minAge(7)]],
+    dateOfBirth: [null, [Validators.required, this.customValidatorsService.minAge(6, 18)]],
     passed: ['', [Validators.required]],
     gender: ['', [Validators.required]],
     countryId: [null, [Validators.required]],

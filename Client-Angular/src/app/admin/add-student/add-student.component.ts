@@ -20,7 +20,7 @@ Template Driven Form
 export class AddStudentComponent implements OnInit {
 
 
-  @ViewChild('newStudentForm') newStudentForm: NgForm | any;
+  @ViewChild('newStudentForm') newStudentForm: NgForm | any; // to access the form
   studentCreateDTO: StudentCreateDTO;
   countries: Country[];
   currYear: number;

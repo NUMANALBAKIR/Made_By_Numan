@@ -2,7 +2,9 @@ import { Directive, Input } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 
 /*
-Age cant be less than five.
+  custom vali  in Template Driven Form. 
+  Used in: Create Student.
+  Age must be between 6 and 18.
 */
 
 @Directive({
@@ -11,29 +13,29 @@ Age cant be less than five.
 })
 export class AgeValidatorDirective implements Validator {
 
-  constructor() { }
-
-  // @Input('appAgeValidator') n: string = '2023';
-
+  @Input('appAgeValidator') n: string ='';
+ 
   validate(control: AbstractControl): ValidationErrors | null {
 
-    debugger;
-
+    if (control.value == null) {
+      return null;
+    }
+ 
     let inputYear: string = control.value.substring(0, 4);
-    let currYear: string = '2023';
-    
-    let isValid = (currYear !== inputYear);
+    let currYear: string = this.n; 
 
-    let t = false;
-
-    // if (t) {
-    //   return null;
-    // } else {
-    //   return { correctAge: { valid: false } }; // errors.correctAge
-    // }
+    debugger;
     
-    return { correctAge: { valid: false } }; // errors.correctAge
+    let difference = Number(currYear) - Number(inputYear);
+
+    if (difference >= 6 && difference <= 18) {
+      return null;  // no errors
+    } else {
+      return { correctAge: { valid: false } }; // errors?.correctAge
+    }
   }
+
+
 
 
 }

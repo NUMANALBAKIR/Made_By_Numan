@@ -8,6 +8,9 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToUpperPipe } from './to-upper.pipe';
 import { FilterPipe } from './filter.pipe';
+import { GenderCountryValidatorDirective } from './gender-country-validator.directive';
+import { AgeValidatorDirective } from './age-validator.directive';
+import { StudentIdUniqueValidatorDirective } from './student-id-unique-validator.directive';
 
 
 @NgModule({
@@ -17,7 +20,12 @@ import { FilterPipe } from './filter.pipe';
     AddStudentComponent,
     EditStudentComponent,
     ToUpperPipe,
-    FilterPipe
+    FilterPipe,
+    GenderCountryValidatorDirective,
+    AgeValidatorDirective,
+    StudentIdUniqueValidatorDirective
+
+
   ],
   imports: [
     CommonModule,

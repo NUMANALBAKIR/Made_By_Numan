@@ -1,9 +1,15 @@
 import { Directive } from '@angular/core';
 import { AbstractControl, AsyncValidator, NG_ASYNC_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { StudentsService } from './students.service';
 import { map } from 'rxjs/operators';
-import { Student } from './Student';
+import { StudentsService } from '../students.service';
+import { Student } from '../Student';
+
+/*
+  async custom vali in Template Driven Form.
+  Used in: Create Student.
+  Student Id must not exist already.
+*/
 
 @Directive({
   selector: '[appStudentIdUniqueValidator]',
@@ -17,13 +23,13 @@ export class StudentIdUniqueValidatorDirective implements AsyncValidator {
 
     return this.studentsService.getStudent(control.value).pipe(map(
       (existing: Student) => {
-        
+
         debugger;
 
         if (existing == null) {
           return null; // no error
         } else {
-          return { uniqueId: { valid: false } };
+          return { uniqueStudentId: { valid: false } };
         }
 
       }
