@@ -12,7 +12,7 @@ export class Student {
   countryId: number | any;    // cli...
   country: Country;     // cli...
 
-  subjects: Subject[];
+  subjects: Subject[] | undefined;
  
   
   constructor() {

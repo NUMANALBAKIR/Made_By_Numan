@@ -1,6 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-// custom pipe
+/*
+  custom pipe.
+  Used in students-crud
+*/
+
 
 @Pipe({
   name: 'toUpperPipe'
@@ -12,7 +16,7 @@ export class ToUpperPipe implements PipeTransform {
     if (value == null) {
       return null;
     } else {
-      return value.toUpperCase() + ' (' + args[0] + args[1] + ' )';
+      return value.toUpperCase() + ' (' + args[0] + args[1] + ')';
     }
 
   }

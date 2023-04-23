@@ -70,20 +70,20 @@ export class CustomValidatorsService {
   }
 
 
-  // valid false if student id exists
+  // student id must exist. else error.
   public UniqueStudentId(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
 
       let id = control.value;
-      
+
       // debugger;
 
       return this._studentsService.getStudent(id)
         .pipe(map((response: StudentDTO | null) => {
-          
-          if (response != null ) {
+
+          if (response == null) {
             // control.setErrors({ uniqueStudentId: { valid: false } }); // optional in this case 
-            return { uniqueStudentId: { valid: false } }; 
+            return { studentIdExists: { valid: false } };
           }
           else {
             return null;

@@ -1,10 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Student } from '../Student';
 
-// complex custom pipe
+/*
+  complex custom pipe
+  Used in students-crud's *ngfor 
+*/
 
 @Pipe({
-  name: 'filter'
+  name: 'filter',
+  pure: false
 })
 export class FilterPipe implements PipeTransform {
 

@@ -28,8 +28,8 @@
                 </span>
 
                 <span class="text-danger"
-                    *ngIf="updateFormReactve.get('studentId')?.invalid && (updateFormReactve.get('studentId')?.dirty || updateFormReactve.get('studentId')?.touched || submitted) && updateFormReactve.get('studentId')?.errors?.uniqueStudentId">
-                Id already exists.
+                    *ngIf="updateFormReactve.get('studentId')?.invalid && (updateFormReactve.get('studentId')?.dirty || updateFormReactve.get('studentId')?.touched || submitted) && updateFormReactve.get('studentId')?.errors?.studentIdExists">
+                Id does not exist.
                 </span>
             </div>
 

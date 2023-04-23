@@ -151,11 +151,6 @@ export class EditStudentComponent implements OnInit {
 
     this.submitted = true;
 
-    // if (this.updateFormReactve.valid) {     
-    //   this.studentUpdateDTO = this.updateFormReactve.value as StudentUpdateDTO;
-    //   console.log(this.updateFormReactve);
-    // }
-
     if (this.updateFormReactve.valid) {
 
       this.studentUpdateDTO = this.updateFormReactve.value as StudentUpdateDTO;
