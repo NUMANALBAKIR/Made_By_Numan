@@ -2,7 +2,7 @@ import { Directive } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 
 /*
-  NOT working.
+  check if works
   cross field vali  in Template Driven Form. 
   Used in: Create Student.
   Gender, Country both can't be Other.

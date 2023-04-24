@@ -6,6 +6,7 @@ import { CountriesService } from 'src/app/countries.service';
 import { Student } from 'src/app/Student';
 import { StudentCreateDTO } from 'src/app/Models/StudentCreateDTO';
 import { NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 /*
 Template Driven Form
@@ -22,7 +23,7 @@ export class AddStudentComponent implements OnInit {
 
   @ViewChild('newStudentForm') newStudentForm: NgForm | any; // to access the form
   studentCreateDTO: StudentCreateDTO;
-  countries: Country[];
+  countries!: Observable<Country[]>;
   currYear: number;
   genders: string[];     // for dynamic radio buttons
 
@@ -34,7 +35,6 @@ export class AddStudentComponent implements OnInit {
   ) {
     this.newStudentForm = null;
     this.studentCreateDTO = new StudentCreateDTO();
-    this.countries = [];
     this.currYear = new Date().getFullYear();
     this.genders = ['Female', 'Male', 'Other'];
   }
@@ -42,22 +42,13 @@ export class AddStudentComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // get and set list of countries
-    this.countriesService.getCountries().subscribe(
-      (response: Country[]) => {
-        this.countries = response;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-
-
+    // get, set list using async pipe bcoz no processing needed.
+    this.countries = this.countriesService.getCountries();
   }
 
   onSubmitClick() {
     
-    debugger;
+    // debugger;
 
     if (this.newStudentForm.valid) {
       this.studentsService.addStudent(this.studentCreateDTO).subscribe(

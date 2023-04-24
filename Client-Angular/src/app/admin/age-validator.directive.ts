@@ -24,7 +24,7 @@ export class AgeValidatorDirective implements Validator {
     let inputYear: string = control.value.substring(0, 4);
     let currYear: string = this.n; 
 
-    debugger;
+    // debugger;
     
     let difference = Number(currYear) - Number(inputYear);
 

@@ -9,6 +9,7 @@ import { CountriesService } from 'src/app/countries.service';
 import { CustomValidatorsService } from 'src/app/custom-validators.service';
 import { Router } from '@angular/router';
 import { StudentDTO } from 'src/app/Models/StudentDTO';
+import { Observable } from 'rxjs';
 
 
 /*
@@ -31,15 +32,14 @@ export class EditStudentComponent implements OnInit {
     private router: Router
   ) {
     this.studentId = this.studentsService.studentIdPassed;
-    this.countries = [];
     this.genders = ['Female', 'Male', 'Other'];
     this.studentUpdateDTO = new StudentUpdateDTO();
     this.submitted = false;
   }
 
   studentId: number;
-  countries: Country[];
-  genders: string[]; // for dynamic radio buttons
+  countries!: Observable<Country[]>;
+  genders: string[];  // for dynamic radio buttons
   studentUpdateDTO: StudentUpdateDTO;
   submitted: boolean;
 
@@ -73,15 +73,8 @@ export class EditStudentComponent implements OnInit {
 
   ngOnInit() {
 
-    // get, set countries list by id
-    this.countriesService.getCountries().subscribe(
-      (response: Country[]) => {
-        this.countries = response;
-      },
-      (e) => {
-        console.log(e);
-      }
-    );
+    // get, set list using async pipe bcoz no processing needed.
+    this.countries = this.countriesService.getCountries();
 
     // get, set student info by id
     this.studentsService.getStudent(this.studentId).subscribe(
