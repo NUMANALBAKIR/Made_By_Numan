@@ -14,17 +14,19 @@ import { ChildComponent } from './child/child.component';
 import { GrandChildComponent } from './grand-child/grand-child.component';
 import { GrandChild2Component } from './grand-child2/grand-child2.component';
 import { GrandChild3Component } from './grand-child3/grand-child3.component';
+import { LoginAlertsDirective } from './login-alerts.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     BadgesComponent,
     ParentComponent,
     ChildComponent,
     GrandChildComponent,
     GrandChild2Component,
-    GrandChild3Component
+    GrandChild3Component,
+    LoginComponent,
+    LoginAlertsDirective
   ],
   imports: [
     BrowserModule,

@@ -14,7 +14,7 @@
             <div class="col-9 pb-3">
                 <input type="text" class="form-control" id="studentId" name="studentId" required="required" 
                     pattern="^[0-9]*$" appStudentIdUniqueValidator [(ngModel)]="studentCreateDTO.studentId"
-                    #newStudentId="ngModel"
+                    #newStudentId="ngModel" 
                     [ngClass]="{'is-invalid': newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newStudentForm.submitted),                            
                             'is-valid': newStudentId.valid && (newStudentId.dirty || newStudentId.touched || newStudentForm.submitted) }">
 

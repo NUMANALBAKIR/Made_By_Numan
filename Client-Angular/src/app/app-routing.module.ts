@@ -9,7 +9,7 @@ import { BadgesComponent } from './badges/badges.component';
 import { ParentComponent } from './parent/parent.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'studentscrud', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'about', component: AboutComponent },
   { path: 'studentscrud', component: StudentsCRUDComponent },
   { path: 'addstudent', component: AddStudentComponent },
