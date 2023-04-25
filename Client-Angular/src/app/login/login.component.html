@@ -1,34 +1,48 @@
 <div class="container mt-4">
-    <h2>Login Form:</h2> 
+    <h2>Login Form:</h2>
 
-    
     <div class="col-6">
 
-        <form>
-            <div appLoginAlerts [errorInLogin]="loginError">
-            </div>
+        <div class="row">
 
-            <div class="form-group mt-3">
-                <label for="username">Email:</label>
-                <input [(ngModel)]="user.username" type="username" class="form-control" id="username" placeholder="Enter User Name" name="username">
-            </div>
+            <form>
+                <div class="form-group mt-3">
+                    <label for="username">Email:</label>
+                    <input [(ngModel)]="user.username" type="username" class="form-control" id="username"
+                        placeholder="Enter User Name" name="username">
+                </div>
 
-            <div class="form-group mt-3">
-                <label for="password">Password:</label>
-                <input [(ngModel)]="user.password" type="password" class="form-control" id="password" placeholder="Enter Password" name="password">
-            </div>
-            
-            <!-- <div class="checkbox">
-                <label><input type="checkbox" name="remember"> Remember me</label>
-            </div> -->
-            
-            <div class="mt-3">
-                <button (click)="onSubmitClick($event)" class="btn btn-outline-primary">Submit</button>
-            </div>
-        </form>
+                <div class="form-group mt-3">
+                    <label for="password">Password:</label>
+                    <input [(ngModel)]="user.password" type="password" class="form-control" id="password"
+                        placeholder="Enter Password" name="password">
+                </div>
+
+                <!-- <div class="checkbox">
+                            <label><input type="checkbox" name="remember"> Remember me</label>
+                        </div> -->
+
+                <div class="mt-3">
+                    <button type="submit" (click)="onLoginClick($event)" class="btn btn-outline-primary">Submit</button>
+                </div>
+
+                <div class="mt-3">
+                    <button type="button" (click)="onMessageClick($event)" class="btn btn-secondary">Toggle
+                        Directive
+                        message</button>
+                </div>
+
+                <div class="mt-3" appLoginAlerts [sendMessage]="getMessage">
+                </div>
+
+            </form>
+
+        </div>
+
+
 
     </div>
 
 </div>
 
-For development purpose- {{user | json }}
+For development purpose- {{ user | json }}

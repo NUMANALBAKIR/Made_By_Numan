@@ -11,37 +11,32 @@ import { User } from '../user';
 export class LoginComponent implements OnInit {
   
   user: User;
-  loginError: boolean;
+  getMessage: boolean;
 
   constructor(private loginService: LoginService, private router: Router) {
     this.user = new User();
-    this.loginError = false;
+    this.getMessage = false;
   }
 
   ngOnInit(): void {
   }
 
-  // onLoginClick(event: any) {
-  //   this.loginService.Login(this.user).subscribe(
-  //     (response: User) => {
-  //       this.user = response;
-  //       this.router.navigateByUrl('/about');
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
+  onLoginClick(event: any) {
+    this.loginService.Login(this.user).subscribe(
+      (response: User) => {
+        this.user = response;
+        this.router.navigateByUrl('/about');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
-  onSubmitClick(event: any) {
 
-    if (this.user.username == '' || this.user.password == '') {
-      this.loginError = true;
-    }
-    else  {
-      this.loginError = false;
-    }
-
+  // get message from directive
+  onMessageClick(event: any) {
+    this.getMessage = !this.getMessage;
   }
 
 }
