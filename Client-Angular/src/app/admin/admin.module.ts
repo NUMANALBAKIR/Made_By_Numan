@@ -11,6 +11,7 @@ import { FilterPipe } from './filter.pipe';
 import { GenderCountryValidatorDirective } from './gender-country-validator.directive';
 import { AgeValidatorDirective } from './age-validator.directive';
 import { StudentIdUniqueValidatorDirective } from './student-id-unique-validator.directive';
+import { ReadStudentComponent } from './read-student/read-student.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { StudentIdUniqueValidatorDirective } from './student-id-unique-validator
     FilterPipe,
     GenderCountryValidatorDirective,
     AgeValidatorDirective,
-    StudentIdUniqueValidatorDirective
+    StudentIdUniqueValidatorDirective,
+    ReadStudentComponent
 
 
   ],

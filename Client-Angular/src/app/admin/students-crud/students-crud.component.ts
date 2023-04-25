@@ -47,10 +47,12 @@ export class StudentsCRUDComponent implements OnInit {
   }
 
 
-  onDetailsClick(event: any, studentId: number) {
-    console.log(event.target.innerHTML);
-    event.target.remove();
-  }
+  // onReadClick(event: any) {
+  //   // console.log(event.target.innerHTML);
+  //   // event.target.remove();
+
+  //   this.router.navigateByUrl('readstudent');
+  // }
 
 
   onUpdateClick(event: any, studentId: number) {

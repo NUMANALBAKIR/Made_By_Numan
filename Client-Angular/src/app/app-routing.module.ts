@@ -7,13 +7,15 @@ import { StudentsCRUDComponent } from './admin/students-crud/students-crud.compo
 import { LoginComponent } from './login/login.component';
 import { BadgesComponent } from './badges/badges.component';
 import { ParentComponent } from './parent/parent.component';
+import { ReadStudentComponent } from './admin/read-student/read-student.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'studentscrud', pathMatch: 'full' },
   { path: 'about', component: AboutComponent },
   { path: 'studentscrud', component: StudentsCRUDComponent },
   { path: 'addstudent', component: AddStudentComponent },
   { path: 'editstudent', component: EditStudentComponent },
+  { path: 'read/student/:studentId/:studentName', component: ReadStudentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'badges', component: BadgesComponent },
   { path: 'componentcommunications', component: ParentComponent }

@@ -69,19 +69,9 @@
                 <th>{{student.gender }}</th>
                 <th>{{student.country.name | toUpperPipe :'upper':'-piped' }}</th>
 
-                <!-- <td>
-                    <ng-container *ngFor="let subject of student.subjectsList; let j = index">                    
-                        {{subject.name}}
-                        <span *ngIf="j < student.subjectsList.length-1; then commaTemplate; else noneTemplate"></span>
-
-                        <ng-template #commaTemplate>,</ng-template>
-                        <ng-template #noneTemplate></ng-template>
-                    </ng-container>
-                </td> -->
-
                 <td class="d-flex justify-content-around">
-                    <button (click)="onDetailsClick($event, student.studentId)"
-                        class="btn btn-outline-info"><b>Details</b></button>
+                    <a  [routerLink]="['/read', 'student', student.studentId, student.name]"
+                        class="btn btn-outline-info"><b>Read (Details)</b></a>
 
                     <a routerLink="/editstudent" (click)="onUpdateClick($event, student.studentId)"
                         class="btn btn-outline-warning"><b>Update</b></a>
