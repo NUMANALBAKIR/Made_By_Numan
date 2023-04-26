@@ -12,7 +12,7 @@ import { GenderCountryValidatorDirective } from './gender-country-validator.dire
 import { AgeValidatorDirective } from './age-validator.directive';
 import { StudentIdUniqueValidatorDirective } from './student-id-unique-validator.directive';
 import { ReadStudentComponent } from './read-student/read-student.component';
-
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -26,14 +26,13 @@ import { ReadStudentComponent } from './read-student/read-student.component';
     AgeValidatorDirective,
     StudentIdUniqueValidatorDirective,
     ReadStudentComponent
-
-
   ],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HighchartsChartModule
   ],
   exports: [
     AboutComponent,
