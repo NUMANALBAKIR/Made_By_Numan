@@ -70,7 +70,7 @@
                 <th>{{student.country.name | toUpperPipe :'upper':'-piped' }}</th>
 
                 <td class="d-flex justify-content-around">
-                    <a [routerLink]="['/admin','read', 'student', student.studentId, student.name]"
+                    <a [routerLink]="['/admin','readstudent', student.studentId, student.name]"
                         class="btn btn-outline-info"><b>Read (Details)</b></a>
 
                     <a [routerLink]="['/admin', 'editstudent']" (click)="onUpdateClick($event, student.studentId)"

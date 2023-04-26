@@ -13,13 +13,16 @@ export class LoginComponent implements OnInit {
   user: User;
   getMessage: boolean;
 
+  
   constructor(private loginService: LoginService, private router: Router) {
     this.user = new User();
     this.getMessage = false;
   }
 
+
   ngOnInit(): void {
   }
+
 
   onLoginClick(event: any) {
     this.loginService.Login(this.user).subscribe(

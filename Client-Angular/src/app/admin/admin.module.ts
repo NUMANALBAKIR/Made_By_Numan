@@ -12,6 +12,7 @@ import { AgeValidatorDirective } from './age-validator.directive';
 import { StudentIdUniqueValidatorDirective } from './student-id-unique-validator.directive';
 import { ReadStudentComponent } from './read-student/read-student.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { AdminRoutingModule } from './admin-routing.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
   ],
   imports: [
     CommonModule,
-    RouterModule,
+    // RouterModule, // no need because using AdminRoutingModule below
+    AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HighchartsChartModule

@@ -10,6 +10,7 @@ import { CustomValidatorsService } from 'src/app/custom-validators.service';
 import { Router } from '@angular/router';
 import { StudentDTO } from 'src/app/Models/StudentDTO';
 import { Observable, Subscription } from 'rxjs';
+import { ICanDeactivate } from 'src/app/can-deactivate-guard.service';
 
 
 /*
@@ -21,7 +22,7 @@ Reactive Form
   templateUrl: './edit-student.component.html',
   styleUrls: ['./edit-student.component.css']
 })
-export class EditStudentComponent implements OnInit, OnDestroy {
+export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
 
   constructor(
     private studentsService: StudentsService,
@@ -36,7 +37,7 @@ export class EditStudentComponent implements OnInit, OnDestroy {
     this.studentUpdateDTO = new StudentUpdateDTO();
     this.submitted = false;
     this.subscriptions = [];
-
+    this.canLeave = true;
   }
 
   studentId: number;
@@ -45,6 +46,8 @@ export class EditStudentComponent implements OnInit, OnDestroy {
   studentUpdateDTO: StudentUpdateDTO;
   submitted: boolean;
   subscriptions: Subscription[];
+  canLeave: boolean;
+
 
 
   // way 1. (validators like ways 2 below can also be applied here.)
@@ -98,15 +101,13 @@ export class EditStudentComponent implements OnInit, OnDestroy {
       this.populateForm();
     }, 500);
 
-
-    // valueChanges
-    // this.updateFormReactve.valueChanges.subscribe(
-    //   (value: any) => {
-    //     // console.log(value);
-    //     // console.log(this.updateFormReactve);
-    //   }
-    // );
-
+    this.subscriptions.push(
+      this.updateFormReactve.valueChanges.subscribe(
+        (value) => {
+          // console.log(value);
+          this.canLeave = false;
+        })
+      );
 
   }
 
@@ -136,7 +137,6 @@ export class EditStudentComponent implements OnInit, OnDestroy {
     if (this.formSubjectsArr.valid) {
     }
 
-
   }
 
 
@@ -150,7 +150,6 @@ export class EditStudentComponent implements OnInit, OnDestroy {
     this.submitted = true;
 
     if (this.updateFormReactve.valid) {
-
       this.studentUpdateDTO = this.updateFormReactve.value as StudentUpdateDTO;
 
       this.subscriptions.push(
@@ -161,6 +160,7 @@ export class EditStudentComponent implements OnInit, OnDestroy {
             console.log(e);
           })
       );
+      this.canLeave = true;
 
       // better alternaive is router below
       // this.location.back();

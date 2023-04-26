@@ -4,18 +4,20 @@ import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from './user';
 
-// under construction
-
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+    this._apiUrl = 'https://localhost:5001/api/StudentsAPI';
+    this.username = null;
+    this.user = null;
+  }
 
-  username: any = null;
-  private _apiUrl: string = 'https://localhost:5001/api/StudentsAPI';
-  user: any = null;
+  username: any;
+  private _apiUrl: string;
+  user: any;
 
   public Login(user: User): Observable<any> {
     return this.httpClient.post<any>(this._apiUrl, user, { responseType: 'json' })
@@ -23,16 +25,16 @@ export class LoginService {
         (user) => {
           if (user) {
             this.username = user.username;
-            this.user= user;
+            this.user = user;
           }
           return user;
         }
       ));
   }
-  
-  public Logout(){
-    this.username=null;
+
+  public Logout() {
+    this.username = null;
   }
-  
-  
+
+
 }
