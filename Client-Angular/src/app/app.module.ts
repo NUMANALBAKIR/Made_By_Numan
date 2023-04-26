@@ -15,6 +15,7 @@ import { GrandChildComponent } from './grand-child/grand-child.component';
 import { GrandChild2Component } from './grand-child2/grand-child2.component';
 import { GrandChild3Component } from './grand-child3/grand-child3.component';
 import { LoginAlertsDirective } from './login-alerts.directive';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { LoginAlertsDirective } from './login-alerts.directive';
     GrandChild2Component,
     GrandChild3Component,
     LoginComponent,
-    LoginAlertsDirective
+    LoginAlertsDirective,
+    AboutComponent
+
   ],
   imports: [
     BrowserModule,

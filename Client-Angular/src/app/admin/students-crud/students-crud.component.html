@@ -9,7 +9,7 @@
         </div>
 
         <div class="col text-end">
-            <a routerLink="/addstudent" class="btn btn-primary">Create Student</a>
+            <a routerLink="/admin/addstudent" class="btn btn-primary">Create Student</a>
         </div>
     </div>
 </div>
@@ -70,10 +70,10 @@
                 <th>{{student.country.name | toUpperPipe :'upper':'-piped' }}</th>
 
                 <td class="d-flex justify-content-around">
-                    <a  [routerLink]="['/read', 'student', student.studentId, student.name]"
+                    <a [routerLink]="['/admin','read', 'student', student.studentId, student.name]"
                         class="btn btn-outline-info"><b>Read (Details)</b></a>
 
-                    <a routerLink="/editstudent" (click)="onUpdateClick($event, student.studentId)"
+                    <a [routerLink]="['/admin', 'editstudent']" (click)="onUpdateClick($event, student.studentId)"
                         class="btn btn-outline-warning"><b>Update</b></a>
 
                     <button data-bs-toggle="modal" data-bs-target="#myModal" (click)="onDeleteClick($event, i)"

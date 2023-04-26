@@ -7,9 +7,10 @@ import { Student } from 'src/app/Student';
 import { StudentCreateDTO } from 'src/app/Models/StudentCreateDTO';
 import { NgForm } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 /*
-Template Driven Form
+  Template Driven Form
 */
 
 
@@ -19,7 +20,6 @@ Template Driven Form
   styleUrls: ['./add-student.component.css']
 })
 export class AddStudentComponent implements OnInit, OnDestroy {
-
 
   @ViewChild('newStudentForm') newStudentForm: NgForm | any; // to access the form
   studentCreateDTO: StudentCreateDTO;
@@ -32,7 +32,8 @@ export class AddStudentComponent implements OnInit, OnDestroy {
   constructor(
     private studentsService: StudentsService,
     private countriesService: CountriesService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {
     this.newStudentForm = null;
     this.studentCreateDTO = new StudentCreateDTO();
@@ -48,6 +49,7 @@ export class AddStudentComponent implements OnInit, OnDestroy {
     this.countries = this.countriesService.getCountries();
   }
 
+
   onSubmitClick() {
     if (this.newStudentForm.valid) {
       this.subscription = this.studentsService.addStudent(this.studentCreateDTO).subscribe(
@@ -59,7 +61,11 @@ export class AddStudentComponent implements OnInit, OnDestroy {
         }
       );
 
-      this.location.back();
+      // better alternaive is router below
+      // this.location.back();
+
+      // .navigate is preferred to .navigateByUrl
+      this.router.navigate(['/admin', 'studentscrud']); // ['/parent', 'child']
     }
   }
 

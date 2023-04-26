@@ -11,13 +11,13 @@
         <div class="navbar-collapse collapse" id="navbarColor02">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="about" *ngIf="loginService.username">About</a>
+                    <a class="nav-link" routerLink="/about" >About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="studentscrud">Students CRUD</a>
+                    <a class="nav-link" [routerLink]="['/admin', 'studentscrud']">Students CRUD</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="componentcommunications">Component-Communications</a>
+                    <a class="nav-link" routerLink="/componentcommunications">Component-Communications</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" onclick="return false">Tab 4</a>

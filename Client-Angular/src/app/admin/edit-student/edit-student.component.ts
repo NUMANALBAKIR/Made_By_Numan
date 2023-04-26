@@ -165,8 +165,8 @@ export class EditStudentComponent implements OnInit, OnDestroy {
       // better alternaive is router below
       // this.location.back();
 
-      this.router.navigate(['', 'studentscrud']); // [ parent, child ]
-
+      // .navigate is preferred to .navigateByUrl
+      this.router.navigate(['/admin', 'studentscrud']); // ['/parent', 'child']
     }
 
   }

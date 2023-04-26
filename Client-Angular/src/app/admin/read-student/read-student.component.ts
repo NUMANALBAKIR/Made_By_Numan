@@ -88,6 +88,17 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
       mark: 25
     },
     {
+      subjectId: 2,
+      subjectName: 'Economics',
+      studentId: this.studentId,
+      mark: 95
+    }, {
+      subjectId: 2,
+      subjectName: 'Biology',
+      studentId: this.studentId,
+      mark: 45
+    },
+    {
       subjectId: 3,
       subjectName: 'Accounting',
       studentId: this.studentId,

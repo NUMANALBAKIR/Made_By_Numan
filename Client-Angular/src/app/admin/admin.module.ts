@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AboutComponent } from './about/about.component';
 import { StudentsCRUDComponent } from './students-crud/students-crud.component';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { EditStudentComponent } from './edit-student/edit-student.component';
@@ -16,7 +15,6 @@ import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
-    AboutComponent,
     StudentsCRUDComponent,
     AddStudentComponent,
     EditStudentComponent,
@@ -35,7 +33,6 @@ import { HighchartsChartModule } from 'highcharts-angular';
     HighchartsChartModule
   ],
   exports: [
-    AboutComponent,
     StudentsCRUDComponent
   ],
   providers: []
