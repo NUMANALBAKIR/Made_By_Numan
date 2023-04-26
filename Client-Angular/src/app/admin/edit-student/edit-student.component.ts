@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Student } from 'src/app/Student';
 import { StudentsService } from 'src/app/students.service';
 import { Location } from '@angular/common';
@@ -9,7 +9,7 @@ import { CountriesService } from 'src/app/countries.service';
 import { CustomValidatorsService } from 'src/app/custom-validators.service';
 import { Router } from '@angular/router';
 import { StudentDTO } from 'src/app/Models/StudentDTO';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 
 /*
@@ -21,7 +21,7 @@ Reactive Form
   templateUrl: './edit-student.component.html',
   styleUrls: ['./edit-student.component.css']
 })
-export class EditStudentComponent implements OnInit {
+export class EditStudentComponent implements OnInit, OnDestroy {
 
   constructor(
     private studentsService: StudentsService,
@@ -35,6 +35,8 @@ export class EditStudentComponent implements OnInit {
     this.genders = ['Female', 'Male', 'Other'];
     this.studentUpdateDTO = new StudentUpdateDTO();
     this.submitted = false;
+    this.subscriptions = [];
+
   }
 
   studentId: number;
@@ -42,6 +44,8 @@ export class EditStudentComponent implements OnInit {
   genders: string[];  // for dynamic radio buttons
   studentUpdateDTO: StudentUpdateDTO;
   submitted: boolean;
+  subscriptions: Subscription[];
+
 
   // way 1. (validators like ways 2 below can also be applied here.)
   // updateFormReactve: FormGroup = new FormGroup({
@@ -77,13 +81,14 @@ export class EditStudentComponent implements OnInit {
     this.countries = this.countriesService.getCountries();
 
     // get, set student info by id
-    this.studentsService.getStudent(this.studentId).subscribe(
-      (response: StudentDTO) => {
-        this.studentUpdateDTO = response;
-      },
-      (e) => {
-        console.log('-- From editComponent: ' + e);
-      }
+    this.subscriptions.push(
+      this.studentsService.getStudent(this.studentId).subscribe(
+        (response: StudentDTO) => {
+          this.studentUpdateDTO = response;
+        },
+        (e) => {
+          console.log('-- From editComponent: ' + e);
+        })
     );
 
     this.updateFormReactve.reset();
@@ -148,12 +153,13 @@ export class EditStudentComponent implements OnInit {
 
       this.studentUpdateDTO = this.updateFormReactve.value as StudentUpdateDTO;
 
-      this.studentsService.updateStudent(this.studentUpdateDTO).subscribe(
-        (r: Student) => {
-        },
-        (e) => {
-          console.log(e);
-        }
+      this.subscriptions.push(
+        this.studentsService.updateStudent(this.studentUpdateDTO).subscribe(
+          (r: Student) => {
+          },
+          (e) => {
+            console.log(e);
+          })
       );
 
       // better alternaive is router below
@@ -195,5 +201,13 @@ export class EditStudentComponent implements OnInit {
       subjects: this.studentUpdateDTO.subjects
     });
   }
+
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
+  }
+
 
 }

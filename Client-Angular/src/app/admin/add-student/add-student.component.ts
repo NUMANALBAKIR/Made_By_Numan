@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { StudentsService } from 'src/app/students.service';
 import { Location } from '@angular/common';
 import { Country } from 'src/app/country';
@@ -6,7 +6,7 @@ import { CountriesService } from 'src/app/countries.service';
 import { Student } from 'src/app/Student';
 import { StudentCreateDTO } from 'src/app/Models/StudentCreateDTO';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 /*
 Template Driven Form
@@ -18,7 +18,7 @@ Template Driven Form
   templateUrl: './add-student.component.html',
   styleUrls: ['./add-student.component.css']
 })
-export class AddStudentComponent implements OnInit {
+export class AddStudentComponent implements OnInit, OnDestroy {
 
 
   @ViewChild('newStudentForm') newStudentForm: NgForm | any; // to access the form
@@ -26,6 +26,7 @@ export class AddStudentComponent implements OnInit {
   countries!: Observable<Country[]>;
   currYear: number;
   genders: string[];     // for dynamic radio buttons
+  subscription: Subscription;
 
 
   constructor(
@@ -37,6 +38,7 @@ export class AddStudentComponent implements OnInit {
     this.studentCreateDTO = new StudentCreateDTO();
     this.currYear = new Date().getFullYear();
     this.genders = ['Female', 'Male', 'Other'];
+    this.subscription = new Subscription();
   }
 
 
@@ -47,11 +49,8 @@ export class AddStudentComponent implements OnInit {
   }
 
   onSubmitClick() {
-    
-    // debugger;
-
     if (this.newStudentForm.valid) {
-      this.studentsService.addStudent(this.studentCreateDTO).subscribe(
+      this.subscription = this.studentsService.addStudent(this.studentCreateDTO).subscribe(
         (r: Student) => {
 
         },
@@ -67,6 +66,11 @@ export class AddStudentComponent implements OnInit {
 
   onResetClick() {
     this.newStudentForm.resetForm();
+  }
+
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

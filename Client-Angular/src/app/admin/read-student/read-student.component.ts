@@ -16,14 +16,13 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
 
   constructor(private activatedRoute: ActivatedRoute, private studentsService: StudentsService) {
     this.studentId = 0;
-    this.subscriptionActivatedRoute = new Subscription();
+    this.subscription = new Subscription();
   }
 
 
   studentId: number;
-  subscriptionActivatedRoute: Subscription;
+  subscription: Subscription;
   studentDTO!: Observable<StudentDTO>;
-  // studentDTO: StudentDTO = new StudentDTO();
   dataArr: any[] = [];
 
   // highcharts data
@@ -68,7 +67,7 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.subscriptionActivatedRoute = this.activatedRoute.params.subscribe(
+    this.subscription = this.activatedRoute.params.subscribe(
       (routeParams) => {
         this.studentId = Number(routeParams['studentId']);
       }
@@ -106,7 +105,7 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-    this.subscriptionActivatedRoute.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 

@@ -1,17 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Country } from 'src/app/country';
 import { Student } from 'src/app/Student';
 import { StudentsService } from 'src/app/students.service';
 import * as $ from 'jquery';
 import { StudentDTO } from 'src/app/Models/StudentDTO';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-students-crud',
   templateUrl: './students-crud.component.html',
   styleUrls: ['./students-crud.component.css']
 })
-export class StudentsCRUDComponent implements OnInit {
+export class StudentsCRUDComponent implements OnInit, OnDestroy {
 
   i: number;
   searchBy: string;
@@ -19,6 +20,7 @@ export class StudentsCRUDComponent implements OnInit {
   students: StudentDTO[];
   countries: Country[];
   showSpinner: boolean;
+  subscriptions: Subscription[];
 
 
   constructor(private studentsService: StudentsService, private router: Router) {
@@ -28,22 +30,23 @@ export class StudentsCRUDComponent implements OnInit {
     this.students = [];
     this.countries = [];
     this.showSpinner = true;
+    this.subscriptions = []; 
+
   }
 
 
   ngOnInit(): void {
     // get and set list of students
-    this.studentsService.getStudents().subscribe(
-      (response: StudentDTO[]) => {
-        this.students = response;
-        this.showSpinner = false;
-      },
-      (error) => {
-        console.log(error);
-      }
-      );
-      
-      // debugger;
+    this.subscriptions.push(
+      this.studentsService.getStudents().subscribe(
+        (response: StudentDTO[]) => {
+          this.students = response;
+          this.showSpinner = false;
+        },
+        (error) => {
+          console.log(error);
+        })
+    );
   }
 
 
@@ -64,12 +67,13 @@ export class StudentsCRUDComponent implements OnInit {
   }
 
   onConfirmDelete() {
-    this.studentsService.deleteStudent(this.students[this.i].studentId).subscribe(
-      (r: string) => {
-      },
-      (e: any) => {
-        console.log(e);
-      }
+    this.subscriptions.push(
+      this.studentsService.deleteStudent(this.students[this.i].studentId).subscribe(
+        (r: string) => {
+        },
+        (e: any) => {
+          console.log(e);
+        })
     );
 
     //  needed
@@ -97,6 +101,12 @@ export class StudentsCRUDComponent implements OnInit {
     $("#crossIcon").trigger("click");
   }
 
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
+  }
 
 
 }
