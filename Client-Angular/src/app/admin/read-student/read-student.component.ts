@@ -57,7 +57,7 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
     },
     tooltip: {
       headerFormat: '<span style="font-size:12px">Subject</span><br>',
-      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b><br/>'
     },
   }; // required
   updateFlag: boolean = false; // optional boolean
@@ -79,7 +79,7 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
       subjectId: 1,
       subjectName: 'English',
       studentId: this.studentId,
-      mark: 85
+      mark: 75
     },
     {
       subjectId: 2,
