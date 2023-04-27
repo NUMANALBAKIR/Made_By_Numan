@@ -6,14 +6,14 @@ import { BadgesComponent } from './components/badges/badges.component';
 import { EditStudentComponent } from './components/edit-student/edit-student.component';
 import { ReadStudentComponent } from './components/read-student/read-student.component';
 import { StudentsCRUDComponent } from './components/students-crud/students-crud.component';
-import { CanDeactivateGuardService } from './services/can-deactivate-guard.service';
-import { CanActivateGuardService } from './services/can-activate-guard.service';
+import { CanDeactivateGuardService } from './guards/can-deactivate-guard.service';
+import { CanActivateGuardService } from './guards/can-activate-guard.service';
 
 const routes: Routes = [
-  {
-    path: 'admin',
+  { 
     // data: { expectedRole: 'Admin' },
     // canActivate: [CanActivateGuardService],
+    path: 'admin',
     children:
       [
         { path: 'studentscrud', component: StudentsCRUDComponent },

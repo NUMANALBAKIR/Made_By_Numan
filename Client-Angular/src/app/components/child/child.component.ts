@@ -1,7 +1,7 @@
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, ContentChild, DoCheck, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { GrandChildComponent } from '../grand-child/grand-child.component';
 import { GrandChild2Component } from '../grand-child2/grand-child2.component';
-import { ComponentCommunicationsService } from '../component-communications.service';
+import { ComponentCommunicationsService } from '../../services/component-communications.service';
 import { GrandChild3Component } from '../grand-child3/grand-child3.component';
 
 
@@ -30,10 +30,10 @@ export class ChildComponent implements
 
   @ContentChild('grandChild3FromParent') grandChild3FromParent = {} as GrandChild3Component;
 
-  
-  constructor(private _compCommuService: ComponentCommunicationsService) { 
+
+  constructor(private _compCommuService: ComponentCommunicationsService) {
   }
-  
+
 
   // Life-cycle hooks
   ngOnChanges(changes: SimpleChanges): void {

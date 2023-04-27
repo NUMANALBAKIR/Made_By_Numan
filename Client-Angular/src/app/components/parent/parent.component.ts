@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { ComponentCommunicationsService } from '../component-communications.service';
+import { ComponentCommunicationsService } from '../../services/component-communications.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -20,19 +20,19 @@ export class ParentComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+
   // receive emitter upon child button click 
   parentsMethod(event: any) {
     this.parentColorValue = event.parentColor;
   }
-  
-  
+
+
   // parent => comp.Commu service=> both grandChilds
-  TurnBothRed(){
+  TurnBothRed() {
     this._compCommuService.turnRed();
   }
 
-// not working
+  // not working
   // setInput(){
   //   debugger;
   //   let thisElement = this.h1Ref.nativeElement;

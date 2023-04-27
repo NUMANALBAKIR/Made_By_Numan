@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { StudentDTO } from 'src/app/admin/models/StudentDTO';
 import { Observable, Subscription } from 'rxjs';
 import { Student } from '../../models/Student';
-import { ICanDeactivate } from '../../services/can-deactivate-guard.service';
+import { ICanDeactivate } from '../../guards/can-deactivate-guard.service';
 import { CountriesService } from '../../services/countries.service';
 import { CustomValidatorsService } from '../../services/custom-validators.service';
 

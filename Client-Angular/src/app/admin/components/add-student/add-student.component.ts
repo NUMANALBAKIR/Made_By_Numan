@@ -6,7 +6,7 @@ import { NgForm } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { StudentsService } from '../../services/students.service';
-import { ICanDeactivate } from '../../services/can-deactivate-guard.service';
+import { ICanDeactivate } from '../../guards/can-deactivate-guard.service';
 import { CountriesService } from '../../services/countries.service';
 import { Student } from '../../models/Student';
 

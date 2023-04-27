@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Student } from '../models/Student';
+import { Student } from '../admin/models/Student';
 
 /*
   complex custom pipe

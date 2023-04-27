@@ -1,21 +1,18 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AdminModule } from './admin/admin.module';
-import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
 import { BadgesComponent } from './admin/components/badges/badges.component';
-import { ParentComponent } from './parent/parent.component';
-import { ChildComponent } from './child/child.component';
-import { GrandChildComponent } from './grand-child/grand-child.component';
-import { GrandChild2Component } from './grand-child2/grand-child2.component';
-import { GrandChild3Component } from './grand-child3/grand-child3.component';
-import { LoginAlertsDirective } from './login-alerts.directive';
-import { AboutComponent } from './about/about.component';
+import { ParentComponent } from './components/parent/parent.component';
+import { ChildComponent } from './components/child/child.component';
+import { GrandChildComponent } from './components/grand-child/grand-child.component';
+import { GrandChild2Component } from './components/grand-child2/grand-child2.component';
+import { GrandChild3Component } from './components/grand-child3/grand-child3.component';
+import { LoginAlertsDirective } from './directives/login-alerts.directive';
+import { AboutComponent } from './components/about/about.component';
+import { SharedModule } from './shared/shared.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -32,13 +29,9 @@ import { AboutComponent } from './about/about.component';
 
   ],
   imports: [
-    BrowserModule,
-    AdminModule,
+    SharedModule,
     AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    RouterModule
-
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
