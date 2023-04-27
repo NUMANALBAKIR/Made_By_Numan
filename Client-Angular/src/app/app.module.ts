@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './components/login/login.component';
-import { BadgesComponent } from './admin/components/badges/badges.component';
 import { ParentComponent } from './components/parent/parent.component';
 import { ChildComponent } from './components/child/child.component';
 import { GrandChildComponent } from './components/grand-child/grand-child.component';
@@ -12,26 +11,26 @@ import { GrandChild3Component } from './components/grand-child3/grand-child3.com
 import { LoginAlertsDirective } from './directives/login-alerts.directive';
 import { AboutComponent } from './components/about/about.component';
 import { SharedModule } from './shared/shared.module';
-import { AdminModule } from './admin/admin.module';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BadgesComponent,
+    AboutComponent,
     ParentComponent,
     ChildComponent,
     GrandChildComponent,
     GrandChild2Component,
     GrandChild3Component,
     LoginComponent,
-    LoginAlertsDirective,
-    AboutComponent
+    LoginAlertsDirective
 
   ],
   imports: [
+    BrowserModule,
     SharedModule,
     AppRoutingModule,
-    AdminModule
+    // AdminModule //commented bcoz adding here eager loads. it's now lazy loaded in app.routing.module.
   ],
   providers: [],
   bootstrap: [AppComponent]

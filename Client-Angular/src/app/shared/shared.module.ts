@@ -24,7 +24,6 @@ import { HighchartsChartModule } from 'highcharts-angular';
   ],
   imports: [
     CommonModule,
-    BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -34,7 +33,6 @@ import { HighchartsChartModule } from 'highcharts-angular';
   ],
   exports: [
     CommonModule,
-    BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

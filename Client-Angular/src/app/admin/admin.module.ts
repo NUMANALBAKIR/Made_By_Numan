@@ -4,7 +4,7 @@ import { AddStudentComponent } from './components/add-student/add-student.compon
 import { EditStudentComponent } from './components/edit-student/edit-student.component';
 import { ReadStudentComponent } from './components/read-student/read-student.component';
 import { AdminRoutingModule } from './admin-routing.module';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../shared/shared.module'; 
 
 @NgModule({
   declarations: [
@@ -16,10 +16,10 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     SharedModule,
     // RouterModule, // no need because using AdminRoutingModule below
-    AdminRoutingModule
+    AdminRoutingModule 
+
   ],
-  exports: [
-  ],
+  exports: [],
   providers: []
 })
 export class AdminModule { }
