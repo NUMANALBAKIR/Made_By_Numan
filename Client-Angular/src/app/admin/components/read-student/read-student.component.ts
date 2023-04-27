@@ -15,13 +15,16 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
 
   constructor(private activatedRoute: ActivatedRoute, private studentsService: StudentsService) {
     this.studentId = 0;
-    this.subscription = new Subscription();
+    this.subscriptions = [];
+    this.studentDTO = new StudentDTO();
+
   }
 
 
   studentId: number;
-  subscription: Subscription;
-  studentDTO!: Observable<StudentDTO>;
+  subscriptions: Subscription[];
+  // studentDTO!: Observable<StudentDTO>;
+  studentDTO: StudentDTO;
   dataArr: any[] = [];
 
   // highcharts data
@@ -29,7 +32,15 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
   chartConstructor: string = 'chart'; // optional string, defaults to 'chart'
   chartOptions: Highcharts.Options = {
     title: {
-      text: 'Marks Obtained in Subjects',
+      text: 'Marks obtained in Subjects',
+      style: {
+        fontSize: '20px'
+      }
+    },
+    legend: {
+      itemStyle: {
+        fontSize: '20px'
+      }
     },
     series: [{
       name: 'Subjects',
@@ -39,10 +50,23 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
     }],
     xAxis: {
       type: 'category',
+      labels: {
+        style: {
+          fontSize: '18px'
+        }
+      }
     },
     yAxis: {
       title: {
-        text: 'MARKS'
+        text: 'Marks',
+        style: {
+          fontSize: '20px'
+        }
+      },
+      labels: {
+        style: {
+          fontSize: '18px'
+        }
       }
     },
     plotOptions: {
@@ -50,13 +74,16 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
         borderWidth: 0,
         dataLabels: {
           enabled: true,
-          format: '{point.y:.1f}%'
-        }
+          format: '{point.y:.1f}%',
+          style:{
+            fontSize: '18px'
+          }
+        }        
       }
     },
     tooltip: {
-      headerFormat: '<span style="font-size:12px">Subject</span><br>',
-      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b><br/>'
+      headerFormat: '<span style="font-size:18px">Subject</span><br>',
+      pointFormat: '<span style="font-size:18px; color:{point.color}">{point.name}</span>: <b style="font-size:18px;">{point.y:.2f}%</b><br/>'
     },
   }; // required
   updateFlag: boolean = false; // optional boolean
@@ -66,13 +93,26 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.subscription = this.activatedRoute.params.subscribe(
-      (routeParams) => {
-        this.studentId = Number(routeParams['studentId']);
-      }
+    this.subscriptions.push(
+      this.activatedRoute.params.subscribe(
+       (routeParams) => {
+         this.studentId = Number(routeParams['studentId']);
+       }
+     )
     );
 
-    this.studentDTO = this.studentsService.getStudent(this.studentId);
+    // this.studentDTO = this.studentsService.getStudent(this.studentId);
+
+    this.subscriptions.push(
+      this.studentsService.getStudent(this.studentId).subscribe(
+        (r: StudentDTO) => {
+          this.studentDTO = r;
+        },
+        (e) => {
+          console.log(e);
+        }
+      )
+    );
 
     const subjects = [{
       subjectId: 1,
@@ -115,7 +155,9 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.forEach(item => {
+      item.unsubscribe();
+    });
   }
 
 
