@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { StudentDTO } from 'src/app/Models/StudentDTO';
-import { StudentsService } from 'src/app/students.service';
+import { StudentDTO } from 'src/app/admin/models/StudentDTO';
+import { StudentsService } from 'src/app/admin/services/students.service';
 import * as Highcharts from 'highcharts';
-import { Subject } from 'src/app/subject';
 
 
 @Component({

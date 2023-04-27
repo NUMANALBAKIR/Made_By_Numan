@@ -1,16 +1,16 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Student } from 'src/app/Student';
-import { StudentsService } from 'src/app/students.service';
+import { StudentsService } from 'src/app/admin/services/students.service';
 import { Location } from '@angular/common';
-import { StudentUpdateDTO } from 'src/app/Models/StudentUpdateDTO';
+import { StudentUpdateDTO } from 'src/app/admin/models/StudentUpdateDTO';
 import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Country } from 'src/app/country';
-import { CountriesService } from 'src/app/countries.service';
-import { CustomValidatorsService } from 'src/app/custom-validators.service';
+import { Country } from 'src/app/admin/models/country';
 import { Router } from '@angular/router';
-import { StudentDTO } from 'src/app/Models/StudentDTO';
+import { StudentDTO } from 'src/app/admin/models/StudentDTO';
 import { Observable, Subscription } from 'rxjs';
-import { ICanDeactivate } from 'src/app/can-deactivate-guard.service';
+import { Student } from '../../models/Student';
+import { ICanDeactivate } from '../../services/can-deactivate-guard.service';
+import { CountriesService } from '../../services/countries.service';
+import { CustomValidatorsService } from '../../services/custom-validators.service';
 
 
 /*
@@ -107,7 +107,7 @@ export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
           // console.log(value);
           this.canLeave = false;
         })
-      );
+    );
 
   }
 

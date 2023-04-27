@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Country } from './country';
+import { Country } from '../models/country';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

@@ -1,21 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { StudentsCRUDComponent } from './students-crud/students-crud.component';
-import { AddStudentComponent } from './add-student/add-student.component';
-import { BadgesComponent } from '../badges/badges.component';
-import { EditStudentComponent } from './edit-student/edit-student.component';
-import { ReadStudentComponent } from './read-student/read-student.component';
-import { CanDeactivateGuardService } from '../can-deactivate-guard.service';
+import { AddStudentComponent } from './components/add-student/add-student.component';
+import { BadgesComponent } from './components/badges/badges.component';
+import { EditStudentComponent } from './components/edit-student/edit-student.component';
+import { ReadStudentComponent } from './components/read-student/read-student.component';
+import { StudentsCRUDComponent } from './components/students-crud/students-crud.component';
+import { CanDeactivateGuardService } from './services/can-deactivate-guard.service';
+import { CanActivateGuardService } from './services/can-activate-guard.service';
 
 const routes: Routes = [
   {
     path: 'admin',
-    // canActivate: [CanActivateGuardService], data: { expectedRole: 'Admin' },
+    // data: { expectedRole: 'Admin' },
+    // canActivate: [CanActivateGuardService],
     children:
       [
         { path: 'studentscrud', component: StudentsCRUDComponent },
-        { path: 'addstudent', component: AddStudentComponent },
+        { path: 'addstudent', component: AddStudentComponent, canDeactivate: [CanDeactivateGuardService] },
         { path: 'readstudent/:studentId/:studentName', component: ReadStudentComponent },
         { path: 'editstudent', component: EditStudentComponent, canDeactivate: [CanDeactivateGuardService] },
         { path: 'badges', component: BadgesComponent }

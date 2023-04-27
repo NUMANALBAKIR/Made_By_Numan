@@ -1,5 +1,5 @@
-import { Country } from "../country";
-import { Subject } from "../subject";
+import { Country } from "./country";
+import { Subject } from "./subject";
 
 export class StudentCreateDTO {
 

@@ -1,10 +1,9 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Country } from 'src/app/country';
-import { Student } from 'src/app/Student';
-import { StudentsService } from 'src/app/students.service';
+import { Country } from 'src/app/admin/models/country';
+import { StudentsService } from 'src/app/admin/services/students.service';
 import * as $ from 'jquery';
-import { StudentDTO } from 'src/app/Models/StudentDTO';
+import { StudentDTO } from 'src/app/admin/models/StudentDTO';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -30,7 +29,7 @@ export class StudentsCRUDComponent implements OnInit, OnDestroy {
     this.students = [];
     this.countries = [];
     this.showSpinner = true;
-    this.subscriptions = []; 
+    this.subscriptions = [];
 
   }
 

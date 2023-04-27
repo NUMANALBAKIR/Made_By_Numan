@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Student } from './Student';
-import { StudentCreateDTO } from './Models/StudentCreateDTO';
-import { StudentUpdateDTO } from './Models/StudentUpdateDTO';
-import { StudentDTO } from './Models/StudentDTO';
+import { Student } from '../models/Student';
+import { StudentCreateDTO } from '../models/StudentCreateDTO';
+import { StudentUpdateDTO } from '../models/StudentUpdateDTO';
+import { StudentDTO } from '../models/StudentDTO';
 
 @Injectable(
   { providedIn: 'root' }

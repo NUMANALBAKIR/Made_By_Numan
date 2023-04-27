@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { StudentsService } from './students.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { StudentDTO } from './Models/StudentDTO';
+import { StudentsService } from './students.service';
+import { StudentDTO } from '../models/StudentDTO';
 
 @Injectable({
   providedIn: 'root'

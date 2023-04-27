@@ -2,8 +2,8 @@ import { Directive } from '@angular/core';
 import { AbstractControl, AsyncValidator, NG_ASYNC_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { StudentsService } from '../students.service';
-import { Student } from '../Student';
+import { StudentsService } from '../services/students.service';
+import { Student } from '../models/Student';
 
 /*
   check if works

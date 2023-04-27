@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { StudentsService } from 'src/app/students.service';
 import { Location } from '@angular/common';
-import { Country } from 'src/app/country';
-import { CountriesService } from 'src/app/countries.service';
-import { Student } from 'src/app/Student';
-import { StudentCreateDTO } from 'src/app/Models/StudentCreateDTO';
+import { Country } from 'src/app/admin/models/country';
+import { StudentCreateDTO } from 'src/app/admin/models/StudentCreateDTO';
 import { NgForm } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { StudentsService } from '../../services/students.service';
+import { ICanDeactivate } from '../../services/can-deactivate-guard.service';
+import { CountriesService } from '../../services/countries.service';
+import { Student } from '../../models/Student';
 
 /*
   Template Driven Form
@@ -19,14 +20,15 @@ import { Router } from '@angular/router';
   templateUrl: './add-student.component.html',
   styleUrls: ['./add-student.component.css']
 })
-export class AddStudentComponent implements OnInit, OnDestroy {
+export class AddStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
 
-  @ViewChild('newStudentForm') newStudentForm: NgForm | any; // to access the form
+  @ViewChild('newStudentForm', { static: true }) newStudentForm: NgForm | any; // to access the form
   studentCreateDTO: StudentCreateDTO;
   countries!: Observable<Country[]>;
   currYear: number;
   genders: string[];     // for dynamic radio buttons
-  subscription: Subscription;
+  subscriptions: Subscription[];
+  canLeave: boolean;
 
 
   constructor(
@@ -39,7 +41,8 @@ export class AddStudentComponent implements OnInit, OnDestroy {
     this.studentCreateDTO = new StudentCreateDTO();
     this.currYear = new Date().getFullYear();
     this.genders = ['Female', 'Male', 'Other'];
-    this.subscription = new Subscription();
+    this.subscriptions = [];
+    this.canLeave = true;
   }
 
 
@@ -47,18 +50,30 @@ export class AddStudentComponent implements OnInit, OnDestroy {
 
     // get, set list using async pipe bcoz no processing needed.
     this.countries = this.countriesService.getCountries();
+
+    this.subscriptions.push(
+      this.newStudentForm.form.valueChanges.subscribe(
+        (value: any) => {
+          // console.log(value);
+          this.canLeave = false;
+        }
+      )
+    );
+
   }
 
 
   onSubmitClick() {
     if (this.newStudentForm.valid) {
-      this.subscription = this.studentsService.addStudent(this.studentCreateDTO).subscribe(
-        (r: Student) => {
 
-        },
-        (e) => {
-          console.log(e);
-        }
+      this.subscriptions.push(
+        this.studentsService.addStudent(this.studentCreateDTO).subscribe(
+          (r: Student) => {
+          },
+          (e) => {
+            console.log(e);
+          }
+        )
       );
 
       // better alternaive is router below
@@ -76,7 +91,9 @@ export class AddStudentComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.forEach(item => {
+      item.unsubscribe();
+    });
   }
 
 }

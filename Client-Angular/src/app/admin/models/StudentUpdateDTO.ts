@@ -1,7 +1,8 @@
 import { Country } from "./country";
 import { Subject } from "./subject";
 
-export class Student {
+
+export class StudentUpdateDTO {
 
   studentId: number | any;
   name: string | any;
@@ -10,11 +11,10 @@ export class Student {
   gender: string | any;   // radio ... sta
 
   countryId: number | any;    // cli...
-  country: Country;     // cli...
 
-  subjects: Subject[] | undefined;
- 
-  
+  subjects: Subject[];
+
+
   constructor() {
     this.studentId = null;
     this.name = null;
@@ -23,10 +23,9 @@ export class Student {
     this.gender = null;
 
     this.countryId = null;
-    this.country = new Country();
 
     this.subjects = [];
- 
+
   }
 
 }
