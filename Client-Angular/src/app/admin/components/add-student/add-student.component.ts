@@ -9,6 +9,7 @@ import { StudentsService } from '../../services/students.service';
 import { ICanDeactivate } from '../../guards/can-deactivate-guard.service';
 import { CountriesService } from '../../services/countries.service';
 import { Student } from '../../models/Student';
+import { StudentDTO } from '../../models/StudentDTO';
 
 /*
   Template Driven Form
@@ -51,6 +52,7 @@ export class AddStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
     // get, set list using async pipe bcoz no processing needed.
     this.countries = this.countriesService.getCountries();
 
+    // handle leaving page
     this.subscriptions.push(
       this.newStudentForm.form.valueChanges.subscribe(
         (value: any) => {
@@ -67,13 +69,15 @@ export class AddStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
     if (this.newStudentForm.valid) {
       this.subscriptions.push(
         this.studentsService.addStudent(this.studentCreateDTO).subscribe(
-          (r: Student) => {
+          (r: StudentDTO) => {
           },
           (e) => {
             console.log(e);
           }
         )
       );
+
+      this.canLeave = true;
 
       // better alternaive is router below
       // this.location.back();

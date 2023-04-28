@@ -65,7 +65,7 @@
                     calender icon):</label>
             </div>
             <div class="col-9 pb-3">
-                <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" appAgeValidator= {{currYear}} 
+                <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"  
                     [(ngModel)]="studentCreateDTO.dateOfBirth" #newStudentDob="ngModel" required="required"
                     [ngClass]="{'is-invalid': newStudentDob.invalid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted),                            
                             'is-valid': newStudentDob.valid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted) }">
@@ -159,7 +159,6 @@
         </div>
     </div>
 </form>
-
 
 
 For development purpose- {{ studentCreateDTO | json }}

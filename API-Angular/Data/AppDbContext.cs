@@ -9,7 +9,6 @@ public class AppDbContext : DbContext
     { }
 
     public DbSet<Student> Students { get; set; }
-    public DbSet<SubjectsList> SubjectsLists { get; set; }
     public DbSet<Country> Countries { get; set; }
     public DbSet<Subject> Subjects { get; set; }
 

@@ -2,6 +2,7 @@
 
 public class SubjectCreateDTO
 {
+    // public string SubjectId { get; set; }
     public string SubjectName { get; set; }
     public int Mark { get; set; }
     

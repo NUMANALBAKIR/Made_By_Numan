@@ -19,5 +19,4 @@ public class Student
     // public List<Subject> Subjects { get; set; } // sk..
 
 
-
 }

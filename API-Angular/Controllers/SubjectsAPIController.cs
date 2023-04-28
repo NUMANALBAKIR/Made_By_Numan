@@ -20,7 +20,6 @@ public class SubjectsAPIController : ControllerBase, ISubjectsAPIController
     {
         _context = context;
         _mapper = mapper;
-
     }
 
 
@@ -41,24 +40,25 @@ public class SubjectsAPIController : ControllerBase, ISubjectsAPIController
 
     // GET: api/SubjectsAPI/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<Subject>> GetSubject(int id)
+    public async Task<ActionResult<SubjectDTO>> GetSubject(int id)
     {
-        var subject = await _context.Subjects.FindAsync(id);
+        Subject subject = await _context.Subjects.FindAsync(id);
+
+        SubjectDTO subjectDto = _mapper.Map<SubjectDTO>(subject);
 
         if (subject == null)
         {
             return NotFound();
         }
-
-        return subject;
+        return subjectDto;
     }
+
 
     // PUT: api/SubjectsAPI/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
     public async Task<IActionResult> PutSubject(int id, SubjectUpdateDTO updateDto)
     {
-
         Subject subject = _mapper.Map<Subject>(updateDto);
 
         if (id != subject.SubjectId)
@@ -83,22 +83,23 @@ public class SubjectsAPIController : ControllerBase, ISubjectsAPIController
                 throw;
             }
         }
-
         return NoContent();
     }
+
 
     // POST: api/SubjectsAPI
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-    public async Task<ActionResult<Subject>> PostSubject(SubjectCreateDTO createDto)
+    public async Task<ActionResult<SubjectDTO>> PostSubject(SubjectCreateDTO createDto)
     {
 
         Subject subject = _mapper.Map<Subject>(createDto);
         _context.Subjects.Add(subject);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetSubject", new { id = subject.SubjectId }, subject);
+        return CreatedAtAction(nameof(GetSubject), new { id = subject.SubjectId }, subject);
     }
+
 
     // DELETE: api/SubjectsAPI/5
     [HttpDelete("{id}")]
@@ -115,6 +116,7 @@ public class SubjectsAPIController : ControllerBase, ISubjectsAPIController
 
         return NoContent();
     }
+
 
     private bool SubjectExists(int id)
     {

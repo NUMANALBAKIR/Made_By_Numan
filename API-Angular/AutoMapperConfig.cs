@@ -16,6 +16,7 @@ public class AutoMapperConfig : Profile
         CreateMap<Subject, SubjectDTO>().ReverseMap();
         CreateMap<Subject, SubjectCreateDTO>().ReverseMap();
         CreateMap<Subject, SubjectUpdateDTO>().ReverseMap();
+        CreateMap<SubjectCreateDTO, SubjectUpdateDTO>().ReverseMap();
 
     }
 }

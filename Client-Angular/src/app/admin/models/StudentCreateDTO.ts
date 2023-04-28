@@ -1,9 +1,8 @@
-import { Country } from "./country";
-import { Subject } from "./subject";
+import { SubjectCreateDTO } from "./subjectCreateDTO";
 
 export class StudentCreateDTO {
 
-  studentId: number | any;
+  studentId: number | any; // just practise
   name: string | any;
   dateOfBirth: string | any;
   passed: boolean | any;  // checkbox ... act
@@ -11,8 +10,9 @@ export class StudentCreateDTO {
 
   countryId: number | any;    // cli...
 
-  // subjects: Subject[];
+  subjects: SubjectCreateDTO[];
 
+  
   constructor() {
     this.studentId = null;
     this.name = null;
@@ -22,7 +22,7 @@ export class StudentCreateDTO {
 
     this.countryId = null;
 
-    // this.subjects = [];
+    this.subjects = [];
 
   }
 

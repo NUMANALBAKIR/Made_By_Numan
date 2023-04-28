@@ -8,8 +8,4 @@ public class SubjectDTO
 
     public int StudentId { get; set; }
     
-    //public int StudentId { get; set; }
-    //[ValidateNever, ForeignKey(nameof(StudentId))]
-    //public Student Student { get; set; }
-
 }

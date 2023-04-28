@@ -1,6 +1,6 @@
-export class SubjectCreateDTO {
+export class SubjectDTO {
 
-  // subjectId: number | any;
+  subjectId: number | any;
   subjectName: string | any;
   mark: number | any;
 
@@ -8,7 +8,7 @@ export class SubjectCreateDTO {
 
   
   constructor() {
-    // this.subjectId = null;
+    this.subjectId = null;
     this.subjectName = null;
     this.mark = null;
 

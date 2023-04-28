@@ -7,9 +7,9 @@ namespace API_Angular.Controllers
     public interface ISubjectsAPIController
     {
         Task<IActionResult> DeleteSubject(int id);
-        Task<ActionResult<Subject>> GetSubject(int id);
+        Task<ActionResult<SubjectDTO>> GetSubject(int id);
         Task<List<SubjectDTO>> GetSubjects(int StudentId);
-        Task<ActionResult<Subject>> PostSubject(SubjectCreateDTO createDto);
+        Task<ActionResult<SubjectDTO>> PostSubject(SubjectCreateDTO createDto);
         Task<IActionResult> PutSubject(int id, SubjectUpdateDTO updateDto);
     }
 }

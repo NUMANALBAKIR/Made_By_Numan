@@ -2,7 +2,7 @@
 
 public class StudentCreateDTO
 {
-    public int StudentId { get; set; }
+    public int StudentId { get; set; } // just practise
     public string Name { get; set; }
     public string DateOfBirth { get; set; }
     public bool Passed { get; set; } // checkbox

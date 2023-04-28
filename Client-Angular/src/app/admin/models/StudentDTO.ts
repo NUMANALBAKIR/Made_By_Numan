@@ -1,5 +1,5 @@
 import { Country } from "./country";
-import { Subject } from "./subject";
+import { SubjectDTO } from "./subjectDTO";
 
 export class StudentDTO {
 
@@ -12,8 +12,9 @@ export class StudentDTO {
   countryId: number | any;    // cli...
   country: Country;     // cli...
 
-  subjects: Subject[];
+  subjects: SubjectDTO[];
 
+  
   constructor() {
     this.studentId = null;
     this.name = null;
@@ -22,7 +23,7 @@ export class StudentDTO {
     this.gender = null;
 
     this.countryId = null;
-    this.country = new Country();
+    this.country = new Country(); // important
 
     this.subjects = [];
   }

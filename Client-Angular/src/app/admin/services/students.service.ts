@@ -36,25 +36,22 @@ export class StudentsService {
     return this.httpClient.get<StudentDTO[]>(this._apiUrl, { responseType: 'json' })
       .pipe(map(
         (data: StudentDTO[]) => {
-
           for (let i = 0; i < data.length; i++) {
             data[i].name = data[i].name.toUpperCase();
           }
-
-          // debugger;
           return data;
         }
       ));
   }
 
 
-  addStudent(studentToAdd: StudentCreateDTO): Observable<Student> {
-    return this.httpClient.post<Student>(this._apiUrl, studentToAdd, { responseType: 'json' });
+  addStudent(studentToCreate: StudentCreateDTO): Observable<StudentDTO> {
+    return this.httpClient.post<StudentDTO>(this._apiUrl, studentToCreate, { responseType: 'json' });
   }
 
 
   updateStudent(studentToUpdate: StudentUpdateDTO): Observable<Student> {
-    return this.httpClient.put<Student>(this._apiUrl + '/' + studentToUpdate.studentId, studentToUpdate, { responseType: 'json' });
+    return this.httpClient.put<StudentDTO>(this._apiUrl + '/' + studentToUpdate.studentId, studentToUpdate, { responseType: 'json' });
   }
 
 
@@ -65,7 +62,6 @@ export class StudentsService {
 
   searchStudents(searchBy: string, searchText: string): Observable<StudentDTO[]> {
     let url = this._apiUrl + '/' + searchBy + '/' + searchText;
-    // debugger;
     return this.httpClient.get<StudentDTO[]>(url, { responseType: 'json' });
   }
 

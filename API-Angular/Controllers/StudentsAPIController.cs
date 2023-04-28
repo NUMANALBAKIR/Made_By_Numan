@@ -56,15 +56,11 @@ public class StudentsAPIController : ControllerBase
             .ToList();
         }
 
-
-
-
-
-
         var list = students.Select(x => _mapper.Map<StudentDTO>(x)).ToList();
 
         return Ok(list);
     }
+
 
     // GET: api/StudentsAPI
     [HttpGet]
@@ -75,7 +71,8 @@ public class StudentsAPIController : ControllerBase
             .OrderBy(x => x.Name)  // notice
             .ToListAsync();
 
-        var list = students.Select(x => _mapper.Map<StudentDTO>(x)).ToList();
+        // this time, no need to load each student's subjects.
+        var list = students.Select(x => _mapper.Map<StudentDTO>(x)).ToList(); // notice
 
         return list;
     }
@@ -109,7 +106,7 @@ public class StudentsAPIController : ControllerBase
     // POST: api/StudentsAPI
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-    public async Task<ActionResult<Student>> PostStudent(StudentCreateDTO createDto)
+    public async Task<ActionResult<StudentDTO>> PostStudent(StudentCreateDTO createDto)
     {
         foreach (var subjectCreateDto in createDto.Subjects)
         {
@@ -144,16 +141,17 @@ public class StudentsAPIController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutStudent(int id, StudentUpdateDTO updateDto)
     {
-
         foreach (var subjectUpdateDto in updateDto.Subjects)
-        {
-            try
+        {   //note position of AsNoTracking
+            Subject existingSubject = await _context.Subjects.AsNoTracking().FirstOrDefaultAsync(x => x.SubjectId == subjectUpdateDto.SubjectId);
+
+            if (existingSubject != null) // subject esists, so update
             {
                 await _subjectsAPIController.PutSubject(subjectUpdateDto.SubjectId, subjectUpdateDto);
             }
-            catch (NullReferenceException)
+            else
             {
-                var createDto = _mapper.Map<SubjectCreateDTO>(subjectUpdateDto);
+                SubjectCreateDTO createDto = _mapper.Map<SubjectCreateDTO>(subjectUpdateDto);
                 await _subjectsAPIController.PostSubject(createDto);
             }
         }
