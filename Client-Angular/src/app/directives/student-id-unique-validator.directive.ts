@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Student } from '../admin/models/Student';
 import { StudentsService } from '../admin/services/students.service';
+import { StudentDTO } from '../admin/models/StudentDTO';
 
 /*
   check if works
@@ -20,21 +21,16 @@ export class StudentIdUniqueValidatorDirective implements AsyncValidator {
 
   constructor(private studentsService: StudentsService) { }
 
-  validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
-
+  validate(control: AbstractControl): Observable<ValidationErrors | null> {
     return this.studentsService.getStudent(control.value).pipe(map(
-      (existing: Student) => {
-
-        // debugger;
-
-        if (existing == null) {
-          return null; // no error
-        } else {
+      (existing: StudentDTO| any) => {
+        if (existing != null) {
           return { uniqueStudentId: { valid: false } };
         }
-
-      }
-    ));
+        else {
+          return null;
+        }
+      }));
   }
 
 

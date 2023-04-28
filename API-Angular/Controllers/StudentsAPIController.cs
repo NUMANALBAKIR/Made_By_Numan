@@ -41,13 +41,13 @@ public class StudentsAPIController : ControllerBase
             students = _context.Students
             .Where(x => x.Name.ToLower().Contains(searchText))
             .ToList();
-        }      
+        }
         else if (searchBy == "gender".ToLower())
         {
-           students = _context.Students
-           .Include(x=> x.Country)
-           .Where(x => x.Gender.ToString().Contains(searchText))
-           .ToList();
+            students = _context.Students
+            .Include(x => x.Country)
+            .Where(x => x.Gender.ToString().Contains(searchText))
+            .ToList();
         }
         else if (searchBy == "passed".ToLower())
         {
@@ -92,7 +92,8 @@ public class StudentsAPIController : ControllerBase
 
         if (student == null)
         {
-            return NotFound(student);
+            // return NotFound(student);  // causes issue
+            return new EmptyResult(); // patch
         }
 
         var studentDto = _mapper.Map<StudentDTO>(student);
@@ -101,7 +102,7 @@ public class StudentsAPIController : ControllerBase
         var subjects = await _subjectsAPIController.GetSubjects(id);
         studentDto.Subjects = subjects;
 
-        return studentDto;
+        return Ok(studentDto);
     }
 
 

@@ -147,7 +147,7 @@
 
             <!-- buttons -->
             <div>
-                <button type="submit" class="btn btn-success form-control mt-3 text-white">Submit</button>
+                <button [disabled]="!newStudentForm.valid" type="submit" class="btn btn-success form-control mt-3 text-white">Submit</button>
 
                 <a type="button" routerLink="/admin/studentscrud" class="btn btn-outline-primary form-control mt-3">Back to
                     List</a>

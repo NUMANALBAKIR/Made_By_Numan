@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { Country } from 'src/app/admin/models/country';
 import { StudentCreateDTO } from 'src/app/admin/models/StudentCreateDTO';
-import { NgForm } from '@angular/forms';
+import { NgForm, ValidationErrors } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { StudentsService } from '../../services/students.service';
@@ -65,7 +65,6 @@ export class AddStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
 
   onSubmitClick() {
     if (this.newStudentForm.valid) {
-
       this.subscriptions.push(
         this.studentsService.addStudent(this.studentCreateDTO).subscribe(
           (r: Student) => {
