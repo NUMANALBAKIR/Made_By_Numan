@@ -88,6 +88,7 @@ export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
       this.studentsService.getStudent(this.studentId).subscribe(
         (response: StudentDTO) => {
           this.studentUpdateDTO = response;
+          this.populateForm();
         },
         (e) => {
           console.log('-- From editComponent: ' + e);
@@ -96,10 +97,11 @@ export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
 
     this.updateFormReactve.reset();
 
+    // no need, because done above in subscribe's arroww function
     // wait for service responses and then populate.
-    setTimeout(() => {
-      this.populateForm();
-    }, 500);
+    // setTimeout(() => {
+    //   this.populateForm();
+    // }, 500);
 
     this.subscriptions.push(
       this.updateFormReactve.valueChanges.subscribe(
@@ -200,6 +202,23 @@ export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
       countryId: this.studentUpdateDTO.countryId,
       subjects: this.studentUpdateDTO.subjects
     });
+
+    // push all subject to form array
+    this.studentUpdateDTO.subjects.forEach(element => {
+      var newFormGroup = this.formBuilder.group({
+        subjectId: [element.subjectId],
+        subjectName: [element.subjectName, [Validators.required]],
+        mark: [element.mark, [Validators.required]],
+        studentId: element.studentId
+      });
+
+      this.formSubjectsArr.push(newFormGroup);
+    });
+
+
+
+
+
   }
 
 

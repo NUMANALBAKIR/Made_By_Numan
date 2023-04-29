@@ -49,6 +49,7 @@ export class StudentsCRUDComponent implements OnInit, OnDestroy {
   }
 
 
+  // just a note
   // onReadClick(event: any) {
   //   // console.log(event.target.innerHTML);
   //   // event.target.remove();
