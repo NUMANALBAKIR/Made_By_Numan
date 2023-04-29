@@ -11,8 +11,7 @@
                 <label for="studentId" class="control-label pt-2" style="font-size:20px;">Student Id:</label>
             </div>
             <div class="col-9 pb-3">
-                <input type="text" class="form-control" id="studentId" name="studentId"
-                    formControlName="studentId" 
+                <input type="text" class="form-control" id="studentId" name="studentId" formControlName="studentId"
                     [ngClass]="{'is-invalid': updateFormReactve.get('studentId')?.invalid && (updateFormReactve.get('studentId')?.dirty || updateFormReactve.get('studentId')?.touched || submitted),
                 
                 'is-valid': updateFormReactve.get('studentId')?.valid && (updateFormReactve.get('studentId')?.dirty || updateFormReactve.get('studentId')?.touched || submitted) }">
@@ -29,7 +28,7 @@
 
                 <span class="text-danger"
                     *ngIf="updateFormReactve.get('studentId')?.invalid && (updateFormReactve.get('studentId')?.dirty || updateFormReactve.get('studentId')?.touched || submitted) && updateFormReactve.get('studentId')?.errors?.studentIdExists">
-                Custom AsyncValidator says: Id does not exist.
+                    Custom AsyncValidator says: Id does not exist.
                 </span>
             </div>
 
@@ -185,15 +184,19 @@
                     </div>
 
                     <!-- remove button -->
-                    <div class="col">
-                        <button type="button" class="btn btn-danger" (click)="onRemoveClick(i)">Remove</button>
+                    <div class="col">                        
+                        <a class="btn btn-danger btn-sm" (click)="onRemoveClick(i)">                            
+                            <i class="bi bi-x-lg"></i>
+                        </a>
                     </div>
 
                 </div>
 
                 <!-- Add Subject button -->
                 <div class="col">
-                    <button type="button" class="btn btn-dark" (click)="onAddClick()">Add Subject</button>
+                    <button type="button" class="btn btn-dark" (click)="onAddClick()">                                  
+                        Add Subject
+                    </button>
                 </div>
 
                 <!-- <div class="row">
@@ -206,9 +209,11 @@
 
             <!-- buttons -->
             <div>
-                <button [disabled]="!updateFormReactve.valid" type="submit" class="btn btn-success form-control mt-3 text-white">Submit</button>
+                <button [disabled]="!updateFormReactve.valid" type="submit"
+                    class="btn btn-success form-control mt-3 text-white">Submit</button>
 
-                <a type="button" routerLink="/admin/studentscrud" class="btn btn-outline-primary form-control mt-3">Back to
+                <a type="button" routerLink="/admin/studentscrud" class="btn btn-outline-primary form-control mt-3">Back
+                    to
                     List</a>
 
                 <button type="button" (click)="onResetClick()" class="btn btn-outline-danger form-control mt-3">Reset
