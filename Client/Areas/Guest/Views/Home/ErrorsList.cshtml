@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <h4>
-                Below are about <b>50</b> Errors and their solutions that I found when developing. I learn errors; Learning errors help me fix future-errors quickly. (Legend: => means solution).
+                Below are <b>68</b> Errors and their solutions that I found when developing. I learn errors; Learning errors help me fix future-errors quickly. (Legend: => means solution).
             </h4>
         </div>
     </div>
@@ -21,7 +21,7 @@
                 
                 <hr />
 
-                "Cannot implicitly convert type 'System.Threading.Tasks.Task<bool>' to 'bool'"
+                "Cannot implicitly convert type 'System.Threading.Tasks.Task< bool>' to 'bool'"
                 <br /> => check AsyncTask related things like: await, ...Async, etc.
                 
                 <hr/>
@@ -278,67 +278,103 @@
 
 <!-- below Added on 18 apr -->
 
-                            vscode migration command error:
-                            <br /> "Could not execute because the specified command or file was not found. Possible reasons for this include:
-                            <br /> * You misspelled a built-in dotnet command.
-                            <br /> * You intended to execute a .NET program, but dotnet-ef does not exist.
-                            <br /> * You intended to run a global tool, but a dotnet-prefixed executable with this name could not be found on the PATH."
-                            <br /> =>  for .net7, do: dotnet tool install --global dotnet-ef
-                            <br /> for .net6 do: dotnet tool install --global dotnet-ef --version 6...
+                vscode migration command error:
+                <br /> "Could not execute because the specified command or file was not found. Possible reasons for this include:
+                <br /> * You misspelled a built-in dotnet command.
+                <br /> * You intended to execute a .NET program, but dotnet-ef does not exist.
+                <br /> * You intended to run a global tool, but a dotnet-prefixed executable with this name could not be found on the PATH."
+                <br /> =>  for .net7, do: dotnet tool install --global dotnet-ef
+                <br /> for .net6 do: dotnet tool install --global dotnet-ef --version 6...
 
-                            <hr />
+                <hr />
 
-                            Type 'number' is not assignable to type 'NumberConstructor'.ts(2322)
-                            => write like: let num: number  = 3;
+                Type 'number' is not assignable to type 'NumberConstructor'.ts(2322)
+                => write like: let num: number  = 3;
 
-                            <hr />
+                <hr />
 
-                            An argument for 'controls' was not provided
-                            => initialize like, myArr: new FormArray([])
+                An argument for 'controls' was not provided
+                => initialize like, myArr: new FormArray([])
 
-                            <hr />
+                <hr />
 
-                            Property 'controls' does not exist on type 'AbstractControl'
-                            <br />  => need to typecast to < FormArray>
-                                , which has controls.
-                            <br />      in .ts add method- get formArr() { return < FormArray> this.myform.get('formArrName'); }
-                            <br />        in.html- < div *ngFor="let item of formArr.controls">
+                Property 'controls' does not exist on type 'AbstractControl'
+                <br />  => need to typecast to < FormArray>
+                    , which has controls.
+                <br />      in .ts add method- get formArr() { return < FormArray> this.myform.get('formArrName'); }
+                <br />        in.html- < div *ngFor="let item of formArr.controls">
 
-                                <hr />
+                    <hr />
+
+                "Object is possibly 'null'.ngtsc(2531)" in "formReactive.get('name').invalid"
+                <br /> => do, formReactive.get('name')?.invalid
+                <br /> Or, read https://www.angularjswiki.com/angular/object-is-possibly-null-error-fix/
+
+                    <hr />
+
+                            "formGroup: FormGroup" shows error: "Type '(formGroup: FormGroup) => ValidationErrors | null' is not assignable to type 'ValidatorFn'. Types of parameters 'formGroup' and 'control' are incompatible. Type 'AbstractControl' is missing the following properties from type 'FormGroup': controls, registerControl, addControl, removeControl, and 3 more.ts(2322)"
+                <br /> => error because ValidatorFn works with controls. so do, "formGroup: AbstractControl"
+
+                    <hr />
+
+                            "this.updateFormReactve as StudentUpdateDTO" shows error: Conversion of type 'FormGroup' to type 'StudentUpdateDTO' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first. Type 'FormGroup' is missing the following properties from type 'StudentUpdateDTO': studentId, name, dateOfBirth, passed, and 3 more.ts(2352)
+                <br /> => do, this.updateFormReactve.value as StudentUpdateDTO
+
+                    <hr />
+
+                                                                        @@ViewChild initializer error on Angular 13. "Property 'viewChild1' has no initializer and is not definitely assigned in the constructor.ts(2564)"
+                <br /> => (I like), @@ViewChild('child') child: ChildComponent = {} as ChildComponent;
+                <br /> Or, @@ViewChild('child') child: ChildComponent = {} as ElementRef;
+                <br /> Or, (not sure) @@ViewChild('child') child: ChildComponent = new ChildComponent;
+
+                <hr />
+
+                '...' is deprecated.ts(6385) => hover to show popup, ctrl+click to link takes to hints
+
+                <hr />
+
+<!-- below Added on 29 apr -->
+
+                "Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Student'.
+                No index signature with a parameter of type 'string' was found on type 'Student'.ts(7053)"
+                <br /> => instead of Student, make it of type any.
+
+                 <hr />
 
 
-                                        "Object is possibly 'null'.ngtsc(2531)" in "formReactive.get('name').invalid"
-                            <br /> => do, formReactive.get('name')?.invalid
-                            <br /> Or, read https://www.angularjswiki.com/angular/object-is-possibly-null-error-fix/
+                Form-validator not getting called at all => check whether the module using it has it in its declarations[].
 
-                                <hr />
-
-                                        "formGroup: FormGroup" shows error: "Type '(formGroup: FormGroup) => ValidationErrors | null' is not assignable to type 'ValidatorFn'. Types of parameters 'formGroup' and 'control' are incompatible. Type 'AbstractControl' is missing the following properties from type 'FormGroup': controls, registerControl, addControl, removeControl, and 3 more.ts(2322)"
-                            <br /> => error because ValidatorFn works with controls. so do, "formGroup: AbstractControl"
-
-                                <hr />
-
-                                        "this.updateFormReactve as StudentUpdateDTO" shows error: Conversion of type 'FormGroup' to type 'StudentUpdateDTO' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first. Type 'FormGroup' is missing the following properties from type 'StudentUpdateDTO': studentId, name, dateOfBirth, passed, and 3 more.ts(2352)
-                            <br /> => do, this.updateFormReactve.value as StudentUpdateDTO
-
-                                <hr />
-
-                                                                                    @@ViewChild initializer error on Angular 13. "Property 'viewChild1' has no initializer and is not definitely assigned in the constructor.ts(2564)"
-                            <br /> => (I like), @@ViewChild('child') child: ChildComponent = {} as ChildComponent;
-                            <br /> Or, @@ViewChild('child') child: ChildComponent = {} as ElementRef;
-                            <br /> Or, (not sure) @@ViewChild('child') child: ChildComponent = new ChildComponent;
-
-                                <hr />
-
-                                        '...' is deprecated.ts(6385)
-                                        => hover to show popup, ctrl+click to link takes to hints
-
-                                <hr />
+                 <hr />
 
 
+                Can't bind to 'routerLink' since it isn't a known property => module needs RouterModule in imports
+
+                 <hr />
+
+                (found while using highcharts) Generic type 'ɵɵComponentDeclaration' requires 7 type argument(s)
+                <br /> => in package.json add compatible version and do 'npm install'.
+                
+                <hr />
+
+                (found when lazy loading was added) "Error: BrowserModule has already been loaded. If you need access to common directives such as NgIf and NgFor from a lazy loaded module, import CommonModule instead."
+                <br /> => adding 'BrowserModule' to shared.module's exports causes this. So, add 'BrowserModule' only to app.module's import, and add 'CommonModule' to shared.module's import+export.
+                
+                <hr />
 
 
+                "NullInjectorError: R3InjectorError(AppModule)[RouterModule -> Router -> NgModuleFactoryLoader -> Compiler -> Compiler -> Compiler]: NullInjectorError: No provider for Compiler!"
+                <br /> => AppModule needs BrowserModule in imports
 
+                <hr />
+
+                don't see lazy loading's 0.js in browser's network tab
+                <br /> => updated is name like 'src_app_...'. clear network tab and go to link again (in new tab).
+
+                <hr />
+
+                API's return NotFound(student); causing problem in angular =>  do, return new EmptyResult(); in api controller.
+
+<!-- total 68 above. below Added on  -->
 
 
 
