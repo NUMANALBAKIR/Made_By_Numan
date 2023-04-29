@@ -1,7 +1,7 @@
 <div class="container border p-2 mt-2">
     <div class="row d-flex justify-content-end">
         <div class="col text-primary">
-            <h3 >Student Details -</h3>
+            <h3>Student Details -</h3>
         </div>
 
         <div class="col text-end">
@@ -70,10 +70,8 @@
     <div class="row">
         <figure class="highcharts-figure">
             <div id="container">
-                <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
-                    [options]="chartOptions" [(update)]="updateFlag" [oneToOne]="oneToOneFlag"
-                    [runOutsideAngular]="runOutsideAngular"
-                    style="width: 100%; height: 400px; display: block; border: 1px solid;"></highcharts-chart>
+                <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions" [(update)]="updateFlag"
+                style="width: 100%; height: 400px; display: block; border: 1px solid;"></highcharts-chart>
             </div>
         </figure>
     </div>

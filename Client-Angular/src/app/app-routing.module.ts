@@ -5,7 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ParentComponent } from './components/parent/parent.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'admin/addstudent', pathMatch: 'full' },
+  { path: '', redirectTo: 'admin/readstudent/1/JINA', pathMatch: 'full' },
 
   { path: 'about', component: AboutComponent },
   { path: 'componentcommunications', component: ParentComponent },
