@@ -1,4 +1,4 @@
-<!-- top row -->
+<!-- top title row -->
 <div class="container border mt-3 p-2">
     <div class="row">
         <div class="col">
@@ -13,6 +13,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- searching -->
 <div class="container border mt-3 p-2">
@@ -58,12 +59,11 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let student of students | filter: searchBy: searchText ; let i = index"
-                [ngClass]="{'border border-danger': !student.passed}">
+            <tr *ngFor="let student of students | filter: searchBy: searchText ; let i = index">
                 <td>{{student.studentId}}</td>
                 <th>{{student.name }}</th>
                 <td>{{student.dateOfBirth | date}}</td>
-                <td [style.color]="(student.passed == true)? 'green':'blue'">
+                <td [style.color]="(student.passed == true)? 'green':'red'">
                     {{student.passed}}
                 </td>
                 <th>{{student.gender }}</th>
