@@ -194,6 +194,13 @@ public class StudentsAPIController : ControllerBase
             return NotFound();
         }
 
+        // get student's subjects and delete.
+        List<SubjectDTO> subjects = await _subjectsAPIController.GetSubjects(student.StudentId);
+        foreach (var item in subjects)
+        {
+            await _subjectsAPIController.DeleteSubject(item.SubjectId);
+        }
+
         _context.Students.Remove(student);
         await _context.SaveChangesAsync();
 

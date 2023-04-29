@@ -40,9 +40,9 @@ public class SubjectsAPIController : ControllerBase, ISubjectsAPIController
 
     // GET: api/SubjectsAPI/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<SubjectDTO>> GetSubject(int id)
+    public async Task<ActionResult<SubjectDTO>> GetSubject(int subjectId)
     {
-        Subject subject = await _context.Subjects.FindAsync(id);
+        Subject subject = await _context.Subjects.FindAsync(subjectId);
 
         SubjectDTO subjectDto = _mapper.Map<SubjectDTO>(subject);
 
@@ -103,9 +103,9 @@ public class SubjectsAPIController : ControllerBase, ISubjectsAPIController
 
     // DELETE: api/SubjectsAPI/5
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteSubject(int id)
+    public async Task<IActionResult> DeleteSubject(int subjectId)
     {
-        var subject = await _context.Subjects.FindAsync(id);
+        var subject = await _context.Subjects.FindAsync(subjectId);
         if (subject == null)
         {
             return NotFound();

@@ -15,7 +15,7 @@ export class CanDeactivateGuardService implements CanDeactivate<ICanDeactivate> 
     if (component.canLeave == true) {
       return true;
     } else {
-      return confirm('Changes will be lost. Leave page?');
+      return confirm('Can-Deactivate-Guard says: Changes will be lost. Leave page?');
     }
   }
 }

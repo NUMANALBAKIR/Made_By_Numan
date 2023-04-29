@@ -134,7 +134,7 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
       },
     }; // required
 
-    this.updateFlag = true;
+    this.updateFlag = true; // this updates chart
   }
 
 
