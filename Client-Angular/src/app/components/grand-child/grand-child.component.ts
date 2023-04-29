@@ -30,7 +30,7 @@ export class GrandChildComponent implements OnInit, OnDestroy {
 
   toggleBlackWhite() {
     if (this.white) {
-      this.grandChildColor = 'black';
+      this.grandChildColor = 'pink';
       this.white = !this.white;
     } else {
       this.grandChildColor = 'white';

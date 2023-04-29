@@ -25,8 +25,8 @@ export class ComponentCommunicationsService {
   // this service => grandchild2
   turnBlue() {
 
-    if (this.color != 'blue') {
-      this.color = 'blue';
+    if (this.color != 'yellow') {
+      this.color = 'yellow';
     }
     else {
       this.color = 'white';
