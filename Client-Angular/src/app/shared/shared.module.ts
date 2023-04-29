@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -9,7 +8,6 @@ import { GenderCountryValidatorDirective } from '../directives/gender-country-va
 import { StudentIdUniqueValidatorDirective } from '../directives/student-id-unique-validator.directive';
 import { FilterPipe } from '../pipes/filter.pipe';
 import { ToUpperPipe } from '../pipes/to-upper.pipe';
-import { HighchartsChartModule } from 'highcharts-angular';
 
 
 
@@ -27,8 +25,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule,
-    HighchartsChartModule
+    RouterModule
 
   ],
   exports: [
@@ -37,7 +34,6 @@ import { HighchartsChartModule } from 'highcharts-angular';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    HighchartsChartModule,
 
     ToUpperPipe,
     FilterPipe,

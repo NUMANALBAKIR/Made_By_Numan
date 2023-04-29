@@ -29,7 +29,7 @@
 
                 <span class="text-danger"
                     *ngIf="updateFormReactve.get('studentId')?.invalid && (updateFormReactve.get('studentId')?.dirty || updateFormReactve.get('studentId')?.touched || submitted) && updateFormReactve.get('studentId')?.errors?.studentIdExists">
-                Id does not exist.
+                Custom AsyncValidator says: Id does not exist.
                 </span>
             </div>
 
@@ -77,7 +77,7 @@
 
                 <span class="text-danger"
                     *ngIf="updateFormReactve.get('dateOfBirth')?.invalid && (updateFormReactve.get('dateOfBirth')?.dirty || updateFormReactve.get('dateOfBirth')?.touched || submitted) && updateFormReactve.get('dateOfBirth')?.errors?.hasminage">
-                    Age must be between 6 and 18.</span>
+                    Custom validator says: Age must be between 6 and 18.</span>
             </div>
 
 
@@ -116,7 +116,7 @@
 
                 <span class="text-danger"
                     *ngIf="updateFormReactve.get('gender')?.invalid && (updateFormReactve.get('gender')?.dirty || updateFormReactve.get('gender')?.touched || submitted) && updateFormReactve.get('gender')?.errors?.notBothOther">
-                    ( Both Gender and Country can't be 'Other'. )</span>
+                    ( Cross-field validator says: Both Gender and Country can't be 'Other'. )</span>
             </div>
 
 

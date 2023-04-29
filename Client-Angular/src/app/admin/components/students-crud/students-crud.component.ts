@@ -75,13 +75,20 @@ export class StudentsCRUDComponent implements OnInit, OnDestroy {
         })
     );
 
-    //  needed
+    // better alternaive is router below
+    // this.location.back();
+
+    // .navigate is preferred to .navigateByUrl
+    // this.router.navigate(['/admin', 'studentscrud']); // ['/parent', 'child']
+
+    // need
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
-    this.router.navigateByUrl('/studentscrud');
+    this.router.navigate(['/admin', 'studentscrud']); // ['/parent', 'child']
 
   }
+
 
   // button commented out
   // onSearchClick() {

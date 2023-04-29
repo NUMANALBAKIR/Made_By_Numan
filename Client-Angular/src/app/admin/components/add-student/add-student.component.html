@@ -30,7 +30,7 @@
 
                 <span class="text-danger"
                     *ngIf="newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newStudentForm.submitted) && newStudentId.errors?.uniqueStudentId">
-                    Id already exists.
+                    Custom AsyncValidator says: Id already exists.
                 </span>
             </div>
 
@@ -66,7 +66,7 @@
             </div>
             <div class="col-9 pb-3">
                 <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"  
-                    [(ngModel)]="studentCreateDTO.dateOfBirth" #newStudentDob="ngModel" required="required"
+                    [(ngModel)]="studentCreateDTO.dateOfBirth" #newStudentDob="ngModel" required="required" appAgeValidator={{currYear}}
                     [ngClass]="{'is-invalid': newStudentDob.invalid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted),                            
                             'is-valid': newStudentDob.valid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted) }">
 
@@ -76,7 +76,7 @@
 
                 <span class="text-danger"
                     *ngIf="newStudentDob.invalid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted) && newStudentDob.errors?.correctAge">
-                    Age must be between 6 and 18.</span>
+                    Custom validator says: Age must be between 6 and 18.</span>
             </div>
 
 
@@ -113,7 +113,7 @@
 
                     <span class="text-danger"
                         *ngIf="newStudentGender.invalid && (newStudentGender.dirty || newStudentGender.touched || newStudentForm.submitted) && newStudentGender.errors?.bothOther">
-                        ( Both Gender and Country can't be 'Other'. )</span>
+                        ( Cross-field validator says: Both Gender and Country can't be 'Other'. )</span>
                 </div>
 
             </div>

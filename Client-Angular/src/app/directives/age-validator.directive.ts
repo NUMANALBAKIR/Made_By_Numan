@@ -2,7 +2,7 @@ import { Directive, Input } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 
 /*
-  custom vali  in Template Driven Form. 
+  custom vali in Template Driven Form. 
   Used in: Create Student.
   Age must be between 6 and 18.
 */
