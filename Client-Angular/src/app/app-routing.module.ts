@@ -5,7 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ParentComponent } from './components/parent/parent.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'admin/editstudent', pathMatch: 'full' },
+  { path: '', redirectTo: 'admin/studentscrud', pathMatch: 'full' },
 
   { path: 'about', component: AboutComponent },
   { path: 'componentcommunications', component: ParentComponent },
@@ -17,7 +17,7 @@ const routes: Routes = [
 
 @NgModule({
   /* enableTracing: true, (this logs Router events)*/
-  imports: [RouterModule.forRoot(routes, { useHash: true /*enableTracing:true (shows router events)*/, preloadingStrategy: PreloadAllModules, onSameUrlNavigation: 'reload' })], // combining 'routes' with the imported
+  imports: [RouterModule.forRoot(routes, { useHash: true /*enableTracing:true (shows router events)*/, preloadingStrategy: PreloadAllModules })], // combining 'routes' with the imported
   exports: [RouterModule] // made available to AppModule
 })
 export class AppRoutingModule { }

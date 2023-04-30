@@ -75,17 +75,7 @@ export class StudentsCRUDComponent implements OnInit, OnDestroy {
           console.log(e);
         })
     );
-
-    // better alternaive is router below
-    // this.location.back();
-    
-    // needed
-    this.router.routeReuseStrategy.shouldReuseRoute = () => {
-      return false;
-    };
-    // .navigate is preferred to .navigateByUrl
-    this.router.navigate(['/admin', 'studentscrud']); // ['/parent', 'child']
-
+    window.location.reload();
   }
 
 
