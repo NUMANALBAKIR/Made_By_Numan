@@ -10,44 +10,49 @@
         </div>
         <div class="card-body">
 
-            <h4 class="card-title">
-                Change Parent Color:
-                <input type="color" id="parentcolor" name="parentcolor" [(ngModel)]="parentColorValue">
-            </h4>
+            <div class="mx-4">
 
-            <h4 class="card-title">
-                Send Color to Child -- using @Input:
-                <input type="color" id="childcolor" name="childcolor" [(ngModel)]="toChildColorValue">
-            </h4>
+                <h4 class="card-title">
+                    Change Parent Color:
+                    <input type="color" id="parentcolor" name="parentcolor" [(ngModel)]="parentColorValue">
+                </h4>
 
-            <div>
-                <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
-                    (click)="TurnYellowGrandChild3()">
-                    Turn Grand-Child-2 Yellow -- using Custom RxJS Obsevable
-                </button>
-            </div>
+                <h4 class="card-title">
+                    Send Color to Child -- using @Input:
+                    <input type="color" id="childcolor" name="childcolor" [(ngModel)]="toChildColorValue">
+                </h4>
 
-            <br>
+                <div>
+                    <button type="button" class="btn btn-success" name="eventToParent" id="eventToParent"
+                        (click)="TurnYellowGrandChild3()">
+                        Turn Grand-Child-2 Yellow -- using Custom RxJS Obsevable
+                    </button>
+                </div>
 
-            <div>
-                <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
-                    (click)="TurnBothRed()">
-                    Turn Grand-Children 1+2 Red -- using RxJS Subject
-                </button>
-            </div>
+                <br>
 
-            <br>
+                <div>
+                    <button type="button" class="btn btn-success" name="eventToParent" id="eventToParent"
+                        (click)="TurnBothRed()">
+                        Turn Grand-Children 1+2 Red -- using RxJS Subject
+                    </button>
+                </div>
 
-            <!-- not working -->
-            <!-- <div>
+                <br>
+
+                <!-- not working -->
+                <!-- <div>
                 This text was set using ElementRef.
                 <input type="text" #h1Ref>
                 <button type="button" (click)="setInput()" class="btn btn-primary" >change input</button>
             </div> -->
 
+            </div>
+
+
             <app-child [childColor]="toChildColorValue" (childsClickEmitter)="parentsMethod($event)">
                 <!-- contents from parent -->
-                
+
                 <div class="col">
                     <app-grand-child3 #ngCongc34 #grandChild3FromParent>
                     </app-grand-child3>
@@ -57,7 +62,7 @@
                     <app-grand-child4 #ngCongc34 #grandChild4FromParent>
                     </app-grand-child4>
                 </div> -->
-                
+
             </app-child>
 
         </div>

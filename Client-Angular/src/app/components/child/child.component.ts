@@ -97,7 +97,7 @@ export class ChildComponent implements
     });
   }
 
-
+  // using contentchildren
   getGC3Color() {
     this.childColor = this.grandChild3FromParent.grandChild3Color;
   }

@@ -1,4 +1,4 @@
-<div class="card shadow-none border-warning mx-4 mt-3 mb-4" [style.background-color]="childColor"
+<div class="card shadow-none border-warning mx-4 mt-3 mb-2" [style.background-color]="childColor"
     style="border: 3px solid;">
     <div class="card-header">
         <h5>Child</h5>
@@ -20,7 +20,7 @@
         <br>
 
         <div>
-            <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
+            <button type="button" class="btn btn-info" name="eventToParent" id="eventToParent"
                 (click)="toggle12PinkWhite()">
                 Toggle Grand-Children 1+2's methods -- using @ViewChildren
             </button>
@@ -29,7 +29,7 @@
         <br>
 
         <div>
-            <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
+            <button type="button" class="btn btn-info" name="eventToParent" id="eventToParent"
                 (click)="gc1.togglePinkWhite()">
                 Toggle Grand-Child-1's method -- using @ViewChild
             </button>
