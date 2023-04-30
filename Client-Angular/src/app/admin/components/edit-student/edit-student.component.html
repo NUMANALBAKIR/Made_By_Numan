@@ -184,8 +184,8 @@
                     </div>
 
                     <!-- remove button -->
-                    <div class="col">                        
-                        <a class="btn btn-danger btn-sm" (click)="onRemoveClick(i)">                            
+                    <div class="col">
+                        <a class="btn btn-danger btn-sm" (click)="onRemoveClick(i)">
                             <i class="bi bi-x-lg"></i>
                         </a>
                     </div>
@@ -194,7 +194,7 @@
 
                 <!-- Add Subject button -->
                 <div class="col">
-                    <button type="button" class="btn btn-dark" (click)="onAddClick()">                                  
+                    <button type="button" class="btn btn-dark" (click)="onAddClick()">
                         Add Subject
                     </button>
                 </div>
@@ -209,7 +209,7 @@
 
             <!-- buttons -->
             <div>
-                <button [disabled]="!updateFormReactve.valid" type="submit"
+                <button  type="submit"
                     class="btn btn-success form-control mt-3 text-white">Submit</button>
 
                 <a type="button" routerLink="/admin/studentscrud" class="btn btn-outline-primary form-control mt-3">Back
@@ -224,7 +224,12 @@
 </form>
 
 
+<br>
 <!-- For development purpose: -->
-form- {{updateFormReactve.value | json}}
-<hr>
-dto- {{studentUpdateDTO | json}}
+<div class="container">
+    For development purpose (Json pipe)-
+    <br>
+    form- {{updateFormReactve.value | json}}
+    <hr>
+    dto- {{studentUpdateDTO | json}}
+</div>
