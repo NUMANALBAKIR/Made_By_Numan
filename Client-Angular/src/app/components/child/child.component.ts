@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, ContentChild, DoCheck, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, ContentChild, ContentChildren, DoCheck, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { GrandChildComponent } from '../grand-child/grand-child.component';
 import { GrandChild2Component } from '../grand-child2/grand-child2.component';
 import { ComponentCommunicationsService } from '../../services/component-communications.service';
@@ -26,9 +26,10 @@ export class ChildComponent implements
 
   @ViewChild('gc1') gc1: GrandChildComponent = {} as GrandChildComponent;
   @ViewChild('gc2') gc2: GrandChild2Component = {} as GrandChild2Component;
-  @ViewChildren('gcs') gcs = {} as QueryList<GrandChildComponent>;
+  @ViewChildren('gc12') gc12 = {} as QueryList<GrandChildComponent>;
 
   @ContentChild('grandChild3FromParent') grandChild3FromParent = {} as GrandChild3Component;
+  @ContentChildren('ngCongc34') ngCongc34 = {} as QueryList<GrandChild3Component>;
 
 
   constructor(private _compCommuService: ComponentCommunicationsService) {
@@ -89,17 +90,11 @@ export class ChildComponent implements
 
 
   // viewchildren
-  toggleBothBlackWhite() {
-    let gcsArr = this.gcs.toArray();
+  toggle12PinkWhite() {
+    let gcsArr = this.gc12.toArray();
     gcsArr.forEach(element => {
-      element.toggleBlackWhite();
+      element.togglePinkWhite();
     });
-  }
-
-
-  // this child => service => grandchild2
-  TurnBlueGrandChild2() {
-    this._compCommuService.turnBlue();
   }
 
 

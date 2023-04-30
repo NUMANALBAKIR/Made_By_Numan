@@ -12,6 +12,7 @@ import { LoginAlertsDirective } from './directives/login-alerts.directive';
 import { AboutComponent } from './components/about/about.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { GrandChild4Component } from './components/grand-child4/grand-child4.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { BrowserModule } from '@angular/platform-browser';
     GrandChildComponent,
     GrandChild2Component,
     GrandChild3Component,
+    GrandChild4Component,
     LoginComponent,
     LoginAlertsDirective
 

@@ -19,16 +19,7 @@ export class GrandChild2Component implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    // child => service => this grandchild2
-    this._compCommuService.observableChild.subscribe(
-      (color: string) => {
-        this.grandChild2Color = color;
-      },
-      (e) => {
-        console.log(e);
-      }
-    );
-
+    // parent => service => this grandchild2
     this.subscription =
       this._compCommuService.subjectParent.subscribe(
         (color) => {
@@ -39,7 +30,7 @@ export class GrandChild2Component implements OnInit, OnDestroy {
   }
 
 
-  toggleBlackWhite() {
+  togglePinkWhite() {
     if (this.white) {
       this.grandChild2Color = 'pink';
       this.white = !this.white;

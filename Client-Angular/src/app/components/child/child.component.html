@@ -1,4 +1,5 @@
-<div class="card shadow-none border-warning mx-4 mt-3 mb-4" [style.background-color]="childColor" style="border: 3px solid;">
+<div class="card shadow-none border-warning mx-4 mt-3 mb-4" [style.background-color]="childColor"
+    style="border: 3px solid;">
     <div class="card-header">
         <h5>Child</h5>
     </div>
@@ -12,7 +13,7 @@
         <div>
             <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
                 (click)="onClickToParent($event)">
-                Trigger Parent's method -- using Child's @Output Emitter (Set Color)
+                Trigger Parent's method -- using Child's @Output Event Emitter (Containing Color)
             </button>
         </div>
 
@@ -20,8 +21,8 @@
 
         <div>
             <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
-                (click)="toggleBothBlackWhite()">
-                Toggle Grand-Children 1+2 methods -- using @ViewChildren
+                (click)="toggle12PinkWhite()">
+                Toggle Grand-Children 1+2's methods -- using @ViewChildren
             </button>
         </div>
 
@@ -29,7 +30,7 @@
 
         <div>
             <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
-                (click)="gc1.toggleBlackWhite()">
+                (click)="gc1.togglePinkWhite()">
                 Toggle Grand-Child-1's method -- using @ViewChild
             </button>
         </div>
@@ -39,29 +40,32 @@
         <div>
             <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
                 (click)="getGC3Color()">
-                Get Grand-Child-3 color -- using @ContentChild
+                Get Grand-Child-3's color -- using @ContentChild
             </button>
         </div>
 
-        <br>
+        <!-- <br> -->
 
-        <div>
+        <!-- not implemented yet. ContentChildren -->
+        <!-- <div>
             <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
-                (click)="TurnBlueGrandChild2()">
-                Turn Grand-Child-2 Yellow -- using Custom RxJS Obsevable
+                (click)="toggle12PinkWhite()">
+                Toggle Grand-Children 3+4 methods -- using @ContentChildren
             </button>
         </div>
+
+        <br> -->
 
     </div>
 
     <div class="row">
         <div class="col">
-            <app-grand-child #gcs #gc1>
+            <app-grand-child #gc12 #gc1>
             </app-grand-child>
         </div>
 
         <div class="col">
-            <app-grand-child2 #gcs #gc2>
+            <app-grand-child2 #gc12 #gc2>
             </app-grand-child2>
         </div>
 

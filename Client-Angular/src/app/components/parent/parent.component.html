@@ -1,9 +1,10 @@
 <div class="container my-2">
     <h4 class="text-info">
-        Component-Communications (passing color values) -
+        Different ways of Component-Communication (passing color-values as data) -
     </h4>
 
-    <div class="card shadow-none border-primary mb-3" [style.background-color]="parentColorValue" style="border: 3px solid;">
+    <div class="card shadow-none border-primary mb-3" [style.background-color]="parentColorValue"
+        style="border: 3px solid;">
         <div class="card-header">
             <h5>Parent</h5>
         </div>
@@ -21,8 +22,17 @@
 
             <div>
                 <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
+                    (click)="TurnYellowGrandChild3()">
+                    Turn Grand-Child-2 Yellow -- using Custom RxJS Obsevable
+                </button>
+            </div>
+
+            <br>
+
+            <div>
+                <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
                     (click)="TurnBothRed()">
-                    Turn both Grand-Children Red -- using RxJS Subject
+                    Turn Grand-Children 1+2 Red -- using RxJS Subject
                 </button>
             </div>
 
@@ -35,14 +45,19 @@
                 <button type="button" (click)="setInput()" class="btn btn-primary" >change input</button>
             </div> -->
 
-
-
             <app-child [childColor]="toChildColorValue" (childsClickEmitter)="parentsMethod($event)">
+                <!-- contents from parent -->
+                
+                <div class="col">
+                    <app-grand-child3 #ngCongc34 #grandChild3FromParent>
+                    </app-grand-child3>
+                </div>
 
-                <!-- content from parent -->
-                <app-grand-child3 #grandChild3FromParent >
-                </app-grand-child3>
-
+                <!-- <div class="col">
+                    <app-grand-child4 #ngCongc34 #grandChild4FromParent>
+                    </app-grand-child4>
+                </div> -->
+                
             </app-child>
 
         </div>

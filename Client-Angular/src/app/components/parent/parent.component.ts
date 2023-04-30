@@ -39,4 +39,11 @@ export class ParentComponent implements OnInit {
   //   thisElement.innerText = 'This text was set using ElementRef.';
   // }
 
+
+  // this child => service => grandchild2
+  TurnYellowGrandChild3() {
+    this._compCommuService.turnYellow();
+  }
+
+
 }

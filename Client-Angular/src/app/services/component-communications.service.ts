@@ -19,11 +19,11 @@ export class ComponentCommunicationsService {
     }
   );
 
-  //-
+  // parent => this service => grandchildren 1+2
   subjectParent = new Subject<string>();
 
-  // this service => grandchild2
-  turnBlue() {
+  // parent => this service => grandchild 3
+  turnYellow() {
 
     if (this.color != 'yellow') {
       this.color = 'yellow';
@@ -37,7 +37,7 @@ export class ComponentCommunicationsService {
     });
   }
 
-  // this service => both grandchilds
+  // parent => this service => grandchildren 1+2
   turnRed() {
     if (this.color != 'red') {
       this.color = 'red';
@@ -45,9 +45,7 @@ export class ComponentCommunicationsService {
     else {
       this.color = 'white';
     }
-
     this.subjectParent.next(this.color);
-
   }
 
 }
