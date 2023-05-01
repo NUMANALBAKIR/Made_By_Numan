@@ -1,5 +1,5 @@
 <div class="container my-2">
-    <h4 class="text-info">
+    <h4 class="">
         Different ways of Component-Communication (passing color-values as data) -
     </h4>
 
@@ -51,17 +51,17 @@
 
 
             <app-child [childColor]="toChildColorValue" (childsClickEmitter)="parentsMethod($event)">
+                
                 <!-- contents from parent -->
-
                 <div class="col">
-                    <app-grand-child3 #ngCongc34 #grandChild3FromParent>
+                    <app-grand-child3 #gc34FromParent #gc3FromParent>
                     </app-grand-child3>
                 </div>
 
-                <!-- <div class="col">
-                    <app-grand-child4 #ngCongc34 #grandChild4FromParent>
+                <div class="col">
+                    <app-grand-child4 #gc34FromParent #gc4FromParent>
                     </app-grand-child4>
-                </div> -->
+                </div>
 
             </app-child>
 

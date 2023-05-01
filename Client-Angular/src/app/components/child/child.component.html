@@ -21,8 +21,8 @@
 
         <div>
             <button type="button" class="btn btn-info" name="eventToParent" id="eventToParent"
-                (click)="toggle12PinkWhite()">
-                Toggle Grand-Children 1+2's methods -- using @ViewChildren
+                (click)="gc1.togglePinkWhite()">
+                Toggle Grand-Child-1's method -- using @ViewChild
             </button>
         </div>
 
@@ -30,8 +30,8 @@
 
         <div>
             <button type="button" class="btn btn-info" name="eventToParent" id="eventToParent"
-                (click)="gc1.togglePinkWhite()">
-                Toggle Grand-Child-1's method -- using @ViewChild
+                (click)="toggle12PinkWhite()">
+                Toggle Grand-Children-1+2's methods -- using @ViewChildren
             </button>
         </div>
 
@@ -44,17 +44,14 @@
             </button>
         </div>
 
-        <!-- <br> -->
+        <br>
 
-        <!-- not implemented yet. ContentChildren -->
-        <!-- <div>
+        <div>
             <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
-                (click)="toggle12PinkWhite()">
-                Toggle Grand-Children 3+4 methods -- using @ContentChildren
+                (click)="getToggleGC34Color()">
+                Get, Toggle using Grand-Children-3+4's colors -- using @ContentChildren
             </button>
         </div>
-
-        <br> -->
 
     </div>
 
