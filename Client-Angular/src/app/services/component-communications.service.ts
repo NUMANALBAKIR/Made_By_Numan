@@ -22,20 +22,20 @@ export class ComponentCommunicationsService {
   // parent => this service => grandchildren 1+2
   subjectParent = new Subject<string>();
 
-  // parent => this service => grandchild 3
-  turnYellow() {
 
+  // parent => this service => grandchild 1
+  turnYellow() {
     if (this.color != 'yellow') {
       this.color = 'yellow';
     }
     else {
       this.color = 'white';
     }
-
     this.obseversGrandChilds.forEach(observer => {
-      observer.next(this.color); // notify change to grandchild2
+      observer.next(this.color); // notify change to grandchild 1
     });
   }
+
 
   // parent => this service => grandchildren 1+2
   turnRed() {

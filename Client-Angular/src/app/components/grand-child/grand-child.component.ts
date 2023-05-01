@@ -9,21 +9,35 @@ import { Subscription } from 'rxjs';
 })
 export class GrandChildComponent implements OnInit, OnDestroy {
 
-  constructor(private _compCommuService: ComponentCommunicationsService) { }
+  constructor(private compCommuService: ComponentCommunicationsService) { }
 
 
   grandChildColor: string = 'white';
   white = true;
-  subscription = new Subscription();
+  subscriptions: Subscription[] = [];
+
 
   ngOnInit(): void {
 
-    this.subscription =
-      this._compCommuService.subjectParent.subscribe(
+    // parent => service observable => this grandchild2
+    this.subscriptions.push(
+      this.compCommuService.observableChild.subscribe(
+        (color: string) => {
+          this.grandChildColor = color;
+        },
+        (e) => {
+          console.log(e);
+        }
+      )           // subsciptions are separated by comma
+    );
+
+    this.subscriptions.push(
+      this.compCommuService.subjectParent.subscribe(
         (color) => {
           this.grandChildColor = color;
         }
-      );
+      )
+    );
 
   }
 
@@ -40,6 +54,9 @@ export class GrandChildComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.forEach(element => {
+      element.unsubscribe();
+    });
   }
+
 }

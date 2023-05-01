@@ -24,8 +24,8 @@
 
                 <div>
                     <button type="button" class="btn btn-success" name="eventToParent" id="eventToParent"
-                        (click)="TurnYellowGrandChild3()">
-                        Turn Grand-Child-2 Yellow -- using Custom RxJS Obsevable
+                        (click)="TurnYellowGrandChild1()">
+                        Turn Grand-Child-1 Yellow -- using Custom RxJS Obsevable
                     </button>
                 </div>
 
@@ -50,6 +50,7 @@
             </div>
 
 
+            <!-- child component -->
             <app-child [childColor]="toChildColorValue" (childsClickEmitter)="parentsMethod($event)">
                 
                 <!-- contents from parent -->

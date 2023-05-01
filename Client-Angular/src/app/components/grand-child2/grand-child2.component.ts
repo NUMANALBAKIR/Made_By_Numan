@@ -19,7 +19,7 @@ export class GrandChild2Component implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    // parent => service => this grandchild2
+    // parent => service subject => this grandchild2
     this.subscription =
       this._compCommuService.subjectParent.subscribe(
         (color) => {

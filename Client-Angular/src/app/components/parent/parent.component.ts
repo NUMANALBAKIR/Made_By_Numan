@@ -41,7 +41,7 @@ export class ParentComponent implements OnInit {
 
 
   // this child => service => grandchild2
-  TurnYellowGrandChild3() {
+  TurnYellowGrandChild1() {
     this._compCommuService.turnYellow();
   }
 
