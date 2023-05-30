@@ -5,7 +5,7 @@ But, if you are a Job-Employer and would like to run my project, please let me k
 
 2. I've implemented design patterns and principles in Project 'API'; so, didn't implement those again in project 'API-Angular', to save time.
 
-3. Project 'Clent' is Asp.Net Core MVC.
+3. Project 'Client' is Asp.Net Core MVC.
 
 4. Projects Demos -  
 Core MVC & Web API: https://drive.google.com/file/d/1fANPPCg67RXcpt5vVVplfMWTN867I8Yl/view  
