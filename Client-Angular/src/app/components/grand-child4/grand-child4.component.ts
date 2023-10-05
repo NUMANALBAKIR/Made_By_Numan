@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 
 @Component({
   selector: 'app-grand-child4',
@@ -14,9 +14,10 @@ export class GrandChild4Component implements DoCheck {
 
 
   grandChild4Color: string;
-  itsColor: string;
+  itsColor: string;     // common in both gc3, gc4. used in a foreach
 
 
+  // on every change detection
   ngDoCheck(): void {
     this.itsColor = this.grandChild4Color;
   }

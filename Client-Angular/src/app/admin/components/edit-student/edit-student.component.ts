@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { StudentsService } from 'src/app/admin/services/students.service';
 import { Location } from '@angular/common';
 import { StudentUpdateDTO } from 'src/app/admin/models/StudentUpdateDTO';
-import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Country } from 'src/app/admin/models/country';
 import { Router } from '@angular/router';
 import { StudentDTO } from 'src/app/admin/models/StudentDTO';
@@ -14,7 +14,7 @@ import { CustomValidatorsService } from '../../services/custom-validators.servic
 
 
 /*
-Reactive Form
+    Reactive Form
 */
 
 @Component({
@@ -152,7 +152,7 @@ export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
     this.submitted = true;
 
     if (this.updateFormReactve.valid) {
-      this.studentUpdateDTO = this.updateFormReactve.value as StudentUpdateDTO;
+      this.studentUpdateDTO = this.updateFormReactve.value as StudentUpdateDTO; // note
 
       this.subscriptions.push(
         this.studentsService.updateStudent(this.studentUpdateDTO).subscribe(

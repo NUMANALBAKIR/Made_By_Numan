@@ -49,8 +49,8 @@
 
 
             <!-- child component -->
-            <app-child [childColor]="toChildColorValue" (childsClickEmitter)="parentsMethod($event)">
-                
+            <app-child [childColor]="toChildColorValue" (childsClickEmitter)="parentsMethod($event)"> <!-- note: on left of = are child's variables in both cases -->
+
                 <!-- contents gc3, gc4 from parent -->
                 <div class="col">
                     <app-grand-child3 #gc3FromParent #gc34FromParent>

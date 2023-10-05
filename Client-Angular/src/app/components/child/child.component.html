@@ -19,7 +19,7 @@
         <br>
 
         <div>
-            <button type="button" class="btn btn-info" (click)="gc1.togglePinkWhite()">
+            <button type="button" class="btn btn-info" (click)="gc1.togglePinkWhite()"> <!--gc1's method-->
                 Toggle Grand-Child-1's method -- using @ViewChild
             </button>
         </div>
@@ -53,19 +53,18 @@
     <!-- row of parent's grandchilds -->
     <div class="row">
 
-        <!-- view gc1 -->
+        <!-- views gc1, gc2 -->
         <div class="col">
             <app-grand-child #gc1 #gc12>
             </app-grand-child>
         </div>
 
-        <!-- view gc2 -->
         <div class="col">
             <app-grand-child2 #gc2 #gc12>
             </app-grand-child2>
         </div>
 
-        <!-- contents from parent -->
+        <!-- contents gc3, gc4 from parent -->
         <ng-content>
         </ng-content>
 

@@ -23,7 +23,7 @@ export class ParentComponent implements OnInit {
 
   // receive emitter upon child button click 
   parentsMethod(event: any) {
-    this.parentColorValue = event.parentColor;
+    this.parentColorValue = event.childsColor;
   }
 
 
@@ -40,7 +40,7 @@ export class ParentComponent implements OnInit {
   // }
 
 
-  // this child => service => grandchild2
+  // parent => service => grandchild 1
   TurnYellowGrandChild1() {
     this._compCommuService.turnYellow();
   }

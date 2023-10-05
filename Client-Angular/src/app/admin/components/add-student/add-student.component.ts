@@ -1,14 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Location } from '@angular/common';
 import { Country } from 'src/app/admin/models/country';
 import { StudentCreateDTO } from 'src/app/admin/models/StudentCreateDTO';
-import { NgForm, ValidationErrors } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { StudentsService } from '../../services/students.service';
 import { ICanDeactivate } from '../../guards/can-deactivate-guard.service';
 import { CountriesService } from '../../services/countries.service';
-import { Student } from '../../models/Student';
 import { StudentDTO } from '../../models/StudentDTO';
 
 /*
@@ -26,7 +24,8 @@ export class AddStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
   @ViewChild('newStudentForm', { static: true }) newStudentForm: NgForm | any; // to access the form
   studentCreateDTO: StudentCreateDTO;
   countries!: Observable<Country[]>;  // using async pipe, to simplify subscribing to observable.
-                                      // and becaause no manipulation is needed on the received data
+  // and becaause no manipulation is needed on the received data
+  // type is observable bcoz directly receiving it from service.
   currYear: number;
   genders: string[];     // for dynamic radio buttons
   subscriptions: Subscription[];
@@ -36,7 +35,6 @@ export class AddStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
   constructor(
     private studentsService: StudentsService,
     private countriesService: CountriesService,
-    private location: Location,
     private router: Router
   ) {
     this.newStudentForm = null;
@@ -69,7 +67,7 @@ export class AddStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
   onSubmitClick() {
     if (this.newStudentForm.valid) {
       this.subscriptions.push(
-        this.studentsService.addStudent(this.studentCreateDTO).subscribe(
+        this.studentsService.addStudent(this.studentCreateDTO).subscribe( // subscribing to the service's observable
           (r: StudentDTO) => {
           },
           (e) => {
@@ -80,7 +78,7 @@ export class AddStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
 
       this.canLeave = true;
 
-      // this.location.back(); // better alternaive is router below
+      // this.location.back(); // of ctor's 'private location: Location'. // better alternaive is router below
 
       // .navigate is preferred to .navigateByUrl
       this.router.navigate(['/admin', 'studentscrud']); // ['/parent', 'child']

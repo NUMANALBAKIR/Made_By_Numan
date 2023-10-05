@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Country } from 'src/app/admin/models/country';
 import { StudentsService } from 'src/app/admin/services/students.service';
-import * as $ from 'jquery';
 import { StudentDTO } from 'src/app/admin/models/StudentDTO';
 import { Subscription } from 'rxjs';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-students-crud',

@@ -21,7 +21,7 @@ export class GrandChild2Component implements OnInit, OnDestroy {
 
     // parent => service subject => this grandchild2
     this.subscription =
-      this._compCommuService.subjectParent.subscribe(
+      this._compCommuService.subject.subscribe(
         (color) => {
           this.grandChild2Color = color;
         }

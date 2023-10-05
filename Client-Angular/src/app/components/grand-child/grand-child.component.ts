@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ComponentCommunicationsService } from '../../services/component-communications.service';
 import { Subscription } from 'rxjs';
 
@@ -21,31 +21,32 @@ export class GrandChildComponent implements OnInit, OnDestroy {
 
     // parent => service observable => this grandchild2
     this.subscriptions.push(
-      this.compCommuService.observableChild.subscribe(
+
+      this.compCommuService.observable.subscribe(
         (color: string) => {
           this.grandChildColor = color;
         },
         (e) => {
           console.log(e);
         }
-      )           // subsciptions are separated by comma
-    );
-
-    this.subscriptions.push(
-      this.compCommuService.subjectParent.subscribe(
+      )
+      ,           // subsciptions are separated by comma
+      this.compCommuService.subject.subscribe(
         (color) => {
           this.grandChildColor = color;
         }
       )
+
     );
 
   }
 
-
+  // viewchild
+  // similarly, you can access ViewChild's data
   togglePinkWhite() {
     if (this.white) {
       this.grandChildColor = 'pink';
-      this.white = !this.white;
+      this.white = !this.white;     // note
     } else {
       this.grandChildColor = 'white';
       this.white = !this.white;
