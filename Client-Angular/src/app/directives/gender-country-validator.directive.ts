@@ -2,10 +2,10 @@ import { Directive } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 
 /*
-  works. need to fix: doesn't show red error message.
   cross field vali  in Template Driven Form. 
   Used in: Create Student.
   Gender, Country both can't be Other.
+  works? need to fix: doesn't show red error message.
 */
 
 @Directive({

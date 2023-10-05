@@ -24,3 +24,4 @@ export class CanDeactivateGuardService implements CanDeactivate<ICanDeactivate> 
 export interface ICanDeactivate {
   canLeave: boolean;
 }
+

@@ -10,13 +10,12 @@ import { FilterPipe } from '../pipes/filter.pipe';
 import { ToUpperPipe } from '../pipes/to-upper.pipe';
 
 
-
 @NgModule({
   declarations: [
-    ToUpperPipe,
     FilterPipe,
-    GenderCountryValidatorDirective,
+    ToUpperPipe,
     AgeValidatorDirective,
+    GenderCountryValidatorDirective,
     StudentIdUniqueValidatorDirective
 
   ],

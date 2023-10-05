@@ -25,7 +25,8 @@ export class AddStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
 
   @ViewChild('newStudentForm', { static: true }) newStudentForm: NgForm | any; // to access the form
   studentCreateDTO: StudentCreateDTO;
-  countries!: Observable<Country[]>;
+  countries!: Observable<Country[]>;  // using async pipe, to simplify subscribing to observable.
+                                      // and becaause no manipulation is needed on the received data
   currYear: number;
   genders: string[];     // for dynamic radio buttons
   subscriptions: Subscription[];
@@ -42,7 +43,7 @@ export class AddStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
     this.studentCreateDTO = new StudentCreateDTO();
     this.currYear = new Date().getFullYear();
     this.genders = ['Female', 'Male', 'Other'];
-    this.subscriptions = [];
+    this.subscriptions = [];  // note
     this.canLeave = true;
   }
 
@@ -79,8 +80,7 @@ export class AddStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
 
       this.canLeave = true;
 
-      // better alternaive is router below
-      // this.location.back();
+      // this.location.back(); // better alternaive is router below
 
       // .navigate is preferred to .navigateByUrl
       this.router.navigate(['/admin', 'studentscrud']); // ['/parent', 'child']

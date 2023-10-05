@@ -11,7 +11,6 @@ export class Student {
 
   countryId: number | any;    // cli...
   country: Country;     // cli...
-
   subjects: Subject[] | undefined;
 
 
@@ -22,10 +21,9 @@ export class Student {
     this.passed = true;
     this.gender = null;
 
-    this.countryId = null;
-    this.country = new Country();
-
-    this.subjects = [];
+    this.countryId = null; 
+    this.country = new Country(); // imp
+    this.subjects = []; // imp
 
   }
 

@@ -23,7 +23,7 @@ export class StudentsService {
 
 
   getStudent(studentId: number): Observable<StudentDTO> {
-    return this.httpClient.get<StudentDTO>(this._apiUrl + '/' + studentId, { responseType: 'json' })
+    return this.httpClient.get<StudentDTO>(`${this._apiUrl}/${studentId}`, { responseType: 'json' })
       .pipe(map(
         (data: StudentDTO | any) => {
           return data;
@@ -39,7 +39,7 @@ export class StudentsService {
           for (let i = 0; i < data.length; i++) {
             data[i].name = data[i].name.toUpperCase();
           }
-          return data;
+          return data;  // don't forget return
         }
       ));
   }
@@ -61,12 +61,8 @@ export class StudentsService {
 
 
   searchStudents(searchBy: string, searchText: string): Observable<StudentDTO[]> {
-    let url = this._apiUrl + '/' + searchBy + '/' + searchText;
+    let url = `${this._apiUrl}/${searchBy}/${searchText}`;
     return this.httpClient.get<StudentDTO[]>(url, { responseType: 'json' });
   }
-
-
-
-
 
 }

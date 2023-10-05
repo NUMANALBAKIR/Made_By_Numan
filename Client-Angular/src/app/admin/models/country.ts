@@ -1,6 +1,6 @@
 export class Country {
-  countryId: any;
-  name: any;
+  countryId: number | any;
+  name: string | any;
 
   constructor() {
     this.countryId = null;

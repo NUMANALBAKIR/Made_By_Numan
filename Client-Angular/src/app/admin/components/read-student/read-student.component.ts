@@ -30,40 +30,37 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
 
   studentId: number;
   subscriptions: Subscription[];
-  // studentDTO!: Observable<StudentDTO>;
   studentDTO: StudentDTO;
   dataArr: any[] = [];
 
   // highcharts data
   highcharts: typeof Highcharts;// required
   chartConstructor: string; // optional string, defaults to 'chart'
-  chartOptions: any;    // note
-  updateFlag: boolean; 
+  chartOptions: any; 
+  updateFlag: boolean;
   oneToOneFlag: boolean;
   runOutsideAngular: boolean;
 
 
   ngOnInit(): void {
-    this.subscriptions.push(
+    this.subscriptions.push(  // multiple  subscriptions
+
       this.activatedRoute.params.subscribe(
         (routeParams) => {
-          this.studentId = Number(routeParams['studentId']);
+          this.studentId = Number(routeParams['studentId']);  // note Number
         }
-      )
-    );
+      ),
 
-    // this.studentDTO = this.studentsService.getStudent(this.studentId);
-
-    this.subscriptions.push(
       this.studentsService.getStudent(this.studentId).subscribe(
         (response: StudentDTO) => {
           this.studentDTO = response;
-          this.drawHighChart(); // note: after getting response
+          this.drawHighChart();   // note: after getting response
         },
         (e) => {
           console.log(e);
         }
       )
+
     );
 
   }

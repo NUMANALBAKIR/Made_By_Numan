@@ -34,9 +34,6 @@
                 <input type="text" class="form-control" id="searchText" name="searchText" [(ngModel)]="searchText">
             </div>
         </div>
-        <!-- <div class="col input-group-append" (click)="onSearchClick()">
-            <span class="input-group-text"><i class="fa fa-search fa-xl" style="color: teal;"></i></span>
-        </div> -->
     </div>
 </div>
 
@@ -53,13 +50,12 @@
                 <th>Passsed?</th>
                 <th>Gender</th>
                 <th>Country</th>
-                <!-- <th>Subjects</th> -->
                 <th class="table-info" style="text-align: center;">Actions</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr *ngFor="let student of students | filter: searchBy: searchText ; let i = index">
+            <tr *ngFor="let student of students | filterPipe: searchBy: searchText ; let i = index">
                 <td>{{student.studentId}}</td>
                 <th>{{student.name }}</th>
                 <td>{{student.dateOfBirth | date}}</td>
@@ -67,7 +63,7 @@
                     {{student.passed}}
                 </td>
                 <th>{{student.gender }}</th>
-                <th>{{student.country.name | toUpperPipe :'upper':'-piped' }}</th>
+                <th>{{student.country.name | toUpperPipe :'upper':'-piped'}}</th><!-- just practicing custom pipe.could do 'name|uppercase' -->
 
                 <td class="d-flex justify-content-around">
                     <a [routerLink]="['/admin','readstudent', student.studentId, student.name]"
@@ -124,4 +120,7 @@
     </div>
 </div>
 
-<!-- For development purpose- {{ students | json }} -->
+
+<div class="container pt-4">
+    For development purpose- {{ students | json }}
+</div>

@@ -1,6 +1,6 @@
 <div class="container my-2">
     <h4 class="">
-        Different ways of Component-Communication (passing color-values as data) -
+        Various ways of Component-Communication (passing color-values as data) -
     </h4>
 
     <div class="card shadow-none border-primary mb-3" [style.background-color]="parentColorValue"
@@ -23,8 +23,7 @@
                 </h4>
 
                 <div>
-                    <button type="button" class="btn btn-success" name="eventToParent" id="eventToParent"
-                        (click)="TurnYellowGrandChild1()">
+                    <button type="button" class="btn btn-success" (click)="TurnYellowGrandChild1()">
                         Turn Grand-Child-1 Yellow -- using Custom RxJS Obsevable
                     </button>
                 </div>
@@ -32,8 +31,7 @@
                 <br>
 
                 <div>
-                    <button type="button" class="btn btn-success" name="eventToParent" id="eventToParent"
-                        (click)="TurnBothRed()">
+                    <button type="button" class="btn btn-success" (click)="TurnBothRed()">
                         Turn Grand-Children 1+2 Red -- using RxJS Subject
                     </button>
                 </div>
@@ -53,14 +51,14 @@
             <!-- child component -->
             <app-child [childColor]="toChildColorValue" (childsClickEmitter)="parentsMethod($event)">
                 
-                <!-- contents from parent -->
+                <!-- contents gc3, gc4 from parent -->
                 <div class="col">
-                    <app-grand-child3 #gc34FromParent #gc3FromParent>
+                    <app-grand-child3 #gc3FromParent #gc34FromParent>
                     </app-grand-child3>
                 </div>
 
                 <div class="col">
-                    <app-grand-child4 #gc34FromParent #gc4FromParent>
+                    <app-grand-child4 #gc4FromParent #gc34FromParent>
                     </app-grand-child4>
                 </div>
 

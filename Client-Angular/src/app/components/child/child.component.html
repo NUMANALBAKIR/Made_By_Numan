@@ -11,8 +11,7 @@
         </h4>
 
         <div>
-            <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
-                (click)="onClickToParent($event)">
+            <button type="button" class="btn btn-primary" (click)="onClickToParent($event)">
                 Trigger Parent's method -- using Child's @Output Event Emitter (Containing Color)
             </button>
         </div>
@@ -20,8 +19,7 @@
         <br>
 
         <div>
-            <button type="button" class="btn btn-info" name="eventToParent" id="eventToParent"
-                (click)="gc1.togglePinkWhite()">
+            <button type="button" class="btn btn-info" (click)="gc1.togglePinkWhite()">
                 Toggle Grand-Child-1's method -- using @ViewChild
             </button>
         </div>
@@ -29,8 +27,7 @@
         <br>
 
         <div>
-            <button type="button" class="btn btn-info" name="eventToParent" id="eventToParent"
-                (click)="toggle12PinkWhite()">
+            <button type="button" class="btn btn-info" (click)="toggle12PinkWhite()">
                 Toggle Grand-Children-1+2's methods -- using @ViewChildren
             </button>
         </div>
@@ -38,8 +35,7 @@
         <br>
 
         <div>
-            <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
-                (click)="getGC3Color()">
+            <button type="button" class="btn btn-primary" (click)="getGC3Color()">
                 Get Grand-Child-3's color -- using @ContentChild
             </button>
         </div>
@@ -47,26 +43,29 @@
         <br>
 
         <div>
-            <button type="button" class="btn btn-primary" name="eventToParent" id="eventToParent"
-                (click)="getToggleGC34Color()">
+            <button type="button" class="btn btn-primary" (click)="getToggleGC34Color()">
                 Get, Toggle using Grand-Children-3+4's colors -- using @ContentChildren
             </button>
         </div>
 
     </div>
 
+    <!-- row of parent's grandchilds -->
     <div class="row">
+
+        <!-- view gc1 -->
         <div class="col">
-            <app-grand-child #gc12 #gc1>
+            <app-grand-child #gc1 #gc12>
             </app-grand-child>
         </div>
 
+        <!-- view gc2 -->
         <div class="col">
-            <app-grand-child2 #gc12 #gc2>
+            <app-grand-child2 #gc2 #gc12>
             </app-grand-child2>
         </div>
 
-        <!-- from parent -->
+        <!-- contents from parent -->
         <ng-content>
         </ng-content>
 

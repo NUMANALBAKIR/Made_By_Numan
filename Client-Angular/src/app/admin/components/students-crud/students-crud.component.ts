@@ -75,21 +75,9 @@ export class StudentsCRUDComponent implements OnInit, OnDestroy {
           console.log(e);
         })
     );
+
     window.location.reload();
   }
-
-
-  // button commented out
-  // onSearchClick() {
-  //   return this.studentsService.searchStudents(this.searchBy, this.searchText).subscribe(
-  //     (r: StudentDTO[]) => {
-  //       this.students = r;
-  //     },
-  //     (e: any) => {
-  //       console.log(e);
-  //     }
-  //   );
-  // }
 
 
   onCancelClick() {

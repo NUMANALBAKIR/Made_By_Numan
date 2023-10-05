@@ -16,8 +16,8 @@ const routes: Routes = [
       [
         { path: 'studentscrud', component: StudentsCRUDComponent },
         { path: 'addstudent', component: AddStudentComponent, canDeactivate: [CanDeactivateGuardService] },
-        { path: 'readstudent/:studentId/:studentName', component: ReadStudentComponent },
         { path: 'editstudent', component: EditStudentComponent, canDeactivate: [CanDeactivateGuardService] },
+        { path: 'readstudent/:studentId/:studentName', component: ReadStudentComponent },
         { path: 'badges', component: BadgesComponent }
       ]
   }

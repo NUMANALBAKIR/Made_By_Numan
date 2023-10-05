@@ -26,7 +26,7 @@ export class AgeValidatorDirective implements Validator {
 
     // debugger;
     
-    let difference = Number(currYear) - Number(inputYear);
+    let difference = Number(currYear) - Number(inputYear); // note
 
     if (difference >= 6 && difference <= 18) {
       return null;  // no errors

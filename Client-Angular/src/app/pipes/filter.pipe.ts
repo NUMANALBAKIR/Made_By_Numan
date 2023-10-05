@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Student } from '../admin/models/Student';
 
 /*
   complex custom pipe
@@ -7,17 +6,17 @@ import { Student } from '../admin/models/Student';
 */
 
 @Pipe({
-  name: 'filter',
+  name: 'filterPipe',
   pure: false
 })
 export class FilterPipe implements PipeTransform {
 
   transform(studentsArr: any[], searchBy: string, searchText: string): any {
 
-    searchBy = searchBy.toLowerCase();
-    searchText = searchText.toLowerCase();
+    searchBy = searchBy.trim().toLowerCase();
+    searchText = searchText.trim().toLowerCase();
 
-    if (studentsArr == null) {
+    if (studentsArr == null || searchText == '') {
       return studentsArr;
     }
 
@@ -25,11 +24,9 @@ export class FilterPipe implements PipeTransform {
 
     for (let student of studentsArr) {
 
-      // debugger;
+      let valueToCompare = String(student[searchBy]).toLowerCase(); // note String and lowercase
 
-      let valueToCompare = String(student[searchBy]).toLowerCase();
-
-      if (valueToCompare.indexOf(searchText) != -1) {
+      if (valueToCompare.indexOf(searchText) != -1) {   // collection.indexOf(alphabet)
         resultArray.push(student);
       }
     }
