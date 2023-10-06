@@ -34,7 +34,7 @@ export class StudentsCRUDComponent implements OnInit, OnDestroy {
   }
 
 
-  ngOnInit(): void {
+  ngOnInit(): void {    // compare side by side with studentService.getStudents()
     // get and set list of students
     this.subscriptions.push(
       this.studentsService.getStudents().subscribe(

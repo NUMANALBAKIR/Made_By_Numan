@@ -163,12 +163,12 @@
                 'is-valid': subject.get('subjectName')?.valid && (subject.get('subjectName')?.dirty || subject.get('subjectName')) }">
 
                         <span class="text-danger"
-                            *ngIf="updateFormReactve.get('subjectName')?.invalid && (updateFormReactve.get('subjectName')?.dirty || updateFormReactve.get('subjectName')?.touched || submitted) && updateFormReactve.get('subjectName')?.errors?.required">
+                            *ngIf="subject.get('subjectName')?.invalid && (subject.get('subjectName')?.dirty || subject.get('subjectName')?.touched || submitted) && subject.get('subjectName')?.errors?.required">
                             Subject name can not be blank.</span>
 
                         <span class="text-danger"
-                            *ngIf="updateFormReactve.get('subjectName')?.invalid && (updateFormReactve.get('subjectName')?.dirty || updateFormReactve.get('subjectName')?.touched || submitted) && updateFormReactve.get('subjectName')?.errors?.minlength">
-                            Subject name must have at least 3 letters.</span>
+                            *ngIf="subject.get('subjectName')?.invalid && (subject.get('subjectName')?.dirty || subject.get('subjectName')?.touched || submitted) && subject.get('subjectName')?.errors?.minlength">
+                            Must have at least 3 letters.</span>
 
                     </div>
 
@@ -180,7 +180,7 @@
 
                     <!-- display mark -->
                     <div class="col-1">
-                        {{ subject.value.mark }}
+                        {{ subject.value.mark }} <!-- .value because subject is a control -->
                     </div>
 
                     <!-- remove button -->

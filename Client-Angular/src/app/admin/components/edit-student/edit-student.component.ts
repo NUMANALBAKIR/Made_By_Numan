@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { StudentsService } from 'src/app/admin/services/students.service';
-import { Location } from '@angular/common';
 import { StudentUpdateDTO } from 'src/app/admin/models/StudentUpdateDTO';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Country } from 'src/app/admin/models/country';
@@ -113,9 +112,9 @@ export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
   }
 
 
-  get formSubjectsArr() {
-    // return <FormArray>this.updateFormReactve.get('subjects');
+  get formSubjectsArr() {   // note
     return this.updateFormReactve.get('subjects') as FormArray;
+    // return <FormArray>this.updateFormReactve.get('subjects'); //alternatve
   }
 
 
@@ -128,8 +127,8 @@ export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
     // });
 
     // way 2
-    var newFormGroup = this.formBuilder.group({
-      subjectName: [null, [Validators.required]],
+    var newFormGroup = this.formBuilder.group({   // think of a formGroup like a class
+      subjectName: [null, [Validators.required, Validators.minLength(3)]],
       mark: [50, [Validators.required]],
       studentId: this.updateFormReactve.value.studentId
     });
