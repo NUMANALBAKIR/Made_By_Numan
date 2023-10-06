@@ -27,7 +27,6 @@ export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
   constructor(
     private studentsService: StudentsService,
     private countriesService: CountriesService,
-    private location: Location,
     private customValidatorsService: CustomValidatorsService,
     private formBuilder: FormBuilder,
     private router: Router
@@ -62,29 +61,32 @@ export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
   // });
 
   // way 2: using formBuilder
-  updateFormReactve: FormGroup = this.formBuilder.group({
-    studentId: [null, [Validators.required, Validators.pattern(/^[0-9]*$/)], [this.customValidatorsService.UniqueStudentId()], { updateOn: 'blur' }],
-    name: [null, [Validators.required, Validators.minLength(3), Validators.pattern(/^[A-Za-z ]+$/)]],
-    dateOfBirth: [null, [Validators.required, this.customValidatorsService.minAge(6, 18)]],
-    passed: ['', [Validators.required]],
-    gender: ['', [Validators.required]],
-    countryId: [null, [Validators.required]],
-    subjects: this.formBuilder.array([])
-  },
+  updateFormReactve: FormGroup = this.formBuilder.group(
+    {
+      studentId: [null, [Validators.required, Validators.pattern(/^[0-9]*$/)], [this.customValidatorsService.UniqueStudentId()], { updateOn: 'blur' }],
+      name: [null, [Validators.required, Validators.minLength(3), Validators.pattern(/^[A-Za-z ]+$/)]],
+      dateOfBirth: [null, [Validators.required, this.customValidatorsService.minAge(6, 18)]],
+      passed: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
+      countryId: [null, [Validators.required]],
+      subjects: this.formBuilder.array([])  // note ( [] )
+    },
     {
       validators: [
         this.customValidatorsService.compareOthers('gender', 'countryId')
       ]
-    });
+    }
+  );
 
 
   ngOnInit() {
 
-    // get, set list using async pipe bcoz no processing needed.
+    // get, set list using async pipe bcoz no processing needed. and auto subscribes.
     this.countries = this.countriesService.getCountries();
 
     // get, set student info by id
     this.subscriptions.push(
+
       this.studentsService.getStudent(this.studentId).subscribe(
         (response: StudentDTO) => {
           this.studentUpdateDTO = response;
@@ -93,29 +95,27 @@ export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
         (e) => {
           console.log('-- From editComponent: ' + e);
         })
+      ,
+      this.updateFormReactve.valueChanges.subscribe(
+        (value) => {
+          this.canLeave = false;
+          // console.log(value);
+        })
     );
 
-    this.updateFormReactve.reset();
-
-    // no need, because done above in subscribe's arroww function
+    // no need of below, because done above in subscribe's arrow function
     // wait for service responses and then populate.
     // setTimeout(() => {
     //   this.populateForm();
     // }, 500);
 
-    this.subscriptions.push(
-      this.updateFormReactve.valueChanges.subscribe(
-        (value) => {
-          // console.log(value);
-          this.canLeave = false;
-        })
-    );
-
+    this.updateFormReactve.reset(); // note
   }
 
 
   get formSubjectsArr() {
-    return <FormArray>this.updateFormReactve.get('subjects');
+    // return <FormArray>this.updateFormReactve.get('subjects');
+    return this.updateFormReactve.get('subjects') as FormArray;
   }
 
 
@@ -204,20 +204,18 @@ export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
     });
 
     // push all subject to form array
-    this.studentUpdateDTO.subjects.forEach(element => {
-      var newFormGroup = this.formBuilder.group({
-        subjectId: [element.subjectId],
-        subjectName: [element.subjectName, [Validators.required]],
-        mark: [element.mark, [Validators.required]],
-        studentId: element.studentId
+    this.studentUpdateDTO.subjects.forEach(
+      (s) => {
+        var newFormGroup = this.formBuilder.group({
+          subjectId: [s.subjectId],
+          subjectName: [s.subjectName, [Validators.required]],
+          mark: [s.mark, [Validators.required]],
+          studentId: s.studentId
+        }
+        );
+
+        this.formSubjectsArr.push(newFormGroup);
       });
-
-      this.formSubjectsArr.push(newFormGroup);
-    });
-
-
-
-
 
   }
 

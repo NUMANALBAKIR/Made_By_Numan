@@ -8,8 +8,8 @@ export const environment = {
 };
 
 export enum ApiPaths {
-  Students = '/StudentsAPI',
-  Countries = '/CountriesAPI'
+  Students = 'StudentsAPI',
+  Countries = 'CountriesAPI'
 }
 
 /*

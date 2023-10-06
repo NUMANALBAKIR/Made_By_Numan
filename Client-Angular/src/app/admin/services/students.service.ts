@@ -23,7 +23,8 @@ export class StudentsService {
 
 
   getStudent(studentId: number): Observable<StudentDTO> {
-    return this.httpClient.get<StudentDTO>(`${this.url}/${studentId}`, { responseType: 'json' })
+    let fullUrl = `${this.url}/${studentId}`;
+    return this.httpClient.get<StudentDTO>(fullUrl, { responseType: 'json' })
       .pipe(map(
         (data: StudentDTO | any) => {
           return data;
