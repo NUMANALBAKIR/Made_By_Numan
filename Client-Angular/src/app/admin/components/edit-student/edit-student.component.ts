@@ -175,18 +175,14 @@ export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
 
   onResetClick() {
 
-    // using 'patchValue'
-    // this.updateFormReactve.patchValue({
-    //   studentId: this.studentId
-    // });
-
     // this.updateFormReactve.reset();
 
-    // similar to aboves
+    // or,
     this.updateFormReactve.reset({
-      passed: this.studentUpdateDTO.passed,
-      gender: this.studentUpdateDTO.gender
+      passed: false
     });
+
+    this.formSubjectsArr.reset();
   }
 
 
@@ -210,8 +206,7 @@ export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
           subjectName: [s.subjectName, [Validators.required]],
           mark: [s.mark, [Validators.required]],
           studentId: s.studentId
-        }
-        );
+        });
 
         this.formSubjectsArr.push(newFormGroup);
       });
