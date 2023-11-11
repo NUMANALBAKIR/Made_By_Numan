@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <h4>
-                Below are <b>68</b> Errors and their solutions that I found when developing. I learn errors; Learning errors help me fix future-errors quickly. (Legend: => means solution).
+                Below are <b>92</b> Errors and their solutions that I found when developing. I learn errors; Learning errors help me fix future-errors quickly. (Legend: => means solution).
             </h4>
         </div>
     </div>
@@ -14,36 +14,37 @@
 
     <div class="row mt-4">
         <div class="mb-4 p-4 text-bg-secondary">
-            <h4> 
-                "NullReferenceException: Object reference not set to an instance of 
+
+            <h4>
+                "NullReferenceException: Object reference not set to an instance of
                 an object"
                 <br /> => Trying to use somehing whose value is null.
-                
+
                 <hr />
 
                 "Cannot implicitly convert type 'System.Threading.Tasks.Task< bool>' to 'bool'"
                 <br /> => check AsyncTask related things like: await, ...Async, etc.
-                
-                <hr/>
 
-                visual studio restarts when debugging => start VS as admin by right-clicking it's icon. 
+                <hr />
+
+                visual studio restarts when debugging => start VS as admin by right-clicking it's icon.
 
                 <hr />
 
                 "A connection was successfully established with the server, but then an error occurred during the login process. (provider: SSL Provider, error: 0 - The certificate chain was issued by an authority that is not trusted.)"
-                <br />=> to Connection String, add "TrustServerCertificate=True"           
-                
+                <br />=> to Connection String, add "TrustServerCertificate=True"
+
                 <hr />
 
                 when scaffolding 'MVC Area', got: "there was an error running the selected code generator scaffolding failed"
                 <br />=> Step 1: add (if absent) within < ItemGroup>, < PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.0" />.
                 Step 2 (if needed): update all nuget packages.
-                        
+
                 <hr />
 
                 "Unable to resolve service for type (interface) "IAuth.." while attempting to activate "Auth.."
                 <br />=> need to add a Service in program.cs injecting Auth into IAuth.
-                        
+
                 <hr />
 
                 ".AutoMapperMappingException: Missing type map configuration or unsupported mapping."
@@ -63,12 +64,12 @@
 
                 "CS0246 The type or namespace name 'Category' could not be found (are you missing a using directive or an assembly reference?) .../Areas_Admin_Views_Category_Edit_cshtml.g.cs"
                 <br />=> maybe, missing something in _ViewImports.cshtml in Views folder. (note the .g.cs)
-                            
+
                 <hr />
 
                 DataTables warning: table id=myTable - Requested unknown parameter 'Title' for row 0, column 0.
                 <br />=> check json's 'Title' property.
-                
+
                 <hr />
 
                 "'An error was generated for warning '..EntityFrameworkCore.Query.InvalidIncludePathError': Unable to find navigation ' covertype' specified in string based include path ' covertype'."
@@ -77,32 +78,32 @@
                 <hr />
 
                 Unexpected token '{' (at product.js:19:13) => check syntax like ending commas.
-                            
+
                 <hr />
 
                 red-unederline error-message at return: "cannot implicitly convert type ... to ..." => check if all types are matching, especially the return-type.
 
                 <hr />
 
-                cannot implicitly convert type  IEnu<...>  to  List<...>" => making .toList() might work.
+                cannot implicitly convert type  IEnu< ...> to  List< ...>" => making .toList() might work.
 
-                                    <hr />
+                <hr />
 
-                            "No overload for method 'method' takes 'number' arguments" => check method's arguments/parameters (of interface and its implementation).
+                "No overload for method 'method' takes 'number' arguments" => check method's arguments/parameters (of interface and its implementation).
 
-                                    <hr />
+                <hr />
 
                 'cannot copy ".." to "..". Exceeded retry count of 10. Failed. IIS run' => stop IIS processes in taskmanager and build again
 
-                                    <hr />
+                <hr />
 
                 "Operator '!' cannot be applied to operands of type 'method group' => change !context.Products.Any to !context.Products.Any().
 
-                                    <hr />
+                <hr />
 
                 cannot delete database in sql server => tick 'close existing connections' then retry
 
-                                    <hr />
+                <hr />
 
                 SqlException: Cannot insert explicit value for identity column in table '..' when IDENTITY_INSERT is set to OFF.
                 <br />=> in sql server, go to table's design, select that column, go to column properties, click (is identity) and set it to 'No'.
@@ -111,7 +112,7 @@
                 <hr />
 
                 controller's method error: "cannot implicitly convert type ..Task< List< T>>  to ..ActionResult< List< T>> "
-                    <br />=> (might work. Not sure) put inside Ok(). Eg: return Ok(_repo.GetProducts());
+                <br />=> (might work. Not sure) put inside Ok(). Eg: return Ok(_repo.GetProducts());
 
                 <hr />
 
@@ -146,8 +147,8 @@
                 <br />OR, console shows "Project Al does not exist"
                 <br />OR, console shows "Error: Unknown arguments: ssl, ssl-cert, ssl-key, Bakir\AppData\Roaming\ASP.NET\https\a.pem, Al, Bakir\AppData\Roaming\ASP.NET\https\a.key"
                 <br />=> issue may be with account's folder-name space in C:\Users\. Format 'start' in package.json like:
-                 <br />"start": "ng serve --ssl --ssl-cert \"%APPDATA%\\ASP.NET\\https\\%npm_package_name%.pem\" --ssl-key \"%APPDATA%\\ASP.NET\\https\\%npm_package_name%.key\"",
-                 <br /> (note: carefully check spaces in above string.)
+                <br />"start": "ng serve --ssl --ssl-cert \"%APPDATA%\\ASP.NET\\https\\%npm_package_name%.pem\" --ssl-key \"%APPDATA%\\ASP.NET\\https\\%npm_package_name%.key\"",
+                <br /> (note: carefully check spaces in above string.)
 
                 <hr />
 
@@ -202,7 +203,7 @@
                 <hr />
 
                 A suitable constructor for type 'Made_By_Numan.Client.Services.FoodService' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.
-                <br />=> sequence is important! add: 
+                <br />=> sequence is important! add:
                 <br />builder.Services.AddHttpClient< IFoodService, FoodService>();
                 <br />builder.Services.AddScoped< IFoodService, FoodService>();
                 <br />FoodService ctor's param IHttpClientFactory needs to be registered before FoodService.
@@ -222,9 +223,9 @@
                 No webpage was found for the web address: https://localhost:5002/Account/Login?ReturnUrl=%2FGuest%2FOrderFood%2FCartItemDetails%3FfoodId%3D3 . HTTP ERROR 404.
                 <br />=> Note '/Identity' is missing in address. [Authorize] needs proper redirection. Add in program.cs: builder.Services.ConfigureApplicationCookie(options =>
                 {
-                    options.LoginPath = $"/Identity/Account/Login";
-                    options.LogoutPath = $"/Identity/Account/Logout";
-                    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
                 });
                 <br />(also, check above error.)
 
@@ -276,8 +277,7 @@
                 not showing 'using' of a class => check namespace of that class.
                 <hr />
 
-<!-- below Added on 18 apr -->
-
+                <!-- below Added on 18 apr -->
                 vscode migration command error:
                 <br /> "Could not execute because the specified command or file was not found. Possible reasons for this include:
                 <br /> * You misspelled a built-in dotnet command.
@@ -300,29 +300,29 @@
 
                 Property 'controls' does not exist on type 'AbstractControl'
                 <br />  => need to typecast to < FormArray>
-                    , which has controls.
+                , which has controls.
                 <br />      in .ts add method- get formArr() { return < FormArray> this.myform.get('formArrName'); }
                 <br />        in.html- < div *ngFor="let item of formArr.controls">
 
-                    <hr />
+                <hr />
 
                 "Object is possibly 'null'.ngtsc(2531)" in "formReactive.get('name').invalid"
                 <br /> => do, formReactive.get('name')?.invalid
                 <br /> Or, read https://www.angularjswiki.com/angular/object-is-possibly-null-error-fix/
 
-                    <hr />
+                <hr />
 
-                            "formGroup: FormGroup" shows error: "Type '(formGroup: FormGroup) => ValidationErrors | null' is not assignable to type 'ValidatorFn'. Types of parameters 'formGroup' and 'control' are incompatible. Type 'AbstractControl' is missing the following properties from type 'FormGroup': controls, registerControl, addControl, removeControl, and 3 more.ts(2322)"
+                "formGroup: FormGroup" shows error: "Type '(formGroup: FormGroup) => ValidationErrors | null' is not assignable to type 'ValidatorFn'. Types of parameters 'formGroup' and 'control' are incompatible. Type 'AbstractControl' is missing the following properties from type 'FormGroup': controls, registerControl, addControl, removeControl, and 3 more.ts(2322)"
                 <br /> => error because ValidatorFn works with controls. so do, "formGroup: AbstractControl"
 
-                    <hr />
+                <hr />
 
-                            "this.updateFormReactve as StudentUpdateDTO" shows error: Conversion of type 'FormGroup' to type 'StudentUpdateDTO' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first. Type 'FormGroup' is missing the following properties from type 'StudentUpdateDTO': studentId, name, dateOfBirth, passed, and 3 more.ts(2352)
+                "this.updateFormReactve as StudentUpdateDTO" shows error: Conversion of type 'FormGroup' to type 'StudentUpdateDTO' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first. Type 'FormGroup' is missing the following properties from type 'StudentUpdateDTO': studentId, name, dateOfBirth, passed, and 3 more.ts(2352)
                 <br /> => do, this.updateFormReactve.value as StudentUpdateDTO
 
-                    <hr />
+                <hr />
 
-                                                                        @@ViewChild initializer error on Angular 13. "Property 'viewChild1' has no initializer and is not definitely assigned in the constructor.ts(2564)"
+                @@ViewChild initializer error on Angular 13. "Property 'viewChild1' has no initializer and is not definitely assigned in the constructor.ts(2564)"
                 <br /> => (I like), @@ViewChild('child') child: ChildComponent = {} as ChildComponent;
                 <br /> Or, @@ViewChild('child') child: ChildComponent = {} as ElementRef;
                 <br /> Or, (not sure) @@ViewChild('child') child: ChildComponent = new ChildComponent;
@@ -333,59 +333,169 @@
 
                 <hr />
 
-<!-- below Added on 29 apr -->
-
+                <!-- below Added on 29 apr -->
                 "Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Student'.
                 No index signature with a parameter of type 'string' was found on type 'Student'.ts(7053)"
                 <br /> => instead of Student, make it of type any.
 
-                 <hr />
+                <hr />
 
 
-                Form-validator not getting called at all => check whether the module using it has it in its declarations[].
+                Form-validator not getting called at all => check if in the module using it.
 
-                 <hr />
+                <hr />
 
 
                 Can't bind to 'routerLink' since it isn't a known property => module needs RouterModule in imports
 
-                 <hr />
+                <hr />
 
                 (found while using highcharts) Generic type 'ɵɵComponentDeclaration' requires 7 type argument(s)
                 <br /> => in package.json add compatible version and do 'npm install'.
-                
+
                 <hr />
 
                 (found when lazy loading was added) "Error: BrowserModule has already been loaded. If you need access to common directives such as NgIf and NgFor from a lazy loaded module, import CommonModule instead."
                 <br /> => adding 'BrowserModule' to shared.module's exports causes this. So, add 'BrowserModule' only to app.module's import, and add 'CommonModule' to shared.module's import+export.
-                
-                <hr />
 
+                <hr />
 
                 "NullInjectorError: R3InjectorError(AppModule)[RouterModule -> Router -> NgModuleFactoryLoader -> Compiler -> Compiler -> Compiler]: NullInjectorError: No provider for Compiler!"
                 <br /> => AppModule needs BrowserModule in imports
 
                 <hr />
 
-                don't see lazy loading's 0.js in browser's network tab
-                <br /> => updated is name like 'src_app_...'. clear network tab and go to link again (in new tab).
+
+                don't see lazy loading's 0.js in browser's network tab => updated is name like 'src_app_...'. clear network tab and go to link again (in new tab).
 
                 <hr />
 
                 API's return NotFound(student); causing problem in angular =>  do, return new EmptyResult(); in api controller.
 
-<!-- total 68 above. below Added on  -->
+                <hr />
+
+                <!-- below Added on 11 nov 23 -->
+
+                highcharts not updatng => needs, updateflag: true. (also, new data has to be processed inside subscribe with response.)
+                        
+                <hr />
+
+                contentchildren not getting array => needs, { descendants: true } inside @@contentchildren()
+
+                <hr />
+
+                'RouterModule' does not appear to be an NgModule => just restart vscode/app
+
+                <hr />
+
+                ''FormsModule' does not appear to be an NgModule class.(-996002)'
+                <br />=> https://stackoverflow.com/questions/60239941/appears-in-the-ngmodule-imports-of-appmodule-but-could-not-be-resolved-to-an-ng
+
+                <hr />
+
+                The error “Can’t bind to ‘formGroup’ since it isn’t a known property of ‘form’”
+                <br />=>  add ReactiveFormsModule in imports[]. and, that component is present in declarations[].
+                        
+                <hr />
+                        
+                visual studio solution not showing angular project 'client'
+                <br />=> if, client.esproj is present inside 'client': right click solution > 'add existing project'.
+                <br />else, right click solution > 'add existing web site' > select folder 'client'.
+                        
+                <hr />
+
+                Error: connect ECONNREFUSED => API is probably off
+                <hr />
 
 
+                "property 'flat' does not exist on type 'any[]'. => in tsconfig.json, check lib[] for es2019 or more.
+
+                <hr />
 
 
+                "A possible object cycle was detected which is not supported. This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32."                        
+                <br />=> happens when eg: User has prop List< Photo>. Photo has navigation-prop User. issue arises in linq .include(x=> x.Photos).
+                <br />soln: make dtos. eg: UserDto has prop List< PhotoDto>. But, PhotoDto DOESN'T have navigation-prop User. this breaks the cycle.
+                <hr />
+
+                        
+                postman shows:
+                <br />{
+                <br />"type": "https://tools.ietf.org/html/rfc7231#section-6.5.13",
+                <br />"title": "Unsupported Media Type",
+                <br />"status": 415,
+                <br />"traceId": "00-47f92a008475f377ce0299c66322feef-ffc9125ca5cbb23d-00"
+                <br />}
+                <br />=> in Headers, set "Content-Type": "application/json"
+                <hr />
+
+                        
+                Unable to find testhost.dll. Please publish your test project and retry
+                <br />=> Install 'Microsoft.NET.Test.Sdk' package from nuget. Command> NuGet\Install-Package Microsoft.NET.Test.Sdk
+                <hr />
+
+                        
+                'does not contain a definition for 'ThenInclude' and no accessible extension method 'ThenInclude''
+                    <br />=> this is from LINQ. check imports. especially look for the wrong import 'using System.Data.Entity;'.
+                <hr />
+
+                        
+                'Cannot use variable as the left-hand side of an assignment expression. Template variables are read-only.ngtsc(-998005)'
+                    <br />=> when doing, let vd of arr, for [(ngModel)] don't do [(ngModel)]=="vd". do like, [(ngModel)]="arr[index]".
+                <hr />
+
+                'The provider for the source IQueryable doesn't implement IDbAsyncQueryProvider. Only providers that implement IDbAsyncQueryProvider can be used for Entity Framework asynchronous operations.'
+                <br />=> check imports, espeically linq's. Wrong import is usually 'using System.Data.Entity;'.
+                <hr />
+
+                error TS2307: Cannot find module '...' => issue is because this package is missing in node modules. Solution is: inside angular app, do 'npm install'.
+                <hr />
+
+                can not find package ... => manually copy and paste those package folders
+                <hr />
+
+                after scaffolding, pasting configurations shows error => paste only of what column was changed.
+                <hr />
+
+                "Hmmm… can't reach this pagelocalhost refused to connect.
+                <br />Try:
+                <br />Checking the connection
+                <br />Checking the proxy and the firewall
+                <br />ERR_CONNECTION_REFUSED"
+                <br />=> try in incognito OR, try after cleaning browser cache OR, try in another browser.
+                <hr />
+
+                Visual Studio not showing all Projects in solution => Check stackoverflow for most efficient solution. Also, can add manually in 'add existing projects'
+                <hr />
 
 
+                'IConfiguration' does not contain a definition for 'GetValue' and no accessible extension method 'GetValue' accepting a first argument of type 'IConfiguration' could be found (are you missing a using directive or an assembly reference?)
+                <br />=> add package Microsoft.Extensions.Configuration.Binder
+                <hr />
+                        
+                autompper mapping issue. eg: from list to list => instead of .Map< DType>(s), do .Map< SType, DType>(s)
+                <hr />
+
+                IIS error shows => del .vs folder in project
+                <hr />                        
+                        
+                Ambiguous invocation:
+                <br />Microsoft....AddMassTransitHostedService(this Microsoft...IServiceCollection) (in class HostedServiceConfigurationExtensions)
+                <br />Microsoft....AddMassTransitHostedService(this Microsoft...IServiceCollection) (in class HostedServiceConfigurationExtensions)
+                <br />match
+                <br />=> check .csproj, to make sure MassTransit packages have same version.
+                <hr />
+
+                "System.MissingMethodException: 'Method not found: 'Void CoreTypeMappingParameters..ctor(System.Type, Microsoft.EntityFrameworkCore.Storage.ValueConversion.ValueConverter"
+                <br />=> check nuget package versions. (perhaps EntityFrameworkCore related.)
+                <hr />
 
 
+                <!-- below Added on -->
 
 
             </h4>
+
         </div>
     </div>
 </div>

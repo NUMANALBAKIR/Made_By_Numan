@@ -1,4 +1,4 @@
-import { Directive, DoCheck, ElementRef, HostBinding, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, Input, OnChanges, Renderer2 } from '@angular/core';
 
 /*
   Custom Directive 
@@ -8,7 +8,7 @@ import { Directive, DoCheck, ElementRef, HostBinding, HostListener, Input, OnIni
 @Directive({
   selector: '[appLoginAlerts]'
 })
-export class LoginAlertsDirective implements DoCheck {
+export class LoginAlertsDirective implements OnChanges {
 
   @Input('sendMessage') sendMessage: boolean;
   @HostBinding('title') title: string;
@@ -24,11 +24,11 @@ export class LoginAlertsDirective implements DoCheck {
 
     this.h4Element =  this.renderer2.createElement('h4');
     this.spanElement = this.renderer2.createElement('span');
-    this.spanText = this.renderer2.createText(this.message);    
+    this.spanText = this.renderer2.createText(this.message);
   }
 
 
-  ngDoCheck(): void {
+  ngOnChanges(): void {
     if (this.sendMessage == true) {
       this.renderer2.setStyle(this.h4Element, 'color', 'red');
       // this.renderer2.addClass(this.h4Element, 'myClass');// not working
@@ -48,24 +48,22 @@ export class LoginAlertsDirective implements DoCheck {
       // `;
     }
     else {
-      this.elementRef.nativeElement.innerHTML = '';
+      this.elementRef.nativeElement.innerHTML = ''; // un-setting
     }
   }
 
 
   @HostListener('mouseenter', ['$event'])
   onMouseEnter(event: any) {
-    // this.elementRef.nativeElement.style.backgroundColor = 'black';// recommended below
+    // this.elementRef.nativeElement.style.backgroundColor = 'green';  // works // recommended is below
     this.renderer2.setStyle(this.h4Element, 'background-color', 'black');
   }
 
 
   @HostListener('mouseleave', ['$event'])
   onMouseLeave(event: any) {
-    // this.elementRef.nativeElement.style.backgroundColor = 'white';// recommended below
+    // this.elementRef.nativeElement.style.backgroundColor = 'blue';  // works // recommended is below
     this.renderer2.setStyle(this.h4Element, 'background-color', 'white');
   }
-
-
 
 }

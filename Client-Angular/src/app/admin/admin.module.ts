@@ -6,6 +6,7 @@ import { ReadStudentComponent } from './components/read-student/read-student.com
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { BadgesComponent } from './components/badges/badges.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
     StudentsCRUDComponent,
     AddStudentComponent,
     EditStudentComponent,
-    ReadStudentComponent
+    ReadStudentComponent,
+    BadgesComponent
   ],
   imports: [
     SharedModule,

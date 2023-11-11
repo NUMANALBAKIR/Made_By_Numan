@@ -4,6 +4,7 @@ for details on configuring this project to bundle and minify static web assets. 
 
 .nav-item:hover {
     background-color: royalblue;
+    border-radius: 10px;
 }
 
 

@@ -19,7 +19,7 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
     this.studentDTO = new StudentDTO();
 
     this.highcharts = Highcharts; // required
-    this.chartConstructor= 'chart'; // optional string, defaults to 'chart'
+    this.chartConstructor = 'chart'; // optional string, defaults to 'chart'
     // chartOptions: any; // no need
     this.updateFlag = false;
     this.oneToOneFlag = true;
@@ -36,7 +36,7 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
   // highcharts data
   highcharts: typeof Highcharts;// required
   chartConstructor: string; // optional string, defaults to 'chart'
-  chartOptions: any; 
+  chartOptions: any;
   updateFlag: boolean;
   oneToOneFlag: boolean;
   runOutsideAngular: boolean;
@@ -58,6 +58,9 @@ export class ReadStudentComponent implements OnInit, OnDestroy {
         },
         (e) => {
           console.log(e);
+        },
+        () => {
+          console.log('complete');
         }
       )
 

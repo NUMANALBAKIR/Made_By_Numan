@@ -8,7 +8,7 @@ import { User } from '../../models/user';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent  {
 
   user: User;
   getMessage: boolean;
@@ -19,21 +19,19 @@ export class LoginComponent implements OnInit {
     this.getMessage = false;
   }
 
-
-  ngOnInit(): void {
-  }
-
-
   onLoginClick(event: any) {
-    this.loginService.Login(this.user).subscribe(
-      (response: User) => {
-        this.user = response;
-        this.router.navigateByUrl('/about');
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+
+    this.router.navigate(['/about']);
+
+    // this.loginService.Login(this.user).subscribe(
+    //   (response: User) => {
+    //     this.user = response;
+    //     this.router.navigateByUrl('/about');   // alternative
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
   }
 
 
