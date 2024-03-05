@@ -26,7 +26,7 @@ export class CountriesService {
     return this.httpClient.get<Country[]>(this.url, { responseType: 'json' })
       .pipe(map(
         (data: Country[]) => {
-          // debugger;          
+          // debugger;
           return data;
         }
       ));

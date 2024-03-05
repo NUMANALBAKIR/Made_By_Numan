@@ -13,6 +13,8 @@ import { AboutComponent } from './components/about/about.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { GrandChild4Component } from './components/grand-child4/grand-child4.component';
+import { TestComponent } from './test/test.component';
+import { getBaseUrl } from 'src/main';
 
 @NgModule({
   declarations: [
@@ -25,16 +27,18 @@ import { GrandChild4Component } from './components/grand-child4/grand-child4.com
     GrandChild3Component,
     GrandChild4Component,
     LoginComponent,
-    LoginAlertsDirective
-
-  ],
+    LoginAlertsDirective,
+      TestComponent
+   ],
   imports: [
     BrowserModule,
     SharedModule,
     AppRoutingModule,
     // AdminModule //commented bcoz adding here eager loads. it's now lazy loaded in app.routing.module.
   ],
-  providers: [],
+  providers: [
+    { provide: 'BASE_URL', useFactory: getBaseUrl },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

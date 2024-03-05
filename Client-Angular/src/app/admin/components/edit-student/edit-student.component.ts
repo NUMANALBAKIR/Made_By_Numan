@@ -15,6 +15,7 @@ import { CustomValidatorsService } from '../../services/custom-validators.servic
 /*
     Reactive Form
 */
+// issue: patched submit doesnt hitting API endpoint
 
 @Component({
   selector: 'app-edit-student',
@@ -100,6 +101,11 @@ export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
           this.canLeave = false;
           // console.log(value);
         })
+        // ,this.updateFormReactve.controls.name.valueChanges.subscribe(
+        //   (v)=>{
+        //     alert(v);
+        //   }
+        // )
     );
 
     // no need of below, because done above in subscribe's arrow function

@@ -1,5 +1,12 @@
 <br />
 
+<!-- to add -->
+<!-- <div *ngIf="newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newStudentForm.submitted)">
+    <div *ngIf="newStudentName.hasError('required')">Password is required.</div>
+    <div *ngIf="newStudentName.hasError('pattern')">Password must contain letter
+</div> -->
+<!--  -->
+
 <form #newStudentForm="ngForm" novalidate="novalidate" appGenderCountryValidator (ngSubmit)="onSubmitClick()">
     <div class="container border p-3">
         <h3 class="text-primary">Create Student (Template Driven Form) -</h3>
@@ -12,10 +19,10 @@
                 <label for="studentId" class="control-label pt-2" style="font-size:20px;">Student Id:</label>
             </div>
             <div class="col-9 pb-3">
-                <input type="text" class="form-control" id="studentId" name="studentId" required="required" 
+                <input type="text" class="form-control" id="studentId" name="studentId" required="required"
                     pattern="^[0-9]*$" appStudentIdUniqueValidator [(ngModel)]="studentCreateDTO.studentId"
-                    #newStudentId="ngModel" 
-                    [ngClass]="{'is-invalid': newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newStudentForm.submitted),                            
+                    #newStudentId="ngModel"
+                    [ngClass]="{'is-invalid': newStudentId.invalid && (newStudentId.dirty || newStudentId.touched || newStudentForm.submitted),
                             'is-valid': newStudentId.valid && (newStudentId.dirty || newStudentId.touched || newStudentForm.submitted) }">
 
                 <span class="text-danger"
@@ -42,7 +49,7 @@
             <div class="col-9 pb-3">
                 <input type="text" class="form-control" id="name" name="name" required="required" pattern="^[A-Za-z ]*$"
                     [(ngModel)]="studentCreateDTO.name" #newStudentName="ngModel"
-                    [ngClass]="{'is-invalid': newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newStudentForm.submitted),                            
+                    [ngClass]="{'is-invalid': newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newStudentForm.submitted),
                             'is-valid': newStudentName.valid && (newStudentName.dirty || newStudentName.touched || newStudentForm.submitted) }">
 
                 <span class="text-danger"
@@ -56,108 +63,111 @@
                 <span class="text-danger"
                     *ngIf="newStudentName.invalid && (newStudentName.dirty || newStudentName.touched || newStudentForm.submitted) && newStudentName.errors?.minlength">
                     Name must contain at least 3 letters.</span>
-            </div>
+                </div>
 
- 
-            <!-- dob -->
-            <div class="col-3 pt-2">
-                <label for="dateOfBirth" class="control-label" style="font-size:20px;">Date Of Birth (please click
-                    calender icon):</label>
-            </div>
-            <div class="col-9 pb-3">
-                <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"  
-                    [(ngModel)]="studentCreateDTO.dateOfBirth" #newStudentDob="ngModel" required="required" appAgeValidator={{currYear}}
-                    [ngClass]="{'is-invalid': newStudentDob.invalid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted),                            
+
+                <!-- dob -->
+                <div class="col-3 pt-2">
+                    <label for="dateOfBirth" class="control-label" style="font-size:20px;">Date Of Birth (please click
+                        calender icon):</label>
+                </div>
+                <div class="col-9 pb-3">
+                    <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
+                        [(ngModel)]="studentCreateDTO.dateOfBirth" #newStudentDob="ngModel" required="required"
+                        appAgeValidator={{currYear}}
+                        [ngClass]="{'is-invalid': newStudentDob.invalid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted),
                             'is-valid': newStudentDob.valid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted) }">
 
-                <span class="text-danger"
-                    *ngIf="newStudentDob.invalid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted) && newStudentDob.errors?.required">
-                    Date of Birth must be selected.</span>
+                    <span class="text-danger"
+                        *ngIf="newStudentDob.invalid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted) && newStudentDob.errors?.required">
+                        Date of Birth must be selected.</span>
 
-                <span class="text-danger"
-                    *ngIf="newStudentDob.invalid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted) && newStudentDob.errors?.correctAge">
-                    Custom validator says: Age must be between 6 and 18.</span>
-            </div>
-
-
-            <!-- passed? Checkbox -->
-            <div class="col-3 pt-2">
-                <label for="checkbox" class="control-label" style="font-size:20px;">Passed? :</label>
-            </div>
-            <div class="col-9 pb-3">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="checkbox" name="passed" value="true"
-                        [(ngModel)]="studentCreateDTO.passed">
-                    &nbsp; {{ studentCreateDTO.passed }}
+                    <span class="text-danger"
+                        *ngIf="newStudentDob.invalid && (newStudentDob.dirty || newStudentDob.touched || newStudentForm.submitted) && newStudentDob.errors?.correctAge">
+                        Custom validator says: Age must be between 6 and 18.</span>
                 </div>
-            </div>
 
 
-            <!-- gender Radio -->
-            <div class="col-3">
-                <label for="gender" class="control-label pt-2" style="font-size:20px;">Gender:</label>
-            </div>
-            <div class="col-9 pb-3">
+                <!-- passed? Checkbox -->
+                <div class="col-3 pt-2">
+                    <label for="checkbox" class="control-label" style="font-size:20px;">Passed? :</label>
+                </div>
+                <div class="col-9 pb-3">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="checkbox" name="passed" value="true"
+                            [(ngModel)]="studentCreateDTO.passed">
+                        &nbsp; {{ studentCreateDTO.passed }}
+                    </div>
+                </div>
 
-                <div class="form-check form-check-inline" *ngFor="let gender of genders">
-                    <input type="radio" class="form-check-input" [id]="gender" name="gender" [value]="gender"
-                        required="required" [(ngModel)]="studentCreateDTO.gender" #newStudentGender="ngModel"
-                        [ngClass]="{'is-invalid': newStudentGender.invalid && (newStudentGender.dirty || newStudentGender.touched || newStudentForm.submitted),                            
+
+                <!-- gender Radio -->
+                <div class="col-3">
+                    <label for="gender" class="control-label pt-2" style="font-size:20px;">Gender:</label>
+                </div>
+                <div class="col-9 pb-3">
+
+                    <div class="form-check form-check-inline" *ngFor="let gender of genders">
+                        <input type="radio" class="form-check-input" [id]="gender" name="gender" [value]="gender"
+                            required="required" [(ngModel)]="studentCreateDTO.gender" #newStudentGender="ngModel"
+                            [ngClass]="{'is-invalid': newStudentGender.invalid && (newStudentGender.dirty || newStudentGender.touched || newStudentForm.submitted),
                             'is-valid': newStudentGender.valid && (newStudentGender.dirty || newStudentGender.touched || newStudentForm.submitted) }">
 
-                    <label [for]="gender" class="form-check-label">{{gender}}</label>
+                        <label [for]="gender" class="form-check-label">{{gender}}</label>
+
+                        <span class="text-danger"
+                            *ngIf="newStudentGender.invalid && (newStudentGender.dirty || newStudentGender.touched || newStudentForm.submitted) && newStudentGender.errors?.required">
+                            ( Gender can't be blank.)</span>
+
+                        <span class="text-danger"
+                            *ngIf="newStudentGender.invalid && (newStudentGender.dirty || newStudentGender.touched || newStudentForm.submitted) && newStudentGender.errors?.bothOther">
+                            ( Cross-field validator says: Both Gender and Country can't be 'Other'. )</span>
+                    </div>
+
+                </div>
+
+
+                <!-- country dropdown -->
+                <div class="col-3">
+                    <label for="countryId" class="control-label pt-2" style="font-size:20px;">Country:</label>
+                </div>
+
+                <div class="col-9 pb-3">
+                    <select class="form-control" id="countryId" name="countryId"
+                        [(ngModel)]="studentCreateDTO.countryId" #newStudentCountryId="ngModel" required="required"
+                        [ngClass]="{'is-invalid': newStudentCountryId.invalid && (newStudentCountryId.dirty || newStudentCountryId.touched || newStudentForm.submitted),
+
+                            'is-valid': newStudentCountryId.valid && (newStudentCountryId.dirty || newStudentCountryId.touched || newStudentForm.submitted) }">
+
+                        <option value="null">- Select Country -</option>
+
+                        <option *ngFor="let country of countries | async" [value]="country.countryId">
+                            &nbsp;
+                            {{country.name}}
+                        </option>
+                    </select>
 
                     <span class="text-danger"
-                        *ngIf="newStudentGender.invalid && (newStudentGender.dirty || newStudentGender.touched || newStudentForm.submitted) && newStudentGender.errors?.required">
-                        ( Gender can't be blank.)</span>
+                        *ngIf="newStudentCountryId.invalid && (newStudentCountryId.dirty || newStudentCountryId.touched || newStudentForm.submitted) && newStudentCountryId.errors?.required">
+                        Country must be selected.</span>
 
-                    <span class="text-danger"
-                        *ngIf="newStudentGender.invalid && (newStudentGender.dirty || newStudentGender.touched || newStudentForm.submitted) && newStudentGender.errors?.bothOther">
-                        ( Cross-field validator says: Both Gender and Country can't be 'Other'. )</span>
+                </div>
+
+                <!-- buttons -->
+                <div>
+                    <button type="submit" class="btn btn-success form-control mt-3 text-white">Submit</button>
+
+                    <a type="button" routerLink="/admin/studentscrud"
+                        class="btn btn-outline-primary form-control mt-3">Back to
+                        List</a>
+
+                    <button type="button" (click)="onResetClick()"
+                        class="btn btn-outline-danger form-control mt-3">Reset
+                        Form</button>
                 </div>
 
             </div>
-
-
-            <!-- country dropdown -->
-            <div class="col-3">
-                <label for="countryId" class="control-label pt-2" style="font-size:20px;">Country:</label>
-            </div>
-
-            <div class="col-9 pb-3">
-                <select class="form-control" id="countryId" name="countryId" [(ngModel)]="studentCreateDTO.countryId"
-                    #newStudentCountryId="ngModel" required="required"
-                    [ngClass]="{'is-invalid': newStudentCountryId.invalid && (newStudentCountryId.dirty || newStudentCountryId.touched || newStudentForm.submitted),
-                            
-                            'is-valid': newStudentCountryId.valid && (newStudentCountryId.dirty || newStudentCountryId.touched || newStudentForm.submitted) }">
-
-                    <option value="null">- Select Country -</option>
-
-                    <option *ngFor="let country of countries | async" [value]="country.countryId">
-                        &nbsp;
-                        {{country.name}}
-                    </option>
-                </select>
-
-                <span class="text-danger"
-                    *ngIf="newStudentCountryId.invalid && (newStudentCountryId.dirty || newStudentCountryId.touched || newStudentForm.submitted) && newStudentCountryId.errors?.required">
-                    Country must be selected.</span>
-
-            </div>
-
-            <!-- buttons -->
-            <div>
-                <button type="submit" class="btn btn-success form-control mt-3 text-white">Submit</button>
-
-                <a type="button" routerLink="/admin/studentscrud" class="btn btn-outline-primary form-control mt-3">Back to
-                    List</a>
-
-                <button type="button" (click)="onResetClick()" class="btn btn-outline-danger form-control mt-3">Reset
-                    Form</button>
-            </div>
-
         </div>
-    </div>
 </form>
 
 <!-- For development purpose: -->
