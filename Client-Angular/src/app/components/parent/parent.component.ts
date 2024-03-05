@@ -15,13 +15,13 @@ export class ParentComponent implements OnInit {
   toChildColorValue: string = '';
 
 
-  @ViewChild('h1Ref') h1Ref = {} as ElementRef<HTMLInputElement>;
+  // @ViewChild('h1Ref') h1Ref = {} as ElementRef<HTMLInputElement>;
 
 
   ngOnInit(): void {
   }
 
-  // receive emitter upon child button click 
+  // receive emitter upon child button click
   parentsMethod(event: any) {
     this.parentColorValue = event.childsColor;
   }

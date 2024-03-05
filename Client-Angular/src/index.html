@@ -1,14 +1,23 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Client-Angular</title>
-  
+
   <base href="/">
+
+  <!-- added -->
+  <script>
+    window['base-href'] = window.location.href;
+  </script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
+
 <body>
   <app-root></app-root>
 </body>
+
 </html>

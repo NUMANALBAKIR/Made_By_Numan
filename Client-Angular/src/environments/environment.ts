@@ -10,7 +10,7 @@ export const environment = {
 export enum ApiPaths {
   Students = 'StudentsAPI',
   Countries = 'CountriesAPI'
-}
+};
 
 /*
  * For easier debugging in development mode, you can import the following file

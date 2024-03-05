@@ -47,12 +47,14 @@ export class StudentsService {
 
 
   addStudent(studentToCreate: StudentCreateDTO): Observable<StudentDTO> {
+    this.url = 'https://localhost:5003/api/StudentsAPI';
     return this.httpClient.post<StudentDTO>(this.url, studentToCreate, { responseType: 'json' });
   }
 
 
   updateStudent(studentToUpdate: StudentUpdateDTO): Observable<Student> {
-    return this.httpClient.put<StudentDTO>(this.url + '/' + studentToUpdate.studentId, studentToUpdate, { responseType: 'json' });
+    this.url = 'https://localhost:5003/api/StudentsAPI/' + studentToUpdate.studentId;
+    return this.httpClient.put<StudentDTO>(this.url, studentToUpdate, { responseType: 'json' });
   }
 
 
