@@ -28,8 +28,8 @@ import { getBaseUrl } from 'src/main';
     GrandChild4Component,
     LoginComponent,
     LoginAlertsDirective,
-      TestComponent
-   ],
+    TestComponent
+  ],
   imports: [
     BrowserModule,
     SharedModule,
