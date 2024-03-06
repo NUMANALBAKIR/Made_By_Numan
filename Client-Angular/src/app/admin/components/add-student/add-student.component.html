@@ -141,7 +141,7 @@
 
                         <option value="null">- Select Country -</option>
 
-                        <option *ngFor="let country of countries | async" [value]="country.countryId">
+                        <option *ngFor="let country of countries | async; trackBy: myTrackBy" [value]="country.countryId">
                             &nbsp;
                             {{country.name}}
                         </option>

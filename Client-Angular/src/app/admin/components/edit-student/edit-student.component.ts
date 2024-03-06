@@ -219,6 +219,10 @@ export class EditStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
 
   }
 
+  myTrackBy(index: number, item: any) {
+    return index; // or item.id;
+  }
+
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => {

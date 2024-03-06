@@ -48,6 +48,10 @@ export class StudentsCRUDComponent implements OnInit, OnDestroy {
     );
   }
 
+  myTrackBy(index: number, item: any) {
+    return index; // or item.id;
+  }
+
 
   // just a note
   // onReadClick(event: any) {

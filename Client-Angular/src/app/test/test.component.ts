@@ -1,19 +1,43 @@
 // import { DashboardService } from '../../../services/dashboard.service';
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { TestService } from '../services/test.service';
+import { BehaviorSubject } from 'rxjs';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css']
 })
-export class TestComponent implements AfterViewInit, AfterViewChecked  {
+export class TestComponent implements AfterViewInit, AfterViewChecked {
+
+
+
+
+
+  MONTHS = this.sharedService.MONTHS_BS.asObservable();
+
+  trackByFn(i: number, item: any) {
+    return item.Name;
+  }
+
+  //-----
 
   @ViewChild('test') test: ElementRef | any;
 
   constructor(private testService: TestService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private sharedService: SharedService
   ) {
+
+
+    this.sharedService.getMonths().subscribe(
+      (r) => {
+        this.sharedService.MONTHS_BS.next(
+          r // this is like: .next(r)
+        );
+      }
+    );
   }
 
   ngAfterViewInit(): void {
@@ -22,7 +46,7 @@ export class TestComponent implements AfterViewInit, AfterViewChecked  {
     // this.renderer.setStyle(el, 'backgroundColor', 'red');
     this.renderer.listen(el, 'click', () => { alert('clicked'); })
     this.renderer.addClass(el, 'mb-5');
-    el.innerText ='sss';
+    el.innerText = 'sss';
 
     const text = this.renderer.createText('Click here to add ');
     this.renderer.appendChild(el, text);
@@ -35,10 +59,9 @@ export class TestComponent implements AfterViewInit, AfterViewChecked  {
   }
 
 
-  ngAftrVw(){
+  ngAftrVw() {
     let el = this.test.nativeElement;
     this.renderer.setStyle(el, 'backgroundColor', 'blue');
-
   }
 
   justEvent(): void {

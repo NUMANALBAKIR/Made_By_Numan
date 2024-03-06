@@ -90,6 +90,9 @@ export class AddStudentComponent implements OnInit, OnDestroy, ICanDeactivate {
     this.newStudentForm.resetForm();
   }
 
+  myTrackBy(index: number, item: any) {
+    return index; // or item.id;
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(item => {

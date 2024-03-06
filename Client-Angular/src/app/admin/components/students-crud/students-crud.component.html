@@ -55,7 +55,7 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let student of students | filterPipe: searchBy: searchText ; let i = index">
+            <tr *ngFor="let student of students | filterPipe: searchBy: searchText; let i = index; trackBy: myTrackBy">
                 <td>{{student.studentId}}</td>
                 <th>{{student.name }}</th>
                 <td>{{student.dateOfBirth | date}}</td>

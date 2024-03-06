@@ -13,7 +13,7 @@
             <div class="col-9 pb-3">
                 <input type="text" class="form-control" id="studentId" name="studentId" formControlName="studentId"
                     [ngClass]="{'is-invalid': updateFormReactve.get('studentId')?.invalid && (updateFormReactve.get('studentId')?.dirty || updateFormReactve.get('studentId')?.touched || submitted),
-                
+
                 'is-valid': updateFormReactve.get('studentId')?.valid && (updateFormReactve.get('studentId')?.dirty || updateFormReactve.get('studentId')?.touched || submitted) }">
 
                 <span class="text-danger"
@@ -40,7 +40,7 @@
             <div class="col-9 pb-3">
                 <input type="text" class="form-control" id="name" name="name" formControlName="name"
                     [ngClass]="{'is-invalid': updateFormReactve.get('name')?.invalid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched || submitted),
-                
+
                 'is-valid': updateFormReactve.get('name')?.valid && (updateFormReactve.get('name')?.dirty || updateFormReactve.get('name')?.touched || submitted) }">
 
                 <span class="text-danger"
@@ -67,7 +67,7 @@
                 <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
                     formControlName="dateOfBirth"
                     [ngClass]="{'is-invalid': updateFormReactve.get('dateOfBirth')?.invalid && (updateFormReactve.get('dateOfBirth')?.dirty || updateFormReactve.get('dateOfBirth')?.touched || submitted),
-                
+
                 'is-valid': updateFormReactve.get('dateOfBirth')?.valid && (updateFormReactve.get('dateOfBirth')?.dirty || updateFormReactve.get('dateOfBirth')?.touched || submitted) }">
 
                 <span class="text-danger"
@@ -103,7 +103,7 @@
                     <input type="radio" class="form-check-input" [id]="gender" name="gender" [value]="gender"
                         formControlName="gender"
                         [ngClass]="{'is-invalid': updateFormReactve.get('gender')?.invalid && (updateFormReactve.get('gender')?.dirty || updateFormReactve.get('gender')?.touched || submitted),
-                
+
                 'is-valid': updateFormReactve.get('gender')?.valid && (updateFormReactve.get('gender')?.dirty || updateFormReactve.get('gender')?.touched || submitted) }">
 
                     <label [for]="gender" class="form-check-label">{{gender}}</label>
@@ -127,12 +127,12 @@
             <div class="col-9 pb-3">
                 <select class="form-control" id="countryId" name="countryId" formControlName="countryId"
                     [ngClass]="{'is-invalid': updateFormReactve.get('countryId')?.invalid && (updateFormReactve.get('countryId')?.dirty || updateFormReactve.get('countryId')?.touched || submitted),
-                
+
                 'is-valid': updateFormReactve.get('countryId')?.valid && (updateFormReactve.get('countryId')?.dirty || updateFormReactve.get('countryId')?.touched || submitted) }">
 
                     <option value="null">- Select Country -</option>
 
-                    <option *ngFor="let country of countries | async" [value]="country.countryId">
+                    <option *ngFor="let country of countries | async; trackBy: myTrackBy" [value]="country.countryId">
                         &nbsp;
                         {{country.name}}
                     </option>
@@ -159,7 +159,7 @@
                         <input type="text" class="form-control" id="subjectName" name="subjectName"
                             placeholder="Subject Name" formControlName="subjectName"
                             [ngClass]="{'is-invalid': subject.get('subjectName')?.invalid && (subject.get('subjectName')?.dirty || subject.get('subjectName')?.touched || submitted),
-                
+
                 'is-valid': subject.get('subjectName')?.valid && (subject.get('subjectName')?.dirty || subject.get('subjectName')) }">
 
                         <span class="text-danger"
