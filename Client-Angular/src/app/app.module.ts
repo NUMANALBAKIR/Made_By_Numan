@@ -15,9 +15,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { GrandChild4Component } from './components/grand-child4/grand-child4.component';
 import { TestComponent } from './test/test.component';
 import { getBaseUrl } from 'src/main';
+import { TestChildComponent } from './test-child/test-child.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     AboutComponent,
     ParentComponent,
@@ -28,8 +29,9 @@ import { getBaseUrl } from 'src/main';
     GrandChild4Component,
     LoginComponent,
     LoginAlertsDirective,
-    TestComponent
-  ],
+    TestComponent,
+      TestChildComponent
+   ],
   imports: [
     BrowserModule,
     SharedModule,
