@@ -1,7 +1,6 @@
 // import { DashboardService } from '../../../services/dashboard.service';
-import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { TestService } from '../services/test.service';
-import { BehaviorSubject } from 'rxjs';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { SharedService } from '../services/shared.service';
 
 @Component({
@@ -9,13 +8,18 @@ import { SharedService } from '../services/shared.service';
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css']
 })
-export class TestComponent implements AfterViewInit, AfterViewChecked {
+export class TestComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
 
 
 
 
 
-  MONTHS = this.sharedService.MONTHS_BS.asObservable();
+
+  // private sub: Subscription;
+
+  //---
+
+  public MONTHS$ = this.sharedService.MONTHS_BS.asObservable();
 
   trackByFn(i: number, item: any) {
     return item.Name;
@@ -25,20 +29,25 @@ export class TestComponent implements AfterViewInit, AfterViewChecked {
 
   @ViewChild('test') test: ElementRef | any;
 
-  constructor(private testService: TestService,
+  constructor(
     private renderer: Renderer2,
     private sharedService: SharedService
   ) {
+  }
 
+  ngOnInit(): void {
 
-    this.sharedService.getMonths().subscribe(
+    const sub = this.sharedService.getMonths().subscribe(
       (r) => {
         this.sharedService.MONTHS_BS.next(
           r // this is like: .next(r)
         );
+        this.sharedService.emitMonths(r);
       }
     );
+
   }
+
 
   ngAfterViewInit(): void {
     let el = this.test.nativeElement;
@@ -68,7 +77,12 @@ export class TestComponent implements AfterViewInit, AfterViewChecked {
     alert('justEvent');
   }
 
+  ngOnDestroy(): void {
+    // this.sub.unsubscribe();
+  }
 
+
+  // for dashboard --
   // Designation: string;
   // Username: string;
   // NoOfTeamMembers: number;

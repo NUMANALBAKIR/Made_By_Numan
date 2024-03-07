@@ -1,14 +1,31 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
+import { EventEmitter, Inject, Injectable } from '@angular/core';
+import {  BehaviorSubject, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
 
-  MONTHS_BS = new BehaviorSubject<any[]>([]);
+  public MONTHS_BS = new BehaviorSubject<any[]>([]);
+  public Months_Emitter = new EventEmitter<any[]>();
+  BaseURL: string = '';
 
-  constructor() { }
+  constructor(@Inject('BASE_URL') baseUrl: string) {
+    if (baseUrl === 'http://localhost:4200/') {
+      this.BaseURL = 'https://localhost:44301/api/Students/';
+    }
+    else {
+      this.BaseURL = baseUrl + 'api/Students/';
+    }
+  }
+
+  emitMonths(data: any[]){
+     this.Months_Emitter.next(data);
+  }
+
+  getMonthsEmitter(){
+    return this.Months_Emitter;
+  }
 
   getMonths() {
     const ms = [

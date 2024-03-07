@@ -14,11 +14,13 @@
 
 <hr>
 
-<h1>list using async pipe is below:</h1>
-<ng-container *ngFor="let month of MONTHS | async as Months; trackBy:trackByFn; let i = index">
-
+<h1>list by using async pipe is below:</h1>
+<ng-container *ngFor="let month of MONTHS$ | async as Months; trackBy: trackByFn; let i = index">
     <div>
-        {{Months.length * i}}
-        {{month.Name}} --- {{month.Value}}
+        sq index: {{Months.length * i}} --- {{month.Name}} --- {{month.Value}}
     </div>
 </ng-container>
+
+<hr>
+
+<app-test-child></app-test-child>
