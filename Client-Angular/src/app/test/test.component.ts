@@ -105,8 +105,8 @@ export class TestComponent implements OnInit, AfterViewInit, AfterViewChecked {
   Clients: string[] = [];
   Projects: string[] = [];
   Years: number[] = [];
-  TeamMembersSummary = {};
-  TeamMembers = {};
+  TeamMembersSummary: any[] = [];
+  TeamMembers: any[] = [];
 
   initiateDashboardProps():void {
     this.Designation = "Team Leader";
