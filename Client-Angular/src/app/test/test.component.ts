@@ -2,6 +2,7 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { SharedService } from '../services/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-test',
@@ -14,6 +15,10 @@ export class TestComponent implements OnInit, AfterViewInit, AfterViewChecked, O
 
 
 
+
+  toTestChild(): void{
+    this.router.navigate(['/testChild'], {queryParams: {name: 'numan', age: 32}})
+  }
 
   // private sub: Subscription;
 
@@ -31,7 +36,8 @@ export class TestComponent implements OnInit, AfterViewInit, AfterViewChecked, O
 
   constructor(
     private renderer: Renderer2,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private router: Router
   ) {
   }
 
@@ -39,9 +45,14 @@ export class TestComponent implements OnInit, AfterViewInit, AfterViewChecked, O
 
     const sub = this.sharedService.getMonths().subscribe(
       (r) => {
+        this.sharedService.dataStore.data = r;
+
         this.sharedService.MONTHS_BS.next(
-          r // this is like: .next(r)
+          Object.assign({}, this.sharedService.dataStore).data
+          // r // this is like: .next(r)
         );
+
+
         this.sharedService.emitMonths(r);
       }
     );
