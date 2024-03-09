@@ -1,5 +1,21 @@
-<p>
-  test-child works!
-</p>
+<hr>
 
-<h1 *ngFor="let item of months">{{item.Name}} - {{item.Value}}</h1>
+<div class="text-center">
+
+  <p>
+    test-child works!
+  </p>
+
+  <ng-container *ngIf="months.length>0">
+    <h4>received from emitter:</h4>
+    <h1 *ngFor="let item of months">{{item.Name}} - {{item.Value}}</h1>
+  </ng-container>
+
+
+  <ng-container *ngIf="name">
+    <h4>received from test with query params:</h4>
+    <h5>{{name}}, {{age}}</h5>
+  </ng-container>
+
+</div>
+<hr>

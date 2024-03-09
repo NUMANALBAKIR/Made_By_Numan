@@ -4,6 +4,7 @@ import { AboutComponent } from './components/about/about.component';
 import { LoginComponent } from './components/login/login.component';
 import { ParentComponent } from './components/parent/parent.component';
 import { TestComponent } from './test/test.component';
+import { TestChildComponent } from './test-child/test-child.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'test', pathMatch: 'full' },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'componentcommunications', component: ParentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'test', component: TestComponent },
+  { path: 'testChild', component: TestChildComponent },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) } // lazy loaded
 
 ];

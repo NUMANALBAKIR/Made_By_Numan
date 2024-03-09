@@ -1,5 +1,10 @@
 import { EventEmitter, Inject, Injectable } from '@angular/core';
-import {  BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
+
+export interface Lookup {
+  Name: string;
+  Value: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +12,9 @@ import {  BehaviorSubject, of } from 'rxjs';
 export class SharedService {
 
   public MONTHS_BS = new BehaviorSubject<any[]>([]);
-  public Months_Emitter = new EventEmitter<any[]>();
+  private Months_Emitter = new EventEmitter<any[]>();
   BaseURL: string = '';
+  dataStore: {data : Lookup[]} = { data: [] } //note
 
   constructor(@Inject('BASE_URL') baseUrl: string) {
     if (baseUrl === 'http://localhost:4200/') {
@@ -19,11 +25,11 @@ export class SharedService {
     }
   }
 
-  emitMonths(data: any[]){
-     this.Months_Emitter.next(data);
+  emitMonths(data: any[]) {
+    this.Months_Emitter.next(data);
   }
 
-  getMonthsEmitter(){
+  getMonthsEmitter() {
     return this.Months_Emitter;
   }
 

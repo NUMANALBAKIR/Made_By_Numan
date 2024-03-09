@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../services/shared.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-test-child',
@@ -8,7 +9,17 @@ import { SharedService } from '../services/shared.service';
 })
 export class TestChildComponent implements OnInit {
 
-  constructor(private sharedService: SharedService) {
+  months: any[] = [];
+name: string;
+age: number;
+
+
+  constructor(private sharedService: SharedService, public activatedRoute: ActivatedRoute) {
+
+    this.name='';
+    this.age=0;
+
+
     const sub = this.sharedService.getMonthsEmitter().subscribe(
       (r) => {
         this.months = r;
@@ -17,13 +28,22 @@ export class TestChildComponent implements OnInit {
         console.log(e);
       },
       () => {
-        console.log();
+        console.log("test child complpete.");
       }
     );
 
+    const sub2 = this.activatedRoute.queryParams.subscribe(
+      r=>{
+        this.name = r.name;
+        this.age = r.age;
+
+      }
+    );
+
+
+
    }
 
-  months: any[] = [];
 
   ngOnInit() {
   }
