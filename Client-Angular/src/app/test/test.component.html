@@ -17,7 +17,7 @@
 <h1>list by using async pipe is below:</h1>
 <ng-container *ngFor="let month of MONTHS$ | async as Months; trackBy: trackByFn; let i = index">
     <div>
-        sq index: {{Months.length * i}} --- {{month.Name}} --- {{month.Value}}
+        sq of index: {{Months.length * i}} --- {{month.Name}} --- {{month.Value}}
     </div>
 </ng-container>
 

@@ -1,30 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SharedService } from '../services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-test-child',
   templateUrl: './test-child.component.html',
   styleUrls: ['./test-child.component.css']
 })
-export class TestChildComponent implements OnInit {
+export class TestChildComponent implements OnInit, OnDestroy {
 
   months: any[] = [];
-name: string;
-age: number;
+  name: string;
+  age: number;
+  sub1: Subscription| any;
 
 
   constructor(private sharedService: SharedService, public activatedRoute: ActivatedRoute) {
 
-    this.name='';
-    this.age=0;
+    this.name = '';
+    this.age = 0;
 
 
-    const sub = this.sharedService.getMonthsEmitter().subscribe(
+    this.sub1 = this.sharedService.getMonthsEmitter().subscribe(
       (r) => {
         this.months = r;
       },
-      e =>{
+      e => {
         console.log(e);
       },
       () => {
@@ -33,19 +35,20 @@ age: number;
     );
 
     const sub2 = this.activatedRoute.queryParams.subscribe(
-      r=>{
-        this.name = r.name;
+      r => {
+        this.name = r.name || 'defaultString';
         this.age = r.age;
-
       }
     );
-
-
-
-   }
+    this.sub1.add(sub2);
+  }
 
 
   ngOnInit() {
   }
 
+
+  ngOnDestroy() {
+    this.sub1.unsubscribe();
+  }
 }
