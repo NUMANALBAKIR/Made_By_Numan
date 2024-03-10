@@ -8,7 +8,7 @@ import { TestChildComponent } from './test-child/test-child.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'test', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'about', component: AboutComponent },
   { path: 'componentcommunications', component: ParentComponent },
   { path: 'login', component: LoginComponent },

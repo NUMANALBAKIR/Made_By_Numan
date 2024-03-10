@@ -1,4 +1,3 @@
-<!-- Dashboard code -->
 <nav>
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
@@ -6,13 +5,13 @@
   </ol>
 </nav>
 
-<h5>Dashboard ----- ----------hhhh----</h5>
+<h5>Dashboard</h5>
 <h6>{{ToDay | date : "d/M/y"}}</h6>
 <div class="row">
   <div class="col-lg-3 pb-3" style="background-color:#e9e6e6">
     <div class="row">
       <div class="col-11 text-white text-center mx-auto rounded pt-2 pb-2 font-weight-bold"
-        style="background-color:#a39e9e; font-family: 'Arial Narrow Bold', sans-serif">{{Designation | uppercase}}
+        style="background-color:#a39e9e; font-family:  'Arial Narrow Bold', sans-serif">{{Designation | uppercase}}
       </div>
       <div class="col-12 text-center mt-2">
         <img src="assets/user.png" width="120px">
@@ -25,20 +24,19 @@
         <ul class="list-group">
           <li class="list-group-item d-flex justify-content-between align-items-center">
             NO. OF TEAM MEMBERS
-            <span class="badge bg-secondary" style="font-size:13px">{{NoOfTeamMembers}}</span>
+            <span class="badge badge-secondary badge-pill" style="font-size:13px">{{NoOfTeamMembers}}</span>
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-center">
             TOTAL COST OF ALL PROJECTS
-            <span class="badge bg-secondary" style="font-size:13px">$
-              {{TotalCostOfAllProjects}} k</span>
+            <span class="badge badge-secondary badge-pill" style="font-size:13px">$ {{TotalCostOfAllProjects}} k</span>
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-center">
             PENDING TASKS
-            <span class="badge bg-secondary" style="font-size:13px">{{PendingTasks}}</span>
+            <span class="badge badge-secondary badge-pill" style="font-size:13px">{{PendingTasks}}</span>
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-center">
             UPCOMING PROJECTS
-            <span class="badge bg-secondary" style="font-size:13px">{{UpComingProjects | percent}}</span>
+            <span class="badge badge-secondary badge-pill" style="font-size:13px">{{UpComingProjects | percent}}</span>
           </li>
         </ul>
       </div>
@@ -55,37 +53,34 @@
     <div class="row">
       <div class="col-12 pt-0 pb-2" style="background-color:#e9e6e6">
         <div class="row mt-2">
-          <div class="col-6 text-start">
+          <div class="col-6 text-left">
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-bs-toggle="dropdown">
+                data-toggle="dropdown">
                 Project A
               </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li *ngFor="let project of Projects">
-                  <a class="dropdown-item" href="#" (click)="onProjectChange($event)">{{project}}</a>
-                </li>
-              </ul>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#" *ngFor="let project of Projects" onclick="return false"
+                  (click)="onProjectChange($event)">{{project}}</a>
+              </div>
             </div>
           </div>
-          <div class="col-6 text-end">
+          <div class="col-6 text-right">
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-bs-toggle="dropdown">
+                data-toggle="dropdown">
                 2019
               </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li *ngFor="let year of Years">
-                  <a class="dropdown-item" href="#">
-                    <span [ngSwitch]="year" [ngClass]="{
-                                            'text-success': year === 2019,
-                                            'text-primary': year === 2018,
-                                            'text-danger': year === 2017,
-                                            'text-dark': year !== 2019 && year !== 2018 && year !== 2017
-                                        }">{{year}}</span>
-                  </a>
-                </li>
-              </ul>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#" *ngFor="let year of Years">
+                  <span [ngSwitch]="year">
+                    <span *ngSwitchCase=" '2019' " style="color:green">{{year}}</span>
+                    <span *ngSwitchCase=" '2018' " style="color:blue">{{year}}</span>
+                    <span *ngSwitchCase=" '2017' " style="color:red">{{year}}</span>
+                    <span *ngSwitchDefault style="color:black">{{year}}</span>
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -144,11 +139,11 @@
 
             <div class="card-header bg-secondary" id="card1">
               <h2 class="mb-0">
-                <button class="btn btn-link text-white" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#cardbody+" {{ i }}>{{teamMembersGroup.Region}}</button>
+                <button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                  [attr.data-target]=" '#cardbody' + i ">{{teamMembersGroup.Region}}</button>
               </h2>
             </div>
-            <div id="cardbody+" {{ i }} class="collapse" aria-labelledby="card1" data-parent="#accordion1">
+            <div [id]=" 'cardbody' + i " class="collapse" data-parent="#accordion1" [ngClass]="(i == 0)? 'show': '' ">
               <div class="card-body">
 
                 <div *ngIf="i == 0; then firstTemplate; else secondTemplate">
@@ -157,8 +152,7 @@
 
                 <ng-template #firstTemplate>
                   <div class="card" *ngFor="let member of teamMembersGroup.Members">
-                    <div class="card-header bg-primary text-white">#{{member.ID}} {{member.Name}}
-                    </div>
+                    <div class="card-header bg-primary text-white">#{{member.ID}} {{member.Name}}</div>
                     <div class="card-body">{{member.Status}}</div>
                   </div>
                 </ng-template>
@@ -175,8 +169,7 @@
                     <tbody>
                       <tr *ngFor="let member of teamMembersGroup.Members">
                         <td>{{member.ID}}</td>
-                        <td [style.color]=" (member.Status == 'Busy')? 'red': 'black' ">
-                          {{member.Name}}</td>
+                        <td [style.color]=" (member.Status == 'Busy')? 'red': 'black' ">{{member.Name}}</td>
                         <td>{{member.Status}}</td>
                       </tr>
                     </tbody>

@@ -7,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    this.initiateDashboardProps();
+
+   }
 
   ngOnInit() {
-    this.initiateDashboardProps();
   }
 
   // for dashboard --
