@@ -16,9 +16,10 @@ import { GrandChild4Component } from './components/grand-child4/grand-child4.com
 import { TestComponent } from './test/test.component';
 import { getBaseUrl } from 'src/main';
 import { TestChildComponent } from './test-child/test-child.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [		
     AppComponent,
     AboutComponent,
     ParentComponent,
@@ -30,7 +31,8 @@ import { TestChildComponent } from './test-child/test-child.component';
     LoginComponent,
     LoginAlertsDirective,
     TestComponent,
-      TestChildComponent
+      TestChildComponent,
+      DashboardComponent
    ],
   imports: [
     BrowserModule,
