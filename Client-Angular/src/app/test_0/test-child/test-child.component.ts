@@ -36,7 +36,7 @@ export class TestChildComponent implements OnInit, OnDestroy {
 
     const sub2 = this.activatedRoute.queryParams.subscribe(
       r => {
-        this.name = r.name || 'defaultString';
+        this.name = r.name || 'defaultNameString';
         this.age = r.age;
       }
     );
