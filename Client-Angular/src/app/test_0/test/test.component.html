@@ -1,6 +1,3 @@
-
-
-
 <ng-container>
     <h1 #test class="myClass">
         1st
@@ -14,7 +11,7 @@
 
     <hr>
 
-    <h1 (click)="ngAftrVw()">ngAftrVwChkd</h1>
+    <h1 (click)="ngAftrVw()">ngAftrVwChkd -- click turns blue: sssClick</h1>
 
     <hr>
 
@@ -29,13 +26,10 @@
 
     <app-test-child></app-test-child>
 
-    <hr>
-
-    <div style="margin: auto;">
-        <!-- using < a > tag below instead gives error -->
-        <button name="btn" id="" class="btn btn-primary" href="#" role="button" (click)="toTestChild()">Go with query
+    <div ngClass="text-center">
+        <!-- using <a type='button'> tag below instead gives error -->
+        <button name="btn" class="btn btn-primary btn-sm " (click)="toTestChild()">Go with query
             params</button>
 
     </div>
 </ng-container>
-
