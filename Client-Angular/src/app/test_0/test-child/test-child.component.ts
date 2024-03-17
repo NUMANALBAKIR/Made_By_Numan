@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SharedService } from '../services/shared.service';
+import { SharedService } from '../../services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -13,7 +13,7 @@ export class TestChildComponent implements OnInit, OnDestroy {
   months: any[] = [];
   name: string;
   age: number;
-  sub1: Subscription| any;
+  sub1: Subscription | any;
 
 
   constructor(private sharedService: SharedService, public activatedRoute: ActivatedRoute) {

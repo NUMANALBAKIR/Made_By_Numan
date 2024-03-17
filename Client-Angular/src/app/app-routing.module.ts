@@ -3,19 +3,20 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './components/about/about.component';
 import { LoginComponent } from './components/login/login.component';
 import { ParentComponent } from './components/parent/parent.component';
-import { TestComponent } from './test/test.component';
-import { TestChildComponent } from './test-child/test-child.component';
+import { TestComponent } from './test_0/test/test.component';
+import { TestChildComponent } from './test_0/test-child/test-child.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { Test_0Component } from './test_0/test_0.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'test_0', pathMatch: 'full' },
   { path: 'about', component: AboutComponent },
   { path: 'componentcommunications', component: ParentComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'test', component: TestComponent },
-  { path: 'testChild', component: TestChildComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) } // lazy loaded
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) }, //lazy loaded //below is standard way
+  { path: 'test_0', component: Test_0Component, loadChildren: async() => (await import('./test_0/test_0.module')).Test_0Module },
+  { path: '**', redirectTo: 'about', pathMatch: 'full' }
 
 ];
 

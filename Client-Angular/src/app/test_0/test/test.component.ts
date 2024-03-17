@@ -1,8 +1,9 @@
 // import { DashboardService } from '../../../services/dashboard.service';
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { SharedService } from '../services/shared.service';
+import { SharedService } from '../../services/shared.service';
 import { Router } from '@angular/router';
+import { TestChildComponent } from '../test-child/test-child.component';
 
 @Component({
   selector: 'app-test',
@@ -14,10 +15,10 @@ export class TestComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
 
 
+  @ViewChild(TestChildComponent) tc : ElementRef | any;
 
-
-  toTestChild(): void{
-    this.router.navigate(['/testChild'], {queryParams: {name: 'numan', age: 32}})
+  toTestChild(): void {
+    this.router.navigate(['/test_0', 'testChild'], { queryParams: { name: 'numan', age: 32 } })
   }
 
   // private sub: Subscription;
@@ -43,7 +44,7 @@ export class TestComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
 
   ngOnInit(): void {
- this.sharedService.getMonths().subscribe(
+    this.sharedService.getMonths().subscribe(
       (r) => {
         this.sharedService.dataStore.data = r;
 

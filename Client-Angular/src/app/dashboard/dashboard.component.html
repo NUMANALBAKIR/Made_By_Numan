@@ -8,13 +8,13 @@
 <h5>Dashboard</h5>
 <h6>{{ToDay | date : "d/M/y"}}</h6>
 <div class="row">
-  <div class="col-lg-3 pb-3" style="background-color:#e9e6e6">
+  <div class="col-lg-3 pb-3" style="background-color:#ffa2a2">
     <div class="row">
-      <div class="col-11 text-white text-center mx-auto rounded pt-2 pb-2 font-weight-bold"
-        style="background-color:#a39e9e; font-family:  'Arial Narrow Bold', sans-serif">{{Designation | uppercase}}
+      <div class="col-12 text-white text-center mx-auto rounded pt-2 pb-2 font-weight-bold"
+        style="background-color:#b98d8d; font-family:  'Arial Narrow Bold', sans-serif">{{Designation | uppercase}}
       </div>
       <div class="col-12 text-center mt-2">
-        <img src="assets/user.png" width="120px">
+        <img src="assets/student.png" width="120px">
       </div>
       <div class="col-12 text-center pt-2 pb-2 font-weight-bold" style="font-family: Tahoma">
         {{Username | lowercase}}
@@ -45,7 +45,7 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let client of Clients">{{client | slice: 0: 10}}</li>
         </ul>
-        <!--{{TeamMembersSummary}}-->
+        <!--{{TeamMembersSummary | json}}-->
       </div>
     </div>
   </div>
@@ -85,7 +85,7 @@
           </div>
         </div>
       </div>
-      <div class="col-11 mx-auto mt-1 text-white text-center pt-2 pb-2 mx-auto rounded font-weight-bold"
+      <div class="col-12 mx-auto mt-1 text-white text-center pt-2 pb-2 mx-auto rounded font-weight-bold"
         style="background-color: #718d97; font-family: 'Arial Narrow'">PROJECT BRIEFING</div>
       <div class="col-12">
         <table class="table table-borderless">
@@ -103,7 +103,7 @@
           </tr>
         </table>
       </div>
-      <div class="col-11 mx-auto mt-1 text-white text-center pt-2 pb-2 mx-2 rounded font-weight-bold"
+      <div class="col-12 mx-auto mt-1 text-white text-center pt-2 pb-2 mx-2 rounded font-weight-bold"
         style="background-color:#718d97; font-family: 'Arial Narrow'">TEAM MEMBERS SUMMARY</div>
       <div class="col-12">
         <table class="table">
@@ -130,7 +130,7 @@
   </div>
   <div class="col-lg-3" style="background-color:#e9e6e6">
     <div class="row">
-      <div class="col-11 mx-auto mt-1 text-white text-center pt-1 pb-2 mx-2 rounded font-weight-bold"
+      <div class="col-12 mx-auto mt-1 text-white text-center pt-1 pb-2 mx-2 rounded font-weight-bold"
         style="background-color:#718d97; font-family: 'Arial Narrow'">TEAM MEMBERS</div>
       <div class="col-lg-12 pt-2">
         <div class="accordion" id="accordion1">
