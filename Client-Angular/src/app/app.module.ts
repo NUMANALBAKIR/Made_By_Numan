@@ -13,13 +13,11 @@ import { AboutComponent } from './components/about/about.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { GrandChild4Component } from './components/grand-child4/grand-child4.component';
-import { TestComponent } from './test/test.component';
 import { getBaseUrl } from 'src/main';
-import { TestChildComponent } from './test-child/test-child.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [		
+  declarations: [
     AppComponent,
     AboutComponent,
     ParentComponent,
@@ -30,10 +28,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     GrandChild4Component,
     LoginComponent,
     LoginAlertsDirective,
-    TestComponent,
-      TestChildComponent,
-      DashboardComponent
-   ],
+    DashboardComponent
+  ],
   imports: [
     BrowserModule,
     SharedModule,
