@@ -21,16 +21,15 @@ export class TestChildComponent implements OnInit, OnDestroy {
     this.name = '';
     this.age = 0;
 
-
     this.sub1 = this.sharedService.getMonthsEmitter().subscribe(
       (r) => {
         this.months = r;
       },
-      e => {
+      (e) => {
         console.log(e);
       },
       () => {
-        console.log("test child complpete.");
+        console.log("test child completes.");
       }
     );
 

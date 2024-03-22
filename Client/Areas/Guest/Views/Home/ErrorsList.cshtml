@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <h4>
-                Below are <b>92</b> Errors and their solutions that I found when developing. I learn errors; Learning errors help me fix future-errors quickly. (Legend: => means solution).
+                Below are <b>109</b> Errors and their solutions that I found when developing. I learn errors; Learning errors help me fix future-errors quickly. (Legend: => means solution).
             </h4>
         </div>
     </div>
@@ -490,8 +490,102 @@
                 <br />=> check nuget package versions. (perhaps EntityFrameworkCore related.)
                 <hr />
 
+                <!-- below Added on 1 dec 23 -->
+                "Identifier '...' is not defined. The component declaration, template variable declarations, and element references do
+                not contain such a member"
+                <br /> => sometimes, removing a letter from the Identifier name and re-adding it removes the error.
+                <hr />
 
-                <!-- below Added on -->
+                "There was an error running the selected code generator: 'Package restore failed"
+                <br />=> updating all packages to the max possible version works. Must start with 'Microsoft.EntityFrameworkCore' package. but, see
+                if updating only package 'CodeGeneration' works.
+                <br />Or,
+                https://stackoverflow.com/questions/57985132/there-was-an-error-running-the-selected-code-generator-package-restore-failed
+                <hr />
+
+                in typescript (.ts), model object's prop IntelliSense not working => give the object a type. eg: userObj: User
+                <hr />
+
+                nuget versions are mismatch and tells to update because a version is deprecated => make nuget souce one certain, instead of the 3.
+                <hr />
+                <!-- above Added on 1 dec 23 . don't auto-format this doc-->
+                "TypeError: Cannot read property 'photoURL' of undefined" =>
+                <br />html is trying to use a variable which is still undefined. soln is adding a *ngif check.
+                <br />Or, adding in html a ? like {{member?.photoURL}}
+                <br />Or, use a resolver to ensure getting value before html loads.
+
+                <hr />
+
+                "Uncaught (in promise): TypeError: Cannot read properties of undefined (reading 'href')"
+                <br />=> a var named 'href' is undefined (most probably in index.html). So, find 'href' and check its value.
+                <hr />
+
+                "No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document"
+                <br />=> below title tag of Index.html, add: < base href="/" />
+
+                <hr />
+
+                "error: GET https://kit.fontawesome.com/yourcode.js net::ERR_ABORTED 403 (Forbidden)"
+                <br />=> the browser is unable to fetch the requested resource because access is forbidden. It seems to be related to
+                <br />fetching the Font Awesome kit JavaScript file (yourcode.js) from the Font Awesome server.
+
+                <hr />
+
+                api endpoint doesnt get hit at all, even when all looks ok.
+                <br />or, api endpoint gets hit, but api model's argument's are null
+                <br />=> the model sent by client must exactly match the model in the api argument.
+
+                <hr />
+
+                "The type or namespace name 'IHttpContextAccessor' could not be found (are you missing a using directive or an assembly reference?)"
+                <br />=> check: 1.'using Microsoft.AspNetCore.Http;' is present.
+                <br />2. in the project where the error is shown, go to Dependencies>Packages. check if package 'Microsoft.AspNetCore.Http' is installed with proper version.
+
+                <hr />
+
+                till database call or stored procedure (sp) execution, all code ok. but database not showing change/update.
+                <br />=> check '...Async', 'await' related things in database operations.
+
+                <hr />
+
+                "The type or namespace name 'User' could not be found (are you missing a using directive or an assembly reference?)"
+                <br />=> make sure the namespace of 'User' is correct.
+
+                <hr />
+
+                "Error: NG0302: The pipe 'async' could not be found!"
+                <br />=> reason: pipe not being declared in the module, or the module containing the pipe is not imported.
+                <br />Ensure 'CommonModule' is imported in the module where the pipe is used.
+
+                <hr />
+
+                a component's ngOnInit's event emitter sunscription doesn't receive a response
+                <br />=> because receivers subsciption to emitter is late. subscribe in ctor.
+
+                <hr />
+
+                "GET https://localhost:5001/api/students net::ERR_CONNECTION_REFUSED"
+                <br />=> api might not be running, or a network issues preventing the connection.
+
+                <hr />
+
+                after cache cleaning, app not showing on iis. only iis homepaage showing => check exact url in iis (especially http/https part)
+
+                <hr />
+
+                "Type 'T' is not assignable to type 'T'. Types of property 'observers' are incompatible.
+                <br />Type 'Observer<never[]>
+                []' is not assignable to type 'Observer<any[]>
+                []'.
+                <br />Type 'Observer<never[]>
+                ' is not assignable to type 'Observer<any[]>
+                '.
+                <br />Type 'any[]' is not assignable to type 'never[]'.ts(2322)"
+                <br />=> give type explicity in both sides like -
+                <br />bs: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+                <hr />
+                <!-- above Added on mar 22 2024. don't auto-format this doc-->
+
 
 
             </h4>

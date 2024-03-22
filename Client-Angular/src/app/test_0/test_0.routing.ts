@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { Test_0Component } from './test_0.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'test', pathMatch: 'full' },
+  { path: '', pathMatch: 'full' },
   // { path: 'test_0', component: Test_0Component },
   { path: 'test', component: TestComponent },
   { path: 'testChild', component: TestChildComponent },
