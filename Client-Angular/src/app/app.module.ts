@@ -15,6 +15,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { GrandChild4Component } from './components/grand-child4/grand-child4.component';
 import { getBaseUrl } from 'src/main';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DashboardComponent
   ],
   imports: [
+    ToastrModule.forRoot({positionClass: 'toast-bottom-right'}),
     BrowserModule,
     SharedModule,
     AppRoutingModule,
