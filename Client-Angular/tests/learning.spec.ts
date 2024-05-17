@@ -3,7 +3,7 @@ import { chromium, test } from "@playwright/test"
 test(
     't1', async () => {
         const browser = await chromium.launch({
-            headless: false
+            // headless: false
         });
         const context = await browser.newContext();
         const page = await context.newPage(); // new tab
