@@ -2,6 +2,10 @@ import { PlaywrightTestConfig, defineConfig, devices } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
   testMatch:['tests/learning.spec.ts'],
+  use: {
+    headless: false,
+    video: 'retain-on-failure'
+  }
 };
 
 export default config;
