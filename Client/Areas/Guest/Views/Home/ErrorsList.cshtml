@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <h4>
-                Below are <b>109</b> Errors and their solutions that I found when developing. I learn errors; Learning errors help me fix future-errors quickly. (Legend: => means solution).
+                Below are <b>117</b> Errors and their solutions that I found when developing. I learn errors; Learning errors help me fix future-errors quickly. (Legend: => means solution).
             </h4>
         </div>
     </div>
@@ -586,6 +586,40 @@
                 <hr />
                 <!-- above Added on mar 22 2024. don't auto-format this doc-->
 
+                "Connection disconnected with error 'Error: Server timeout elapsed without receiving a message from the server.'."
+                <br />=> increase signalR "hubConnection.serverTimeoutInMilliseconds()"
+                                        <hr />
+
+                weird underlines? Or, error "Parameter 'items' implicitly has an 'any' type.ts(7006)"?
+                <br />=> turn off strict type checking.
+                                        <hr />
+
+                cloned solution projects look like folders instead of projects
+                <br />=> reopen VS
+                                        <hr />
+
+                in signalR c# hub, can not set cookie/session in response head becuase the response has already started.
+                <br />=> try other ways like setting and getting:
+                <br />Context.Items[key] = value;
+                <br />var value = Context.Items.ContainsKey(key) ? Context.Items[key]?.ToString() : "Key not found";
+                                        <hr />
+
+                <br />"pastContactDto does not contain a definition for Reverse and no accessible method 'Reverse'"
+                <br />=> check on what you are applying reverse.
+                                        <hr />
+
+                <br />"Error: Type AppRole must derive from RoleManager< AppRole>"
+                <br />=> do: .AddRoleManager< RoleManager< AppRole>>()
+                                        <hr />
+
+                <br />the api, or hub class ctor not getting hit even when all looks ok
+                <br />=> check the things in ctor. check for unused props and injections.
+                                        <hr />
+
+                <br />"'app-navBar' is not a known element". OR, "No pipe found with name 'date'.ngtsc(-998004)"
+                <br />=> if these show even when all is ok, check the module and routing.module. other errors in module may show such errors.
+
+                <!-- above Added on aug 13 2024. don't auto-format this doc-->
 
 
             </h4>
