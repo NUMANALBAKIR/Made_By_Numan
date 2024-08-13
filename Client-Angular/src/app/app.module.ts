@@ -16,6 +16,8 @@ import { GrandChild4Component } from './components/grand-child4/grand-child4.com
 import { getBaseUrl } from 'src/main';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ToastrModule } from 'ngx-toastr';
+import { JsTestComponent } from './jsTest/jsTest.component';
+import { LoadScriptDirective } from './jsTest/LoadScriptDirective.directive';
 
 @NgModule({
   declarations: [
@@ -29,8 +31,10 @@ import { ToastrModule } from 'ngx-toastr';
     GrandChild4Component,
     LoginComponent,
     LoginAlertsDirective,
-    DashboardComponent
-  ],
+    DashboardComponent,
+      JsTestComponent,
+      LoadScriptDirective
+   ],
   imports: [
     ToastrModule.forRoot({positionClass: 'toast-bottom-right'}),
     BrowserModule,

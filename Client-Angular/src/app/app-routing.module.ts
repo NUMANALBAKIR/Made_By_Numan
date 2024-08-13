@@ -7,13 +7,15 @@ import { TestComponent } from './test_0/test/test.component';
 import { TestChildComponent } from './test_0/test-child/test-child.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Test_0Component } from './test_0/test_0.component';
+import { JsTestComponent } from './jsTest/jsTest.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'test_0', pathMatch: 'full' },
+  { path: '', redirectTo: 'jstest', pathMatch: 'full' },
   { path: 'about', component: AboutComponent },
   { path: 'componentcommunications', component: ParentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'jstest', component: JsTestComponent },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) }, //lazy loaded //below is standard way
   { path: 'test_0', component: Test_0Component, loadChildren: async() => (await import('./test_0/test_0.module')).Test_0Module },
   { path: '**', redirectTo: 'about', pathMatch: 'full' }
