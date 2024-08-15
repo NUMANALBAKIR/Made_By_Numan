@@ -1,10 +1,10 @@
 # Numan's Practice projects :
 
 > [!NOTE]
-> * Project 'Client' is in Asp.Net Core MVC. API projects are in Asp.Net Core Web API.  
-> * 'Client-Angular' is an Angular project.  
+> 1. Project 'Client' is in Asp.Net Core MVC. API projects are in Asp.Net Core Web API.  
+> 2. 'Client-Angular' is an Angular project.  
 
-### Asp.Net Core MVC + Web API project -
+### 1. Asp.Net Core MVC + Web API project -
 
 #### Home page -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/1.png)
@@ -52,7 +52,7 @@
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/13.png)
 
 
-### Angular project -
+### 2. Angular project -
 
 #### Customer's chat box - un-opened -
 ![test image](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/019e4caabebbdf8d23ad3ce51dc05ed233b22569/screenshots_Angular/0.png)
