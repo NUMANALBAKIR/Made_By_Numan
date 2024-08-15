@@ -1,8 +1,7 @@
 # Numan's Practice projects :
 
 > [!NOTE]
-> * Project 'Client' is in Asp.Net Core MVC.  
-> * API projects are in Asp.Net Core Web API.  
+> * Project 'Client' is in Asp.Net Core MVC. API projects are in Asp.Net Core Web API.  
 > * 'Client-Angular' is an Angular project.  
 
 ### Asp.Net Core MVC + Web API project -
