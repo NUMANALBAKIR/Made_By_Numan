@@ -6,7 +6,7 @@
 
 ### 1. Asp.Net Core MVC + Web API project -
 
-#### Home page -
+#### Home page containing information about the app -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/1.png)
 
 #### Collection of errors that I've encountered, noted, and learn -
@@ -54,23 +54,23 @@
 
 ### 2. Angular project -
 
-#### Customer's chat box - un-opened -
+#### Home page containing information about the app -
 ![test image](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/019e4caabebbdf8d23ad3ce51dc05ed233b22569/screenshots_Angular/0.png)
 
-#### Customer's chat box - un-opened -
+#### CRUD data list -
 ![test image](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/019e4caabebbdf8d23ad3ce51dc05ed233b22569/screenshots_Angular/1.png)
 
-#### Customer's chat box - un-opened -
+#### Searching and filtering works -
 ![test image](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/019e4caabebbdf8d23ad3ce51dc05ed233b22569/screenshots_Angular/2.png)
 
-#### Customer's chat box - un-opened -
+#### Create student Template driven form -
 ![test image](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/019e4caabebbdf8d23ad3ce51dc05ed233b22569/screenshots_Angular/3.png)
 
-#### Customer's chat box - un-opened -
+#### Update student Reactive form -
 ![test image](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/019e4caabebbdf8d23ad3ce51dc05ed233b22569/screenshots_Angular/4.png)
 
-#### Customer's chat box - un-opened -
+#### Details page containing bar diagram using highcharts -
 ![test image](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/019e4caabebbdf8d23ad3ce51dc05ed233b22569/screenshots_Angular/5.png)
 
-#### Customer's chat box - un-opened -
+#### various ways of component-communication in Angular using color values as data -
 ![test image](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/019e4caabebbdf8d23ad3ce51dc05ed233b22569/screenshots_Angular/6.PNG)
