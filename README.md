@@ -4,7 +4,7 @@
 > 1. Project 'Client' is in Asp.Net Core MVC. API projects are in Asp.Net Core Web API.  
 > 2. 'Client-Angular' is an Angular project.  
 
-### 1. Asp.Net Core MVC + Web API project -
+### 1. .Net MVC + Web API -
 
 #### Home page containing information about the app -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/1.png)
