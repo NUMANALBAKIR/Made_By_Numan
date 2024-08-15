@@ -28,4 +28,4 @@
 ![test image](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/019e4caabebbdf8d23ad3ce51dc05ed233b22569/screenshots_Angular/5.png)
 
 #### Customer's chat box - un-opened -
-![test image](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/019e4caabebbdf8d23ad3ce51dc05ed233b22569/screenshots_Angular/6.png)
+![test image](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/019e4caabebbdf8d23ad3ce51dc05ed233b22569/screenshots_Angular/6.PNG)
