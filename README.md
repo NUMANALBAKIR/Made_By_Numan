@@ -8,49 +8,49 @@
 ### Asp.Net Core MVC + Web API project -
 
 #### abc -
-![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/72d263ecce46df527a524ada423e835cff330038/screenshots_mvc%2Bapi/1.png)
+![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/1.png)
 
 #### abc -
-![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/72d263ecce46df527a524ada423e835cff330038/screenshots_mvc%2Bapi/1_.PNG)
+![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/1_.PNG)
 
 #### abc -
-![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/72d263ecce46df527a524ada423e835cff330038/screenshots_mvc%2Bapi/1__.png)
+![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/1__.png)
 
 #### abc -
-![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/72d263ecce46df527a524ada423e835cff330038/screenshots_mvc%2Bapi/2.png)
+![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/2.png)
 
 #### abc -
-![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/72d263ecce46df527a524ada423e835cff330038/screenshots_mvc%2Bapi/3.png)
+![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/3.png)
 
 #### abc -
-![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/72d263ecce46df527a524ada423e835cff330038/screenshots_mvc%2Bapi/4.png)
+![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/4.png)
 
 #### abc -
-![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/72d263ecce46df527a524ada423e835cff330038/screenshots_mvc%2Bapi/5.png)
+![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/5.png)
 
 #### abc -
-![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/72d263ecce46df527a524ada423e835cff330038/screenshots_mvc%2Bapi/6.png)
+![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/6.png)
 
 #### abc -
-![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/72d263ecce46df527a524ada423e835cff330038/screenshots_mvc%2Bapi/7.png)
+![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/7.png)
 
 #### abc -
-![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/72d263ecce46df527a524ada423e835cff330038/screenshots_mvc%2Bapi/8.png)
+![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/8.png)
 
 #### abc -
-![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/72d263ecce46df527a524ada423e835cff330038/screenshots_mvc%2Bapi/8_.png)
+![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/8_.png)
 
 #### abc -
-![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/72d263ecce46df527a524ada423e835cff330038/screenshots_mvc%2Bapi/9.png)
+![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/9.png)
 
 #### abc -
-![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/72d263ecce46df527a524ada423e835cff330038/screenshots_mvc%2Bapi/10.png)
+![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/10.png)
 
 #### abc -
-![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/72d263ecce46df527a524ada423e835cff330038/screenshots_mvc%2Bapi/12.png)
+![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/12.png)
 
 #### abc -
-![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/72d263ecce46df527a524ada423e835cff330038/screenshots_mvc%2Bapi/13.png)
+![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/13.png)
 
 
 ### Angular project -
