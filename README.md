@@ -7,49 +7,49 @@
 
 ### Asp.Net Core MVC + Web API project -
 
-#### abc -
+#### Home page -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/1.png)
 
-#### abc -
+#### Collection of errors that I've encountered, noted, and learn -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/1_.PNG)
 
-#### abc -
+#### API used to develop the project -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/1__.png)
 
-#### abc -
+#### register page -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/2.png)
 
-#### abc -
+#### Bank of Numan Dashboard. Funds can be trasferred between accounts. Also, Food can be ordered (mimicked) using the chekings account balance -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/3.png)
 
-#### abc -
+#### Validations work as shown in the red alert -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/4.png)
 
-#### abc -
+#### Home page of the food ordering website template collected from bootstrapmade.com. I made the template alive and functional by integrating it to .Net MVC and API -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/5.png)
 
-#### abc -
+#### Food can be selected and ordered -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/6.png)
 
-#### abc -
+#### Cart -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/7.png)
 
-#### abc -
+#### Place order button is hidden as the Bank of Numan Checkings balance is insufficient, as shown in the alert on top -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/8.png)
 
-#### abc -
+#### Funds have been transferred to chekings accunt to be able to order food -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/8_.png)
 
-#### abc -
+#### Place order button is now visible and the alert on top shows the balance -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/9.png)
 
-#### abc -
+#### Order has been placed and email has been sent -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/10.png)
 
-#### abc -
+#### Image of the received email -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/12.png)
 
-#### abc -
+#### The food purchase is reflected on the checkings balance and in the Transactions History -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/13.png)
 
 
