@@ -10,7 +10,7 @@ import { Test_0Component } from './test_0/test_0.component';
 import { JsTestComponent } from './jsTest/jsTest.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'jstest', pathMatch: 'full' },
+  { path: '', redirectTo: 'about', pathMatch: 'full' },
   { path: 'about', component: AboutComponent },
   { path: 'componentcommunications', component: ParentComponent },
   { path: 'login', component: LoginComponent },

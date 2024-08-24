@@ -18,6 +18,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ToastrModule } from 'ngx-toastr';
 import { JsTestComponent } from './jsTest/jsTest.component';
 import { LoadScriptDirective } from './jsTest/LoadScriptDirective.directive';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './admin/_interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { LoadScriptDirective } from './jsTest/LoadScriptDirective.directive';
   ],
   providers: [
     { provide: 'BASE_URL', useFactory: getBaseUrl },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
