@@ -55,7 +55,7 @@
 ### 2. Angular project -
 
 #### Home page containing information about the app -
-![test image](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/019e4caabebbdf8d23ad3ce51dc05ed233b22569/screenshots_Angular/0.png)
+![test image](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/fd8f002f083254e47d03c7e6ff15862e594c9f0e/screenshots_Angular/0.png)
 
 #### CRUD data list -
 ![test image](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/019e4caabebbdf8d23ad3ce51dc05ed233b22569/screenshots_Angular/1.png)
