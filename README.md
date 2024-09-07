@@ -24,7 +24,7 @@
 #### Validations work as shown in the red alert -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/4.png)
 
-#### Home page of the food ordering website template collected from bootstrapmade.com. I made the template alive and functional by integrating it to .Net MVC and API -
+#### Home page of the food ordering website template collected from (https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/). I made the template alive and functional by integrating it to .Net MVC and API -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/5.png)
 
 #### Food can be selected and ordered -
