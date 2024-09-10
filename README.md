@@ -9,7 +9,7 @@
 #### Home page containing information about the app -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/1.png)
 
-#### Collection of errors that I've encountered, noted, and learn -
+#### Collection of errors that I've encountered over the years, noted, and learn -
 ![_](https://github.com/NUMANALBAKIR/Made_By_Numan/blob/a793b0da5a37f64f7d83aa7ab032dd038a497f32/screenshots_mvc%2Bapi/1_.PNG)
 
 #### API used to develop the project -
