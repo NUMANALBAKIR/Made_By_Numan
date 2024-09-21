@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <h4>
-                Below are <b>117</b> Errors and their solutions that I found when developing. I learn errors; Learning errors help me fix future-errors quickly. (Legend: => means solution).
+                Below are <b>117</b> Errors and their solutions that I found so far, while developing over the years. I learn errors; Learning errors help me fix future-errors quickly. (Legend: => means solution).
             </h4>
         </div>
     </div>
@@ -377,7 +377,7 @@
                 <!-- below Added on 11 nov 23 -->
 
                 highcharts not updatng => needs, updateflag: true. (also, new data has to be processed inside subscribe with response.)
-                        
+
                 <hr />
 
                 contentchildren not getting array => needs, { descendants: true } inside @@contentchildren()
@@ -395,13 +395,13 @@
 
                 The error “Can’t bind to ‘formGroup’ since it isn’t a known property of ‘form’”
                 <br />=>  add ReactiveFormsModule in imports[]. and, that component is present in declarations[].
-                        
+
                 <hr />
-                        
+
                 visual studio solution not showing angular project 'client'
                 <br />=> if, client.esproj is present inside 'client': right click solution > 'add existing project'.
                 <br />else, right click solution > 'add existing web site' > select folder 'client'.
-                        
+
                 <hr />
 
                 Error: connect ECONNREFUSED => API is probably off
@@ -413,12 +413,12 @@
                 <hr />
 
 
-                "A possible object cycle was detected which is not supported. This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32."                        
+                "A possible object cycle was detected which is not supported. This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32."
                 <br />=> happens when eg: User has prop List< Photo>. Photo has navigation-prop User. issue arises in linq .include(x=> x.Photos).
                 <br />soln: make dtos. eg: UserDto has prop List< PhotoDto>. But, PhotoDto DOESN'T have navigation-prop User. this breaks the cycle.
                 <hr />
 
-                        
+
                 postman shows:
                 <br />{
                 <br />"type": "https://tools.ietf.org/html/rfc7231#section-6.5.13",
@@ -429,17 +429,17 @@
                 <br />=> in Headers, set "Content-Type": "application/json"
                 <hr />
 
-                        
+
                 Unable to find testhost.dll. Please publish your test project and retry
                 <br />=> Install 'Microsoft.NET.Test.Sdk' package from nuget. Command> NuGet\Install-Package Microsoft.NET.Test.Sdk
                 <hr />
 
-                        
+
                 'does not contain a definition for 'ThenInclude' and no accessible extension method 'ThenInclude''
                     <br />=> this is from LINQ. check imports. especially look for the wrong import 'using System.Data.Entity;'.
                 <hr />
 
-                        
+
                 'Cannot use variable as the left-hand side of an assignment expression. Template variables are read-only.ngtsc(-998005)'
                     <br />=> when doing, let vd of arr, for [(ngModel)] don't do [(ngModel)]=="vd". do like, [(ngModel)]="arr[index]".
                 <hr />
@@ -472,13 +472,13 @@
                 'IConfiguration' does not contain a definition for 'GetValue' and no accessible extension method 'GetValue' accepting a first argument of type 'IConfiguration' could be found (are you missing a using directive or an assembly reference?)
                 <br />=> add package Microsoft.Extensions.Configuration.Binder
                 <hr />
-                        
+
                 autompper mapping issue. eg: from list to list => instead of .Map< DType>(s), do .Map< SType, DType>(s)
                 <hr />
 
                 IIS error shows => del .vs folder in project
-                <hr />                        
-                        
+                <hr />
+
                 Ambiguous invocation:
                 <br />Microsoft....AddMassTransitHostedService(this Microsoft...IServiceCollection) (in class HostedServiceConfigurationExtensions)
                 <br />Microsoft....AddMassTransitHostedService(this Microsoft...IServiceCollection) (in class HostedServiceConfigurationExtensions)
